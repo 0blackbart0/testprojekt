@@ -1,0 +1,9 @@
+.rechteck{
+    background-color: lightgray;
+    border: solid 2px black;
+    height: 10vw;
+    width: 10vw;
+    border-radius: 5px;
+    display: block;
+
+}

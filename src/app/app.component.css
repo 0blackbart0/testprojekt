@@ -1,0 +1,11 @@
+app-tool-bar{
+    grid-column: 1;
+    display: grid;
+    background-color: grey;
+}
+
+app-drawing-field{
+    grid-column: 2;
+    background-color: white;
+    height: 100vh;
+}

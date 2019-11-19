@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: white;   
+    margin: 0;
+    padding: 0; 
+}
+
+app-root{
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    margin: 0;
+    padding: 0;
+}
