@@ -1,3 +1,6 @@
-<div class="rechteck">
+<div class="rechteck" (click)="setSelected()" 
+[style.background-color]="shape.selected ? 'pink': 'lightgrey'"
+[style.top.vh]="shape.top"
+[style.left.vw]="shape.left">
 
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Shape } from './shape';
+import { Shape, Kreis } from './shape';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,7 @@ import { Shape } from './shape';
 export class ComponentDirectorService {
 
   ShapeList: Shape[] = [];
+  LastSelected: Shape;
 
   constructor() { }
 
@@ -17,4 +18,7 @@ export class ComponentDirectorService {
   addShape(shape: Shape) {
     this.ShapeList.push(shape);
   }
+
+
+
 }

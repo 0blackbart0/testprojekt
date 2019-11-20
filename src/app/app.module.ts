@@ -7,6 +7,7 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { RechteckComponent } from './rechteck/rechteck.component';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 import { KreisComponent } from './kreis/kreis.component';
+import { StartShapeComponent } from './start-shape/start-shape.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { KreisComponent } from './kreis/kreis.component';
     ToolBarComponent,
     RechteckComponent,
     DrawingFieldComponent,
-    KreisComponent
+    KreisComponent,
+    StartShapeComponent
   ],
   imports: [
     BrowserModule,

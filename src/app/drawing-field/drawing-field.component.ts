@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Shape, Rechteck, Kreis, Dreieck} from '../shape';
+import {Shape, Rechteck, Kreis} from '../shape';
 import { ComponentDirectorService } from '../component-director.service';
 
 @Component({
@@ -22,10 +22,4 @@ export class DrawingFieldComponent implements OnInit {
     return this;
   }
 
-  machwas(shape: Shape): void {
-    this.selected = shape;
-    if (shape instanceof Rechteck) {console.log('rechteck'); }
-    if (shape instanceof Kreis) {console.log('kreis'); }
-    if (shape instanceof Dreieck) {console.log('dreieck'); }
-  }
 }

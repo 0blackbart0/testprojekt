@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Shape, Rechteck, Kreis, Dreieck } from '../shape';
+import { Shape, Rechteck, Kreis } from '../shape';
 import { ComponentDirectorService } from '../component-director.service';
 
 @Component({
@@ -17,16 +17,18 @@ export class ToolBarComponent implements OnInit {
   addShape(typ: string) {
 
 
-    let tmp: Shape = null;
+      let tmp: Shape = null;
 
-    if (typ === 'rechteck') {
-      tmp = new Rechteck();
-    } else if (typ === 'kreis') {
-      tmp = new Kreis();
-    } else if (typ === 'dreieck') {
-      tmp = new Dreieck();
+      if (typ === 'rechteck') {
+        tmp = new Rechteck();
+      } else if (typ === 'kreis') {
+        tmp = new Kreis();
+      }
+
+      tmp.setParent(this.director.LastSelected);
+      tmp.setPosition();
+      this.director.addShape(tmp);
     }
-    this.director.addShape(tmp);
-  }
+
 
 }

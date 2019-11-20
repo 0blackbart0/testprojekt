@@ -1,13 +1,12 @@
-<div>
+<div class="wrapper">
+    <app-start-shape id="startShape"></app-start-shape>
     <div *ngFor="let Shape of ShapeList">
         <div *ngIf="Shape.instanceOf() === 'rechteck'">
-            <app-rechteck></app-rechteck>
+            <app-rechteck [shape]=Shape></app-rechteck>
         </div>
         <div *ngIf="Shape.instanceOf() === 'kreis'">
-            <app-kreis></app-kreis>
+            <app-kreis [shape]=Shape ></app-kreis>
         </div>
-        <div *ngIf="Shape.instanceOf() === 'dreieck'">
-            <p>dreieck...</p>
-        </div>
+
     </div>
 </div>

@@ -1,9 +1,10 @@
 .kreis{
     background-color: lightgray;
     border: solid 2px black;
-    height: 10vw;
-    width: 10vw;
-    border-radius: 5vw;
+    height: 5vw;
+    width: 30vw;
+    border-radius: 2.5vw;
     display: block;
+    position: absolute;
 
 }

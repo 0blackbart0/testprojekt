@@ -1,6 +1,7 @@
-import { Component, OnInit, HostListener, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, HostListener, EventEmitter, Output, Input } from '@angular/core';
 import { Kreis, Shape,  } from '../shape';
 import { DrawingFieldComponent } from '../drawing-field/drawing-field.component';
+import { ComponentDirectorService } from '../component-director.service';
 
 @Component({
   selector: 'app-kreis',
@@ -9,19 +10,21 @@ import { DrawingFieldComponent } from '../drawing-field/drawing-field.component'
 })
 export class KreisComponent implements OnInit {
 
-  shape: Shape;
-  @Output() voted = new EventEmitter<Shape>();
+  @Input() shape: Shape;
 
-  constructor() {
+  constructor(private director: ComponentDirectorService) {
     this.shape = new Kreis();
-    console.log('Jetzt?');
+  }
+
+
+  setSelected() {
+
+    this.director.LastSelected.selected = false;
+    this.director.LastSelected = this.shape;
+    this.shape.selected = true;
   }
 
   ngOnInit() {
-  }
-
-  @HostListener('click') onClick() {
-    this.voted.emit(this.shape);
   }
 
   setParent(shape: Shape) {

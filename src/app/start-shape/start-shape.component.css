@@ -1,0 +1,16 @@
+.rechteck {
+
+    position: absolute;
+
+    background-color: darkgray;
+    border: solid 2px black;
+    height: 10vw;
+    width: 10vw;
+    border-radius: 5px;
+    display: block;
+    
+}
+
+.rechteck:hover {
+    opacity: 0.7;
+}
