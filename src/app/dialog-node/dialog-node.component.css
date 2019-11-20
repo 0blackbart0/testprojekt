@@ -1,0 +1,94 @@
+#box{
+    background-color: #F5F5F5;
+    width: 280px;
+    height: 390px;
+    border: 1px solid;
+    border-color: #707070;
+    border-radius: 15px;
+}
+
+#line{
+    width: 90%;
+    color:#707070;
+}
+
+#headline{
+    margin-top: 5px;
+    margin-bottom: 5px;;
+    font-size: 20px;
+    font-weight: bold; 
+    color:#707070;
+    text-align: center;
+}
+
+#userHeader{
+    margin-top: 5px;
+    margin-right: 10px;
+    margin-bottom: 5px;;
+    font-size: 20px;
+    color:#707070;
+    text-align: right;
+}
+
+#chatbotHeader{
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-bottom: 5px;;
+    font-size: 20px;
+    color:#707070;
+    text-align: left;
+}
+
+#userBubble{
+    margin-left: 75px;
+    width: 190px;
+    height: 100px;
+    background-color: white;
+    border: 3px solid;
+    border-color: #707070;
+    border-radius: 10px;
+}
+
+#chatbotBubble{
+    margin-left: 10px;
+    width: 190px;
+    height: 100px;
+    background-color: white;
+    border: 3px solid;
+    border-color: #707070;
+    border-radius: 10px;
+}
+
+
+#chatbotTextDialogNode{
+    margin: 5px 5px 5px 5px;
+    font-size: 14px;
+    color: #707070;
+    font-weight: bold;
+}
+
+#userText{
+    margin: 5px 5px 5px 5px;
+    font-size: 14px;
+    color: #707070;
+    font-weight: bold;
+}
+
+#speechBubbleTriangleUser{
+    margin-left: 230px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 25px 35px 0;
+    border-color: transparent #707070 transparent transparent;
+}
+
+#speechBubbleTriangleChatbot{
+    margin-left: 25px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 35px 25px 0 0;
+    border-color: #707070 transparent transparent transparent;
+
+}
