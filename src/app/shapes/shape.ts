@@ -1,4 +1,5 @@
 import { SubKreis } from './subkreis';
+import { Phantom } from './phantom';
 
 export abstract class Shape {
 
@@ -9,33 +10,15 @@ export abstract class Shape {
     width: number;
     parent: Shape = null;
     previousSplitter: Kreis = null;
-    ancestorList: Shape[] = [];
+    phantoms: Phantom[];
+
     abstract instanceOf(): string;
 
     constructor(parent: Shape) {
         this.parent = parent;
         this.left = 0;
         this.top = 2;
-    }
-
-    getAncestors() {
-
-        let tmp: Shape = null;
-        while (tmp.instanceOf() !== 'startShape') {
-            tmp = tmp.getParent();
-            this.ancestorList.push(tmp);
-        }
-    }
-
-
-    getPreviousSplitter(): Shape {
-        let tmp: Shape = null;
-
-        while (tmp.instanceOf() !== 'kreis' || tmp !== null) {
-            tmp = tmp.getParent();
-        }
-
-        return tmp;
+        this.phantoms = [];
     }
 
     getParent(): Shape { return this.parent; }
@@ -62,11 +45,22 @@ export class Rechteck extends Shape {
 
 export class Kreis extends Shape {
 
+    subkreise: Shape[] = [];
+
     constructor(parent: Shape) {
         super(parent);
         this.width = 30;
         this.height = 5;
     }
+
+    addSubkreis(subkreis: Shape) {
+        this.subkreise.push(subkreis);
+    }
+    setPosition() {
+        this.left = this.parent.left - (this.width / 2) + (this.parent.width / 2);
+        this.top = this.parent.top + this.parent.height + 1;
+    }
+
     instanceOf(): string {
         return 'kreis';
     }

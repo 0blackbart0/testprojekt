@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Shape, Kreis } from './shapes/shape';
+import { Shape, Kreis, StartShape } from './shapes/shape';
+import { SubKreis, SubKreisLeft, SubKreisRight } from './shapes/subkreis';
 
 @Injectable({
   providedIn: 'root'
@@ -39,9 +40,45 @@ export class ComponentDirectorService {
     return child;
   } */
 
-  getParentDivider(shape: Shape[]): Shape[] {
-    const divider: Shape[] = [];
+  resizeDivider(element: Shape) {
+   
+    /*
+    for (const divider of this.getParentDivider(element)) {
+      (divider as SubKreis).addPhantom();
+    }*/
+    
+    const dividers: SubKreis[] = (this.getParentDivider(element) as SubKreis[]);
+    const masterDivider: SubKreis = dividers[dividers.length - 1];
+    let innerDividerSet = false;
+    let outside = 0;
+    let inside = 0;
 
+    for ( const divider of dividers) {
+      if ( divider.instanceOf() === masterDivider.instanceOf()) {
+        divider.addPhantom();
+        outside++;
+      }
+      if ( divider.instanceOf() !== masterDivider.instanceOf() && !(innerDividerSet)) {
+        divider.addPhantom();
+        innerDividerSet = true;
+        inside++;
+      }
+    }
+    if ( inside > outside && outside !== 0) {
+          masterDivider.addPhantom();
+    }
+  }
+  getParentDivider(element: Shape): Shape[] {
+    const divider: Shape[] = [];
+    if (!(element instanceof StartShape)) {
+     element = element.parent;
+    }
+    while (element.parent !== null ) {
+      if (element instanceof SubKreis) {
+        divider.push(element);
+      }
+      element = element.getParent();
+    }
     return divider;
   }
 
@@ -52,7 +89,6 @@ export class ComponentDirectorService {
         childs.push(element);
       }
     }
-    console.log(childs);
     return childs;
   }
 

@@ -11,6 +11,7 @@ import { StartNodeComponent } from './start-node/start-node.component';
 import { DialogNodeComponent } from './dialog-node/dialog-node.component';
 import { SubKreisLeftComponent } from './sub-kreis-left/sub-kreis-left.component';
 import { SubKreisRightComponent } from './sub-kreis-right/sub-kreis-right.component';
+import { PhantomComponent } from './phantom/phantom.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SubKreisRightComponent } from './sub-kreis-right/sub-kreis-right.compon
     StartNodeComponent,
     DialogNodeComponent,
     SubKreisLeftComponent,
-    SubKreisRightComponent
+    SubKreisRightComponent,
+    PhantomComponent
   ],
   imports: [
     BrowserModule,
