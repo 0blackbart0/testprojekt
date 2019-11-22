@@ -6,8 +6,11 @@ import { AppComponent } from './app.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
 import { RechteckComponent } from './rechteck/rechteck.component';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
-import { KreisComponent } from './kreis/kreis.component';
 import { StartShapeComponent } from './start-shape/start-shape.component';
+import { StartNodeComponent } from './start-node/start-node.component';
+import { DialogNodeComponent } from './dialog-node/dialog-node.component';
+import { SubKreisLeftComponent } from './sub-kreis-left/sub-kreis-left.component';
+import { SubKreisRightComponent } from './sub-kreis-right/sub-kreis-right.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +18,11 @@ import { StartShapeComponent } from './start-shape/start-shape.component';
     ToolBarComponent,
     RechteckComponent,
     DrawingFieldComponent,
-    KreisComponent,
-    StartShapeComponent
+    StartShapeComponent,
+    StartNodeComponent,
+    DialogNodeComponent,
+    SubKreisLeftComponent,
+    SubKreisRightComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, EventEmitter, Input, Output } from '@angular/core';
-import { Rechteck, Shape  } from '../shape';
+import { Rechteck, Shape  } from '../shapes/shape';
 import { DrawingFieldComponent } from '../drawing-field/drawing-field.component';
 import { ComponentDirectorService } from '../component-director.service';
 
@@ -10,16 +10,9 @@ import { ComponentDirectorService } from '../component-director.service';
 })
 export class RechteckComponent implements OnInit {
 
-  @Input() shape: Shape = null;
+  @Input() shape: Shape;
 
-  constructor(private director: ComponentDirectorService) {
-    this.shape = new Rechteck();
-  }
-
-  setSelected() {
-    this.director.LastSelected.selected = false;
-    this.director.LastSelected = this.shape;
-    this.shape.selected = true;
+  constructor(public director: ComponentDirectorService) {
   }
 
   ngOnInit() {

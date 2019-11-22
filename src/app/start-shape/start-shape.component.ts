@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Rechteck, StartShape , Shape} from '../shape';
+import { Rechteck, StartShape , Shape} from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 
 @Component({
@@ -12,18 +12,11 @@ export class StartShapeComponent implements OnInit {
 
   @Input() shape: Shape;
 
-
-  setSelected() {
-    this.director.LastSelected.selected = false;
-    this.director.LastSelected = this.shape;
-    this.shape.selected = true;
-  }
-
-  constructor(private director: ComponentDirectorService) {
+  constructor(public director: ComponentDirectorService) {
     this.shape = new StartShape();
-    this.shape.left = 52;
     this.shape.selected = true;
     this.director.LastSelected = this.shape;
+    this.director.addShape(this.shape);
    }
 
   ngOnInit() {

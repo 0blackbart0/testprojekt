@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Shape, Rechteck, Kreis } from '../shape';
+import { Shape, Rechteck, Kreis } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
+import { SubKreis, SubKreisLeft, SubKreisRight } from '../shapes/subkreis';
 
 @Component({
   selector: 'app-tool-bar',
@@ -19,16 +20,55 @@ export class ToolBarComponent implements OnInit {
 
       let tmp: Shape = null;
 
-      if (typ === 'rechteck') {
-        tmp = new Rechteck();
-      } else if (typ === 'kreis') {
-        tmp = new Kreis();
+      let subleft = null;
+      let subright = null;
+
+      let childs: Shape[] = [];
+      childs = this.director.getChildFrom(this.director.LastSelected);
+      if (childs.length === 0) {
+
+        if (typ === 'rechteck') {
+          tmp = new Rechteck(this.director.LastSelected);
+          this.director.addShape(tmp);
+          this.director.setSelected(tmp);
+        } else if (typ === 'subKreis') {
+          tmp = new Kreis(this.director.LastSelected);
+          subleft = new SubKreisLeft(tmp);
+          subright = new SubKreisRight(tmp);
+          this.director.addShape(tmp);
+          this.director.addShape(subleft);
+          this.director.addShape(subright);
+          this.director.setSelected(subleft);
+        }
+        tmp.setPosition();
+        if (typ === 'subKreis') {
+          subleft.setPosition();
+          subright.setPosition();
+        }
+      } else if (childs.length === 1) {
+        ////////// Der shit funktioniert noch nicht.. muss noch die position in der liste erausfinden und eintragen an der stelle.
+        if (typ === 'rechteck') {
+          tmp = new Rechteck(this.director.LastSelected);
+          childs[0].parent = tmp;
+          this.director.addShape(tmp);
+          this.director.setSelected(tmp);
+        } else if (typ === 'subKreis') {
+          tmp = new Kreis(this.director.LastSelected);
+          subleft = new SubKreisLeft(tmp);
+          childs[0].parent = subleft;
+          subright = new SubKreisRight(tmp);
+          this.director.addShape(tmp);
+          this.director.addShape(subleft);
+          this.director.addShape(subright);
+          this.director.setSelected(subleft);
+        }
+        tmp.setPosition();
+        if (typ === 'subKreis') {
+          subleft.setPosition();
+          subright.setPosition();
+        }
+        this.director.rearrangeAll(this.director.ShapeList[0]);
       }
-
-      tmp.setParent(this.director.LastSelected);
-      tmp.setPosition();
-      this.director.addShape(tmp);
     }
-
 
 }

@@ -1,0 +1,12 @@
+.subKreisLeft {
+    border: 2px solid black;
+    border-right: none;
+    box-sizing: border-box;
+    border-radius: 2.5vw 0 0 2.5vw;
+    position: absolute;
+}
+
+
+.subKreisLeft:hover {
+    opacity: 0.7;
+}

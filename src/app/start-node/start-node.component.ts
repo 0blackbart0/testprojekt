@@ -12,8 +12,7 @@ export class StartNodeComponent implements OnInit {
   ngOnInit() {
   }
 
-  openEditor(){
-    
+  openEditor() {
     const selectedBubble: HTMLElement = document.getElementById('bubble');
     const selectedText: HTMLElement = document.getElementById('chatbotText');
     selectedBubble.style.backgroundColor = '#DD0B2F';

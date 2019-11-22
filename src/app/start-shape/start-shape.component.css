@@ -1,11 +1,9 @@
 .rechteck {
 
     position: absolute;
-
+    box-sizing: border-box;
     background-color: darkgray;
     border: solid 2px black;
-    height: 10vw;
-    width: 10vw;
     border-radius: 5px;
     display: block;
     
