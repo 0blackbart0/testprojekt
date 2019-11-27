@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Shape, Kreis, StartShape } from './shapes/shape';
 import { SubKreis, SubKreisLeft, SubKreisRight } from './shapes/subkreis';
+import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
+import { concat } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComponentDirectorService {
 
+
   ShapeList: Shape[] = [];
   LastSelected: Shape;
+  drawingField: DrawingFieldComponent = null;
 
   constructor() { }
 
@@ -20,25 +24,39 @@ export class ComponentDirectorService {
     this.ShapeList.push(shape);
   }
 
-  /* getChildFrom(shape: Shape): Shape[] {
+  setDrawingField(field: DrawingFieldComponent) {
+    this.drawingField = field;
+  }
 
-    let child: Shape[] = [];
-
-    for (const element of this.ShapeList) {
-      if (element.parent === shape) {
-        if (element.instanceOf() === 'kreis') {
-          const subChild: Shape[] = [];
-          for (const subElement of this.getChildFrom(element)) {
-            subChild.push(subElement);
-          }
-          child = subChild;
-        } else {
-          child.push(element);
-        }
+  resizeInjectedDivider(element: Kreis) {
+    const childDividers: Shape[] = this.getChildDividers(element);
+    if (childDividers.length <= 2) {
+      return;
+    }
+    const subRight: SubKreisRight = this.getChildFrom(element)[1] as SubKreisRight;
+    let maxLeft = 0;
+    let maxLeftWidth = 0;
+    console.log(subRight.instanceOf());
+    for (const child of childDividers) {
+      if (child.left > maxLeft) {
+        maxLeft = child.left;
+        maxLeftWidth = child.width;
       }
     }
-    return child;
-  } */
+    console.log(('subright.left' + subRight.left));
+    console.log(('maxleft' + maxLeft));
+
+
+    subRight.phantomLeft.width += ((maxLeft + maxLeftWidth) - subRight.left);
+
+    subRight.phantomLeft.left = subRight.left + subRight.phantomRight.width;
+    subRight.phantomLeft.top = subRight.top;
+
+    subRight.setPosition();
+
+
+
+  }
 
   resizeDivider(element: Shape) {
     const divider: SubKreis = this.getParentDivider(element) as SubKreis;
@@ -75,7 +93,7 @@ export class ComponentDirectorService {
       this.resizeDividerRecursive(element as SubKreis);
     }
   }
-
+ 
   resizeDividerRecursive(element: SubKreis) {
     if (element === null) {
       return;
@@ -149,9 +167,19 @@ export class ComponentDirectorService {
     return childs;
   }
 
-  getChildDividers(element: SubKreis): SubKreis {
-    
-    return element;
+  getChildDividers(element: Shape): Shape[] {
+
+    let childDividers: Shape[] = [];
+    const currentChildren: Shape[] = this.getChildFrom(element);
+
+    for (const child of currentChildren) {
+      if ( child instanceof SubKreis) {
+        childDividers.push(child);
+      }
+      childDividers = childDividers.concat(this.getChildDividers(child));
+    }
+    return childDividers;
+
   }
 
   rearrangeAll(element: Shape) {
@@ -161,8 +189,30 @@ export class ComponentDirectorService {
       child.setPosition();
       this.rearrangeAll(child);
     }
-
-
+  }
+  setPaddingLeft() {
+    let minDistanceLeft: number = 52;
+    for (const shape of this.getShapeList()) {
+      if (shape.left < minDistanceLeft) {
+        minDistanceLeft = shape.left;
+      }
+    }
+    if (minDistanceLeft < 5) {
+      this.ShapeList[0].left += 10;
+      this.rearrangeAll(this.ShapeList[0]);
+    }
+  }
+  setPaddingBottom(element: Shape) {
+    let maxDistanceTop: number = 0;
+    const height: number = element.height;
+    for (const shape of this.getShapeList()) {
+      if (shape.top > maxDistanceTop) {
+        maxDistanceTop = shape.top;
+      }
+    }
+    if ( (this.drawingField.drawingFieldPaddingTop - maxDistanceTop) <= this.drawingField.drawingFieldPadding) {
+      this.drawingField.drawingFieldPaddingTop += height + 1;
+    }
   }
 
   setSelected(shape: Shape) {
@@ -170,5 +220,7 @@ export class ComponentDirectorService {
     this.LastSelected = shape;
     shape.selected = true;
   }
+
+
 
 }

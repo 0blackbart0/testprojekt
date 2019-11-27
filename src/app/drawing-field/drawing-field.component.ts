@@ -12,15 +12,13 @@ export class DrawingFieldComponent implements OnInit {
 
   selected: Shape;
   ShapeList: Shape[] = [];
-
+  drawingFieldPadding: number = 60;
+  drawingFieldPaddingTop: number = 50;
   constructor(private director: ComponentDirectorService) { }
 
   ngOnInit() {
     this.ShapeList = this.director.getShapeList();
-  }
-
-  get drawingField(): DrawingFieldComponent {
-    return this;
+    this.director.setDrawingField(this);
   }
 
 }

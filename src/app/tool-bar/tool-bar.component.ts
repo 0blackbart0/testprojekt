@@ -32,7 +32,7 @@ export class ToolBarComponent implements OnInit {
         if (typ === 'rechteck') {
           tmp = new Rechteck(this.director.LastSelected);
           this.director.addShape(tmp);
-         // this.director.setSelected(tmp);
+          this.director.setSelected(tmp);
         } else if (typ === 'subKreis') {
           tmp = new Kreis(this.director.LastSelected);
           subleft = new SubKreisLeft(tmp);
@@ -41,6 +41,7 @@ export class ToolBarComponent implements OnInit {
           this.director.addShape(subleft);
           this.director.addShape(subright);
           this.director.resizeDivider(this.director.LastSelected);
+          this.director.setSelected(subleft);
         }
         tmp.setPosition();
         if (typ === 'subKreis') {
@@ -54,7 +55,7 @@ export class ToolBarComponent implements OnInit {
           tmp = new Rechteck(this.director.LastSelected);
           childs[0].parent = tmp;
           this.director.addShape(tmp);
-         // this.director.setSelected(tmp);
+          this.director.setSelected(tmp);
         } else if (typ === 'subKreis') {
           tmp = new Kreis(this.director.LastSelected);
           subleft = new SubKreisLeft(tmp);
@@ -63,8 +64,8 @@ export class ToolBarComponent implements OnInit {
           this.director.addShape(tmp);
           this.director.addShape(subleft);
           this.director.addShape(subright);
-//          this.director.setSelected(subright);
           this.director.resizeDivider(this.director.LastSelected);
+          this.director.setSelected(subleft);
         }
         tmp.setPosition();
         if (typ === 'subKreis') {
@@ -73,6 +74,13 @@ export class ToolBarComponent implements OnInit {
         }
       }
       this.director.rearrangeAll(this.director.ShapeList[0]);
+      this.director.setPaddingLeft();
+      this.director.setPaddingBottom(tmp);
+
+      if(typ === 'subKreis' && childs.length === 1) {
+        this.director.resizeInjectedDivider(tmp);
+      }
+
     }
 
 }
