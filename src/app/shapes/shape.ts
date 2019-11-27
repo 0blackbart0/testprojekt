@@ -10,7 +10,9 @@ export abstract class Shape {
     width: number;
     parent: Shape = null;
     previousSplitter: Kreis = null;
-    phantoms: Phantom[];
+    phantomLeft: Phantom = null;
+    phantomRight: Phantom = null;
+
 
     abstract instanceOf(): string;
 
@@ -18,14 +20,13 @@ export abstract class Shape {
         this.parent = parent;
         this.left = 0;
         this.top = 2;
-        this.phantoms = [];
     }
 
     getParent(): Shape { return this.parent; }
 
 
     setPosition() {
-        this.left = this.parent.left - (this.width / 2) + (this.parent.width / 2);
+        this.left = this.parent.left;
         this.top = this.parent.top + this.parent.height + 1;
     }
 }
@@ -45,17 +46,12 @@ export class Rechteck extends Shape {
 
 export class Kreis extends Shape {
 
-    subkreise: Shape[] = [];
-
     constructor(parent: Shape) {
         super(parent);
-        this.width = 30;
+        this.width = 20;
         this.height = 5;
     }
 
-    addSubkreis(subkreis: Shape) {
-        this.subkreise.push(subkreis);
-    }
     setPosition() {
         this.left = this.parent.left - (this.width / 2) + (this.parent.width / 2);
         this.top = this.parent.top + this.parent.height + 1;

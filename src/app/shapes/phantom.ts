@@ -1,20 +1,19 @@
-import { SubKreis, SubKreisLeft } from './subkreis';
+import { SubKreis, SubKreisLeft, SubKreisRight } from './subkreis';
 
 export class Phantom {
+
     left: number;
     top: number;
-    height: number;
-    width: number;
+    height: number = 5;
+    width: number = 0;
 
     parent: SubKreis;
 
     constructor(parent: SubKreis) {
-        this.top = parent.top;
-        this.left = parent.left;
-        this.height = parent.height;
-        this.width = parent.width ;
-        console.log(parent.phantoms.length);
+        this.parent = parent;
     }
-
-
+    setPosition() {
+        this.top = this.parent.top;
+        this.left = this.parent.left;
+    }
 }

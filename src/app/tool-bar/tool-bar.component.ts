@@ -40,7 +40,6 @@ export class ToolBarComponent implements OnInit {
           this.director.addShape(tmp);
           this.director.addShape(subleft);
           this.director.addShape(subright);
-          //this.director.setSelected(subright);
           this.director.resizeDivider(this.director.LastSelected);
         }
         tmp.setPosition();
@@ -48,6 +47,7 @@ export class ToolBarComponent implements OnInit {
           subleft.setPosition();
           subright.setPosition();
         }
+
       } else if (childs.length === 1) {
         /////////// Einfügen in der Mitte
         if (typ === 'rechteck') {
@@ -63,7 +63,7 @@ export class ToolBarComponent implements OnInit {
           this.director.addShape(tmp);
           this.director.addShape(subleft);
           this.director.addShape(subright);
-          //this.director.setSelected(subright);
+//          this.director.setSelected(subright);
           this.director.resizeDivider(this.director.LastSelected);
         }
         tmp.setPosition();
@@ -72,7 +72,6 @@ export class ToolBarComponent implements OnInit {
           subright.setPosition();
         }
       }
-
       this.director.rearrangeAll(this.director.ShapeList[0]);
     }
 

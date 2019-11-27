@@ -1,8 +1,23 @@
-<div class="subKreisLeft" (click)="director.setSelected(this.shape)"
-[style.background-color]="shape.selected ? 'pink': 'lightgrey'"
-[style.top.vh]="shape.top"
-[style.left.vh]="shape.left"
-[style.width.vh]="shape.width"
-[style.height.vh]="shape.height">
+<div>
+    <div *ngIf="shape.phantomLeft !== null" class="phantom"
+    [style.top.vh]="shape.phantomLeft.top"
+    [style.left.vh]="shape.phantomLeft.left"
+    [style.width.vh]="shape.phantomLeft.width"
+    [style.height.vh]="shape.phantomLeft.height"> 
+    </div>
 
+    <div class="subKreisLeft" (click)="director.setSelected(this.shape)"
+    [style.background-color]="shape.selected ? 'pink': 'lightgrey'"
+    [style.top.vh]="shape.top"
+    [style.left.vh]="shape.left"
+    [style.width.vh]="shape.width"
+    [style.height.vh]="shape.height">
+    </div>
+
+    <div *ngIf="shape.phantomRight !== null" class="phantom"
+    [style.top.vh]="shape.phantomRight.top"
+    [style.left.vh]="shape.phantomRight.left"
+    [style.width.vh]="shape.phantomRight.width"
+    [style.height.vh]="shape.phantomRight.height"> 
+</div>
 </div>

@@ -41,34 +41,63 @@ export class ComponentDirectorService {
   } */
 
   resizeDivider(element: Shape) {
-   
-    /*
-    for (const divider of this.getParentDivider(element)) {
-      (divider as SubKreis).addPhantom();
-    }*/
-    
-    const dividers: SubKreis[] = (this.getParentDivider(element) as SubKreis[]);
-    const masterDivider: SubKreis = dividers[dividers.length - 1];
-    let innerDividerSet = false;
-    let outside = 0;
-    let inside = 0;
+    const divider: SubKreis = this.getParentDivider(element) as SubKreis;
 
-    for ( const divider of dividers) {
-      if ( divider.instanceOf() === masterDivider.instanceOf()) {
-        divider.addPhantom();
-        outside++;
+    let firstDividerSet = false;
+
+    if ( element.instanceOf() === 'rechteck') {
+      if (divider === null) {
+        return;
       }
-      if ( divider.instanceOf() !== masterDivider.instanceOf() && !(innerDividerSet)) {
-        divider.addPhantom();
-        innerDividerSet = true;
-        inside++;
-      }
+      element = divider;
     }
-    if ( inside > outside && outside !== 0) {
-          masterDivider.addPhantom();
+
+    // Erstes Element anpassen, da dieses anders behandelt wird. Bsp. Außnahme von Rechtecken
+    if (element.instanceOf() === 'subKreisLeft') {
+      element.phantomRight.width += (element.width / 2);
+      firstDividerSet = true;
+      element.phantomRight.left = element.left + element.phantomRight.width;
+      element.phantomRight.top = element.top;
+      element.setPosition();
+
+    } else if (element.instanceOf() === 'subKreisRight') {
+
+      element.phantomLeft.width += (element.width / 2);
+      firstDividerSet = true;
+      element.phantomLeft.left = element.left;
+      element.phantomLeft.top = element.top;
+      element.setPosition();
+    }
+
+
+    // als nächstes der erste Parent divider der in die entgegengesetzte Richtung zeigt
+    if (firstDividerSet) {
+      this.resizeDividerRecursive(element as SubKreis);
     }
   }
-  getParentDivider(element: Shape): Shape[] {
+
+  resizeDividerRecursive(element: SubKreis) {
+    if (element === null) {
+      return;
+    }
+    const divider: SubKreis = this.getParentOppositeDivider(element);
+
+    if ( divider != null) {
+      if (divider.instanceOf() === 'subKreisLeft') {
+        divider.phantomRight.width += (element.width );
+        divider.phantomRight.left -= (element.width );
+        element.phantomLeft.left -= (element.width );
+
+      } else if (divider.instanceOf() === 'subKreisRight') {
+        divider.phantomLeft.width += (element.width );
+        divider.phantomLeft.left -= (element.width );
+        element.phantomRight.left += (element.width );
+      }
+      this.resizeDividerRecursive(divider);
+    }
+
+  }
+  getParentDividers(element: Shape): Shape[] {
     const divider: Shape[] = [];
     if (!(element instanceof StartShape)) {
      element = element.parent;
@@ -82,6 +111,34 @@ export class ComponentDirectorService {
     return divider;
   }
 
+  getParentDivider(element: Shape): Shape {
+    if (!(element instanceof StartShape)) {
+     element = element.parent;
+    }
+    while (element.parent !== null ) {
+      if (element instanceof SubKreis) {
+        return element;
+      }
+      element = element.getParent();
+    }
+    return null;
+  }
+
+  getParentOppositeDivider(element: SubKreis): SubKreis {
+
+    let opDivider: SubKreis = null;
+    let pointer: Shape = element.getParent();
+    while (pointer !== null) {
+
+      if (pointer instanceof SubKreis && element.instanceOf() !== pointer.instanceOf()) {
+        opDivider = pointer as SubKreis;
+        break;
+      }
+      pointer = pointer.getParent();
+    }
+    return opDivider;
+  }
+
   getChildFrom(shape: Shape): Shape[] {
     const childs: Shape[] = [];
     for (const element of this.ShapeList) {
@@ -92,22 +149,19 @@ export class ComponentDirectorService {
     return childs;
   }
 
+  getChildDividers(element: SubKreis): SubKreis {
+    
+    return element;
+  }
+
   rearrangeAll(element: Shape) {
 
     const childs: Shape[] = this.getChildFrom(element);
-    switch (childs.length) {
-      case 0:
-        break;
-      case 1:
-        childs[0].setPosition();
-        this.rearrangeAll(childs[0]);
-        break;
-      default:
-        for (const child of childs) {
-          child.setPosition();
-          this.rearrangeAll(child);
-        }
+    for (const child of childs) {
+      child.setPosition();
+      this.rearrangeAll(child);
     }
+
 
   }
 
