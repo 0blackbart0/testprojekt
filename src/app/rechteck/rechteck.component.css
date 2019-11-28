@@ -1,10 +1,21 @@
 .rechteck{
+    /*background-color: lightgray;
+    border: solid 2px black;
+    */border-radius: 5px;
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0.2vh;
+}
+
+.wrapper{
     background-color: lightgray;
     border: solid 2px black;
     border-radius: 5px;
     display: block;
-    position: absolute;
     box-sizing: border-box;
+    height: 100%;
+    width: 100%;
 }
 
 .rechteck:hover {

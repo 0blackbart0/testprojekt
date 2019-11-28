@@ -1,7 +1,10 @@
 <div class="rechteck" (click)="director.setSelected(this.shape)" 
-[style.background-color]="shape.selected ? 'pink': 'lightgrey'"
 [style.top.vh]="shape.top"
 [style.left.vh]="shape.left"
 [style.width.vh]="shape.width"
 [style.height.vh]="shape.height">
+    <div class="wrapper" 
+    [style.background-color]="shape.selected ? '#DD0B2F': '#707070'">
+        
+    </div>
 </div>
