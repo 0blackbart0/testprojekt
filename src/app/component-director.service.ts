@@ -47,7 +47,12 @@ export class ComponentDirectorService {
     console.log(('maxleft' + maxLeft));
 
 
-    subRight.phantomLeft.width += ((maxLeft + maxLeftWidth) - subRight.left);
+    if ( maxLeft === subRight.left && childDividers.length === 4) {
+      subRight.phantomLeft.width += (subRight.width / 2);
+    } else {
+      subRight.phantomLeft.width += ((maxLeft + maxLeftWidth) - subRight.left);
+    }
+
 
     subRight.phantomLeft.left = subRight.left + subRight.phantomRight.width;
     subRight.phantomLeft.top = subRight.top;
