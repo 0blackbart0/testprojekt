@@ -1,7 +1,5 @@
 app-tool-bar{
     grid-column: 1;
-    display: grid;
-    background-color: grey;
 }
 
 app-drawing-field{

@@ -7,18 +7,15 @@
         </div>
     
         <div class="subKreisRight" (click)="director.setSelected(this.shape)"
-        [style.background-color]="shape.selected ? '#DD0B2F': '#707070'"
         [style.top.vh]="shape.top"
         [style.left.vh]="shape.left"
         [style.width.vh]="shape.width"
         [style.height.vh]="shape.height">
+                <div class="wrapper"
+                [style.background-color]="shape.selected ? '#DD0B2F': '#707070'">
+                
+                </div>
         </div>
 
-        <div *ngIf="shape.phantomRight !== null" class="phantom"
-        [style.top.vh]="shape.phantomRight.top"
-        [style.left.vh]="shape.phantomRight.left"
-        [style.width.vh]="shape.phantomRight.width"
-        [style.height.vh]="shape.phantomRight.height"> 
-    </div>
-    </div>
+</div>
     
