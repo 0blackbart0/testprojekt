@@ -1,0 +1,28 @@
+.subKreisCenter {
+    /*  border: 2px solid black;
+      border-right: none;
+      */box-sizing: border-box;
+      position: absolute;
+  }
+  .wrapper {
+      border: 2px solid black;
+      border-right: none;
+      border-left: none;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+  }
+  
+  
+  .subKreisCenter:hover {
+      opacity: 0.7;
+  }
+  
+  .phantom {
+      border: 2px solid black;
+      border-right: none;
+      border-left: none;
+      box-sizing: border-box;
+      position: absolute;
+      background-color: #707070;
+  }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Shape, Kreis, StartShape } from './shapes/shape';
-import { SubKreis, SubKreisLeft, SubKreisRight } from './shapes/subkreis';
+import { Shape, Kreis, StartShape, Rechteck } from './shapes/shape';
+import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from './shapes/subkreis';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 import { concat } from 'rxjs';
 
@@ -68,7 +68,7 @@ export class ComponentDirectorService {
 
     let firstDividerSet = false;
 
-    if ( element.instanceOf() === 'rechteck') {
+    if ( element instanceof Rechteck) {
       if (divider === null) {
         return;
       }
@@ -76,20 +76,24 @@ export class ComponentDirectorService {
     }
 
     // Erstes Element anpassen, da dieses anders behandelt wird. Bsp. Außnahme von Rechtecken
-    if (element.instanceOf() === 'subKreisLeft') {
+    if (element instanceof SubKreisLeft) {
       element.phantomRight.width += (element.width / 2);
       firstDividerSet = true;
       element.phantomRight.left = element.left + element.phantomRight.width;
       element.phantomRight.top = element.top;
       element.setPosition();
 
-    } else if (element.instanceOf() === 'subKreisRight') {
+    } else if (element instanceof SubKreisRight) {
 
       element.phantomLeft.width += (element.width / 2);
       firstDividerSet = true;
       element.phantomLeft.left = element.left;
       element.phantomLeft.top = element.top;
       element.setPosition();
+    } else if ( element instanceof SubKreisCenter) {
+      firstDividerSet = true;
+      element.phantomRight.width += (element.width / 2);
+      element.phantomLeft.width += (element.width / 2);
     }
 
 
@@ -98,7 +102,7 @@ export class ComponentDirectorService {
       this.resizeDividerRecursive(element as SubKreis);
     }
   }
- 
+
   resizeDividerRecursive(element: SubKreis) {
     if (element === null) {
       return;
@@ -106,20 +110,83 @@ export class ComponentDirectorService {
     const divider: SubKreis = this.getParentOppositeDivider(element);
 
     if ( divider != null) {
-      if (divider.instanceOf() === 'subKreisLeft') {
+      if (divider instanceof SubKreisLeft ) {
         divider.phantomRight.width += (element.width );
         divider.phantomRight.left -= (element.width );
         element.phantomLeft.left -= (element.width );
-
-      } else if (divider.instanceOf() === 'subKreisRight') {
-        divider.phantomLeft.width += (element.width );
-        divider.phantomLeft.left -= (element.width );
-        element.phantomRight.left += (element.width );
+      } else if (divider instanceof SubKreisRight) {
+        if (!(element instanceof SubKreisCenter)) {
+          divider.phantomLeft.width += (element.width );
+          divider.phantomLeft.left -= (element.width );
+          element.phantomRight.left += (element.width );
+        }
+      } else if (divider instanceof SubKreisCenter) {
+        if (element instanceof SubKreisRight) {
+          divider.phantomRight.width += element.width;
+          divider.phantomRight.left += element.width;
+        } else if (element instanceof SubKreisLeft) {
+          divider.phantomLeft.width += element.width;
+          divider.phantomLeft.left -= element.width;
+        } else if ( element instanceof SubKreisCenter) {
+          divider.phantomRight.width += element.width;
+          divider.phantomRight.left += element.width;
+        }
       }
       this.resizeDividerRecursive(divider);
     }
 
   }
+
+  reziseDividerAfterAddCenter(element: SubKreis) {
+    if (element === null) {
+      return;
+    }
+    const parentDivider: SubKreis = this.getParentDivider(element);
+
+    if (parentDivider === null) {
+      return;
+    }
+    if (!(parentDivider instanceof SubKreisRight)) {
+      parentDivider.phantomRight.width += parentDivider.width;
+    }
+    this.resizeDividerRecursive(parentDivider);
+  }
+
+  /*reziseDividerAfterAddCenterRecursive(element: SubKreis) {
+
+    if (element === null) {
+      return;
+    }
+    const parentOppositeDivider: SubKreis = this.getParentOppositeDivider(element);
+    if ( parentOppositeDivider === null) {
+      return;
+    }
+
+    if (parentOppositeDivider instanceof SubKreisLeft ) {
+      parentOppositeDivider.phantomRight.width += (element.width );
+      parentOppositeDivider.phantomRight.left -= (element.width );
+      parentOppositeDivider.phantomLeft.left -= (element.width );
+
+    } else if (parentOppositeDivider instanceof SubKreisRight) {
+      parentOppositeDivider.phantomLeft.width += (element.width );
+      parentOppositeDivider.phantomLeft.left -= (element.width );
+      element.phantomRight.left += (element.width );
+    } else if (divider instanceof SubKreisCenter) {
+      if (element instanceof SubKreisRight) {
+        divider.phantomRight.width += element.width;
+        divider.phantomRight.left += element.width;
+      } else if (element instanceof SubKreisLeft) {
+        divider.phantomLeft.width += element.width;
+        divider.phantomLeft.left -= element.width;
+      } else if ( element instanceof SubKreisCenter) {
+
+      }
+    }
+
+
+  }*/
+
+
   getParentDividers(element: Shape): Shape[] {
     const divider: Shape[] = [];
     if (!(element instanceof StartShape)) {
@@ -134,7 +201,7 @@ export class ComponentDirectorService {
     return divider;
   }
 
-  getParentDivider(element: Shape): Shape {
+  getParentDivider(element: Shape): SubKreis {
     if (!(element instanceof StartShape)) {
      element = element.parent;
     }
@@ -148,12 +215,16 @@ export class ComponentDirectorService {
   }
 
   getParentOppositeDivider(element: SubKreis): SubKreis {
+    // liefert den letzten gegenüberliegenden Divider zurükck
+     // oder den nächsten CenterDivider
 
     let opDivider: SubKreis = null;
     let pointer: Shape = element.getParent();
     while (pointer !== null) {
 
-      if (pointer instanceof SubKreis && element.instanceOf() !== pointer.instanceOf()) {
+      if (pointer instanceof SubKreis &&
+          ( element.instanceOf() !== pointer.instanceOf() ||
+          (element.instanceOf() === pointer.instanceOf() && element instanceof SubKreisCenter))) {
         opDivider = pointer as SubKreis;
         break;
       }

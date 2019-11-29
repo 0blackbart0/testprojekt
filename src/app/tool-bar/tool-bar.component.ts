@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Shape, Rechteck, Kreis } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
-import { SubKreis, SubKreisLeft, SubKreisRight } from '../shapes/subkreis';
+import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from '../shapes/subkreis';
 import { ScalingService } from '../scaling.service';
 
 @Component({
@@ -32,20 +32,19 @@ export class ToolBarComponent implements OnInit {
   }
 
   rezise(element: Shape) {
+
     element.height *= this.scaling.scale;
     element.width *= this.scaling.scale;
-    if ( element instanceof SubKreisLeft) {
-      (element as SubKreisLeft).phantomRight.width *= this.scaling.scale;
-      (element as SubKreisLeft).phantomRight.height *= this.scaling.scale;
-    }
-    if ( element instanceof SubKreisRight) {
-      (element as SubKreisRight).phantomLeft.width *= this.scaling.scale;
-      (element as SubKreisRight).phantomLeft.height *= this.scaling.scale;
+    if ( element instanceof SubKreis) {
+      (element as SubKreis).phantomRight.width *= this.scaling.scale;
+      (element as SubKreis).phantomRight.height *= this.scaling.scale;
+      (element as SubKreis).phantomLeft.width *= this.scaling.scale;
+      (element as SubKreis).phantomLeft.height *= this.scaling.scale;
     }
   }
 
   addKreis() {
-    let tmp: Shape = null;
+    let tmp: Kreis = null;
     let subleft = null;
     let subright = null;
     let childs: Shape[] = [];
@@ -85,6 +84,34 @@ export class ToolBarComponent implements OnInit {
     this.director.setPaddingLeft();
     this.director.setPaddingBottom(tmp);
     this.director.resizeInjectedDivider(tmp);
+  }
+
+  addSubKreisCenter() {
+    if (!(this.director.LastSelected instanceof SubKreis)) {
+      return;
+    }
+    const parent: Shape = this.director.LastSelected.getParent();
+    const childs: Shape[] = this.director.getChildFrom(parent);
+    let subKreisRight: SubKreisRight;
+    for (const child of childs) {
+      if ( child instanceof SubKreisRight) {
+        subKreisRight = child;
+      }
+    }
+
+    const subKreisRightChild: Shape[] = this.director.getChildFrom(subKreisRight);
+    const subKreisCenter: SubKreisCenter = new SubKreisCenter(parent);
+    this.director.addShape(subKreisCenter);
+    (parent as Kreis).addCenter(subKreisCenter);
+    subKreisCenter.setValuesTo(subKreisRight);
+    subKreisRight.left += subKreisRight.phantomLeft.width + subKreisRight.width;
+    subKreisRight.phantomLeft.width = 0;
+    if (subKreisRightChild.length === 1 ) {
+      subKreisRightChild[0].parent = subKreisCenter;
+    }
+    this.director.reziseDividerAfterAddCenter(subKreisCenter);
+    this.director.rearrangeAll(this.director.ShapeList[0]);
+
   }
 
   addRechteck() {

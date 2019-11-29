@@ -16,6 +16,20 @@ export abstract class SubKreis extends Kreis {
         this.phantomLeft = new Phantom(this);
         this.phantomRight = new Phantom(this);
     }
+
+    getTotalCenterWidth(element: SubKreisCenter): number {
+        let totalCenterWidth = 0;
+        for (const center of (element.parent as Kreis).centerChilds) {
+            if (center === element ) {
+                break;
+            } else {
+                totalCenterWidth += center.width;
+                totalCenterWidth += center.phantomLeft.width;
+                totalCenterWidth += center.phantomRight.width;
+            }
+        }
+        return totalCenterWidth;
+    }
 }
 
 export class SubKreisLeft extends SubKreis {
@@ -31,13 +45,51 @@ export class SubKreisLeft extends SubKreis {
     }
 }
 
+export class SubKreisCenter extends SubKreis {
+    instanceOf(): string {
+        return 'subKreisCenter';
+    }
+
+    setPosition() {
+        const totalCenterWidth = this.getTotalCenterWidth(this);
+        this.left = this.parent.left + this.width + this.phantomLeft.width + totalCenterWidth;
+        this.top = this.parent.top;
+        this.phantomLeft.left = this.left - this.phantomLeft.width;
+        this.phantomLeft.top = this.top;
+        this.phantomRight.left = this.left + this.width;
+        this.phantomRight.top = this.top;
+    }
+
+
+
+
+    setValuesTo(subKreis: SubKreis) {
+        this.height = subKreis.height;
+        this.width = subKreis.width;
+        this.left = subKreis.left;
+        this.top = subKreis.top;
+        this.phantomLeft.height = subKreis.phantomLeft.height;
+        this.phantomLeft.width = subKreis.phantomLeft.width;
+        this.phantomRight.height = subKreis.phantomLeft.height;
+        this.phantomLeft.left = subKreis.phantomLeft.left;
+        this.phantomLeft.top = subKreis.phantomLeft.top;
+    }
+}
+
 export class SubKreisRight extends SubKreis {
 
     instanceOf(): string {
         return 'subKreisRight';
     }
     setPosition() {
-        this.left = this.parent.left + this.width + this.phantomLeft.width;
+
+        let totalCenterWidth = 0;
+        for (const center of (this.parent as Kreis).centerChilds) {
+            totalCenterWidth += center.width;
+            totalCenterWidth += center.phantomLeft.width;
+            totalCenterWidth += center.phantomRight.width;
+        }
+        this.left = this.parent.left + this.width + this.phantomLeft.width + totalCenterWidth;
         this.top = this.parent.top;
         this.phantomLeft.left = this.left - this.phantomLeft.width;
         this.phantomLeft.top = this.top;

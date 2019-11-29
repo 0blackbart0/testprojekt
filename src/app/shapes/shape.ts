@@ -1,4 +1,4 @@
-import { SubKreis } from './subkreis';
+import { SubKreis, SubKreisCenter } from './subkreis';
 import { Phantom } from './phantom';
 
 export abstract class Shape {
@@ -47,12 +47,16 @@ export class Rechteck extends Shape {
 }
 
 export class Kreis extends Shape {
+    centerChilds: SubKreisCenter[] = [];
     constructor(parent: Shape) {
         super(parent);
         this.width = 60;
         this.height = 10;
     }
 
+    addCenter(center: SubKreisCenter) {
+        this.centerChilds.push(center);
+    }
     setPosition() {
         this.left = this.parent.left - (this.width / 2) + (this.parent.width / 2);
         this.top = this.parent.top + this.parent.height + 1;
