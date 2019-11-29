@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, EventEmitter, Input, Output } from '@a
 import { Rechteck, Shape  } from '../shapes/shape';
 import { DrawingFieldComponent } from '../drawing-field/drawing-field.component';
 import { ComponentDirectorService } from '../component-director.service';
+import { ScalingService } from '../scaling.service';
 
 @Component({
   selector: 'app-rechteck',
@@ -12,7 +13,7 @@ export class RechteckComponent implements OnInit {
 
   @Input() shape: Shape;
 
-  constructor(public director: ComponentDirectorService) {
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
   }
 
   ngOnInit() {

@@ -197,13 +197,15 @@ export class ComponentDirectorService {
   }
   setPaddingLeft() {
     let minDistanceLeft: number = 52;
+    let minDistanceLeftWidth: number;
     for (const shape of this.getShapeList()) {
       if (shape.left < minDistanceLeft) {
         minDistanceLeft = shape.left;
+        minDistanceLeftWidth = shape.width;
       }
     }
     if (minDistanceLeft < 5) {
-      this.ShapeList[0].left += 10;
+      this.ShapeList[0].left += minDistanceLeftWidth;
       this.rearrangeAll(this.ShapeList[0]);
     }
   }

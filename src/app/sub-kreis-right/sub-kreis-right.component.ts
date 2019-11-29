@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Shape } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
+import { ScalingService } from '../scaling.service';
 
 @Component({
   selector: 'app-sub-kreis-right',
@@ -10,7 +11,7 @@ import { ComponentDirectorService } from '../component-director.service';
 export class SubKreisRightComponent implements OnInit {
 
   @Input() shape: Shape;
-  constructor(public director: ComponentDirectorService) { }
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
 
   ngOnInit() {
   }

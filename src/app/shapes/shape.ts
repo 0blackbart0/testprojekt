@@ -35,21 +35,22 @@ export abstract class Shape {
 export class Rechteck extends Shape {
     constructor(parent: Shape) {
         super(parent);
-        this.width = 10;
-        this.height = 10;
+        this.width = 30;
+        this.height = 50;
     }
 
     instanceOf(): string {
         return 'rechteck';
     }
+
+
 }
 
 export class Kreis extends Shape {
-
     constructor(parent: Shape) {
         super(parent);
-        this.width = 20;
-        this.height = 5;
+        this.width = 60;
+        this.height = 10;
     }
 
     setPosition() {
@@ -61,14 +62,11 @@ export class Kreis extends Shape {
         return 'kreis';
     }
 }
-
-
-
 export class StartShape extends Shape {
     constructor() {
         super(null);
-        this.width = 10;
-        this.height = 10;
+        this.width = 30;
+        this.height = 30;
         this.left = 60;
     }
     instanceOf(): string {
