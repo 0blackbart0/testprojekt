@@ -7,18 +7,26 @@ import { SubKreisLeft, SubKreisRight } from './shapes/subkreis';
 })
 export class ScalingService {
 
-  balance = 0;
+  balance = -10;
   scale: number;
   constructor() { }
 
-  increase() {
-    this.scale = 1.1;
-    this.balance++;
+  increase(): boolean {
+    if ( this.balance < 10 ) {
+      this.scale = 1.1;
+      this.balance++;
+      return true;
+    }
+    return false;
   }
 
   decrease() {
-    this.scale = 0.9;
-    this.balance--;
+    if (this.balance > -15 ) {
+      this.scale = 0.9;
+      this.balance--;
+      return true;
+    }
+    return false;
   }
 
   scaleNewShape(shape: Shape) {

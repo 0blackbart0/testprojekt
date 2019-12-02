@@ -11,7 +11,7 @@ import { ScalingService } from '../scaling.service';
 })
 export class ToolBarComponent implements OnInit {
 
-  constructor(private director: ComponentDirectorService, public scaling: ScalingService) { }
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
 
   ngOnInit() {
   }
@@ -19,16 +19,19 @@ export class ToolBarComponent implements OnInit {
 
 
   scale(scale: string) {
+    let scalingAllowed = false;
     if (scale === '+') {
-      this.scaling.increase();
+      scalingAllowed = this.scaling.increase();
     } else if (scale === '-') {
-      this.scaling.decrease();
+      scalingAllowed = this.scaling.decrease();
     }
-    for (const element of this.director.getShapeList()) {
-      this.rezise(element);
-    }
-    this.director.rearrangeAll(this.director.ShapeList[0]);
+    if ( scalingAllowed ) {
 
+      for (const element of this.director.getShapeList()) {
+        this.rezise(element);
+      }
+      this.director.rearrangeAll(this.director.ShapeList[0]);
+    }
   }
 
   rezise(element: Shape) {
@@ -43,6 +46,14 @@ export class ToolBarComponent implements OnInit {
     }
   }
 
+  replaceParent() {
+    if (this.director.replaceActive) {
+      this.director.replaceActive = false;
+    } else {
+      this.director.replaceActive = true;
+    }
+
+  }
   addKreis() {
     let tmp: Kreis = null;
     let subleft = null;

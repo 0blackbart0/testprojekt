@@ -23,3 +23,9 @@ button{
 button:hover {
     background-color: #DD0B2F;
 }
+.test {
+    background-color: #DD0B2F;
+}
+.test2 {
+    background-color: black;
+}

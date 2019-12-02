@@ -18,6 +18,7 @@ export class StartShapeComponent implements OnInit {
     this.shape.selected = true;
     this.director.LastSelected = this.shape;
     this.director.addShape(this.shape);
+    this.scaling.scaleNewShape(this.shape);
    }
 
   ngOnInit() {
