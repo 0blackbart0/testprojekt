@@ -1,10 +1,11 @@
 <div class="toolBar">
     <div class="wrapper">
         <button id="kreis" (click)="addKreis()">kreis</button>
-        <button id="center" (click)="addSubKreisCenter()">addSubKreis</button>
         <button id="rechteck" (click)="addRechteck()">Rechteck</button>
+        <button id="center" (click)="addSubKreisCenter()">addSubKreis</button>
         <button id="replace" (click)="replaceParent()"
         [style.background-color]="this.director.replaceActive? '#DD0B2F' : '#707070'"> replace</button>
+        <button id="delete" (click)="deleteSubTree()">delete below</button>
         <button id="plus" (click)="scale('+')">+</button>
         <button id="minus" (click)="scale('-')">-</button>
     </div>

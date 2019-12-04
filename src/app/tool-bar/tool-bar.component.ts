@@ -17,6 +17,95 @@ export class ToolBarComponent implements OnInit {
   }
 
 
+  deleteSubTree() {
+    const toDelete: Shape = this.director.LastSelected;
+    this.reziseAfterDelete(toDelete);
+    this.director.deleteAll(toDelete);
+    this.director.rearrangeAll(this.director.ShapeList[0]);
+  }
+
+  reziseAfterDelete(toDelete: Shape) {
+
+    let deletedPhantomWidth = 0;
+    let firstDividerSet = false;
+
+    const childDividers: Shape[] = this.director.getChildDividers(toDelete);
+    if ( childDividers.length === 0 ) {
+      return;
+    }
+    let maxLeft = 0;
+    for (const child of childDividers) {
+      if (child.left > maxLeft) {
+        maxLeft = child.left;
+      }
+    }
+    deletedPhantomWidth = maxLeft - toDelete.left;
+
+
+
+
+    if ( toDelete instanceof SubKreisLeft) {
+      deletedPhantomWidth += toDelete.phantomRight.width;
+      toDelete.phantomRight.width = 0;
+      firstDividerSet = true;
+    } else if ( toDelete instanceof SubKreisRight) {
+      deletedPhantomWidth += toDelete.phantomLeft.width;
+      toDelete.phantomLeft.width = 0;
+      firstDividerSet = true;
+    } else if ( toDelete instanceof SubKreisCenter) {
+      const tmp = (toDelete.phantomLeft.width + toDelete.phantomRight.width) / 2;
+      deletedPhantomWidth += tmp;
+      toDelete.phantomLeft.width = 0;
+      toDelete.phantomRight.width = 0;
+      firstDividerSet = true;
+    } else if ( toDelete instanceof Rechteck ) {
+        toDelete = this.director.getParentDivider(toDelete);
+        this.reziseAfterDelete(toDelete);
+        return;
+    }
+
+    if (firstDividerSet) {
+      this.reziseAfterDeleteRecursive(toDelete as SubKreis, deletedPhantomWidth);
+    }
+
+  }
+
+  reziseAfterDeleteRecursive(lastDivider: SubKreis, deletedPhantomWidth: number) {
+
+
+    const parentDivider: SubKreis = this.director.getParentOppositeDivider(lastDivider as SubKreis);
+
+    if ( parentDivider === null ) {
+      return;
+    }
+
+    if ( parentDivider instanceof SubKreisLeft) {
+      if (parentDivider.injected) {
+        const parentKreis: Kreis = parentDivider.parent as Kreis;
+
+        if ( parentKreis.centerChilds.length === 0) {
+          const childs: Shape[] = this.director.getChildFrom(parentKreis);
+          childs[1].phantomLeft.width -= deletedPhantomWidth;
+        } else {
+          parentKreis.centerChilds[parentKreis.centerChilds.length - 1].phantomLeft.width -= deletedPhantomWidth;
+        }
+      } else {
+        parentDivider.phantomRight.width -= deletedPhantomWidth;
+      }
+    } else if ( parentDivider instanceof SubKreisRight) {
+      if (!(lastDivider instanceof SubKreisCenter)) {
+        parentDivider.phantomLeft.width -= deletedPhantomWidth;
+      }
+    } else if ( parentDivider instanceof SubKreisCenter) {
+      if (lastDivider instanceof SubKreisLeft) {
+        parentDivider.phantomLeft.width -= deletedPhantomWidth;
+      } else if (lastDivider instanceof SubKreisRight) {
+        parentDivider.phantomRight.width -= deletedPhantomWidth;
+      }
+    }
+
+    this.reziseAfterDeleteRecursive(parentDivider, deletedPhantomWidth);
+  }
 
   scale(scale: string) {
     let scalingAllowed = false;
@@ -77,6 +166,7 @@ export class ToolBarComponent implements OnInit {
       /////////// Einfügen in der Mitte
         tmp = new Kreis(this.director.LastSelected);
         subleft = new SubKreisLeft(tmp);
+        subleft.hasBeenInjected();
         childs[0].parent = subleft;
         subright = new SubKreisRight(tmp);
         this.director.addShape(tmp);
@@ -109,7 +199,6 @@ export class ToolBarComponent implements OnInit {
         subKreisRight = child;
       }
     }
-
     const subKreisRightChild: Shape[] = this.director.getChildFrom(subKreisRight);
     const subKreisCenter: SubKreisCenter = new SubKreisCenter(parent);
     this.director.addShape(subKreisCenter);
@@ -122,7 +211,8 @@ export class ToolBarComponent implements OnInit {
     }
     this.director.reziseDividerAfterAddCenter(subKreisCenter);
     this.director.rearrangeAll(this.director.ShapeList[0]);
-
+    this.director.sizePhantomOfSubKreisRightAfterCenterAdd(subKreisCenter);
+    this.director.setPaddingLeft();
   }
 
   addRechteck() {

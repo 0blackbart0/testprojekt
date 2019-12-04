@@ -14,6 +14,7 @@ export class ComponentDirectorService {
   replaceActive = false;
   drawingField: DrawingFieldComponent = null;
 
+
   constructor() { }
 
   getShapeList() {
@@ -28,6 +29,32 @@ export class ComponentDirectorService {
     this.drawingField = field;
   }
 
+  sizePhantomOfSubKreisRightAfterCenterAdd(subCenter: SubKreisCenter) {
+    const parentKreis: Shape = subCenter.parent;
+    const children: Shape[] = this.getChildFrom(parentKreis);
+    let subRight: SubKreisRight = null;
+    for (const child of children) {
+      if (child instanceof SubKreisRight) {
+        subRight = child;
+      }
+    }
+    const childDividers: Shape[] = this.getChildDividers(subCenter as Shape);
+    if ( childDividers.length === 0 ) {
+      return;
+    }
+    let maxLeft = 0;
+    let maxLeftWidth = 0;
+    for (const child of childDividers) {
+      if (child.left > maxLeft) {
+        maxLeft = child.left;
+        maxLeftWidth = child.width;
+      }
+    }
+    const distance = (maxLeft + maxLeftWidth) - subRight.left;
+    subRight.phantomLeft.width += distance;
+    this.rearrangeAll(this.ShapeList[0]);
+  }
+
   resizeInjectedDivider(element: Kreis) {
     const childDividers: Shape[] = this.getChildDividers(element);
     if (childDividers.length <= 2) {
@@ -36,15 +63,12 @@ export class ComponentDirectorService {
     const subRight: SubKreisRight = this.getChildFrom(element)[1] as SubKreisRight;
     let maxLeft = 0;
     let maxLeftWidth = 0;
-    console.log(subRight.instanceOf());
     for (const child of childDividers) {
       if (child.left > maxLeft) {
         maxLeft = child.left;
         maxLeftWidth = child.width;
       }
     }
-    console.log(('subright.left' + subRight.left));
-    console.log(('maxleft' + maxLeft));
 
 
     if ( maxLeft === subRight.left && childDividers.length === 4) {
@@ -261,12 +285,11 @@ export class ComponentDirectorService {
 
     let lastSelected = this.LastSelected;
 
-    if (lastSelected instanceof StartShape) {
+    if (lastSelected instanceof StartShape || lastSelected instanceof Kreis) {
+      this.replaceActive = false;
       return;
     }
-    if (lastSelected instanceof Kreis) {
-      lastSelected = lastSelected.parent;
-    }
+
     let childsLastSelected: Shape[] = [];
     let childsShape: Shape[]        = [];
     childsLastSelected  = this.getChildFrom(lastSelected);
@@ -283,6 +306,12 @@ export class ComponentDirectorService {
     }
     childsShape[0].parent = pointer;
 
+    ///////
+    let childDividers: Shape[] = this.getChildDividers(lastSelected);
+    // TODO
+
+    //////
+
     }
     this.replaceActive = false;
     this.rearrangeAll(this.ShapeList[0]);
@@ -291,10 +320,20 @@ export class ComponentDirectorService {
   setSelected(shape: Shape) {
     if (this.replaceActive) {
       this.replaceParent(shape);
+
     }
     this.LastSelected.selected = false;
     this.LastSelected = shape;
     shape.selected = true;
+  }
+
+  deleteAll(element: Shape) {
+    const childs: Shape[] = this.getChildFrom(element);
+    for (const child of childs) {
+      const index = this.ShapeList.indexOf(child);
+      this.ShapeList.splice(index, 1);
+      this.deleteAll(child);
+    }
   }
 
 

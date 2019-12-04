@@ -3,6 +3,7 @@ import { Phantom } from './phantom';
 
 export abstract class SubKreis extends Kreis {
 
+    injected = false;
     constructor(parent: Shape) {
         super(parent);
         this.width = 30;
@@ -15,6 +16,10 @@ export abstract class SubKreis extends Kreis {
     setPhantom() {
         this.phantomLeft = new Phantom(this);
         this.phantomRight = new Phantom(this);
+    }
+
+    hasBeenInjected() {
+        this.injected = true;
     }
 
     getTotalCenterWidth(element: SubKreisCenter): number {

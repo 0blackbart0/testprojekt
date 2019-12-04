@@ -13,6 +13,9 @@ export abstract class Shape {
     phantomLeft: Phantom = null;
     phantomRight: Phantom = null;
 
+    ///////
+    name: string;
+
 
     abstract instanceOf(): string;
 
