@@ -18,7 +18,7 @@ export abstract class SubKreis extends Kreis {
         this.phantomRight = new Phantom(this);
     }
 
-    hasBeenInjected() {
+    setInjected() {
         this.injected = true;
     }
 

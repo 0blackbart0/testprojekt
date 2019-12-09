@@ -4,6 +4,7 @@ import { ComponentDirectorService } from '../component-director.service';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from '../shapes/subkreis';
 import { ScalingService } from '../scaling.service';
 
+
 @Component({
   selector: 'app-tool-bar',
   templateUrl: './tool-bar.component.html',
@@ -16,9 +17,67 @@ export class ToolBarComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteTree() {
+    if (!(this.director.LastSelected instanceof Rechteck )) {
+      return;
+    }
+    const toDelete: Shape = this.director.LastSelected.parent;
+    this.deleteBelow(toDelete);
+  }
+
+  deleteOuterKreis() {
+    const subKreis: Shape = this.director.LastSelected;
+    const kreis: Kreis = subKreis.parent as Kreis;
+    if (  !((subKreis instanceof SubKreisLeft) ||  (subKreis instanceof SubKreisRight))) {
+      return;
+    }
+    let outerCenter: SubKreisCenter;
+    this.deleteBelow(subKreis);
+    if (subKreis instanceof SubKreisRight) {
+      outerCenter = kreis.centerChilds[kreis.centerChilds.length - 1];
+      subKreis.phantomLeft.width = outerCenter.phantomLeft.width;
+      outerCenter.phantomLeft.width = 0;
+      outerCenter.phantomRight.width = 0;
+    } else if ( subKreis instanceof SubKreisLeft) {
+      outerCenter = kreis.centerChilds[0];
+      subKreis.phantomRight.width = outerCenter.phantomRight.width;
+      outerCenter.phantomLeft.width = 0;
+      outerCenter.phantomRight.width = 0;
+    }
+
+    this.director.replaceParents(outerCenter, subKreis);
+
+    this.removeSubKreisCenter(outerCenter);
+
+  }
+
+  removeSubKreisCenter(toDelete: SubKreisCenter) {
+    this.deleteBelow(toDelete);
+    const kreis: Kreis = toDelete.parent as Kreis;
+    let index = kreis.centerChilds.indexOf(toDelete);
+
+    kreis.centerChilds.splice(index, 1);
+    index = this.director.ShapeList.indexOf(toDelete);
+    this.director.ShapeList.splice(index, 1);
+    this.director.reziseDividerAfterDeleteCenter(toDelete);
+    this.director.setSelected(this.director.getChildFrom(kreis)[0]);
+    this.director.rearrangeAll(this.director.ShapeList[0]);
+  }
+
+  deleteSubKreisCenter() {
+    const toDelete: Shape = this.director.LastSelected;
+    if (!(toDelete instanceof SubKreisCenter )) {
+      return;
+    }
+    this.removeSubKreisCenter(toDelete);
+  }
+
 
   deleteSubTree() {
-    const toDelete: Shape = this.director.LastSelected;
+    this.deleteBelow(this.director.LastSelected);
+  }
+
+  deleteBelow(toDelete: Shape) {
     this.reziseAfterDelete(toDelete);
     this.director.deleteAll(toDelete);
     this.director.rearrangeAll(this.director.ShapeList[0]);
@@ -45,18 +104,43 @@ export class ToolBarComponent implements OnInit {
 
 
     if ( toDelete instanceof SubKreisLeft) {
-      deletedPhantomWidth += toDelete.phantomRight.width;
-      toDelete.phantomRight.width = 0;
+      if ( toDelete.injected) {
+        if ( (toDelete.parent as Kreis).centerChilds.length === 0) {
+          this.director.getChildFrom(toDelete.parent)[1].phantomLeft.width -= deletedPhantomWidth;
+        } else {
+          (toDelete.parent as Kreis).centerChilds[0].phantomLeft.width -= deletedPhantomWidth;
+        }
+
+      } else {
+        deletedPhantomWidth += toDelete.phantomRight.width;
+        toDelete.phantomRight.width = 0;
+
+      }
+
       firstDividerSet = true;
     } else if ( toDelete instanceof SubKreisRight) {
       deletedPhantomWidth += toDelete.phantomLeft.width;
       toDelete.phantomLeft.width = 0;
       firstDividerSet = true;
     } else if ( toDelete instanceof SubKreisCenter) {
-      const tmp = (toDelete.phantomLeft.width + toDelete.phantomRight.width) / 2;
-      deletedPhantomWidth += tmp;
-      toDelete.phantomLeft.width = 0;
-      toDelete.phantomRight.width = 0;
+
+      let minLeft = toDelete.left;
+      for (const child of childDividers) {
+        if (child.left < minLeft) {
+          minLeft = child.left;
+        }
+      }
+      const minDistance = toDelete.left - minLeft;
+
+      toDelete.phantomLeft.width -= minDistance;
+      if (toDelete.phantomLeft.width < 0 ) {
+        toDelete.phantomLeft.width = 0;
+      }
+      toDelete.phantomRight.width -= deletedPhantomWidth;
+      if (toDelete.phantomRight.width < 0) {
+        toDelete.phantomRight.width = 0;
+      }
+      deletedPhantomWidth += minDistance;
       firstDividerSet = true;
     } else if ( toDelete instanceof Rechteck ) {
         toDelete = this.director.getParentDivider(toDelete);
@@ -73,8 +157,12 @@ export class ToolBarComponent implements OnInit {
   reziseAfterDeleteRecursive(lastDivider: SubKreis, deletedPhantomWidth: number) {
 
 
-    const parentDivider: SubKreis = this.director.getParentOppositeDivider(lastDivider as SubKreis);
+    let parentDivider: SubKreis = this.director.getParentOppositeDivider(lastDivider as SubKreis);
 
+    if ( lastDivider.injected) {
+      parentDivider = this.director.getParentDivider(lastDivider);
+      lastDivider.injected = false;
+    }
     if ( parentDivider === null ) {
       return;
     }
@@ -100,6 +188,8 @@ export class ToolBarComponent implements OnInit {
       if (lastDivider instanceof SubKreisLeft) {
         parentDivider.phantomLeft.width -= deletedPhantomWidth;
       } else if (lastDivider instanceof SubKreisRight) {
+        parentDivider.phantomRight.width -= deletedPhantomWidth;
+      } else if ( lastDivider instanceof SubKreisCenter ) {
         parentDivider.phantomRight.width -= deletedPhantomWidth;
       }
     }
@@ -166,7 +256,7 @@ export class ToolBarComponent implements OnInit {
       /////////// Einfügen in der Mitte
         tmp = new Kreis(this.director.LastSelected);
         subleft = new SubKreisLeft(tmp);
-        subleft.hasBeenInjected();
+        subleft.setInjected();
         childs[0].parent = subleft;
         subright = new SubKreisRight(tmp);
         this.director.addShape(tmp);

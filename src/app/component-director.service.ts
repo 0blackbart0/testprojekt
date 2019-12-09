@@ -56,11 +56,12 @@ export class ComponentDirectorService {
   }
 
   resizeInjectedDivider(element: Kreis) {
-    const childDividers: Shape[] = this.getChildDividers(element);
+    let childDividers: Shape[] = this.getChildDividers(element);
     if (childDividers.length <= 2) {
       return;
     }
     const subRight: SubKreisRight = this.getChildFrom(element)[1] as SubKreisRight;
+    childDividers = this.getChildDividers(this.getChildFrom(element)[0]);
     let maxLeft = 0;
     let maxLeftWidth = 0;
     for (const child of childDividers) {
@@ -126,7 +127,8 @@ export class ComponentDirectorService {
       this.resizeDividerRecursive(element as SubKreis);
     }
   }
-
+ /////////// FAAAAAALSCH  /////////
+ //////////////// Brauhen wir einmal negativ und einmal Positiv.... ///////////
   resizeDividerRecursive(element: SubKreis) {
     if (element === null) {
       return;
@@ -159,6 +161,21 @@ export class ComponentDirectorService {
       this.resizeDividerRecursive(divider);
     }
 
+  }
+
+  reziseDividerAfterDeleteCenter(element: SubKreis) {
+    if (element === null) {
+      return;
+    }
+    const parentDivider: SubKreis = this.getParentDivider(element);
+
+    if (parentDivider === null) {
+      return;
+    }
+    if (!(parentDivider instanceof SubKreisRight)) {
+      parentDivider.phantomRight.width -= parentDivider.width;
+    }
+    this.resizeDividerRecursive(parentDivider);
   }
 
   reziseDividerAfterAddCenter(element: SubKreis) {
@@ -281,6 +298,21 @@ export class ComponentDirectorService {
       this.drawingField.drawingFieldPaddingTop += height + 1;
     }
   }
+  replaceParents(fromShape: SubKreisCenter, toShape: SubKreis) {
+
+
+    let childsShape: Shape[] = [];
+    childsShape = this.getChildFrom(fromShape);
+    if (childsShape.length === 0) {
+      return;
+    }
+    childsShape[0].parent = toShape;
+    this.rearrangeAll(this.ShapeList[0]);
+  }
+
+
+
+/////////////////DEPRICATED////////////////////
   replaceParent(shape: Shape) {
 
     let lastSelected = this.LastSelected;
@@ -322,6 +354,7 @@ export class ComponentDirectorService {
       this.replaceParent(shape);
 
     }
+
     this.LastSelected.selected = false;
     this.LastSelected = shape;
     shape.selected = true;
