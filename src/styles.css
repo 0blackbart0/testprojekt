@@ -2,6 +2,22 @@ body {
     background-color: white;   
     margin: 0;
     padding: 0; 
+    --font-size-header: 2.5vh;
+    --outer-padding: 0.2vh;
+    --title-margin-bottom: 1vh;
+    --wrapper-inner-padding: 1.5vh;
+    --wrapper-inner-padding-hover: 1.3vh;
+    --border-radius: 5vh;
+    --border-radius-small: 2.5vh;
+    --border-bottom-seperator: 0.3vh;
+    --border-weight-medium: 0.5vh;
+    --border-weight-thick: 0.7vh;
+
+    --label-size: 3vh;
+    --chatbubble-padding-left: 0.6vh;
+
+    --triangle-short: 3.5vh;
+    --triangle-long: 5vh;
 }
 
 app-root{
@@ -9,4 +25,9 @@ app-root{
     grid-template-columns: 1fr 6fr;
     margin: 0;
     padding: 0;
+
+}
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -1,0 +1,27 @@
+<div class="rechteck" (click)="director.setSelected(this.shape)" 
+[style.top.vh]="shape.top"
+[style.left.vh]="shape.left"
+[style.width.vh]="shape.width"
+[style.height.vh]="shape.height">
+    <div class="wrapper" 
+    [style.border-color]="shape.selected ? '#DD0B2F': '#707070'">
+ 
+        <input class="titleInput" type="text" [(ngModel)]="shape.title" >
+        
+        
+        <div class="contentFloat user">
+            <label class="Label floatRight" >Benutzer</label>
+        </div>
+        <textarea class="chatBubble user" rows="4" cols="8" type="textarea" [(ngModel)]="shape.question"></textarea>
+        <div class="triangleUser"></div>
+        
+        
+
+        <label class="Label bot" >ChatBot</label>
+        <textarea class="chatBubble bot" rows="4" cols="8" type="textarea" [(ngModel)]="shape.answer"></textarea>
+        <div class="triangleBot"></div>
+        
+        <div class="connector"></div>
+    </div>
+
+</div>

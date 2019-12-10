@@ -6,7 +6,7 @@ export abstract class SubKreis extends Kreis {
     injected = false;
     constructor(parent: Shape) {
         super(parent);
-        this.width = 30;
+        this.width = 40;
         this.height = 10;
         this.setPhantom();
     }

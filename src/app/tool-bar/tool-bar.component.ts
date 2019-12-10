@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Shape, Rechteck, Kreis } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from '../shapes/subkreis';
+import { Dialog } from '../shapes/component';
 import { ScalingService } from '../scaling.service';
 
 
@@ -31,24 +32,25 @@ export class ToolBarComponent implements OnInit {
     if (  !((subKreis instanceof SubKreisLeft) ||  (subKreis instanceof SubKreisRight))) {
       return;
     }
+
+    if (kreis.centerChilds.length === 0) {
+      return;
+    }
     let outerCenter: SubKreisCenter;
     this.deleteBelow(subKreis);
     if (subKreis instanceof SubKreisRight) {
       outerCenter = kreis.centerChilds[kreis.centerChilds.length - 1];
       subKreis.phantomLeft.width = outerCenter.phantomLeft.width;
-      outerCenter.phantomLeft.width = 0;
-      outerCenter.phantomRight.width = 0;
     } else if ( subKreis instanceof SubKreisLeft) {
       outerCenter = kreis.centerChilds[0];
       subKreis.phantomRight.width = outerCenter.phantomRight.width;
-      outerCenter.phantomLeft.width = 0;
-      outerCenter.phantomRight.width = 0;
     }
 
     this.director.replaceParents(outerCenter, subKreis);
 
-    this.removeSubKreisCenter(outerCenter);
+    this.director.reziseDividerAfterReplace(subKreis);
 
+    this.removeSubKreisCenter(outerCenter);
   }
 
   removeSubKreisCenter(toDelete: SubKreisCenter) {
@@ -78,6 +80,10 @@ export class ToolBarComponent implements OnInit {
   }
 
   deleteBelow(toDelete: Shape) {
+    if (toDelete instanceof SubKreisCenter) {
+      toDelete.phantomLeft.width = 0;
+      toDelete.phantomRight.width = 0;
+    }
     this.reziseAfterDelete(toDelete);
     this.director.deleteAll(toDelete);
     this.director.rearrangeAll(this.director.ShapeList[0]);
@@ -141,6 +147,7 @@ export class ToolBarComponent implements OnInit {
         toDelete.phantomRight.width = 0;
       }
       deletedPhantomWidth += minDistance;
+
       firstDividerSet = true;
     } else if ( toDelete instanceof Rechteck ) {
         toDelete = this.director.getParentDivider(toDelete);
@@ -224,7 +231,6 @@ export class ToolBarComponent implements OnInit {
       (element as SubKreis).phantomLeft.height *= this.scaling.scale;
     }
   }
-
   replaceParent() {
     if (this.director.replaceActive) {
       this.director.replaceActive = false;
@@ -306,28 +312,53 @@ export class ToolBarComponent implements OnInit {
   }
 
   addRechteck() {
-      let tmp: Shape = null;
-      let childs: Shape[] = [];
-      childs = this.director.getChildFrom(this.director.LastSelected);
-      if (childs.length === 0) {
-        /////////   Einfügen als Leaf
-        tmp = new Rechteck(this.director.LastSelected);
-        this.director.addShape(tmp);
-        this.director.setSelected(tmp);
-        tmp.setPosition();
-      } else if (childs.length === 1) {
-        /////////// Einfügen in der Mitte
-        tmp = new Rechteck(this.director.LastSelected);
-        childs[0].parent = tmp;
-        this.director.addShape(tmp);
-        this.director.setSelected(tmp);
-        tmp.setPosition();
-      }
-      this.scaling.scaleNewShape(tmp);
-      this.director.rearrangeAll(this.director.ShapeList[0]);
-      this.director.setPaddingLeft();
-      this.director.setPaddingBottom(tmp);
-
+    let tmp: Shape = null;
+    let childs: Shape[] = [];
+    childs = this.director.getChildFrom(this.director.LastSelected);
+    if (childs.length === 0) {
+      /////////   Einfügen als Leaf
+      tmp = new Rechteck(this.director.LastSelected);
+      this.director.addShape(tmp);
+      this.director.setSelected(tmp);
+      tmp.setPosition();
+    } else if (childs.length === 1) {
+      /////////// Einfügen in der Mitte
+      tmp = new Rechteck(this.director.LastSelected);
+      childs[0].parent = tmp;
+      this.director.addShape(tmp);
+      this.director.setSelected(tmp);
+      tmp.setPosition();
     }
+    this.scaling.scaleNewShape(tmp);
+    this.director.rearrangeAll(this.director.ShapeList[0]);
+    this.director.setPaddingLeft();
+    this.director.setPaddingBottom(tmp);
+
+  }
+
+  addDialog() {
+    let tmp: Shape = null;
+    let childs: Shape[] = [];
+    childs = this.director.getChildFrom(this.director.LastSelected);
+    if (childs.length === 0) {
+      /////////   Einfügen als Leaf
+      tmp = new Dialog(this.director.LastSelected);
+      this.director.addShape(tmp);
+      this.director.setSelected(tmp);
+      tmp.setPosition();
+    } else if (childs.length === 1) {
+      /////////// Einfügen in der Mitte
+      tmp = new Dialog(this.director.LastSelected);
+      childs[0].parent = tmp;
+      this.director.addShape(tmp);
+      this.director.setSelected(tmp);
+      tmp.setPosition();
+    }
+    this.scaling.scaleNewShape(tmp);
+    this.director.rearrangeAll(this.director.ShapeList[0]);
+    this.director.setPaddingLeft();
+    this.director.setPaddingBottom(tmp);
+
+  }
 
 }

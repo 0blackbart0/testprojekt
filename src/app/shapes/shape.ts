@@ -38,7 +38,7 @@ export abstract class Shape {
 export class Rechteck extends Shape {
     constructor(parent: Shape) {
         super(parent);
-        this.width = 30;
+        this.width = 40;
         this.height = 50;
     }
 
@@ -53,7 +53,7 @@ export class Kreis extends Shape {
     centerChilds: SubKreisCenter[] = [];
     constructor(parent: Shape) {
         super(parent);
-        this.width = 60;
+        this.width = 80;
         this.height = 10;
     }
 
@@ -72,7 +72,7 @@ export class Kreis extends Shape {
 export class StartShape extends Shape {
     constructor() {
         super(null);
-        this.width = 30;
+        this.width = 40;
         this.height = 30;
         this.left = 60;
     }
