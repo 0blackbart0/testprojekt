@@ -1,4 +1,4 @@
-<div class="rechteck" (click)="director.setSelected(this.shape)" 
+<div class="rechteck" (click)="director.setSelected(this.shape);toolMenuS.doToolMenu();" 
 [style.top.vh]="shape.top"
 [style.left.vh]="shape.left"
 [style.width.vh]="shape.width"
@@ -6,6 +6,5 @@
     <div class="wrapper" 
     [style.background-color]="shape.selected ? '#DD0B2F': '#707070'">
     <label for="text">{{shape.name}}</label>
-        
     </div>
 </div>

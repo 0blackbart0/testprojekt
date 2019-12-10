@@ -13,6 +13,9 @@ import { SubKreisLeftComponent } from './sub-kreis-left/sub-kreis-left.component
 import { SubKreisRightComponent } from './sub-kreis-right/sub-kreis-right.component';
 import { PhantomComponent } from './phantom/phantom.component';
 import { SubKreisCenterComponent } from './sub-kreis-center/sub-kreis-center.component';
+import { ToolMenuComponent } from './tool-menu/tool-menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -26,11 +29,13 @@ import { SubKreisCenterComponent } from './sub-kreis-center/sub-kreis-center.com
     SubKreisLeftComponent,
     SubKreisRightComponent,
     PhantomComponent,
-    SubKreisCenterComponent
+    SubKreisCenterComponent,
+    ToolMenuComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule    
   ],
   providers: [],
   bootstrap: [AppComponent]

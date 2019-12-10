@@ -3,6 +3,7 @@ import { Shape, Kreis, StartShape, Rechteck } from './shapes/shape';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from './shapes/subkreis';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 
+
 @Injectable({
   providedIn: 'root'
 })
