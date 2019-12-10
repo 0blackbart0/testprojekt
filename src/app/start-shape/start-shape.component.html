@@ -1,4 +1,4 @@
-<div class="rechteck" (click)="director.setSelected(this.shape)" 
+<div class="rechteck" (click)="director.setSelected(this.shape);toolMenuS.doToolMenu()" 
 [style.background-color]="shape.selected ? '#DD0B2F': '#707070'"
 [style.top.vh]="shape.top"
 [style.left.vh]="shape.left"

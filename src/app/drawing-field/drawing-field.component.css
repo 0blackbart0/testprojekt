@@ -10,3 +10,7 @@
     height: 1px;
     width: 1px;
 }
+
+#toolMenuClass{
+    position: absolute;
+}
