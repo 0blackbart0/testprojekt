@@ -1,11 +1,25 @@
 <div class="rechteck" (click)="director.setSelected(this.shape)" 
-[style.background-color]="shape.selected ? '#DD0B2F': '#707070'"
 [style.top.vh]="shape.top"
 [style.left.vh]="shape.left"
 [style.width.vh]="shape.width"
 [style.height.vh]="shape.height">
+    <div class="wrapper" 
+    [style.border-color]="shape.selected ? '#DD0B2F': '#707070'">
 
-    <div class="wrapper">
+        <input class="titleInput" type="text" [(ngModel)]="shape.title" >
         
+
+
+
+
+
+        
+        <label class="Label" >ChatBot</label>
+        <textarea class="chatBubble" type="textarea" [(ngModel)]="shape.question"></textarea>
+        <div class="triangleBot"></div>
+        
+
     </div>
+    <div class="connector"
+    [class.connector-active]="shape.selected"></div>
 </div>

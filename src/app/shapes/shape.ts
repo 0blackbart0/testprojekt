@@ -3,6 +3,7 @@ import { Phantom } from './phantom';
 
 export abstract class Shape {
 
+    title: string;
     selected: boolean;
     left: number;
     top: number;
@@ -20,6 +21,7 @@ export abstract class Shape {
     abstract instanceOf(): string;
 
     constructor(parent: Shape) {
+        this.title = 'title';
         this.parent = parent;
         this.left = 0;
         this.top = 2;
@@ -70,6 +72,7 @@ export class Kreis extends Shape {
     }
 }
 export class StartShape extends Shape {
+    question: string;
     constructor() {
         super(null);
         this.width = 36;

@@ -11,7 +11,7 @@ import { ScalingService } from '../scaling.service';
 export class StartShapeComponent implements OnInit {
 
 
-  @Input() shape: Shape;
+  @Input() shape: StartShape;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
     this.shape = new StartShape();

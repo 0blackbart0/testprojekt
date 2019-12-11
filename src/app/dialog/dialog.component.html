@@ -14,12 +14,12 @@
         </div>
         <textarea class="chatBubble user" type="textarea" [(ngModel)]="shape.question"></textarea>
         <div class="triangleUser"></div>
-        <label class="Label bot" >ChatBot</label>
-        <textarea class="chatBubble bot" type="textarea" [(ngModel)]="shape.answer"></textarea>
+        <label class="Label" >ChatBot</label>
+        <textarea class="chatBubble" type="textarea" [(ngModel)]="shape.answer"></textarea>
         <div class="triangleBot"></div>
         
-        <div class="connector"
-        [class.connector-active]="shape.selected"></div>
+        
     </div>
-
+    <div class="connector"
+    [class.connector-active]="shape.selected"></div>
 </div>

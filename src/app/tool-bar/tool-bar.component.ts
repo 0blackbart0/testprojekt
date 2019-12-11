@@ -214,7 +214,7 @@ export class ToolBarComponent implements OnInit {
     if ( scalingAllowed ) {
 
       for (const element of this.director.getShapeList()) {
-        this.scaling.rezise(element);
+        this.scaling.rezise(element, scale);
       }
       this.director.rearrangeAll(this.director.ShapeList[0]);
     }

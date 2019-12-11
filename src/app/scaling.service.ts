@@ -8,25 +8,7 @@ import { SubKreis, SubKreisLeft, SubKreisRight } from './shapes/subkreis';
 export class ScalingService {
 
   balance = 0;
-  scale: number;
-
-  baseOuterPadding = 0.2;
-  baseiTleMarginBottom = 1.5;
-  baseWrapperInnerPadding = 2;
-  baseWrapperInnerPaddingHover = 3;
-  baseBorderRadius = 2  ;
-  baseBorderRadiusSmall = 0.5;
-  baseBorderWeightMedium = 0.5;
-  baseBorderWeightThick = 0.7;
-  baseBorderBottomSeperator = 0.3;
-  baseLabelSize = 2.5;
-  baseFontSizeHeader = 3;
-  baseFontSizeText = 2;
-  baseChatBubblePaddingLeft = 0.6;
-  baseTriangleLong = 5;
-  baseTriangleShort = 3.5;
-  baseConnectorSize = 10;
-  baseConnectorRadius = 5;
+  scale = 0.9;
 
   outerPadding = 0.2;
   titleMarginBottom = 1.5;
@@ -45,6 +27,7 @@ export class ScalingService {
   triangleShort = 3.5;
   connectorSize = 10;
   connectorRadius = 5;
+  connectorBorder = 1;
 
 
 
@@ -53,9 +36,9 @@ export class ScalingService {
 
   increase(): boolean {
     if ( this.balance < 10 ) {
-      this.scale = 1.1;
       this.balance++;
-      this.scaleCSS();
+      this.scaleCSS(-1);
+      this.setCSSValues();
       return true;
     }
     return false;
@@ -63,34 +46,39 @@ export class ScalingService {
 
   decrease() {
     if (this.balance > -15 ) {
-      this.scale = 0.9;
+
       this.balance--;
-      this.scaleCSS();
+      this.scaleCSS(1);
+      this.setCSSValues();
       return true;
     }
     return false;
   }
 
-  scaleCSS() {
+  scaleCSS(exponent: number) {
 
-    this.outerPadding *= this.scale;
-    this.titleMarginBottom *= this.scale;
-    this.wrapperInnerPadding *= this.scale;
-    this.wrapperInnerPaddingHover *= this.scale;
-    this.borderRadius *= this.scale;
-    this.borderBottomSeperator *= this.scale;
-    this.borderRadiusSmall *= this.scale;
-    this.labelSize *= this.scale;
-    this.fontSizeText *= this.scale;
-    this.fontSizeHeader *= this.scale;
-    this.borderWeightMedium *= this.scale;
-    this.triangleLong *= this.scale;
-    this.triangleShort *= this.scale;
-    this.borderWeightThick *= this.scale;
-    this.chatBubblePaddingLeft *= this.scale;
-    this.connectorSize *= this.scale;
-    this.connectorRadius *= this.scale;
+    this.outerPadding *= Math.pow(this.scale, exponent);
+    this.titleMarginBottom *= Math.pow(this.scale, exponent);
+    this.wrapperInnerPadding *= Math.pow(this.scale, exponent);
+    this.wrapperInnerPaddingHover *= Math.pow(this.scale, exponent);
+    this.borderRadius *= Math.pow(this.scale, exponent);
+    this.borderBottomSeperator *= Math.pow(this.scale, exponent);
+    this.borderRadiusSmall *= Math.pow(this.scale, exponent);
+    this.labelSize *= Math.pow(this.scale, exponent);
+    this.fontSizeText *= Math.pow(this.scale, exponent);
+    this.fontSizeHeader *= Math.pow(this.scale, exponent);
+    this.borderWeightMedium *= Math.pow(this.scale, exponent);
+    this.triangleLong *= Math.pow(this.scale, exponent);
+    this.triangleShort *= Math.pow(this.scale, exponent);
+    this.borderWeightThick *= Math.pow(this.scale, exponent);
+    this.chatBubblePaddingLeft *= Math.pow(this.scale, exponent);
+    this.connectorSize *= Math.pow(this.scale, exponent);
+    this.connectorRadius *= Math.pow(this.scale, exponent);
+    this.connectorBorder *= Math.pow(this.scale, exponent);
 
+  }
+
+  setCSSValues() {
 
     const body = document.body;
 
@@ -110,6 +98,7 @@ export class ScalingService {
     body.style.setProperty('--triangle-long', this.triangleLong + 'vh');
     body.style.setProperty('--connector-size', this.connectorSize + 'vh');
     body.style.setProperty('--connector-radius', this.connectorRadius + 'vh');
+    body.style.setProperty('--connector-border', this.connectorBorder + 'vh');
 
     body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
     body.style.setProperty('--font-size-text', this.fontSizeText + 'vh');
@@ -117,44 +106,57 @@ export class ScalingService {
 
   }
 
-  rezise(element: Shape) {
+  rezise(element: Shape, scale: string) {
 
-    element.height *= this.scale;
-    element.width *= this.scale;
-    if ( element instanceof SubKreis) {
-      (element as SubKreis).phantomRight.width *= this.scale;
-      (element as SubKreis).phantomRight.height *= this.scale;
-      (element as SubKreis).phantomLeft.width *= this.scale;
-      (element as SubKreis).phantomLeft.height *= this.scale;
+    if ( scale === '+') {
+      console.log("++++");
+      element.height /= this.scale;
+      element.width /= this.scale;
+      if ( element instanceof SubKreis) {
+        (element as SubKreis).phantomRight.width /= this.scale;
+        (element as SubKreis).phantomRight.height /= this.scale;
+        (element as SubKreis).phantomLeft.width /= this.scale;
+        (element as SubKreis).phantomLeft.height /= this.scale;
+      }
+    } else if ( scale === '-') {
+      console.log("-----");
+      element.height *= this.scale;
+      element.width *= this.scale;
+      if ( element instanceof SubKreis) {
+        (element as SubKreis).phantomRight.width *= this.scale;
+        (element as SubKreis).phantomRight.height *= this.scale;
+        (element as SubKreis).phantomLeft.width *= this.scale;
+        (element as SubKreis).phantomLeft.height *= this.scale;
+      }
     }
   }
 
   scaleNewShape(shape: Shape) {
     if ( this.balance < 0) {
       for (let i = 0; i < Math.abs(this.balance); i++) {
-        shape.height *= 0.9;
-        shape.width *= 0.9;
+        shape.height *= this.scale;
+        shape.width *= this.scale;
         if (shape instanceof SubKreisLeft) {
-          (shape as SubKreisLeft).phantomRight.height *= 0.9;
-          (shape as SubKreisLeft).phantomRight.width *= 0.9;
+          (shape as SubKreisLeft).phantomRight.height *= this.scale;
+          (shape as SubKreisLeft).phantomRight.width *= this.scale;
         }
         if (shape instanceof SubKreisRight) {
-          (shape as SubKreisRight).phantomLeft.height *= 0.9;
-          (shape as SubKreisRight).phantomLeft.width *= 0.9;
+          (shape as SubKreisRight).phantomLeft.height *= this.scale;
+          (shape as SubKreisRight).phantomLeft.width *= this.scale;
         }
       }
 
     } else if ( this.balance > 0 ) {
       for (let i = 0; i < this.balance + 1; i++) {
-        shape.height *= 1.1;
-        shape.width *= 1.1;
+        shape.height /= this.scale;
+        shape.width /= this.scale;
         if (shape instanceof SubKreisLeft) {
-          (shape as SubKreisLeft).phantomRight.height *= 1.1;
-          (shape as SubKreisLeft).phantomRight.width *= 1.1;
+          (shape as SubKreisLeft).phantomRight.height /= this.scale;
+          (shape as SubKreisLeft).phantomRight.width /= this.scale;
         }
         if (shape instanceof SubKreisRight) {
-          (shape as SubKreisRight).phantomLeft.height *= 1.1;
-          (shape as SubKreisRight).phantomLeft.width *= 1.1;
+          (shape as SubKreisRight).phantomLeft.height /= this.scale;
+          (shape as SubKreisRight).phantomLeft.width /= this.scale;
         }
       }
     }

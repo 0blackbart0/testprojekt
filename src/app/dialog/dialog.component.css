@@ -103,21 +103,15 @@
     width: 100%;
 }
 
-/*.wrapper:hover {
-    border-width: var(--border-weight-thick);
-    padding: var(--wrapper-inner-padding-hover);
-
-}
-*/
 
 .connector {
-    border: solid 1vh white;
+    display: block;
+    border: solid var(--connector-border) white;
     border-top: none;
     box-sizing: border-box;
 
     position: relative;
     left: 36.1%;
-    top: 6.6%;
     width: var(--connector-size);
     height: var(--connector-radius);
     background-color: var(--assono-blau);
