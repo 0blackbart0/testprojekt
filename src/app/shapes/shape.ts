@@ -30,7 +30,7 @@ export abstract class Shape {
 
     setPosition() {
         this.left = this.parent.left;
-        this.top = this.parent.top + this.parent.height + 1;
+        this.top = this.parent.top + this.parent.height + 2;
     }
 }
 
@@ -62,7 +62,7 @@ export class Kreis extends Shape {
     }
     setPosition() {
         this.left = this.parent.left - (this.width / 2) + (this.parent.width / 2);
-        this.top = this.parent.top + this.parent.height + 1;
+        this.top = this.parent.top + this.parent.height + 2;
     }
 
     instanceOf(): string {

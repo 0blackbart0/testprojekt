@@ -18,7 +18,8 @@
         <textarea class="chatBubble bot" type="textarea" [(ngModel)]="shape.answer"></textarea>
         <div class="triangleBot"></div>
         
-        <div class="connector"></div>
+        <div class="connector"
+        [class.connector-active]="shape.selected"></div>
     </div>
 
 </div>

@@ -361,7 +361,7 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
       }
     }
     if ( (this.drawingField.drawingFieldPaddingTop - maxDistanceTop) <= this.drawingField.drawingFieldPadding) {
-      this.drawingField.drawingFieldPaddingTop += height + 1;
+      this.drawingField.drawingFieldPaddingTop += height + 2;
     }
   }
   replaceParents(fromShape: SubKreisCenter, toShape: SubKreis) {

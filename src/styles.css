@@ -7,8 +7,8 @@ body {
     --title-margin-bottom: 1.5vh;
     --wrapper-inner-padding: 2vh;
     --wrapper-inner-padding-hover: 1.8vh;
-    --border-radius: 5vh;
-    --border-radius-small: 2.5vh;
+    --border-radius: 2vh;
+    --border-radius-small: 0.5vh;
     --border-bottom-seperator: 0.3vh;
     --border-weight-medium: 0.5vh;
     --border-weight-thick: 0.7vh;
@@ -21,6 +21,14 @@ body {
 
     --triangle-short: 3.5vh;
     --triangle-long: 5vh;
+    --connector-size: 10vh;
+    --connector-radius: 5vh;
+
+
+    /*/////////////// FARBEN ///////////////*/
+
+    --assono-rot: #DD0B2F;
+    --assono-blau: #133348;
 }
 
 app-root{
@@ -36,3 +44,4 @@ app-root{
     margin: 0;
     padding: 0;
 }
+

@@ -10,12 +10,30 @@ export class ScalingService {
   balance = 0;
   scale: number;
 
+  baseOuterPadding = 0.2;
+  baseiTleMarginBottom = 1.5;
+  baseWrapperInnerPadding = 2;
+  baseWrapperInnerPaddingHover = 3;
+  baseBorderRadius = 2  ;
+  baseBorderRadiusSmall = 0.5;
+  baseBorderWeightMedium = 0.5;
+  baseBorderWeightThick = 0.7;
+  baseBorderBottomSeperator = 0.3;
+  baseLabelSize = 2.5;
+  baseFontSizeHeader = 3;
+  baseFontSizeText = 2;
+  baseChatBubblePaddingLeft = 0.6;
+  baseTriangleLong = 5;
+  baseTriangleShort = 3.5;
+  baseConnectorSize = 10;
+  baseConnectorRadius = 5;
+
   outerPadding = 0.2;
   titleMarginBottom = 1.5;
   wrapperInnerPadding = 2;
   wrapperInnerPaddingHover = 3;
-  borderRadius = 5;
-  borderRadiusSmall = 2.5;
+  borderRadius = 2;
+  borderRadiusSmall = 0.5;
   borderWeightMedium = 0.5;
   borderWeightThick = 0.7;
   borderBottomSeperator = 0.3;
@@ -25,6 +43,9 @@ export class ScalingService {
   chatBubblePaddingLeft = 0.6;
   triangleLong = 5;
   triangleShort = 3.5;
+  connectorSize = 10;
+  connectorRadius = 5;
+
 
 
 
@@ -67,6 +88,8 @@ export class ScalingService {
     this.triangleShort *= this.scale;
     this.borderWeightThick *= this.scale;
     this.chatBubblePaddingLeft *= this.scale;
+    this.connectorSize *= this.scale;
+    this.connectorRadius *= this.scale;
 
 
     const body = document.body;
@@ -85,14 +108,13 @@ export class ScalingService {
 
     body.style.setProperty('--triangle-short', this.triangleShort + 'vh');
     body.style.setProperty('--triangle-long', this.triangleLong + 'vh');
+    body.style.setProperty('--connector-size', this.connectorSize + 'vh');
+    body.style.setProperty('--connector-radius', this.connectorRadius + 'vh');
 
     body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
     body.style.setProperty('--font-size-text', this.fontSizeText + 'vh');
     body.style.setProperty('--label-size', this.labelSize + 'vh');
 
-
-    body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
-    body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
   }
 
   rezise(element: Shape) {

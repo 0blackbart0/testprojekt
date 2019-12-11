@@ -34,6 +34,7 @@
     display: block;
 }
 
+
 .chatBubble {
     height: 27%;
     padding-left: var(--chatbubble-padding-left);
@@ -51,6 +52,7 @@
     display: block;
     
 }
+
 .triangleUser {
     position: relative;
     width: 0;
@@ -101,16 +103,37 @@
     width: 100%;
 }
 
-.wrapper:hover {
+/*.wrapper:hover {
     border-width: var(--border-weight-thick);
     padding: var(--wrapper-inner-padding-hover);
+
 }
+*/
 
 .connector {
+    border: solid 1vh white;
+    border-top: none;
+    box-sizing: border-box;
+
     position: relative;
-    left: 47%;
-    top: 30%;
-    width: 6%;
-    height: 6%;
-    background-color: red;
+    left: 36.1%;
+    top: 6.6%;
+    width: var(--connector-size);
+    height: var(--connector-radius);
+    background-color: var(--assono-blau);
+    border-radius: 0 0 var(--connector-radius) var(--connector-radius);
+}
+
+.connector:hover {
+    border-color: var(--assono-rot);
+    transition: 0.3s;
+}
+
+.connector:hover {
+    background-color: var(--assono-rot);
+}
+
+.connector-active {
+    background-color: var(--assono-rot);
+    border-color: var(--assono-rot);
 }
