@@ -6,6 +6,7 @@
     position: absolute;
     padding-left: 0.2vh;
 }
+
 .wrapper {
     border: 2px solid black;
     border-right: none;
@@ -27,4 +28,12 @@
     box-sizing: border-box;
     position: absolute;
     background-color: #707070;
+}
+
+.connector-fem {
+    position: relative;
+    background-color: var(--assono-blau);
+    height: var(--connector-height-fem);
+    width: var(--connector-size);
+    left: 36.1%;
 }

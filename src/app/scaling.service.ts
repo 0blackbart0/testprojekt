@@ -11,6 +11,7 @@ export class ScalingService {
   scale = 0.9;
 
   outerPadding = 0.2;
+  componentPadding = 2;
   titleMarginBottom = 1.5;
   wrapperInnerPadding = 2;
   wrapperInnerPaddingHover = 3;
@@ -28,6 +29,7 @@ export class ScalingService {
   connectorSize = 10;
   connectorRadius = 5;
   connectorBorder = 1;
+  connectorHeightFem = 5.5;
 
 
 
@@ -58,6 +60,7 @@ export class ScalingService {
   scaleCSS(exponent: number) {
 
     this.outerPadding *= Math.pow(this.scale, exponent);
+    this.componentPadding *= Math.pow(this.scale, exponent);
     this.titleMarginBottom *= Math.pow(this.scale, exponent);
     this.wrapperInnerPadding *= Math.pow(this.scale, exponent);
     this.wrapperInnerPaddingHover *= Math.pow(this.scale, exponent);
@@ -75,6 +78,8 @@ export class ScalingService {
     this.connectorSize *= Math.pow(this.scale, exponent);
     this.connectorRadius *= Math.pow(this.scale, exponent);
     this.connectorBorder *= Math.pow(this.scale, exponent);
+    this.connectorHeightFem *= Math.pow(this.scale, exponent);
+
 
   }
 
@@ -83,6 +88,7 @@ export class ScalingService {
     const body = document.body;
 
     body.style.setProperty('--outer-padding', this.outerPadding + 'vh');
+    body.style.setProperty('--component-padding', this.componentPadding + 'vh');
     body.style.setProperty('--title-margin-bottom', this.titleMarginBottom + 'vh');
     body.style.setProperty('--wrapper-inner-padding', this.wrapperInnerPadding + 'vh');
     body.style.setProperty('--wrapper-inner-padding-hover', this.wrapperInnerPaddingHover + 'vh');
@@ -99,6 +105,7 @@ export class ScalingService {
     body.style.setProperty('--connector-size', this.connectorSize + 'vh');
     body.style.setProperty('--connector-radius', this.connectorRadius + 'vh');
     body.style.setProperty('--connector-border', this.connectorBorder + 'vh');
+    body.style.setProperty('--connector-height-fem', this.connectorHeightFem + 'vh');
 
     body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
     body.style.setProperty('--font-size-text', this.fontSizeText + 'vh');
@@ -109,7 +116,6 @@ export class ScalingService {
   rezise(element: Shape, scale: string) {
 
     if ( scale === '+') {
-      console.log("++++");
       element.height /= this.scale;
       element.width /= this.scale;
       if ( element instanceof SubKreis) {
@@ -119,7 +125,6 @@ export class ScalingService {
         (element as SubKreis).phantomLeft.height /= this.scale;
       }
     } else if ( scale === '-') {
-      console.log("-----");
       element.height *= this.scale;
       element.width *= this.scale;
       if ( element instanceof SubKreis) {

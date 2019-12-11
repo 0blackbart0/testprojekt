@@ -4,6 +4,7 @@ body {
     padding: 0; 
 
     --outer-padding: 0.2vh;
+    --component-padding: 2vh;
     --title-margin-bottom: 1.5vh;
     --wrapper-inner-padding: 2vh;
     --wrapper-inner-padding-hover: 1.8vh;
@@ -24,6 +25,7 @@ body {
     --connector-size: 10vh;
     --connector-radius: 5vh;
     --connector-border: 1vh;
+    --connector-height-fem: 5.5vh;
 
 
     /*/////////////// FARBEN ///////////////*/

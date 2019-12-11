@@ -80,20 +80,21 @@
 
 .connector {
     display: block;
-    border: solid var(--connector-border) white;
     border-top: none;
     box-sizing: border-box;
-
+    border: solid var(--border-radius-small) white;
+    border-top: none;
     position: relative;
     left: 36.1%;
     width: var(--connector-size);
     height: var(--connector-radius);
     background-color: var(--assono-blau);
     border-radius: 0 0 var(--connector-radius) var(--connector-radius);
+    z-index: 1;
 }
 
 .connector:hover {
-    border-color: var(--assono-rot);
+    border: solid var(--connector-border) var(--assono-rot);
     transition: 0.3s;
 }
 
