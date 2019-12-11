@@ -11,7 +11,7 @@ export class Dialog extends Rechteck {
         this.question = 'question';
         this.answer = 'answer';
 
-        this.height = 70;
+        this.height = 55;
     }
     instanceOf(): string {
         return 'dialog';

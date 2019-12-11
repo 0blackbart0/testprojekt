@@ -214,23 +214,13 @@ export class ToolBarComponent implements OnInit {
     if ( scalingAllowed ) {
 
       for (const element of this.director.getShapeList()) {
-        this.rezise(element);
+        this.scaling.rezise(element);
       }
       this.director.rearrangeAll(this.director.ShapeList[0]);
     }
   }
 
-  rezise(element: Shape) {
 
-    element.height *= this.scaling.scale;
-    element.width *= this.scaling.scale;
-    if ( element instanceof SubKreis) {
-      (element as SubKreis).phantomRight.width *= this.scaling.scale;
-      (element as SubKreis).phantomRight.height *= this.scaling.scale;
-      (element as SubKreis).phantomLeft.width *= this.scaling.scale;
-      (element as SubKreis).phantomLeft.height *= this.scaling.scale;
-    }
-  }
   replaceParent() {
     if (this.director.replaceActive) {
       this.director.replaceActive = false;

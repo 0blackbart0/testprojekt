@@ -1,6 +1,6 @@
 import { Injectable, RootRenderer } from '@angular/core';
 import { Shape } from './shapes/shape';
-import { SubKreisLeft, SubKreisRight } from './shapes/subkreis';
+import { SubKreis, SubKreisLeft, SubKreisRight } from './shapes/subkreis';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +10,18 @@ export class ScalingService {
   balance = 0;
   scale: number;
 
-  fontSizeHeader = 2.5;
   outerPadding = 0.2;
-  titleMarginBottom = 1;
-  wrapperInnerPadding = 1.5;
-  wrapperInnerPaddingHover = 1.5;
+  titleMarginBottom = 1.5;
+  wrapperInnerPadding = 2;
+  wrapperInnerPaddingHover = 3;
   borderRadius = 5;
   borderRadiusSmall = 2.5;
   borderWeightMedium = 0.5;
   borderWeightThick = 0.7;
   borderBottomSeperator = 0.3;
-  labelSize = 3;
+  labelSize = 2.5;
+  fontSizeHeader = 3;
+  fontSizeText = 2;
   chatBubblePaddingLeft = 0.6;
   triangleLong = 5;
   triangleShort = 3.5;
@@ -50,7 +51,7 @@ export class ScalingService {
   }
 
   scaleCSS() {
-    this.fontSizeHeader *= this.scale;
+
     this.outerPadding *= this.scale;
     this.titleMarginBottom *= this.scale;
     this.wrapperInnerPadding *= this.scale;
@@ -59,6 +60,8 @@ export class ScalingService {
     this.borderBottomSeperator *= this.scale;
     this.borderRadiusSmall *= this.scale;
     this.labelSize *= this.scale;
+    this.fontSizeText *= this.scale;
+    this.fontSizeHeader *= this.scale;
     this.borderWeightMedium *= this.scale;
     this.triangleLong *= this.scale;
     this.triangleShort *= this.scale;
@@ -68,24 +71,40 @@ export class ScalingService {
 
     const body = document.body;
 
-    body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
     body.style.setProperty('--outer-padding', this.outerPadding + 'vh');
     body.style.setProperty('--title-margin-bottom', this.titleMarginBottom + 'vh');
     body.style.setProperty('--wrapper-inner-padding', this.wrapperInnerPadding + 'vh');
     body.style.setProperty('--wrapper-inner-padding-hover', this.wrapperInnerPaddingHover + 'vh');
-    body.style.setProperty('--border-radius', this.borderRadius + 'vh');
-    body.style.setProperty('--border-bottom-seperator', this.borderBottomSeperator + 'vh');
-    body.style.setProperty('--label-size', this.labelSize + 'vh');
     body.style.setProperty('--chatbubble-padding-left', this.chatBubblePaddingLeft + 'vh');
+
     body.style.setProperty('--border-radius-small', this.borderRadiusSmall + 'vh');
     body.style.setProperty('--border-weight-medium', this.borderWeightMedium + 'vh');
     body.style.setProperty('--border-weight-thick', this.borderWeightThick + 'vh');
+    body.style.setProperty('--border-radius', this.borderRadius + 'vh');
+    body.style.setProperty('--border-bottom-seperator', this.borderBottomSeperator + 'vh');
+
     body.style.setProperty('--triangle-short', this.triangleShort + 'vh');
     body.style.setProperty('--triangle-long', this.triangleLong + 'vh');
 
     body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
+    body.style.setProperty('--font-size-text', this.fontSizeText + 'vh');
+    body.style.setProperty('--label-size', this.labelSize + 'vh');
+
+
     body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
     body.style.setProperty('--font-size-header', this.fontSizeHeader + 'vh');
+  }
+
+  rezise(element: Shape) {
+
+    element.height *= this.scale;
+    element.width *= this.scale;
+    if ( element instanceof SubKreis) {
+      (element as SubKreis).phantomRight.width *= this.scale;
+      (element as SubKreis).phantomRight.height *= this.scale;
+      (element as SubKreis).phantomLeft.width *= this.scale;
+      (element as SubKreis).phantomLeft.height *= this.scale;
+    }
   }
 
   scaleNewShape(shape: Shape) {
