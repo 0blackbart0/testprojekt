@@ -56,7 +56,7 @@ export class Kreis extends Shape {
     constructor(parent: Shape) {
         super(parent);
         this.width = 36 * 2;
-        this.height = 10;
+        this.height = 20;
     }
 
     addCenter(center: SubKreisCenter) {

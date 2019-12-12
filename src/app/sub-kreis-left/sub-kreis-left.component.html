@@ -4,8 +4,10 @@
     [style.left.vh]="shape.left"
     [style.width.vh]="shape.width"
     [style.height.vh]="shape.height">
-        <div class="wrapper"
-        [style.background-color]="shape.selected ? '#DD0B2F': '#707070'">
+
+    
+    <div class="wrapper"
+    [style.background-color]="shape.selected ? '#DD0B2F': '#707070'">
             
         </div>
     </div>
@@ -16,5 +18,8 @@
     [style.width.vh]="shape.phantomRight.width"
     [style.height.vh]="shape.phantomRight.height"> 
     </div>
-    <div class="connector-fem"></div>
+    <div class="connector-fem"
+    [style.top.vh]="shape.phantomRight.top"
+    [style.left.vh]="shape.phantomRight.left - 5"></div>
+    
 </div>

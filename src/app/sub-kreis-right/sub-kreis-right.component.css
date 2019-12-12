@@ -1,18 +1,18 @@
 .subKreisRight {
-    /*border: 2px solid black;
-    border-left: none;
-    */box-sizing: border-box;
-    border-radius: 0 2.5vh 2.5vh 0;
+    box-sizing: border-box;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
     position: absolute;
-    padding-right: 0.2vh;
+    padding-right:var(--outer-padding);
+    display: block;
 }
 .wrapper {
     border: 2px solid black;
     border-left: none;
     box-sizing: border-box;
-    border-radius: 0 2.5vh 2.5vh 0;
-    height: 100%;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    height: 50%;
     width: 100%;
+    margin-top: var(--connector-height-fem);
 }
 
 .subKreisRight:hover {

@@ -1,19 +1,20 @@
 .subKreisLeft {
-  /*  border: 2px solid black;
-    border-right: none;
-    */box-sizing: border-box;
-    border-radius: 2.5vh 0 0 2.5vh;
+    box-sizing: border-box;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
     position: absolute;
-    padding-left: 0.2vh;
+    padding-left: var(--outer-padding);
+    display: block;
+
 }
 
 .wrapper {
     border: 2px solid black;
     border-right: none;
     box-sizing: border-box;
-    border-radius: 2.5vh 0 0 2.5vh;
-    height: 100%;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    height: 50%;
     width: 100%;
+    margin-top: var(--connector-height-fem);
 }
 
 
@@ -31,9 +32,9 @@
 }
 
 .connector-fem {
-    position: relative;
+    position: absolute;
     background-color: var(--assono-blau);
     height: var(--connector-height-fem);
     width: var(--connector-size);
-    left: 36.1%;
+    left: 72.2%;
 }
