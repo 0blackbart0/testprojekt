@@ -7,8 +7,8 @@ export class Dialog extends Rechteck {
     answer: string;
     constructor(parent: Shape) {
         super(parent);
-        this.question = 'question';
-        this.answer = 'answer';
+        this.question = 'Frage';
+        this.answer = 'Antwort';
 
         this.height = 55;
     }

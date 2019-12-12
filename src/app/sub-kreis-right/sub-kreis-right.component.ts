@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Shape } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
+import { SubKreis } from '../shapes/subkreis';
 
 @Component({
   selector: 'app-sub-kreis-right',
@@ -10,10 +11,18 @@ import { ScalingService } from '../scaling.service';
 })
 export class SubKreisRightComponent implements OnInit {
 
-  @Input() shape: Shape;
+  @Input() shape: SubKreis;
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
 
   ngOnInit() {
   }
 
+  toggleConnectorActive() {
+    this.shape.connectorActive = !this.shape.connectorActive;
+
+  }
+
+  deselectConnectoractive() {
+    this.shape.connectorActive = false;
+  }
 }

@@ -4,10 +4,11 @@ import { Phantom } from './phantom';
 export abstract class SubKreis extends Kreis {
 
     injected = false;
+    selectionText = 'Auswahltext';
     constructor(parent: Shape) {
         super(parent);
         this.width = 36;
-        this.height = 20;
+        this.height = 15;
         this.setPhantom();
     }
     instanceOf(): string {

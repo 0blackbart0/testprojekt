@@ -30,6 +30,7 @@ export class ComponentDirectorService {
     this.drawingField = field;
   }
 
+
   sizePhantomOfSubKreisRightAfterCenterAdd(subCenter: SubKreisCenter) {
     const parentKreis: Shape = subCenter.parent;
     const children: Shape[] = this.getChildFrom(parentKreis);
@@ -423,6 +424,9 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
     }
 
     this.LastSelected.selected = false;
+    if ( shape !== this.LastSelected) {
+      this.LastSelected.connectorActive = false;
+    }
     this.LastSelected = shape;
     shape.selected = true;
   }

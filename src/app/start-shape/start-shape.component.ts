@@ -24,4 +24,15 @@ export class StartShapeComponent implements OnInit {
   ngOnInit() {
   }
 
+  toggleConnectorActive() {
+    this.shape.connectorActive = !this.shape.connectorActive;
+    if (this.director.LastSelected !== this.shape) {
+      this.director.LastSelected.connectorActive = false;
+    }
+  }
+
+  deselectConnectoractive() {
+    this.shape.connectorActive = false;
+  }
+
 }

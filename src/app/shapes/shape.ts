@@ -13,6 +13,7 @@ export abstract class Shape {
     previousSplitter: Kreis = null;
     phantomLeft: Phantom = null;
     phantomRight: Phantom = null;
+    connectorActive: boolean = false;
 
     ///////
     name: string;
@@ -21,7 +22,7 @@ export abstract class Shape {
     abstract instanceOf(): string;
 
     constructor(parent: Shape) {
-        this.title = 'title';
+        this.title = 'Titel';
         this.parent = parent;
         this.left = 0;
         this.top = 2;
@@ -56,7 +57,7 @@ export class Kreis extends Shape {
     constructor(parent: Shape) {
         super(parent);
         this.width = 36 * 2;
-        this.height = 20;
+        this.height = 15;
     }
 
     addCenter(center: SubKreisCenter) {
@@ -72,7 +73,7 @@ export class Kreis extends Shape {
     }
 }
 export class StartShape extends Shape {
-    question: string;
+    greeting: string = 'Hallo ich bin Bot MultOS, wie kann ich dir zu Diensten sein?';
     constructor() {
         super(null);
         this.width = 36;

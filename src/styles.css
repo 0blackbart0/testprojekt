@@ -32,6 +32,8 @@ body {
 
     --assono-rot: #DD0B2F;
     --assono-blau: #133348;
+    --light-grey: #f5f5f5;
+    --dark-grey: #707070;
 }
 
 app-root{

@@ -22,4 +22,13 @@ export class DialogComponent implements OnInit {
   setParent(shape: Shape) {
     this.shape.parent = shape;
   }
+
+  toggleConnectorActive() {
+    this.shape.connectorActive = !this.shape.connectorActive;
+
+  }
+
+  deselectConnectoractive() {
+    this.shape.connectorActive = false;
+  }
 }

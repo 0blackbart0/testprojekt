@@ -4,31 +4,33 @@
     position: absolute;
     padding-left: var(--outer-padding);
     display: block;
-
 }
 
+
 .wrapper {
-    border: 2px solid black;
+    border: solid var(--border-weight-medium) var(--dark-grey); 
     border-right: none;
     box-sizing: border-box;
     border-radius: var(--border-radius) 0 0 var(--border-radius);
-    height: 50%;
+    height: 63%;
     width: 100%;
     margin-top: var(--connector-height-fem);
+    background-color: var(--light-grey);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-
-.subKreisLeft:hover {
-    opacity: 0.7;
-}
 
 .phantom {
-    border: 2px solid black;
+    margin-top: var(--connector-height-fem);
+    border: solid var(--border-weight-medium) var(--dark-grey); 
     border-right: none;
     border-left: none;
     box-sizing: border-box;
     position: absolute;
-    background-color: #707070;
+    background-color: var(--light-grey);;
 }
 
 .connector-fem {
@@ -37,4 +39,51 @@
     height: var(--connector-height-fem);
     width: var(--connector-size);
     left: 72.2%;
+}
+
+.buttonInput {
+    
+    background-color: white;
+    color: var(--dark-grey);
+    border: solid var(--border-weight-medium) var(--dark-grey);
+    font-size: var(--font-size-text);
+    font-weight: bold;
+    text-align: center;
+    width: 70%;
+    height: 50%;
+}
+
+.buttonInput-selected {
+    border-color:  var(--assono-rot);
+}
+
+
+
+
+
+.connector {
+    display: block;
+    border-top: none;
+    box-sizing: border-box;
+    border: solid var(--border-radius-small) white;
+    border-top: none;
+    position: relative;
+    left: 36.1%;
+    width: var(--connector-size);
+    height: var(--connector-radius);
+    background-color: var(--assono-blau);
+    border-radius: 0 0 var(--connector-radius) var(--connector-radius);
+    z-index: 1;
+}
+
+.connector:hover {
+    border: solid var(--connector-border) var(--assono-rot);
+    transition: 0.3s;
+    background-color: var(--assono-rot);
+}
+
+
+.connector-active {
+    background-color: var(--assono-rot);
+    border-color: var(--assono-rot);
 }

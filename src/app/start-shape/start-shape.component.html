@@ -7,20 +7,19 @@
     <div class="wrapper" 
     [style.border-color]="shape.selected ? '#DD0B2F': '#707070'">
 
-        <input class="titleInput" type="text" [(ngModel)]="shape.title" >
-        
-
-
-
-
-
+        <input class="titleInput" type="text" 
+        [(ngModel)]="shape.title" 
+        (click)="deselectConnectoractive()">
         
         <label class="Label" >ChatBot</label>
-        <textarea class="chatBubble" type="textarea" [(ngModel)]="shape.question"></textarea>
+        <textarea class="chatBubble" type="textarea" 
+        [(ngModel)]="shape.greeting"
+        (click)="deselectConnectoractive()"></textarea>
         <div class="triangleBot"></div>
         
 
     </div>
     <div class="connector"
-    [class.connector-active]="shape.selected"></div>
+    (click)="toggleConnectorActive()"
+    [class.connector-active]="shape.connectorActive"></div>
 </div>
