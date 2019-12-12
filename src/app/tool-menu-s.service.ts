@@ -139,7 +139,7 @@ export class ToolMenuSService{
 
   setButtonsToShow(){
     this.btnToShow=[false,false,false,false,false,false,]
-    if (this.selectedShape.instanceOf()==='rechteck'){
+    if (this.selectedShape.instanceOf()==='dialog'){
       for (let i of this.btnIDsAtRechteck){
         this.btnCountGerade= ((this.btnIDsAtRechteck.length %2) >0)? false : true;
         this.btnToShow[i]=true;
