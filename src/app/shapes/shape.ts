@@ -6,8 +6,10 @@ import { CommonModule } from '@angular/common';
 
 export abstract class Shape {
 
+    // JSON Values
     title: string;
 
+    // Developer Values
     selected: boolean;
     left: number;
     top: number;
@@ -19,8 +21,6 @@ export abstract class Shape {
     phantomRight: Phantom = null;
     connectorActive: boolean = false;
 
-    ///////
-    name: string;
     abstract getInfoString(): string;
 
 
@@ -42,8 +42,6 @@ export abstract class Shape {
     }
 }
 
-// TODO: einrückungen, new Line etc
-
 export class Rechteck extends Shape {
 
     shape: Shape = null;
@@ -55,7 +53,6 @@ export class Rechteck extends Shape {
         super(parent);
         this.width = 36;
         this.director = director;
-        this.width = 30;
         this.height = 50;
     }
 
@@ -137,10 +134,12 @@ export class Kreis extends Shape {
 
 export class StartShape extends Shape {
 
-    question: string;
+    // JSON Values
+    greeting: string = 'Hallo ich bin Bot MultOS, wie kann ich dir zu Diensten sein?';
+
+    // Developer Values
     childs: Shape[] = [];
     shape: Shape = null;
-    greeting: string = 'Hallo ich bin Bot MultOS, wie kann ich dir zu Diensten sein?';
     director: ComponentDirectorService;
 
 

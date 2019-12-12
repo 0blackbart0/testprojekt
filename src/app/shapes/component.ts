@@ -3,9 +3,11 @@ import { ComponentDirectorService } from '../component-director.service';
 
 export class Dialog extends Rechteck {
 
-    title: string;
+    // JSON Values
     question: string;
     answer: string;
+
+    // Developer Values
     director: ComponentDirectorService;
 
     constructor(parent: Shape, director: ComponentDirectorService) {
