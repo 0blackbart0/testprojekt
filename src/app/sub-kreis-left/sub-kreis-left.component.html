@@ -4,16 +4,26 @@
     [style.left.vh]="shape.left"
     [style.width.vh]="shape.width"
     [style.height.vh]="shape.height">
-        <div class="wrapper"
-        [style.background-color]="shape.selected ? '#DD0B2F': '#707070'">
-            
+
+    
+        <div class="wrapper">
+                <input class="buttonInput" type="text" [(ngModel)]="shape.selectionText"
+                [class.buttonInput-selected]="shape.selected"
+                (click)="deselectConnectoractive()">
         </div>
+        <div class="connector"
+        (click)="toggleConnectorActive()"
+        [class.connector-active]="shape.connectorActive"></div>
     </div>
 
     <div *ngIf="shape.phantomRight !== null" class="phantom"
     [style.top.vh]="shape.phantomRight.top"
     [style.left.vh]="shape.phantomRight.left"
     [style.width.vh]="shape.phantomRight.width"
-    [style.height.vh]="shape.phantomRight.height"> 
+    [style.height.vh]="shape.phantomRight.height * 0.63"> 
     </div>
+    <div class="connector-fem"
+    [style.top.vh]="shape.phantomRight.top"
+    [style.left.vh]="shape.phantomRight.left - (scaling.connectorSize / 2) + shape.phantomRight.width"></div>
+    
 </div>

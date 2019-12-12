@@ -2,6 +2,38 @@ body {
     background-color: white;   
     margin: 0;
     padding: 0; 
+
+    --outer-padding: 0.2vh;
+    --component-padding: 2vh;
+    --title-margin-bottom: 1.5vh;
+    --wrapper-inner-padding: 2vh;
+    --wrapper-inner-padding-hover: 1.8vh;
+    --border-radius: 2vh;
+    --border-radius-small: 0.5vh;
+    --border-bottom-seperator: 0.3vh;
+    --border-weight-medium: 0.5vh;
+    --border-weight-thick: 0.7vh;
+
+    --font-size-header: 3vh;
+    --label-size: 2.5vh;
+    --font-size-text: 2vh;
+
+    --chatbubble-padding-left: 0.6vh;
+
+    --triangle-short: 3.5vh;
+    --triangle-long: 5vh;
+    --connector-size: 10vh;
+    --connector-radius: 5vh;
+    --connector-border: 1vh;
+    --connector-height-fem: 5.5vh;
+
+
+    /*/////////////// FARBEN ///////////////*/
+
+    --assono-rot: #DD0B2F;
+    --assono-blau: #133348;
+    --light-grey: #f5f5f5;
+    --dark-grey: #707070;
 }
 
 app-root{
@@ -9,6 +41,12 @@ app-root{
     grid-template-columns: 1fr 6fr;
     margin: 0;
     padding: 0;
+
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+

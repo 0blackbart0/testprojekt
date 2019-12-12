@@ -4,6 +4,9 @@
         <div *ngIf="Shape.instanceOf() === 'rechteck'">
             <app-rechteck [shape]=Shape></app-rechteck>
         </div>
+        <div *ngIf="Shape.instanceOf() === 'dialog'">
+            <app-dialog [shape]=Shape></app-dialog>
+        </div>
         <div *ngIf="Shape.instanceOf() === 'subKreisLeft'" >
             <app-sub-kreis-left [shape]=Shape></app-sub-kreis-left>
         </div>
