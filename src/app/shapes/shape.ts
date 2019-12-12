@@ -126,15 +126,6 @@ export class Kreis extends Shape {
             }
         }
 
-        /*
-        for (this.shape of this.childs) {
-
-            const childStringOfShape = this.shape.getInfoString();
-            resultString = resultString.concat(childStringOfShape);
-        }
-        */
-
-
         return '{"name":"divider","childs":[' + resultString + ']}';
     }
 }
@@ -153,7 +144,7 @@ export class StartShape extends Shape {
         let resultString: string = '';
 
         if (this.childs.length < 1) {
-            return 'Startshape ohne Childs';
+            return '{"name": "startshape","childs":null}';
         }
 
         for (this.shape of this.childs) {
