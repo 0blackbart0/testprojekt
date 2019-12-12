@@ -1,15 +1,36 @@
 import { Shape, Kreis } from './shape';
 import { Phantom } from './phantom';
+import { ComponentDirectorService } from '../component-director.service';
 
 export abstract class SubKreis extends Kreis {
 
     injected = false;
-    constructor(parent: Shape) {
-        super(parent);
+    constructor(parent: Shape, director: ComponentDirectorService) {
+        super(parent, director);
         this.width = 30;
         this.height = 10;
         this.setPhantom();
     }
+
+    getInfoString(): string {
+
+        let resultString: string = '';
+        this.childs = this.director.getChildFrom(this);
+
+        if (this.childs.length < 1) {
+            return '{"name":"branch","childs":null}';
+        }
+
+        for (this.shape of this.childs) {
+
+            const childStringOfShape = this.shape.getInfoString();
+            resultString = resultString.concat(childStringOfShape);
+        }
+
+        return '{"name":"branch","childs":[' + resultString + ']}';
+    }
+
+
     instanceOf(): string {
         return 'subKreis';
     }
