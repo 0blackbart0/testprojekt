@@ -61,7 +61,7 @@
 
 
 .chatBubble {
-    height: 27%;
+    height: 25.5%;
     padding-left: var(--chatbubble-padding-left);
     resize: none;
     width: 80%;
@@ -69,12 +69,15 @@
 
     box-sizing: border-box;
 
-    border: var(--border-weight-medium) solid #707070;
+    border: var(--border-weight-medium) solid var(--dark-grey);
     border-radius: var(--border-radius-small);
     
     font-size: var(--font-size-text);
     color: var(--dark-grey);
     display: block;
+
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-background);
+    scrollbar-width: thin;
     
 }
 
@@ -88,7 +91,7 @@
     height: 0;
     border-style: solid;
     border-width: var(--triangle-long) 0 0 var(--triangle-short);
-    border-color: #707070 transparent transparent transparent;
+    border-color: var(--dark-grey) transparent transparent transparent;
     box-sizing: border-box;
     margin-left: 80%;
     display: block;
@@ -98,7 +101,7 @@
     height: 0;
     border-style: solid;
     border-width: var(--triangle-long) var(--triangle-short) 0 0;
-    border-color: #707070 transparent transparent transparent;
+    border-color: var(--dark-grey) transparent transparent transparent;
 
     margin-left: 10%;
     display: block;

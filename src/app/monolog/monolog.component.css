@@ -14,7 +14,7 @@
     border-radius: var(--border-radius); 
     display: block;
     box-sizing: border-box;
-    height: 100%;
+    height: 85%;
     width: 100%;
 }
 
@@ -119,4 +119,12 @@
 .connector-active {
     background-color: var(--assono-rot);
     border-color: var(--assono-rot);
+}
+
+.connector-fem {
+    position: relative;
+    background-color: var(--assono-blau);
+    height: var(--connector-height-fem);
+    width: var(--connector-size);
+    left: 36.1%;
 }

@@ -28,12 +28,17 @@ body {
     --connector-height-fem: 5.5vh;
 
 
-    /*/////////////// FARBEN ///////////////*/
+    /*/////////////// COLORS ///////////////*/
 
     --assono-rot: #DD0B2F;
     --assono-blau: #133348;
     --light-grey: #f5f5f5;
-    --dark-grey: #707070;
+    --dark-grey: #505050;
+
+    /*/////////////// ELEMENT COLORS ///////////////*/
+
+    --scrollbar-thumb: var(--dark-grey);
+    --scrollbar-background: white;
 }
 
 app-root{

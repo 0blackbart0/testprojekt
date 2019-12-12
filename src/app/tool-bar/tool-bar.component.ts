@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Shape, Rechteck, Kreis } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from '../shapes/subkreis';
-import { Dialog } from '../shapes/component';
+import { Dialog, Monolog } from '../shapes/component';
 import { ScalingService } from '../scaling.service';
 import { JsonLoaderService } from '../json-loader.service';
 

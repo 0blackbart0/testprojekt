@@ -14,6 +14,7 @@ import { PhantomComponent } from './phantom/phantom.component';
 import { SubKreisCenterComponent } from './sub-kreis-center/sub-kreis-center.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
+import { MonologComponent } from './monolog/monolog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     SubKreisRightComponent,
     PhantomComponent,
     SubKreisCenterComponent,
-    DialogComponent
+    DialogComponent,
+    MonologComponent
   ],
   imports: [
     BrowserModule,

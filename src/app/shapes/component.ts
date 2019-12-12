@@ -8,7 +8,6 @@ export class Dialog extends Rechteck {
     answer: string;
 
     // Developer Values
-    director: ComponentDirectorService;
 
     constructor(parent: Shape, director: ComponentDirectorService) {
         super(parent, director);
@@ -19,6 +18,24 @@ export class Dialog extends Rechteck {
     }
     instanceOf(): string {
         return 'dialog';
+    }
+
+}
+
+export class Monolog extends Rechteck {
+
+    // JSON Values
+    forwardText: string;
+
+    // Developer Values
+
+    constructor(parent: Shape, director: ComponentDirectorService) {
+        super(parent, director);
+        this.forwardText = 'Ich leite sie gerne weiter';
+        this.height = 35;
+    }
+    instanceOf(): string {
+        return 'monolog';
     }
 
 }
