@@ -1,12 +1,18 @@
 <div class="toolBar">
     <div class="wrapper">
         <button id="kreis" (click)="addKreis()">kreis</button>
+        <button id="rechteck" (click)="addDialog()">Dialog</button>
         <button id="center" (click)="addSubKreisCenter()">addSubKreis</button>
-        <button id="rechteck" (click)="addRechteck()">Rechteck</button>
+        <button id="delete" (click)="deleteSubKreisCenter()">deleteSubKreis</button>
+
         <button id="replace" (click)="replaceParent()"
         [style.background-color]="this.director.replaceActive? '#DD0B2F' : '#707070'"> replace</button>
+        <button id="delete" (click)="deleteTree()">delete Tree</button>
+        <button id="delete" (click)="deleteSubTree()">delete below</button>
+        <button id="delete" (click)="deleteOuterKreis()">delete OuterKreis</button>
         <button id="plus" (click)="scale('+')">+</button>
         <button id="minus" (click)="scale('-')">-</button>
+        <button id="jsonButton" (click)="generateJSONString()">JSON</button>
     </div>
 
 </div>

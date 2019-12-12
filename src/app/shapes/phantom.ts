@@ -4,7 +4,7 @@ export class Phantom {
 
     left: number;
     top: number;
-    height = 10;
+    height = 15;
     width = 0;
 
     parent: SubKreis;

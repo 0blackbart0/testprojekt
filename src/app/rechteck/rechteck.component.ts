@@ -1,6 +1,5 @@
-import { Component, OnInit, HostListener, EventEmitter, Input, Output } from '@angular/core';
-import { Rechteck, Shape  } from '../shapes/shape';
-import { DrawingFieldComponent } from '../drawing-field/drawing-field.component';
+import { Component, OnInit, Input } from '@angular/core';
+import { Shape  } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
 import {ToolMenuSService} from '../tool-menu-s.service';
@@ -13,7 +12,7 @@ import {ToolMenuSService} from '../tool-menu-s.service';
 export class RechteckComponent implements OnInit {
 
   @Input() shape: Shape;
-
+  name = "hallo";
   constructor(public director: ComponentDirectorService, public scaling: ScalingService, public toolMenuS:ToolMenuSService) {
   }
 

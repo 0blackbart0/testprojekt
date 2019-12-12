@@ -12,10 +12,10 @@ import { ToolMenuSService } from '../tool-menu-s.service';
 export class StartShapeComponent implements OnInit {
 
 
-  @Input() shape: Shape;
+  @Input() shape: StartShape;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService, public toolMenuS:ToolMenuSService) {
-    this.shape = new StartShape();
+    this.shape = new StartShape(director);
     this.shape.selected = true;
     this.director.LastSelected = this.shape;
     this.director.addShape(this.shape);
@@ -25,6 +25,17 @@ export class StartShapeComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  toggleConnectorActive() {
+    this.shape.connectorActive = !this.shape.connectorActive;
+    if (this.director.LastSelected !== this.shape) {
+      this.director.LastSelected.connectorActive = false;
+    }
+  }
+
+  deselectConnectoractive() {
+    this.shape.connectorActive = false;
   }
 
 }

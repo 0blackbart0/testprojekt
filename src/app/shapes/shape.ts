@@ -1,8 +1,15 @@
 import { SubKreis, SubKreisCenter } from './subkreis';
 import { Phantom } from './phantom';
+import { ComponentDirectorService } from '../component-director.service';
+import { Direct } from 'protractor/built/driverProviders';
+import { CommonModule } from '@angular/common';
 
 export abstract class Shape {
 
+    // JSON Values
+    title: string;
+
+    // Developer Values
     selected: boolean;
     left: number;
     top: number;
@@ -12,11 +19,15 @@ export abstract class Shape {
     previousSplitter: Kreis = null;
     phantomLeft: Phantom = null;
     phantomRight: Phantom = null;
+    connectorActive: boolean = false;
+
+    abstract getInfoString(): string;
 
 
     abstract instanceOf(): string;
 
     constructor(parent: Shape) {
+        this.title = 'Titel';
         this.parent = parent;
         this.left = 0;
         this.top = 2;
@@ -27,15 +38,21 @@ export abstract class Shape {
 
     setPosition() {
         this.left = this.parent.left;
-        this.top = this.parent.top + this.parent.height + 1;
+        this.top = this.parent.top + this.parent.height;
     }
 }
 
-
 export class Rechteck extends Shape {
-    constructor(parent: Shape) {
+
+    shape: Shape = null;
+    childs: Shape[];
+    director: ComponentDirectorService;
+
+    constructor(parent: Shape, director: ComponentDirectorService) {
+
         super(parent);
-        this.width = 30;
+        this.width = 36;
+        this.director = director;
         this.height = 50;
     }
 
@@ -43,15 +60,40 @@ export class Rechteck extends Shape {
         return 'rechteck';
     }
 
+    getInfoString(): string {
+
+        this.childs = this.director.getChildFrom(this);
+
+        let resultString: string = '';
+
+        if (this.childs.length < 1) {
+            return '{"name":"rechteck", "childs":null}';
+        }
+
+        for (this.shape of this.childs) {
+
+            const childStringOfShape = this.shape.getInfoString();
+            resultString = resultString.concat(childStringOfShape);
+        }
+
+        return '{"name":"rechteck", "childs":[' + resultString + ']}';
+    }
 
 }
 
 export class Kreis extends Shape {
+
+    childs: Shape[] = [];
+    shape: Shape = null;
+    director: ComponentDirectorService;
+
+
     centerChilds: SubKreisCenter[] = [];
-    constructor(parent: Shape) {
+    constructor(parent: Shape, director: ComponentDirectorService) {
         super(parent);
-        this.width = 60;
-        this.height = 10;
+        this.width = 36 * 2;
+        this.height = 15;
+        this.director = director;
     }
 
     addCenter(center: SubKreisCenter) {
@@ -59,20 +101,75 @@ export class Kreis extends Shape {
     }
     setPosition() {
         this.left = this.parent.left - (this.width / 2) + (this.parent.width / 2);
-        this.top = this.parent.top + this.parent.height + 1;
+        this.top = this.parent.top + this.parent.height;
     }
 
     instanceOf(): string {
         return 'kreis';
     }
+
+    getInfoString(): string {
+
+        let resultString: string = '';
+        this.childs = this.director.getChildFrom(this);
+
+        if (this.childs.length < 1) {
+            return '{"name":"divider","childs":null}';
+        }
+
+        for (let i = 0; i < this.childs.length; i++) {
+
+            const childStringOfShape = this.childs[i].getInfoString();
+
+            if (i === 0) {
+                resultString = resultString.concat(childStringOfShape);
+            } else {
+                resultString = resultString.concat(',', childStringOfShape);
+            }
+        }
+
+        return '{"name":"divider","childs":[' + resultString + ']}';
+    }
 }
+
 export class StartShape extends Shape {
-    constructor() {
+
+    // JSON Values
+    greeting: string = 'Hallo ich bin Bot MultOS, wie kann ich dir zu Diensten sein?';
+
+    // Developer Values
+    childs: Shape[] = [];
+    shape: Shape = null;
+    director: ComponentDirectorService;
+
+
+    getInfoString(): string {
+
+        this.childs = this.director.getChildFrom(this);
+
+        let resultString: string = '';
+
+        if (this.childs.length < 1) {
+            return '{"name": "startshape","childs":null}';
+        }
+
+        for (this.shape of this.childs) {
+
+            const childStringOfShape = this.shape.getInfoString();
+            resultString = resultString.concat(childStringOfShape);
+        }
+        return '{"name": "startshape","childs":[' + resultString + ']}';
+    }
+
+
+    constructor(director: ComponentDirectorService) {
         super(null);
-        this.width = 30;
+        this.director = director;
+        this.width = 36;
         this.height = 30;
         this.left = 60;
     }
+
     instanceOf(): string {
         return 'startShape';
     }

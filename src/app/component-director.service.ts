@@ -10,10 +10,12 @@ import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 export class ComponentDirectorService {
 
 
+
   ShapeList: Shape[] = [];
   LastSelected: Shape;
   replaceActive = false;
   drawingField: DrawingFieldComponent = null;
+
 
   constructor() { }
 
@@ -29,23 +31,48 @@ export class ComponentDirectorService {
     this.drawingField = field;
   }
 
-  resizeInjectedDivider(element: Kreis) {
-    const childDividers: Shape[] = this.getChildDividers(element);
-    if (childDividers.length <= 2) {
+
+  sizePhantomOfSubKreisRightAfterCenterAdd(subCenter: SubKreisCenter) {
+    const parentKreis: Shape = subCenter.parent;
+    const children: Shape[] = this.getChildFrom(parentKreis);
+    let subRight: SubKreisRight = null;
+    for (const child of children) {
+      if (child instanceof SubKreisRight) {
+        subRight = child;
+      }
+    }
+    const childDividers: Shape[] = this.getChildDividers(subCenter as Shape);
+    if ( childDividers.length === 0 ) {
       return;
     }
-    const subRight: SubKreisRight = this.getChildFrom(element)[1] as SubKreisRight;
     let maxLeft = 0;
     let maxLeftWidth = 0;
-    console.log(subRight.instanceOf());
     for (const child of childDividers) {
       if (child.left > maxLeft) {
         maxLeft = child.left;
         maxLeftWidth = child.width;
       }
     }
-    console.log(('subright.left' + subRight.left));
-    console.log(('maxleft' + maxLeft));
+    const distance = (maxLeft + maxLeftWidth) - subRight.left;
+    subRight.phantomLeft.width += distance;
+    this.rearrangeAll(this.ShapeList[0]);
+  }
+
+  resizeInjectedDivider(element: Kreis) {
+    let childDividers: Shape[] = this.getChildDividers(element);
+    if (childDividers.length <= 2) {
+      return;
+    }
+    const subRight: SubKreisRight = this.getChildFrom(element)[1] as SubKreisRight;
+    childDividers = this.getChildDividers(this.getChildFrom(element)[0]);
+    let maxLeft = 0;
+    let maxLeftWidth = 0;
+    for (const child of childDividers) {
+      if (child.left > maxLeft) {
+        maxLeft = child.left;
+        maxLeftWidth = child.width;
+      }
+    }
 
 
     if ( maxLeft === subRight.left && childDividers.length === 4) {
@@ -104,38 +131,87 @@ export class ComponentDirectorService {
     }
   }
 
-  resizeDividerRecursive(element: SubKreis) {
+ resizeDividerRecursive(element: SubKreis) {
+  if (element === null) {
+    return;
+  }
+  const divider: SubKreis = this.getParentOppositeDivider(element);
+
+  if ( divider != null) {
+    if (divider instanceof SubKreisLeft ) {
+      divider.phantomRight.width += (element.width );
+      divider.phantomRight.left -= (element.width );
+      element.phantomLeft.left -= (element.width );
+    } else if (divider instanceof SubKreisRight) {
+      if (!(element instanceof SubKreisCenter)) {
+        divider.phantomLeft.width += (element.width );
+        divider.phantomLeft.left -= (element.width );
+        element.phantomRight.left += (element.width );
+      }
+    } else if (divider instanceof SubKreisCenter) {
+      if (element instanceof SubKreisRight) {
+        divider.phantomRight.width += element.width;
+        divider.phantomRight.left += element.width;
+      } else if (element instanceof SubKreisLeft) {
+        divider.phantomLeft.width += element.width;
+        divider.phantomLeft.left -= element.width;
+      } else if ( element instanceof SubKreisCenter) {
+        divider.phantomRight.width += element.width;
+        divider.phantomRight.left += element.width;
+      }
+    }
+    this.resizeDividerRecursive(divider);
+  }
+
+}
+
+resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
+  if (element === null) {
+    return;
+  }
+  const divider: SubKreis = this.getParentOppositeDivider(element);
+
+  if ( divider != null) {
+    if (divider instanceof SubKreisLeft ) {
+      divider.phantomRight.width -= (element.width );
+      divider.phantomRight.left += (element.width );
+      element.phantomLeft.left += (element.width );
+    } else if (divider instanceof SubKreisRight) {
+      if (!(element instanceof SubKreisCenter)) {
+        divider.phantomLeft.width -= (element.width );
+        divider.phantomLeft.left += (element.width );
+        element.phantomRight.left -= (element.width );
+      }
+    } else if (divider instanceof SubKreisCenter) {
+      if (element instanceof SubKreisRight) {
+        divider.phantomRight.width -= element.width;
+        divider.phantomRight.left -= element.width;
+      } else if (element instanceof SubKreisLeft) {
+        divider.phantomLeft.width -= element.width;
+        divider.phantomLeft.left += element.width;
+      } else if ( element instanceof SubKreisCenter) {
+        divider.phantomRight.width -= element.width;
+        divider.phantomRight.left -= element.width;
+      }
+    }
+    this.resizeDividerAfterDeleteCenterRecursive(divider);
+  }
+
+}
+
+  reziseDividerAfterDeleteCenter(element: SubKreis) {
     if (element === null) {
       return;
     }
-    const divider: SubKreis = this.getParentOppositeDivider(element);
+    const parentDivider: SubKreis = this.getParentDivider(element);
 
-    if ( divider != null) {
-      if (divider instanceof SubKreisLeft ) {
-        divider.phantomRight.width += (element.width );
-        divider.phantomRight.left -= (element.width );
-        element.phantomLeft.left -= (element.width );
-      } else if (divider instanceof SubKreisRight) {
-        if (!(element instanceof SubKreisCenter)) {
-          divider.phantomLeft.width += (element.width );
-          divider.phantomLeft.left -= (element.width );
-          element.phantomRight.left += (element.width );
-        }
-      } else if (divider instanceof SubKreisCenter) {
-        if (element instanceof SubKreisRight) {
-          divider.phantomRight.width += element.width;
-          divider.phantomRight.left += element.width;
-        } else if (element instanceof SubKreisLeft) {
-          divider.phantomLeft.width += element.width;
-          divider.phantomLeft.left -= element.width;
-        } else if ( element instanceof SubKreisCenter) {
-          divider.phantomRight.width += element.width;
-          divider.phantomRight.left += element.width;
-        }
-      }
-      this.resizeDividerRecursive(divider);
+    if (parentDivider === null) {
+      return;
     }
-
+    if (!(parentDivider instanceof SubKreisRight)) {
+      parentDivider.phantomRight.width -= parentDivider.width;
+    }
+    this.resizeDividerAfterDeleteCenterRecursive(parentDivider);
   }
 
   reziseDividerAfterAddCenter(element: SubKreis) {
@@ -151,6 +227,38 @@ export class ComponentDirectorService {
       parentDivider.phantomRight.width += parentDivider.width;
     }
     this.resizeDividerRecursive(parentDivider);
+  }
+
+
+  reziseDividerAfterReplace(subKreis: SubKreisLeft | SubKreisRight) {
+    const measurements = this.measureDistances(subKreis);
+    return null;
+  }
+
+  measureDistances(subkreis: SubKreisLeft | SubKreisRight): number[] {
+
+    const childDividers: Shape[] = this.getChildDividers(subkreis);
+    if ( childDividers.length === 0 ) {
+      return;
+    }
+    let maxLeft = 0;
+    for (const child of childDividers) {
+      if (child.left > maxLeft) {
+        maxLeft = child.left;
+      }
+    }
+    const overFlowRight = maxLeft - subkreis.left;
+
+    let minLeft = subkreis.left;
+    for (const child of childDividers) {
+      if (child.left < minLeft) {
+        minLeft = child.left;
+      }
+    }
+    const overFlowLeft = subkreis.left - minLeft;
+
+    return [overFlowLeft, overFlowRight];
+
   }
 
   getParentDividers(element: Shape): Shape[] {
@@ -255,19 +363,34 @@ export class ComponentDirectorService {
       }
     }
     if ( (this.drawingField.drawingFieldPaddingTop - maxDistanceTop) <= this.drawingField.drawingFieldPadding) {
-      this.drawingField.drawingFieldPaddingTop += height + 1;
+      this.drawingField.drawingFieldPaddingTop += height;
     }
   }
-  replaceParent(shape: Shape) {
+  replaceParents(fromShape: SubKreisCenter, toShape: SubKreis) {
 
-    let lastSelected = this.LastSelected;
 
-    if (lastSelected instanceof StartShape) {
+    let childsShape: Shape[] = [];
+    childsShape = this.getChildFrom(fromShape);
+    if (childsShape.length === 0) {
       return;
     }
-    if (lastSelected instanceof Kreis) {
-      lastSelected = lastSelected.parent;
+    childsShape[0].parent = toShape;
+    this.rearrangeAll(this.ShapeList[0]);
+  }
+
+
+
+
+///////////////// DEPRECATED////////////////////
+  replaceParent(shape: Shape) {
+
+    const lastSelected = this.LastSelected;
+
+    if (lastSelected instanceof StartShape || lastSelected instanceof Kreis) {
+      this.replaceActive = false;
+      return;
     }
+
     let childsLastSelected: Shape[] = [];
     let childsShape: Shape[]        = [];
     childsLastSelected  = this.getChildFrom(lastSelected);
@@ -284,6 +407,12 @@ export class ComponentDirectorService {
     }
     childsShape[0].parent = pointer;
 
+    ///////
+    const childDividers: Shape[] = this.getChildDividers(lastSelected);
+    // TODO
+
+    //////
+
     }
     this.replaceActive = false;
     this.rearrangeAll(this.ShapeList[0]);
@@ -292,10 +421,24 @@ export class ComponentDirectorService {
   setSelected(shape: Shape) {
     if (this.replaceActive) {
       this.replaceParent(shape);
+
     }
+
     this.LastSelected.selected = false;
+    if ( shape !== this.LastSelected) {
+      this.LastSelected.connectorActive = false;
+    }
     this.LastSelected = shape;
     shape.selected = true;
+  }
+
+  deleteAll(element: Shape) {
+    const childs: Shape[] = this.getChildFrom(element);
+    for (const child of childs) {
+      const index = this.ShapeList.indexOf(child);
+      this.ShapeList.splice(index, 1);
+      this.deleteAll(child);
+    }
   }
 
 
