@@ -19,7 +19,7 @@ export class ToolMenuSService{
   //Rechteck =0
   //Monolog  =1
   //Maps     =2
-  //Verbinder=3 #kommt weg!
+  //Delete   =3
   //Verlinker=4
   //Kreis    =5
   btnIDsAtRechteck:number[]=[0,1,2,4,5];
