@@ -4,6 +4,7 @@ import { ComponentDirectorService } from '../component-director.service';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from '../shapes/subkreis';
 import { Dialog } from '../shapes/component';
 import { ScalingService } from '../scaling.service';
+import { JsonLoaderService } from '../json-loader.service';
 
 
 @Component({
@@ -13,9 +14,13 @@ import { ScalingService } from '../scaling.service';
 })
 export class ToolBarComponent implements OnInit {
 
-  constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
+  constructor(public loader: JsonLoaderService, public director: ComponentDirectorService, public scaling: ScalingService) { }
 
   ngOnInit() {
+  }
+
+  generateJSONString() {
+    console.log(this.loader.generateString());
   }
 
   deleteTree() {
@@ -237,9 +242,9 @@ export class ToolBarComponent implements OnInit {
     childs = this.director.getChildFrom(this.director.LastSelected);
     if (childs.length === 0) {
       /////////   Einfügen als Leaf
-      tmp = new Kreis(this.director.LastSelected);
-      subleft = new SubKreisLeft(tmp);
-      subright = new SubKreisRight(tmp);
+      tmp = new Kreis(this.director.LastSelected, this.director);
+      subleft = new SubKreisLeft(tmp, this.director);
+      subright = new SubKreisRight(tmp, this.director);
       this.director.addShape(tmp);
       this.director.addShape(subleft);
       this.director.addShape(subright);
@@ -250,11 +255,11 @@ export class ToolBarComponent implements OnInit {
       subright.setPosition();
     } else if (childs.length === 1) {
       /////////// Einfügen in der Mitte
-        tmp = new Kreis(this.director.LastSelected);
-        subleft = new SubKreisLeft(tmp);
+        tmp = new Kreis(this.director.LastSelected, this.director);
+        subleft = new SubKreisLeft(tmp, this.director);
         subleft.setInjected();
         childs[0].parent = subleft;
-        subright = new SubKreisRight(tmp);
+        subright = new SubKreisRight(tmp, this.director);
         this.director.addShape(tmp);
         this.director.addShape(subleft);
         this.director.addShape(subright);
@@ -286,7 +291,7 @@ export class ToolBarComponent implements OnInit {
       }
     }
     const subKreisRightChild: Shape[] = this.director.getChildFrom(subKreisRight);
-    const subKreisCenter: SubKreisCenter = new SubKreisCenter(parent);
+    const subKreisCenter: SubKreisCenter = new SubKreisCenter(parent, this.director);
     this.director.addShape(subKreisCenter);
     (parent as Kreis).addCenter(subKreisCenter);
     subKreisCenter.setValuesTo(subKreisRight);
@@ -302,27 +307,27 @@ export class ToolBarComponent implements OnInit {
   }
 
   addRechteck() {
-    let tmp: Shape = null;
-    let childs: Shape[] = [];
-    childs = this.director.getChildFrom(this.director.LastSelected);
-    if (childs.length === 0) {
-      /////////   Einfügen als Leaf
-      tmp = new Rechteck(this.director.LastSelected);
-      this.director.addShape(tmp);
-      this.director.setSelected(tmp);
-      tmp.setPosition();
-    } else if (childs.length === 1) {
-      /////////// Einfügen in der Mitte
-      tmp = new Rechteck(this.director.LastSelected);
-      childs[0].parent = tmp;
-      this.director.addShape(tmp);
-      this.director.setSelected(tmp);
-      tmp.setPosition();
-    }
-    this.scaling.scaleNewShape(tmp);
-    this.director.rearrangeAll(this.director.ShapeList[0]);
-    this.director.setPaddingLeft();
-    this.director.setPaddingBottom(tmp);
+      let tmp: Shape = null;
+      let childs: Shape[] = [];
+      childs = this.director.getChildFrom(this.director.LastSelected);
+      if (childs.length === 0) {
+        /////////   Einfügen als Leaf
+        tmp = new Rechteck(this.director.LastSelected, this.director);
+        this.director.addShape(tmp);
+        this.director.setSelected(tmp);
+        tmp.setPosition();
+      } else if (childs.length === 1) {
+        /////////// Einfügen in der Mitte
+        tmp = new Rechteck(this.director.LastSelected, this.director);
+        childs[0].parent = tmp;
+        this.director.addShape(tmp);
+        this.director.setSelected(tmp);
+        tmp.setPosition();
+      }
+      this.scaling.scaleNewShape(tmp);
+      this.director.rearrangeAll(this.director.ShapeList[0]);
+      this.director.setPaddingLeft();
+      this.director.setPaddingBottom(tmp);
 
   }
 
@@ -332,13 +337,13 @@ export class ToolBarComponent implements OnInit {
     childs = this.director.getChildFrom(this.director.LastSelected);
     if (childs.length === 0) {
       /////////   Einfügen als Leaf
-      tmp = new Dialog(this.director.LastSelected);
+      tmp = new Dialog(this.director.LastSelected, this.director);
       this.director.addShape(tmp);
       this.director.setSelected(tmp);
       tmp.setPosition();
     } else if (childs.length === 1) {
       /////////// Einfügen in der Mitte
-      tmp = new Dialog(this.director.LastSelected);
+      tmp = new Dialog(this.director.LastSelected, this.director);
       childs[0].parent = tmp;
       this.director.addShape(tmp);
       this.director.setSelected(tmp);
@@ -350,5 +355,6 @@ export class ToolBarComponent implements OnInit {
     this.director.setPaddingBottom(tmp);
 
   }
+
 
 }

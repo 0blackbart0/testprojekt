@@ -14,7 +14,7 @@ export class StartShapeComponent implements OnInit {
   @Input() shape: StartShape;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
-    this.shape = new StartShape();
+    this.shape = new StartShape(director);
     this.shape.selected = true;
     this.director.LastSelected = this.shape;
     this.director.addShape(this.shape);
