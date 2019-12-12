@@ -1,3 +1,4 @@
+
 <div class="rechteck" (click)="director.setSelected(this.shape)" 
 [style.top.vh]="shape.top"
 [style.left.vh]="shape.left"
@@ -5,7 +6,7 @@
 [style.height.vh]="shape.height">
     <div class="connector-fem"></div>
     <div class="wrapper" 
-    [style.border-color]="shape.selected ? '#DD0B2F': '#707070'">
+    [class.wrapper-active]="shape.selected">
  
         <input class="titleInput" type="text" 
         [(ngModel)]="shape.title" 

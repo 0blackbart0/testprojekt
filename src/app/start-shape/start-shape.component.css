@@ -18,6 +18,9 @@
     width: 100%;
 }
 
+.wrapper-active {
+    border: dotted var(--border-weight-medium) var(--assono-rot);
+}
 
 .titleInput {
     background-color: transparent;
