@@ -8,7 +8,7 @@
         [style.height.vh]="shape.phantomLeft.height * 0.63"> 
         </div>
     
-        <div class="subKreisRight" (click)="director.setSelected(this.shape)"
+        <div class="subKreisRight" (click)="director.setSelected(this.shape);toolMenuS.doToolMenu()"
         [style.top.vh]="shape.top"
         [style.left.vh]="shape.left"
         [style.width.vh]="shape.width"

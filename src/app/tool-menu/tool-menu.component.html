@@ -1,0 +1,55 @@
+<div class="wrapperToolMenu"
+    [style.height.vh]="this.toolMenuS.toolMenuHeight"
+    [style.width.vh]="this.toolMenuS.toolMenuWidth"
+    [style.top.vh]="this.toolMenuS.toolMenuTopPos"
+    [style.left.vh]="this.toolMenuS.toolMenuLeftPos"
+    [style.display]="this.toolMenuS.toolMenuVisibile">
+    <button class="mBtn"
+        [style.visibility]="isVisible(0)"
+        [style.left.vh]="this.toolMenuS.btnPositions[0][0]"
+        [style.top.vh]="this.toolMenuS.btnPositions[0][1]">
+        <img 
+            [src]="this.icon_ButtonList[0]"
+            (click)="addDialog();this.toolMenuS.hideToolMenu()"/>
+    </button>
+    <button class="mBtn"
+        [style.visibility]="isVisible(1)"
+        [style.left.vh]="this.toolMenuS.btnPositions[1][0]"
+        [style.top.vh]="this.toolMenuS.btnPositions[1][1]">
+        <img
+            [src]="this.icon_ButtonList[1]"
+            (click)="addDialog();this.toolMenuS.hideToolMenu()"/>
+    </button>
+    <button class="mBtn"
+        [style.visibility]="isVisible(2)"
+        [style.left.vh]="this.toolMenuS.btnPositions[2][0]"
+        [style.top.vh]="this.toolMenuS.btnPositions[2][1]">
+        <img 
+            [src]="this.icon_ButtonList[2]"
+            (click)="addDialog();this.toolMenuS.hideToolMenu()"/>
+    </button>
+    <button class="mBtn"
+        [style.visibility]="isVisible(3)"
+        [style.left.vh]="this.toolMenuS.btnPositions[3][0]"
+        [style.top.vh]="this.toolMenuS.btnPositions[3][1]">
+        <img
+            [src]="this.icon_ButtonList[3]"
+            (click)="addDialog();this.toolMenuS.hideToolMenu()"/>
+    </button>
+    <button class="mBtn"
+        [style.visibility]="isVisible(4)"
+        [style.left.vh]="this.toolMenuS.btnPositions[4][0]"
+        [style.top.vh]="this.toolMenuS.btnPositions[4][1]">
+        <img
+            [src]="this.icon_ButtonList[4]"
+            (click)="addDialog();this.toolMenuS.hideToolMenu()"/>
+    </button>
+    <button class="mBtn"
+        [style.visibility]="isVisible(5)"
+        [style.left.vh]="this.toolMenuS.btnPositions[5][0]"
+        [style.top.vh]="this.toolMenuS.btnPositions[5][1]">
+        <img
+            [src]="this.icon_ButtonList[5]"
+            (click)="addKreis();this.toolMenuS.hideToolMenu()"/>
+    </button>
+</div>
