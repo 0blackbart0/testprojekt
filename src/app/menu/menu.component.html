@@ -1,0 +1,26 @@
+<div class="rechteck" 
+[style.top.vh]="shape.top"
+[style.left.vh]="shape.left"
+[style.width.vh]="shape.width"
+[style.height.vh]="shape.height">
+    
+<div class="wrapper" (click)="director.deleteMenu();">
+    <img src='../../assets/button_icons/icon_verzweigung.png' id="kreis" (click)="addKreis()">
+
+ <!--   <button id="center" (click)="addSubKreisCenter()">addSubKreis</button>
+    <button id="delete" (click)="deleteSubKreisCenter()">deleteSubKreis</button>
+-->
+    <img src='../../assets/button_icons/icon_dialog.png' id="rechteck" (click)="addDialog()">
+    <img src='../../assets/button_icons/icon_monolog.png' id="monolog" (click)="addMonolog()">
+    
+    <img src='../../assets/button_icons/icon_delete.png' id="delete" (click)="deleteTree()">
+    
+<!--
+    <button id="delete" (click)="deleteSubTree()">delete below</button>
+
+    <button id="jsonButton" (click)="generateJSONString()">JS</button>
+-->
+</div>
+
+    
+</div>

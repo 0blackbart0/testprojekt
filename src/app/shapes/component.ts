@@ -1,6 +1,19 @@
 import { Shape, Rechteck } from './shape';
 import { ComponentDirectorService } from '../component-director.service';
 
+export class Menu extends Rechteck {
+
+    height = 20;
+    typeOfMenu(): string {
+        return this.parent.instanceOf();
+    }
+
+    instanceOf(): string {
+        return 'menu';
+    }
+
+}
+
 export class Dialog extends Rechteck {
 
     // JSON Values

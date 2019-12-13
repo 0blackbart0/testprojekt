@@ -3,6 +3,8 @@ import { Shape, Kreis, StartShape, Rechteck } from './shapes/shape';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from './shapes/subkreis';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 import { ToolMenuSService } from './tool-menu-s.service';
+import { ScalingService } from './scaling.service';
+import { Menu } from './shapes/component';
 
 
 @Injectable({
@@ -17,7 +19,7 @@ export class ComponentDirectorService {
   replaceActive = false;
   drawingField: DrawingFieldComponent = null;
 
-  constructor() { }
+  constructor(private scaling: ScalingService) { }
 
   getShapeList() {
     return this.ShapeList;
@@ -29,6 +31,28 @@ export class ComponentDirectorService {
 
   setDrawingField(field: DrawingFieldComponent) {
     this.drawingField = field;
+  }
+
+  addMenu() {
+    let tmp: Shape = null;
+    let childs: Shape[] = [];
+    childs = this.getChildFrom(this.LastSelected);
+    if (childs.length === 0) {
+      /////////   Einfügen als Leaf
+      tmp = new Menu(this.LastSelected, this);
+      this.addShape(tmp);
+      tmp.setPosition();
+    } else if (childs.length === 1) {
+      /////////// Einfügen in der Mitte
+      tmp = new Menu(this.LastSelected, this);
+      childs[0].parent = tmp;
+      this.addShape(tmp);
+      tmp.setPosition();
+    }
+    this.scaling.scaleNewShape(tmp);
+    this.rearrangeAll(this.ShapeList[0]);
+    this.setPadding();
+
   }
 
 
@@ -449,6 +473,26 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
       }
       this.LastSelected = shape;
       shape.selected = true;
+  }
+
+  deleteMenu() {
+    for ( const element of this.getShapeList()) {
+      if ( element.instanceOf() === 'menu') {
+        this.deleteSingle(element);
+      }
+    }
+  }
+
+  deleteSingle(element: Shape) {
+    const parent: Shape = element.parent;
+    const child: Shape[] = this.getChildFrom(element);
+
+    if ( child.length === 1) {
+      child[0].parent = parent;
+    }
+    const index = this.ShapeList.indexOf(element);
+    this.ShapeList.splice(index, 1);
+    this.rearrangeAll(this.ShapeList[0]);
   }
 
   deleteAll(element: Shape) {

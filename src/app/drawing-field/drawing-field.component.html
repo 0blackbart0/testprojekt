@@ -20,6 +20,9 @@
         <div *ngIf="Shape.instanceOf() === 'subKreisRight'" >
             <app-sub-kreis-right [shape]=Shape></app-sub-kreis-right>
         </div>
+        <div *ngIf="Shape.instanceOf() === 'menu'">
+            <app-menu [shape]=Shape></app-menu>
+        </div>
 
     </div>
 

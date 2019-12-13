@@ -131,7 +131,6 @@ export class ToolMenuSService {
   }
 
   setPositionTop(): number {
-    console.log("test");
     if (this.selectedShape != null) {
       this.toolMenuTopPos = this.selectedShape.top + this.selectedShape.height;
       return this.toolMenuTopPos;

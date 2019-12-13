@@ -1,10 +1,10 @@
-<div class="rechteck" (click)="director.setSelected(this.shape) " 
+<div class="rechteck"  
 [style.top.vh]="shape.top"
 [style.left.vh]="shape.left"
 [style.width.vh]="shape.width"
 [style.height.vh]="shape.height">
 
-    <div class="wrapper" 
+    <div class="wrapper" (click)="director.setSelected(this.shape) "
     [class.wrapper-active]="shape.selected">
 
         <input class="titleInput" type="text" 
@@ -20,6 +20,6 @@
 
     </div>
     <div class="connector"
-    (click)="toggleConnectorActive()"
+    (click)="director.setSelected(this.shape); director.deleteMenu(); toggleConnectorActive(); director.addMenu()"
     [class.connector-active]="shape.connectorActive"></div>
 </div>

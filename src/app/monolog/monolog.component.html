@@ -20,6 +20,6 @@
 
     </div>
     <div class="connector"
-    (click)="toggleConnectorActive()"
+    (click)="director.setSelected(this.shape); director.deleteMenu(); toggleConnectorActive(); director.addMenu()"
     [class.connector-active]="shape.connectorActive"></div>
 </div>

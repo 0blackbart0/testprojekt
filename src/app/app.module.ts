@@ -17,6 +17,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
 import { MonologComponent } from './monolog/monolog.component';
 import { ScalingMenuComponent } from './scaling-menu/scaling-menu.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ScalingMenuComponent } from './scaling-menu/scaling-menu.component';
     ToolMenuComponent,
     MonologComponent,
     DialogComponent,
-    ScalingMenuComponent
+    ScalingMenuComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
