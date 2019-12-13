@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Shape, Kreis, StartShape, Rechteck } from './shapes/shape';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from './shapes/subkreis';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
+import { ToolMenuSService } from './tool-menu-s.service';
 
 
 @Injectable({
@@ -15,7 +16,6 @@ export class ComponentDirectorService {
   LastSelected: Shape;
   replaceActive = false;
   drawingField: DrawingFieldComponent = null;
-
 
   constructor() { }
 
@@ -341,31 +341,52 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
     }
   }
   setPaddingLeft() {
-    let minDistanceLeft: number = 52;
-    let minDistanceLeftWidth: number;
+
+    const paddingLeft = 60;
+    let difference: number;
+
+    let minDistanceLeft: number = this.getShapeList()[0].left;
+
     for (const shape of this.getShapeList()) {
       if (shape.left < minDistanceLeft) {
         minDistanceLeft = shape.left;
-        minDistanceLeftWidth = shape.width;
       }
     }
-    if (minDistanceLeft < 5) {
-      this.ShapeList[0].left += minDistanceLeftWidth;
-      this.rearrangeAll(this.ShapeList[0]);
+
+    if (minDistanceLeft < paddingLeft) {
+      difference = paddingLeft - minDistanceLeft;
+      this.ShapeList[0].left += difference;
+
+    } else if (minDistanceLeft > paddingLeft) {
+      difference = minDistanceLeft -  paddingLeft;
+      this.ShapeList[0].left -= difference;
     }
+
+    this.rearrangeAll(this.ShapeList[0]);
   }
-  setPaddingBottom(element: Shape) {
+
+
+  setPaddingBottom() {
     let maxDistanceTop: number = 0;
-    const height: number = element.height;
+    const paddingBottom: number = 20;
+
     for (const shape of this.getShapeList()) {
-      if (shape.top > maxDistanceTop) {
-        maxDistanceTop = shape.top;
+      if (shape.top + shape.height > maxDistanceTop) {
+        maxDistanceTop = shape.top + shape.height;
+
       }
     }
-    if ( (this.drawingField.drawingFieldPaddingTop - maxDistanceTop) <= this.drawingField.drawingFieldPadding) {
-      this.drawingField.drawingFieldPaddingTop += height;
-    }
+
+    this.drawingField.drawingFieldPaddingTop = maxDistanceTop + paddingBottom;
+
   }
+
+  setPadding() {
+    this.setPaddingLeft();
+    this.setPaddingBottom();
+  }
+
+
   replaceParents(fromShape: SubKreisCenter, toShape: SubKreis) {
 
 
@@ -419,17 +440,15 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
   }
 
   setSelected(shape: Shape) {
-    if (this.replaceActive) {
-      this.replaceParent(shape);
-
-    }
-
-    this.LastSelected.selected = false;
-    if ( shape !== this.LastSelected) {
-      this.LastSelected.connectorActive = false;
-    }
-    this.LastSelected = shape;
-    shape.selected = true;
+      if (this.replaceActive) {
+        this.replaceParent(shape);
+      }
+      this.LastSelected.selected = false;
+      if ( shape !== this.LastSelected) {
+        this.LastSelected.connectorActive = false;
+      }
+      this.LastSelected = shape;
+      shape.selected = true;
   }
 
   deleteAll(element: Shape) {

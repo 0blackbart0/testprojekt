@@ -14,7 +14,7 @@ export class DialogComponent implements OnInit {
 
   @Input() shape: Dialog;
 
-  constructor(public director: ComponentDirectorService, public scaling: ScalingService, public toolMenuS:ToolMenuSService) {
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService, public toolMenuS: ToolMenuSService) {
   }
 
   ngOnInit() {

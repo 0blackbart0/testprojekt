@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Shape, Rechteck, Kreis } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { Phantom } from '../shapes/phantom';
+import { ToolMenuSService } from '../tool-menu-s.service';
 
 @Component({
   selector: 'app-drawing-field',
@@ -14,7 +15,7 @@ export class DrawingFieldComponent implements OnInit {
   ShapeList: Shape[] = [];
   drawingFieldPadding: number = 60;
   drawingFieldPaddingTop: number = 50;
-  constructor(private director: ComponentDirectorService) { }
+  constructor(public director: ComponentDirectorService) { }
 
   ngOnInit() {
     this.ShapeList = this.director.getShapeList();

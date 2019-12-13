@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StartNodeComponent } from './start-node.component';
+import { ScalingMenuComponent } from './scaling-menu.component';
 
-describe('StartNodeComponent', () => {
-  let component: StartNodeComponent;
-  let fixture: ComponentFixture<StartNodeComponent>;
+describe('ScalingMenuComponent', () => {
+  let component: ScalingMenuComponent;
+  let fixture: ComponentFixture<ScalingMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartNodeComponent ]
+      declarations: [ ScalingMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StartNodeComponent);
+    fixture = TestBed.createComponent(ScalingMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

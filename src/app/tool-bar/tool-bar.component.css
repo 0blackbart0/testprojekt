@@ -5,6 +5,7 @@
     border-right: 2px solid black;
     display: border-box;
     padding: 0.5vh;
+    box-sizing: border-box;
 }
 
 button{

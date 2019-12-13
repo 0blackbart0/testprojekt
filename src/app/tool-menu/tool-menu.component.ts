@@ -14,28 +14,28 @@ import { JsonLoaderService } from '../json-loader.service';
 })
 export class ToolMenuComponent implements OnInit {
 
-  img_backgroundcolor:string="rgb(0, 124, 128)";
 
-  //Alle verfügbaren Shapes
-  icon_ButtonList: string[]=[     
-    "../../assets/button_icons/icon_dialog.png",
-    "../../assets/button_icons/icon_monolog.png",
-    "../../assets/button_icons/icon_maps.png",
-    "../../assets/button_icons/icon_delete.png",
-    "../../assets/button_icons/icon_verlinkung.png",
-    "../../assets/button_icons/icon_verzweigung.png"
+  // Alle verfügbaren Shapes
+  icon_ButtonList: string[] = [
+    '../../assets/button_icons/icon_dialog.png',
+    '../../assets/button_icons/icon_monolog.png',
+    '../../assets/button_icons/icon_maps.png',
+    '../../assets/button_icons/icon_delete.png',
+    '../../assets/button_icons/icon_verlinkung.png',
+    '../../assets/button_icons/icon_verzweigung.png'
     ];
 
-  constructor(public loader: JsonLoaderService, private director:ComponentDirectorService, public scaling: ScalingService, public toolMenuS:ToolMenuSService) { 
+  constructor(public loader: JsonLoaderService, private director: ComponentDirectorService,
+                public scaling: ScalingService, public toolMenuS: ToolMenuSService) {
     toolMenuS.doToolMenu();
   }
 
-  isVisible(ind:number):string{
-    if (this.toolMenuS.btnToShow[ind]==true){
-      return "visible";
+  isVisible(ind: number): string {
+    if (this.toolMenuS.btnToShow[ind] === true) {
+      return 'visible';
     }
-    else{
-      return "hidden";
+    else {
+      return 'hidden';
     }
   }
 
@@ -43,7 +43,7 @@ export class ToolMenuComponent implements OnInit {
 
   }
 
-  
+
   generateJSONString() {
     console.log(this.loader.generateString());
   }
@@ -299,7 +299,7 @@ export class ToolMenuComponent implements OnInit {
     this.scaling.scaleNewShape(subright);
     this.director.rearrangeAll(this.director.ShapeList[0]);
     this.director.setPaddingLeft();
-    this.director.setPaddingBottom(tmp);
+    this.director.setPaddingBottom();
     this.director.resizeInjectedDivider(tmp);
   }
 
@@ -352,7 +352,7 @@ export class ToolMenuComponent implements OnInit {
       this.scaling.scaleNewShape(tmp);
       this.director.rearrangeAll(this.director.ShapeList[0]);
       this.director.setPaddingLeft();
-      this.director.setPaddingBottom(tmp);
+      this.director.setPaddingBottom();
 
   }
 
@@ -377,7 +377,7 @@ export class ToolMenuComponent implements OnInit {
     this.scaling.scaleNewShape(tmp);
     this.director.rearrangeAll(this.director.ShapeList[0]);
     this.director.setPaddingLeft();
-    this.director.setPaddingBottom(tmp);
+    this.director.setPaddingBottom();
 
   }
 

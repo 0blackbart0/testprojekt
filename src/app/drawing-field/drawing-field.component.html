@@ -1,5 +1,6 @@
-<div class="wrapper">
+<div class="drawing-field">
     <app-start-shape id="startShape"></app-start-shape>
+
     <div *ngFor="let Shape of ShapeList">
         <div *ngIf="Shape.instanceOf() === 'rechteck'">
             <app-rechteck [shape]=Shape></app-rechteck>
@@ -21,8 +22,9 @@
         </div>
 
     </div>
-    <div [style.top.vh]="drawingFieldPaddingTop" id="drawingFieldPadding">
-        
+
+    <div [style.top.vh]="drawingFieldPaddingTop" id="drawingFieldPadding">   
     </div>
-    <app-tool-menu id="toolMenuClass"></app-tool-menu>
+
+    <app-scaling-menu></app-scaling-menu>
 </div>

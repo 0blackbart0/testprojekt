@@ -273,8 +273,7 @@ export class ToolBarComponent implements OnInit {
     this.scaling.scaleNewShape(subleft);
     this.scaling.scaleNewShape(subright);
     this.director.rearrangeAll(this.director.ShapeList[0]);
-    this.director.setPaddingLeft();
-    this.director.setPaddingBottom(tmp);
+    this.director.setPadding();
     this.director.resizeInjectedDivider(tmp);
   }
 
@@ -303,31 +302,30 @@ export class ToolBarComponent implements OnInit {
     this.director.reziseDividerAfterAddCenter(subKreisCenter);
     this.director.rearrangeAll(this.director.ShapeList[0]);
     this.director.sizePhantomOfSubKreisRightAfterCenterAdd(subKreisCenter);
-    this.director.setPaddingLeft();
+    this.director.setPadding();
   }
 
   addRechteck() {
-      let tmp: Shape = null;
-      let childs: Shape[] = [];
-      childs = this.director.getChildFrom(this.director.LastSelected);
-      if (childs.length === 0) {
-        /////////   Einfügen als Leaf
-        tmp = new Rechteck(this.director.LastSelected, this.director);
-        this.director.addShape(tmp);
-        this.director.setSelected(tmp);
-        tmp.setPosition();
-      } else if (childs.length === 1) {
-        /////////// Einfügen in der Mitte
-        tmp = new Rechteck(this.director.LastSelected, this.director);
-        childs[0].parent = tmp;
-        this.director.addShape(tmp);
-        this.director.setSelected(tmp);
-        tmp.setPosition();
-      }
-      this.scaling.scaleNewShape(tmp);
-      this.director.rearrangeAll(this.director.ShapeList[0]);
-      this.director.setPaddingLeft();
-      this.director.setPaddingBottom(tmp);
+    let tmp: Shape = null;
+    let childs: Shape[] = [];
+    childs = this.director.getChildFrom(this.director.LastSelected);
+    if (childs.length === 0) {
+      /////////   Einfügen als Leaf
+      tmp = new Rechteck(this.director.LastSelected, this.director);
+      this.director.addShape(tmp);
+      this.director.setSelected(tmp);
+      tmp.setPosition();
+    } else if (childs.length === 1) {
+      /////////// Einfügen in der Mitte
+      tmp = new Rechteck(this.director.LastSelected, this.director);
+      childs[0].parent = tmp;
+      this.director.addShape(tmp);
+      this.director.setSelected(tmp);
+      tmp.setPosition();
+    }
+    this.scaling.scaleNewShape(tmp);
+    this.director.rearrangeAll(this.director.ShapeList[0]);
+    this.director.setPadding();
 
   }
 
@@ -351,8 +349,7 @@ export class ToolBarComponent implements OnInit {
     }
     this.scaling.scaleNewShape(tmp);
     this.director.rearrangeAll(this.director.ShapeList[0]);
-    this.director.setPaddingLeft();
-    this.director.setPaddingBottom(tmp);
+    this.director.setPadding();
 
   }
 

@@ -1,8 +1,10 @@
-.wrapper {
+.drawing-field {
     overflow: scroll;
     background-color: white;
     height: 100vh;
     position: relative;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-background);
+    scrollbar-width: thin;
 }
 
 #drawingFieldPadding {
