@@ -32,8 +32,8 @@ export class ToolMenuComponent implements OnInit {
     toolMenuS.doToolMenu();
   }
 
-  isVisible(ind: number): string{
-    if (this.toolMenuS.btnToShow[ind] === true){
+  isVisible(ind: number): string {
+    if (this.toolMenuS.btnToShow[ind] === true) {
       return "visible";
     }
     else{
