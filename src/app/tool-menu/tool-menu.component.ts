@@ -14,10 +14,8 @@ import { JsonLoaderService } from '../json-loader.service';
 })
 export class ToolMenuComponent implements OnInit {
 
-  img_backgroundcolor:string="rgb(0, 124, 128)";
-
-  //Alle verfügbaren Shapes
-  icon_ButtonList: string[]=[     
+  // Alle verfügbaren Shapes
+  icon_ButtonList: string[] = [
     "../../assets/button_icons/icon_dialog.png",
     "../../assets/button_icons/icon_monolog.png",
     "../../assets/button_icons/icon_maps.png",
@@ -26,12 +24,16 @@ export class ToolMenuComponent implements OnInit {
     "../../assets/button_icons/icon_verzweigung.png"
     ];
 
-  constructor(public loader: JsonLoaderService, private director:ComponentDirectorService, public scaling: ScalingService, public toolMenuS:ToolMenuSService) { 
+  constructor(
+              public loader: JsonLoaderService,
+              private director: ComponentDirectorService,
+              public scaling: ScalingService,
+              public toolMenuS: ToolMenuSService) {
     toolMenuS.doToolMenu();
   }
 
-  isVisible(ind:number):string{
-    if (this.toolMenuS.btnToShow[ind]==true){
+  isVisible(ind: number): string{
+    if (this.toolMenuS.btnToShow[ind] === true){
       return "visible";
     }
     else{
