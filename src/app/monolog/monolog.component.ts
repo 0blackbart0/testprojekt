@@ -20,8 +20,8 @@ export class MonologComponent implements OnInit {
 
   toggleConnectorActive() {
     this.shape.connectorActive = !this.shape.connectorActive;
-    if (this.director.LastSelected !== this.shape) {
-      this.director.LastSelected.connectorActive = false;
+    if (!this.shape.connectorActive) {
+      this.director.deleteMenu();
     }
   }
 

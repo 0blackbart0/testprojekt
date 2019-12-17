@@ -4,24 +4,22 @@
 [style.width.vh]="shape.width"
 [style.height.vh]="shape.height">
     
-<div class="wrapper" (click)="director.deleteMenu();">
-    <img src='../../assets/button_icons/icon_verzweigung.png' id="kreis" (click)="addKreis()">
+<div *ngIf="(shape.parent.instanceOf() !== 'subKreisLeft') && (shape.parent.instanceOf() !== 'subKreisRight') && (shape.parent.instanceOf() !== 'subKreisCenter')" 
+class="wrapper-uneven" (click)="director.deleteMenu();">
 
- <!--   <button id="center" (click)="addSubKreisCenter()">addSubKreis</button>
-    <button id="delete" (click)="deleteSubKreisCenter()">deleteSubKreis</button>
--->
+    <img src='../../assets/button_icons/icon_verzweigung.png' id="kreis" (click)="addKreis()">
     <img src='../../assets/button_icons/icon_dialog.png' id="rechteck" (click)="addDialog()">
     <img src='../../assets/button_icons/icon_monolog.png' id="monolog" (click)="addMonolog()">
-    
-
-    <img src='../../assets/button_icons/icon_verlinkung.png'>
+    <img src='../../assets/button_icons/icon_verlinkung.png' id="verlinkung" (click)="addLink()">
     <img src='../../assets/button_icons/icon_delete.png' id="delete" (click)="deleteTree()">
-<!--
-    <button id="delete" (click)="deleteSubTree()">delete below</button>
 
-    <button id="jsonButton" (click)="generateJSONString()">JS</button>
--->
 </div>
 
-    
+    <div *ngIf="(shape.parent.instanceOf() === 'subKreisLeft') || (shape.parent.instanceOf() === 'subKreisRight') || (shape.parent.instanceOf() === 'subKreisCenter')" 
+    class="wrapper-even" (click)="director.deleteMenu();" >
+        <img src='../../assets/button_icons/icon_dialog.png' id="rechteck" (click)="addDialog()">
+        <img src='../../assets/button_icons/icon_monolog.png' id="monolog" (click)="addMonolog()">
+        <img src='../../assets/button_icons/icon_verlinkung.png' id="verlinkung" (click)="addLink()">
+        <img src='../../assets/button_icons/icon_delete.png' id="delete" (click)="deleteTree()">
+    </div>
 </div>

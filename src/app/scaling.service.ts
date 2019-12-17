@@ -35,7 +35,24 @@ export class ScalingService {
 
   buttonSize = 5;
 
+  left1 = 6.5;
+  left2 = 12.5;
+  left3 = 18.5;
+  left4 = 24.5;
 
+  top1_4 = -2;
+  top2_3 = 1;
+
+
+  leftU1 = 3.5;
+  leftU2 = 9.5;
+  leftU3 = 15.5;
+  leftU4 = 21.5;
+  leftU5 = 27.5;
+
+  topU1_5 = -1.5;
+  topU2_4 = 0.5;
+  topU3 = 1.5;
 
 
   constructor() { }
@@ -87,6 +104,25 @@ export class ScalingService {
     this.borderRadiusMedium *= Math.pow(this.scale, exponent);
     this.buttonSize *= Math.pow(this.scale, exponent);
 
+    this.left1 *= Math.pow(this.scale, exponent);
+    this.left2 *= Math.pow(this.scale, exponent);
+    this.left3 *= Math.pow(this.scale, exponent);
+    this.left4 *= Math.pow(this.scale, exponent);
+
+    this.top1_4 *= Math.pow(this.scale, exponent);
+    this.top2_3 *= Math.pow(this.scale, exponent);
+
+    this.leftU1 *= Math.pow(this.scale, exponent);
+    this.leftU2 *= Math.pow(this.scale, exponent);
+    this.leftU3 *= Math.pow(this.scale, exponent);
+    this.leftU4 *= Math.pow(this.scale, exponent);
+    this.leftU5 *= Math.pow(this.scale, exponent);
+
+    this.topU1_5 *= Math.pow(this.scale, exponent);
+    this.topU2_4 *= Math.pow(this.scale, exponent);
+    this.topU3 *= Math.pow(this.scale, exponent);
+
+
 
   }
 
@@ -123,6 +159,24 @@ export class ScalingService {
     body.style.setProperty('--button-size', this.buttonSize + 'vh');
 
 
+    body.style.setProperty('--left-1', this.left1 + 'vh');
+    body.style.setProperty('--left-2', this.left2 + 'vh');
+    body.style.setProperty('--left-3', this.left3 + 'vh');
+    body.style.setProperty('--left-4', this.left4 + 'vh');
+
+    body.style.setProperty('--top-1-4', this.top1_4 + 'vh');
+    body.style.setProperty('--top-2-3', this.top2_3 + 'vh');
+
+
+    body.style.setProperty('--left-u-1', this.leftU1 + 'vh');
+    body.style.setProperty('--left-u-2', this.leftU2 + 'vh');
+    body.style.setProperty('--left-u-3', this.leftU3 + 'vh');
+    body.style.setProperty('--left-u-4', this.leftU4 + 'vh');
+    body.style.setProperty('--left-u-5', this.leftU5 + 'vh');
+
+    body.style.setProperty('--top-u-1-5', this.topU1_5 + 'vh');
+    body.style.setProperty('--top-u-2-4', this.topU2_4 + 'vh');
+    body.style.setProperty('--top-u-3', this.topU3 + 'vh');
   }
 
   rezise(element: Shape, scale: string) {

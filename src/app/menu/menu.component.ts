@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComponentDirectorService } from '../component-director.service';
-import { Menu, Dialog, Monolog } from '../shapes/component';
+import { Menu, Dialog, Monolog, Link } from '../shapes/component';
 import { JsonLoaderService } from '../json-loader.service';
 import { ScalingService } from '../scaling.service';
 import { Rechteck, Shape, Kreis } from '../shapes/shape';
@@ -235,12 +235,14 @@ export class MenuComponent implements OnInit {
     }
 
   }
+
   addKreis() {
     let tmp: Kreis = null;
     let subleft = null;
     let subright = null;
     let childs: Shape[] = [];
     childs = this.director.getChildFrom(this.director.LastSelected);
+    childs = this.director.getChildFrom(childs[0]);
     if (childs.length === 0) {
       /////////   Einfügen als Leaf
       tmp = new Kreis(this.director.LastSelected, this.director);
@@ -334,6 +336,7 @@ export class MenuComponent implements OnInit {
     let tmp: Shape = null;
     let childs: Shape[] = [];
     childs = this.director.getChildFrom(this.director.LastSelected);
+    childs = this.director.getChildFrom(childs[0]);
     if (childs.length === 0) {
       /////////   Einfügen als Leaf
       tmp = new Dialog(this.director.LastSelected, this.director);
@@ -358,6 +361,7 @@ export class MenuComponent implements OnInit {
     let tmp: Shape = null;
     let childs: Shape[] = [];
     childs = this.director.getChildFrom(this.director.LastSelected);
+    childs = this.director.getChildFrom(childs[0]);
     if (childs.length === 0) {
       /////////   Einfügen als Leaf
       tmp = new Monolog(this.director.LastSelected, this.director);
@@ -371,6 +375,26 @@ export class MenuComponent implements OnInit {
       this.director.addShape(tmp);
       this.director.setSelected(tmp);
       tmp.setPosition();
+    }
+    this.scaling.scaleNewShape(tmp);
+    this.director.rearrangeAll(this.director.ShapeList[0]);
+    this.director.setPadding();
+
+  }
+  addLink() {
+    let tmp: Shape = null;
+    let childs: Shape[] = [];
+    childs = this.director.getChildFrom(this.director.LastSelected);
+    childs = this.director.getChildFrom(childs[0]);
+    if (childs.length === 0) {
+      /////////   Einfügen als Leaf
+      tmp = new Link(this.director.LastSelected, this.director);
+      this.director.addShape(tmp);
+      this.director.setSelected(tmp);
+      tmp.setPosition();
+    } else if (childs.length === 1) {
+      /////////// Einfügen in der Mitte
+      return;
     }
     this.scaling.scaleNewShape(tmp);
     this.director.rearrangeAll(this.director.ShapeList[0]);

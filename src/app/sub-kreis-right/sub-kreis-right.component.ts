@@ -13,14 +13,16 @@ import { SubKreis } from '../shapes/subkreis';
 export class SubKreisRightComponent implements OnInit {
 
   @Input() shape: SubKreis;
-  constructor(public director: ComponentDirectorService, public scaling: ScalingService, public toolMenuS:ToolMenuSService) { }
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
 
   ngOnInit() {
   }
 
   toggleConnectorActive() {
     this.shape.connectorActive = !this.shape.connectorActive;
-
+    if (!this.shape.connectorActive) {
+      this.director.deleteMenu();
+    }
   }
 
   deselectConnectoractive() {

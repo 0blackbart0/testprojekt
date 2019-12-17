@@ -4,7 +4,7 @@
 [style.width.vh]="shape.width"
 [style.height.vh]="shape.height">
 
-    <div class="wrapper" (click)="director.setSelected(this.shape) "
+    <div class="wrapper" (click)="director.setSelected(this.shape); director.deleteMenu()"
     [class.wrapper-active]="shape.selected">
 
         <input class="titleInput" type="text" 
@@ -20,6 +20,6 @@
 
     </div>
     <div class="connector"
-    (click)="director.setSelected(this.shape); director.deleteMenu(); toggleConnectorActive(); director.addMenu()"
+    (click)="director.setSelected(this.shape); director.deleteMenu(); director.addMenu(); toggleConnectorActive()"
     [class.connector-active]="shape.connectorActive"></div>
 </div>

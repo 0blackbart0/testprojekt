@@ -6,7 +6,7 @@
     [style.height.vh]="shape.phantomLeft.height * 0.63"> 
     </div>
     
-    <div class="subKreisCenter" (click)="director.setSelected(this.shape)"
+    <div class="subKreisCenter" (click)="director.setSelected(this.shape); director.deleteMenu()"
     [style.top.vh]="shape.top"
     [style.left.vh]="shape.left"
     [style.width.vh]="shape.width"
@@ -17,7 +17,7 @@
             (click)="deselectConnectoractive()">
         </div>
           <div class="connector"
-          (click)="director.setSelected(this.shape); director.deleteMenu(); toggleConnectorActive(); director.addMenu()"
+          (click)="director.setSelected(this.shape); director.deleteMenu(); director.addMenu(); toggleConnectorActive()"
           [class.connector-active]="shape.connectorActive"
           ></div>
     </div>

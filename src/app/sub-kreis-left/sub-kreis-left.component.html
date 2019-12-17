@@ -1,18 +1,18 @@
 <div>
-    <div class="subKreisLeft" (click)="director.setSelected(this.shape);toolMenuS.doToolMenu()"
+    <div class="subKreisLeft" (click)="director.setSelected(this.shape);"
     [style.top.vh]="shape.top"
     [style.left.vh]="shape.left"
     [style.width.vh]="shape.width"
     [style.height.vh]="shape.height">
 
     
-        <div class="wrapper">
+        <div class="wrapper" (click)="director.deleteMenu()">
                 <input class="buttonInput" type="text" [(ngModel)]="shape.selectionText"
                 [class.buttonInput-selected]="shape.selected"
                 (click)="deselectConnectoractive()">
         </div>
         <div class="connector"
-        (click)="director.setSelected(this.shape); director.deleteMenu(); toggleConnectorActive(); director.addMenu()"
+        (click)="director.setSelected(this.shape); director.deleteMenu(); director.addMenu(); toggleConnectorActive()"
         [class.connector-active]="shape.connectorActive"></div>
     </div>
 

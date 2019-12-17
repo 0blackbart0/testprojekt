@@ -19,7 +19,9 @@ export class SubKreisCenterComponent implements OnInit {
 
   toggleConnectorActive() {
     this.shape.connectorActive = !this.shape.connectorActive;
-
+    if (!this.shape.connectorActive) {
+      this.director.deleteMenu();
+    }
   }
 
   deselectConnectoractive() {

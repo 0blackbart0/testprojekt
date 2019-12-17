@@ -23,6 +23,9 @@
         <div *ngIf="Shape.instanceOf() === 'menu'">
             <app-menu [shape]=Shape></app-menu>
         </div>
+        <div *ngIf="Shape.instanceOf() === 'link'">
+            <app-link [shape]=Shape></app-link>
+        </div>
 
     </div>
 

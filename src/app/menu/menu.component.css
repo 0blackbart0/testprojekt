@@ -9,21 +9,12 @@
 
 
 
-.wrapper{
-    margin-top: var(--menu-margin-top);
-    position: relative;
-    padding: var(--wrapper-inner-padding);
-    display: block;
-    box-sizing: border-box;
-    height: 90%;
-    width: 100%;
-    background-color: pink;
-    
-}
+
+
+
 img{
+    position: absolute;
     display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
     border: var(--border-bottom-seperator) solid var(--dark-grey);
     background-color: white;
     box-sizing: border-box;
@@ -35,4 +26,60 @@ img{
 
 img:hover{
     background-color: var(--assono-rot);
+}
+
+
+.wrapper-even, .wrapper-uneven{
+    margin-top: var(--menu-margin-top);
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    height: 90%;
+    width: 100%;
+ 
+    
+}
+
+
+.wrapper-even #rechteck {
+    left: var(--left-1);
+    top: var(--top-1-4);
+}
+.wrapper-even #monolog {
+    left: var(--left-2);
+    top: var(--top-2-3);
+}
+.wrapper-even #verlinkung {
+    left: var(--left-3);
+    top: var(--top-2-3);
+}
+.wrapper-even #delete {  
+
+    left: var(--left-4);
+    top: var(--top-1-4); 
+
+}
+
+/*        //////////////////          */
+
+.wrapper-uneven #rechteck {
+    left: var(--left-u-1);
+    top: var(--top-u-1-5);
+}
+.wrapper-uneven #monolog {
+    left: var(--left-u-2);
+    top: var(--top-u-2-4);
+}
+.wrapper-uneven #kreis {
+    left: var(--left-u-3);
+    top: var(--top-u-3);;
+}
+.wrapper-uneven #verlinkung {
+    left: var(--left-u-4);
+    top: var(--top-u-2-4);
+}
+
+.wrapper-uneven #delete {
+    left: var(--left-u-5);
+    top: var(--top-u-1-5);
 }

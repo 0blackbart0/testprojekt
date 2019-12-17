@@ -1,0 +1,66 @@
+.rechteck {
+    border-radius: var(--border-radius);
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    padding: var(--outer-padding);
+    
+}
+.wrapper{
+    position: relative;
+    padding: var(--wrapper-inner-padding);
+    background-color: #f5f5f5;
+    border: solid var(--border-weight-medium) var(--dark-grey);
+    border-radius: var(--border-radius); 
+    display: block;
+    box-sizing: border-box;
+    height: 85%;
+    width: 100%;
+}
+
+.wrapper-active {
+    border: dotted var(--border-weight-medium) var(--assono-rot);
+}
+
+.titleInput {
+    background-color: transparent;
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 0;
+    border-bottom: var(--border-bottom-seperator) solid black;
+
+    text-align: center;
+    font-size: var(--font-size-header);
+    font-weight: bolder;
+    color: var(--dark-grey);
+
+    padding: 0;
+    margin-bottom: var(--title-margin-bottom);
+
+    display: block;
+
+}
+
+.titleInput:focus {
+    border-color: var(--assono-rot);
+    
+}
+.connector-fem {
+    position: relative;
+    background-color: var(--assono-blau);
+    height: var(--connector-height-fem);
+    width: var(--connector-size);
+    left: 36.1%;
+}
+
+img {
+    position: relative;
+    width: 20vh;
+    height: 10vh;
+    left: 6vh;
+    top: -1vh;
+
+    
+}
