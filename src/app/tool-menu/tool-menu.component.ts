@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener, Input} from '@angular/core';
 import {ComponentDirectorService} from '../component-director.service';
-import {ToolMenuSService} from '../tool-menu-s.service'
+import {ToolMenuSService} from '../tool-menu-s.service';
 import { ScalingService } from '../scaling.service';
 import { Shape, Kreis, Rechteck } from '../shapes/shape';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from '../shapes/subkreis';
@@ -26,15 +26,14 @@ export class ToolMenuComponent implements OnInit {
     ];
 
   constructor(public loader: JsonLoaderService, private director: ComponentDirectorService,
-                public scaling: ScalingService, public toolMenuS: ToolMenuSService) {
+              public scaling: ScalingService, public toolMenuS: ToolMenuSService) {
     toolMenuS.doToolMenu();
   }
 
   isVisible(ind: number): string {
     if (this.toolMenuS.btnToShow[ind] === true) {
       return 'visible';
-    }
-    else {
+    } else {
       return 'hidden';
     }
   }

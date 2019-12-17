@@ -6,9 +6,11 @@ body {
     --outer-padding: 0.2vh;
     --component-padding: 2vh;
     --title-margin-bottom: 1.5vh;
+    --menu-margin-top: 5vh;
     --wrapper-inner-padding: 2vh;
     --wrapper-inner-padding-hover: 1.8vh;
     --border-radius: 2vh;
+    --border-radius-medium: 1vh;
     --border-radius-small: 0.5vh;
     --border-bottom-seperator: 0.3vh;
     --border-weight-medium: 0.5vh;
@@ -25,7 +27,11 @@ body {
     --connector-size: 10vh;
     --connector-radius: 5vh;
     --connector-border: 1vh;
-    --connector-height-fem: 5.5vh;
+    --connector-height-fem: 5vh;
+    --connector-fem-cut-out-bottom: 0.2vh;
+
+    --button-size: 5vh;
+
 
 
     /*/////////////// COLORS ///////////////*/
