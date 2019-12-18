@@ -27,8 +27,10 @@ export class StartShapeComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.shape.connectorActive = true;
     this.director.addMenu();
+  
   }
 
   toggleConnectorActive() {

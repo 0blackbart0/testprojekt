@@ -5,6 +5,8 @@ import { JsonLoaderService } from '../json-loader.service';
 import { ScalingService } from '../scaling.service';
 import { Rechteck, Shape, Kreis, StartShape } from '../shapes/shape';
 import { SubKreisLeft, SubKreisRight, SubKreisCenter, SubKreis } from '../shapes/subkreis';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -15,9 +17,27 @@ export class MenuComponent implements OnInit {
 
   @Input() shape: Menu;
 
-  constructor(public loader: JsonLoaderService, public director: ComponentDirectorService, public scaling: ScalingService) { }
+  constructor(public loader: JsonLoaderService,
+              public director: ComponentDirectorService, public scaling: ScalingService, public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+
+  openDialog(): void {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    
+
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   menuType(): string {
@@ -38,7 +58,6 @@ export class MenuComponent implements OnInit {
         }
       }
     }
-    console.log(type);
     return type;
   }
 

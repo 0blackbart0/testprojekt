@@ -19,6 +19,9 @@ import { MonologComponent } from './monolog/monolog.component';
 import { ScalingMenuComponent } from './scaling-menu/scaling-menu.component';
 import { MenuComponent } from './menu/menu.component';
 import { LinkComponent } from './link/link.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component'
 
 @NgModule({
   declarations: [
@@ -36,12 +39,19 @@ import { LinkComponent } from './link/link.component';
     DialogComponent,
     ScalingMenuComponent,
     MenuComponent,
-    LinkComponent
+    LinkComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
+  entryComponents: [
+    DeleteDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
