@@ -29,7 +29,7 @@ img:hover{
 }
 
 
-.wrapper-even, .wrapper-uneven{
+.wrapper{
     margin-top: var(--menu-margin-top);
     position: relative;
     display: block;
@@ -41,19 +41,19 @@ img:hover{
 }
 
 
-.wrapper-even #rechteck {
+#e-1 {
     left: var(--left-1);
     top: var(--top-1-4);
 }
-.wrapper-even #monolog {
+#e-2 {
     left: var(--left-2);
     top: var(--top-2-3);
 }
-.wrapper-even #verlinkung {
+#e-3 {
     left: var(--left-3);
     top: var(--top-2-3);
 }
-.wrapper-even #delete {  
+#e-4 {  
 
     left: var(--left-4);
     top: var(--top-1-4); 
@@ -62,24 +62,24 @@ img:hover{
 
 /*        //////////////////          */
 
-.wrapper-uneven #rechteck {
+#u-1 {
     left: var(--left-u-1);
     top: var(--top-u-1-5);
 }
-.wrapper-uneven #monolog {
+#u-2 {
     left: var(--left-u-2);
     top: var(--top-u-2-4);
 }
-.wrapper-uneven #kreis {
+#u-3 {
     left: var(--left-u-3);
     top: var(--top-u-3);;
 }
-.wrapper-uneven #verlinkung {
+#u-4 {
     left: var(--left-u-4);
     top: var(--top-u-2-4);
 }
 
-.wrapper-uneven #delete {
+#u-5 {
     left: var(--left-u-5);
     top: var(--top-u-1-5);
 }

@@ -3,7 +3,7 @@ import { ComponentDirectorService } from '../component-director.service';
 import { Menu, Dialog, Monolog, Link } from '../shapes/component';
 import { JsonLoaderService } from '../json-loader.service';
 import { ScalingService } from '../scaling.service';
-import { Rechteck, Shape, Kreis } from '../shapes/shape';
+import { Rechteck, Shape, Kreis, StartShape } from '../shapes/shape';
 import { SubKreisLeft, SubKreisRight, SubKreisCenter, SubKreis } from '../shapes/subkreis';
 
 @Component({
@@ -18,6 +18,28 @@ export class MenuComponent implements OnInit {
   constructor(public loader: JsonLoaderService, public director: ComponentDirectorService, public scaling: ScalingService) { }
 
   ngOnInit() {
+  }
+
+  menuType(): string {
+
+    let type: string = null;
+
+    if ( this.shape.parent instanceof SubKreis) {
+      type = 'kreisLeaf';
+      if (this.director.getChildFrom(this.shape).length !== 0) {
+        type = 'kreisWithChild';
+      }
+    } else if ( this.shape.parent instanceof Rechteck || this.shape.parent instanceof StartShape) {
+      type = 'rechteckLeaf';
+      if (this.director.getChildFrom(this.shape).length !== 0) {
+        type = 'rechteckWithChild';
+        if ( this.director.getChildFrom(this.shape)[0] instanceof Kreis ) {
+          type += 'Kreis';
+        }
+      }
+    }
+    console.log(type);
+    return type;
   }
 
   generateJSONString() {
