@@ -29,14 +29,15 @@ export class MenuComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    
+    dialogConfig.autoFocus = false;
+
 
 
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(`Dialog result: ${result}`);
+      
     });
   }
 

@@ -495,6 +495,8 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
     this.rearrangeAll(this.ShapeList[0]);
   }
 
+  
+
   deleteAll(element: Shape) {
     const childs: Shape[] = this.getChildFrom(element);
     for (const child of childs) {
