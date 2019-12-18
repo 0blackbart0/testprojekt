@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Shape, Rechteck, Kreis } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { Phantom } from '../shapes/phantom';
-import { ToolMenuSService } from '../tool-menu-s.service';
 
 @Component({
   selector: 'app-drawing-field',

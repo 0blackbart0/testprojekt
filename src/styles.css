@@ -34,10 +34,10 @@ body {
 
     --menu-connector-top: -4vh;
 
-    --img-link-width: 20vh;
-    --img-link-height: 10vh;
-    --img-link-left: 6vh;
-    --img-link-top: -1vh;
+    --img-link-width: 10vh;
+    --img-link-height: 5vh;
+    --img-link-left: 10vh;
+    --img-link-top: 0vh;
 
     /*/////////////// MenuElements /////////*/
 

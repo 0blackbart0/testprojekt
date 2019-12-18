@@ -3,7 +3,6 @@ import { Shape  } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
 import { Dialog } from '../shapes/component';
-import { ToolMenuSService } from '../tool-menu-s.service';
 
 @Component({
   selector: 'app-dialog',
@@ -14,7 +13,7 @@ export class DialogComponent implements OnInit {
 
   @Input() shape: Dialog;
 
-  constructor(public director: ComponentDirectorService, public scaling: ScalingService, public toolMenuS: ToolMenuSService) {
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
   }
 
   ngOnInit() {

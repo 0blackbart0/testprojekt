@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScalingService } from '../scaling.service';
 import { ComponentDirectorService } from '../component-director.service';
-import { ToolMenuSService } from '../tool-menu-s.service';
 
 @Component({
   selector: 'app-scaling-menu',
@@ -10,14 +9,13 @@ import { ToolMenuSService } from '../tool-menu-s.service';
 })
 export class ScalingMenuComponent implements OnInit {
 
-  constructor(public scaling: ScalingService, public director: ComponentDirectorService, private menu: ToolMenuSService) { }
+  constructor(public scaling: ScalingService, public director: ComponentDirectorService) { }
 
   ngOnInit() {
   }
 
 
   scale(scale: string) {
-    this.menu.hideToolMenu();
     let scalingAllowed = false;
     if (scale === '+') {
       scalingAllowed = this.scaling.increase();

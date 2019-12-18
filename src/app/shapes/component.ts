@@ -57,6 +57,7 @@ export class Link extends Rechteck {
     constructor(parent: Shape, director: ComponentDirectorService) {
         super(parent, director);
         this.height = 20;
+        this.title = 'Verlinkung';
     }
 
     instanceOf(): string {

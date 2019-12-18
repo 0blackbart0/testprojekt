@@ -65,7 +65,6 @@ export class MenuComponent implements OnInit {
     console.log(this.loader.generateString());
   }
 
-  
 
   deleteOuterKreis() {
     const subKreis: Shape = this.director.LastSelected;

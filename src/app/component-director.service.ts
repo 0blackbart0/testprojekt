@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Shape, Kreis, StartShape, Rechteck } from './shapes/shape';
 import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from './shapes/subkreis';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
-import { ToolMenuSService } from './tool-menu-s.service';
 import { ScalingService } from './scaling.service';
 import { Menu } from './shapes/component';
 

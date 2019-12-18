@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Shape } from '../shapes/shape';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
-import { ToolMenuSService } from '../tool-menu-s.service';
 import { SubKreis } from '../shapes/subkreis';
 
 @Component({

@@ -8,7 +8,7 @@
     <div class="wrapper"  (click)="director.deleteMenu()"
     [class.wrapper-active]="shape.selected">
 
-        <input class="titleInput" type="text">
+        <input class="titleInput" type="text" [(ngModel)]="shape.title">
         
         <img src="../../assets/button_icons/arrow.png">
         
