@@ -36,8 +36,7 @@ export class MenuComponent implements OnInit {
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-      
+
     });
   }
 
@@ -66,13 +65,7 @@ export class MenuComponent implements OnInit {
     console.log(this.loader.generateString());
   }
 
-  deleteTree() {
-    if (!(this.director.LastSelected instanceof Rechteck )) {
-      return;
-    }
-    const toDelete: Shape = this.director.LastSelected.parent;
-    this.deleteBelow(toDelete);
-  }
+  
 
   deleteOuterKreis() {
     const subKreis: Shape = this.director.LastSelected;
@@ -85,7 +78,7 @@ export class MenuComponent implements OnInit {
       return;
     }
     let outerCenter: SubKreisCenter;
-    this.deleteBelow(subKreis);
+    this.director.deleteBelow(subKreis);
     if (subKreis instanceof SubKreisRight) {
       outerCenter = kreis.centerChilds[kreis.centerChilds.length - 1];
       subKreis.phantomLeft.width = outerCenter.phantomLeft.width;
@@ -98,159 +91,24 @@ export class MenuComponent implements OnInit {
 
     this.director.reziseDividerAfterReplace(subKreis);
 
-    this.removeSubKreisCenter(outerCenter);
+    this.director.removeSubKreisCenter(outerCenter);
   }
 
-  removeSubKreisCenter(toDelete: SubKreisCenter) {
-    this.deleteBelow(toDelete);
-    const kreis: Kreis = toDelete.parent as Kreis;
-    let index = kreis.centerChilds.indexOf(toDelete);
 
-    kreis.centerChilds.splice(index, 1);
-    index = this.director.ShapeList.indexOf(toDelete);
-    this.director.ShapeList.splice(index, 1);
-    this.director.reziseDividerAfterDeleteCenter(toDelete);
-    this.director.setSelected(this.director.getChildFrom(kreis)[0]);
-    this.director.rearrangeAll(this.director.ShapeList[0]);
-  }
 
   deleteSubKreisCenter() {
     const toDelete: Shape = this.director.LastSelected;
     if (!(toDelete instanceof SubKreisCenter )) {
       return;
     }
-    this.removeSubKreisCenter(toDelete);
+    this.director.removeSubKreisCenter(toDelete);
   }
 
 
   deleteSubTree() {
-    this.deleteBelow(this.director.LastSelected);
+    this.director.deleteBelow(this.director.LastSelected);
   }
 
-  deleteBelow(toDelete: Shape) {
-    if (toDelete instanceof SubKreisCenter) {
-      toDelete.phantomLeft.width = 0;
-      toDelete.phantomRight.width = 0;
-    }
-    this.reziseAfterDelete(toDelete);
-    this.director.deleteAll(toDelete);
-    this.director.rearrangeAll(this.director.ShapeList[0]);
-  }
-
-  reziseAfterDelete(toDelete: Shape) {
-
-    let deletedPhantomWidth = 0;
-    let firstDividerSet = false;
-
-    const childDividers: Shape[] = this.director.getChildDividers(toDelete);
-    if ( childDividers.length === 0 ) {
-      return;
-    }
-    let maxLeft = 0;
-    for (const child of childDividers) {
-      if (child.left > maxLeft) {
-        maxLeft = child.left;
-      }
-    }
-    deletedPhantomWidth = maxLeft - toDelete.left;
-
-
-
-
-    if ( toDelete instanceof SubKreisLeft) {
-      if ( toDelete.injected) {
-        if ( (toDelete.parent as Kreis).centerChilds.length === 0) {
-          this.director.getChildFrom(toDelete.parent)[1].phantomLeft.width -= deletedPhantomWidth;
-        } else {
-          (toDelete.parent as Kreis).centerChilds[0].phantomLeft.width -= deletedPhantomWidth;
-        }
-
-      } else {
-        deletedPhantomWidth += toDelete.phantomRight.width;
-        toDelete.phantomRight.width = 0;
-
-      }
-
-      firstDividerSet = true;
-    } else if ( toDelete instanceof SubKreisRight) {
-      deletedPhantomWidth += toDelete.phantomLeft.width;
-      toDelete.phantomLeft.width = 0;
-      firstDividerSet = true;
-    } else if ( toDelete instanceof SubKreisCenter) {
-
-      let minLeft = toDelete.left;
-      for (const child of childDividers) {
-        if (child.left < minLeft) {
-          minLeft = child.left;
-        }
-      }
-      const minDistance = toDelete.left - minLeft;
-
-      toDelete.phantomLeft.width -= minDistance;
-      if (toDelete.phantomLeft.width < 0 ) {
-        toDelete.phantomLeft.width = 0;
-      }
-      toDelete.phantomRight.width -= deletedPhantomWidth;
-      if (toDelete.phantomRight.width < 0) {
-        toDelete.phantomRight.width = 0;
-      }
-      deletedPhantomWidth += minDistance;
-
-      firstDividerSet = true;
-    } else if ( toDelete instanceof Rechteck ) {
-        toDelete = this.director.getParentDivider(toDelete);
-        this.reziseAfterDelete(toDelete);
-        return;
-    }
-
-    if (firstDividerSet) {
-      this.reziseAfterDeleteRecursive(toDelete as SubKreis, deletedPhantomWidth);
-    }
-
-  }
-
-  reziseAfterDeleteRecursive(lastDivider: SubKreis, deletedPhantomWidth: number) {
-
-
-    let parentDivider: SubKreis = this.director.getParentOppositeDivider(lastDivider as SubKreis);
-
-    if ( lastDivider.injected) {
-      parentDivider = this.director.getParentDivider(lastDivider);
-      lastDivider.injected = false;
-    }
-    if ( parentDivider === null ) {
-      return;
-    }
-
-    if ( parentDivider instanceof SubKreisLeft) {
-      if (parentDivider.injected) {
-        const parentKreis: Kreis = parentDivider.parent as Kreis;
-
-        if ( parentKreis.centerChilds.length === 0) {
-          const childs: Shape[] = this.director.getChildFrom(parentKreis);
-          childs[1].phantomLeft.width -= deletedPhantomWidth;
-        } else {
-          parentKreis.centerChilds[parentKreis.centerChilds.length - 1].phantomLeft.width -= deletedPhantomWidth;
-        }
-      } else {
-        parentDivider.phantomRight.width -= deletedPhantomWidth;
-      }
-    } else if ( parentDivider instanceof SubKreisRight) {
-      if (!(lastDivider instanceof SubKreisCenter)) {
-        parentDivider.phantomLeft.width -= deletedPhantomWidth;
-      }
-    } else if ( parentDivider instanceof SubKreisCenter) {
-      if (lastDivider instanceof SubKreisLeft) {
-        parentDivider.phantomLeft.width -= deletedPhantomWidth;
-      } else if (lastDivider instanceof SubKreisRight) {
-        parentDivider.phantomRight.width -= deletedPhantomWidth;
-      } else if ( lastDivider instanceof SubKreisCenter ) {
-        parentDivider.phantomRight.width -= deletedPhantomWidth;
-      }
-    }
-
-    this.reziseAfterDeleteRecursive(parentDivider, deletedPhantomWidth);
-  }
 
   scale(scale: string) {
     let scalingAllowed = false;

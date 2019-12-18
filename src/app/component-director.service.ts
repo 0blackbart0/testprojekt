@@ -495,7 +495,7 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
     this.rearrangeAll(this.ShapeList[0]);
   }
 
-  
+
 
   deleteAll(element: Shape) {
     const childs: Shape[] = this.getChildFrom(element);
@@ -506,6 +506,149 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
     }
   }
 
+  deleteBelow(toDelete: Shape) {
+    if (toDelete instanceof SubKreisCenter) {
+      toDelete.phantomLeft.width = 0;
+      toDelete.phantomRight.width = 0;
+    }
+    this.reziseAfterDelete(toDelete);
+    this.deleteAll(toDelete);
+    this.rearrangeAll(this.ShapeList[0]);
+  }
+
+  reziseAfterDelete(toDelete: Shape) {
+
+    let deletedPhantomWidth = 0;
+    let firstDividerSet = false;
+
+    const childDividers: Shape[] = this.getChildDividers(toDelete);
+    if ( childDividers.length === 0 ) {
+      return;
+    }
+    let maxLeft = 0;
+    for (const child of childDividers) {
+      if (child.left > maxLeft) {
+        maxLeft = child.left;
+      }
+    }
+    deletedPhantomWidth = maxLeft - toDelete.left;
 
 
+
+
+    if ( toDelete instanceof SubKreisLeft) {
+      if ( toDelete.injected) {
+        if ( (toDelete.parent as Kreis).centerChilds.length === 0) {
+          this.getChildFrom(toDelete.parent)[1].phantomLeft.width -= deletedPhantomWidth;
+        } else {
+          (toDelete.parent as Kreis).centerChilds[0].phantomLeft.width -= deletedPhantomWidth;
+        }
+
+      } else {
+        deletedPhantomWidth += toDelete.phantomRight.width;
+        toDelete.phantomRight.width = 0;
+
+      }
+
+      firstDividerSet = true;
+    } else if ( toDelete instanceof SubKreisRight) {
+      deletedPhantomWidth += toDelete.phantomLeft.width;
+      toDelete.phantomLeft.width = 0;
+      firstDividerSet = true;
+    } else if ( toDelete instanceof SubKreisCenter) {
+
+      let minLeft = toDelete.left;
+      for (const child of childDividers) {
+        if (child.left < minLeft) {
+          minLeft = child.left;
+        }
+      }
+      const minDistance = toDelete.left - minLeft;
+
+      toDelete.phantomLeft.width -= minDistance;
+      if (toDelete.phantomLeft.width < 0 ) {
+        toDelete.phantomLeft.width = 0;
+      }
+      toDelete.phantomRight.width -= deletedPhantomWidth;
+      if (toDelete.phantomRight.width < 0) {
+        toDelete.phantomRight.width = 0;
+      }
+      deletedPhantomWidth += minDistance;
+
+      firstDividerSet = true;
+    } else if ( toDelete instanceof Rechteck ) {
+        toDelete = this.getParentDivider(toDelete);
+        this.reziseAfterDelete(toDelete);
+        return;
+    }
+
+    if (firstDividerSet) {
+      this.reziseAfterDeleteRecursive(toDelete as SubKreis, deletedPhantomWidth);
+    }
+
+  }
+
+  reziseAfterDeleteRecursive(lastDivider: SubKreis, deletedPhantomWidth: number) {
+
+
+    let parentDivider: SubKreis = this.getParentOppositeDivider(lastDivider as SubKreis);
+
+    if ( lastDivider.injected) {
+      parentDivider = this.getParentDivider(lastDivider);
+      lastDivider.injected = false;
+    }
+    if ( parentDivider === null ) {
+      return;
+    }
+
+    if ( parentDivider instanceof SubKreisLeft) {
+      if (parentDivider.injected) {
+        const parentKreis: Kreis = parentDivider.parent as Kreis;
+
+        if ( parentKreis.centerChilds.length === 0) {
+          const childs: Shape[] = this.getChildFrom(parentKreis);
+          childs[1].phantomLeft.width -= deletedPhantomWidth;
+        } else {
+          parentKreis.centerChilds[parentKreis.centerChilds.length - 1].phantomLeft.width -= deletedPhantomWidth;
+        }
+      } else {
+        parentDivider.phantomRight.width -= deletedPhantomWidth;
+      }
+    } else if ( parentDivider instanceof SubKreisRight) {
+      if (!(lastDivider instanceof SubKreisCenter)) {
+        parentDivider.phantomLeft.width -= deletedPhantomWidth;
+      }
+    } else if ( parentDivider instanceof SubKreisCenter) {
+      if (lastDivider instanceof SubKreisLeft) {
+        parentDivider.phantomLeft.width -= deletedPhantomWidth;
+      } else if (lastDivider instanceof SubKreisRight) {
+        parentDivider.phantomRight.width -= deletedPhantomWidth;
+      } else if ( lastDivider instanceof SubKreisCenter ) {
+        parentDivider.phantomRight.width -= deletedPhantomWidth;
+      }
+    }
+
+    this.reziseAfterDeleteRecursive(parentDivider, deletedPhantomWidth);
+  }
+
+  removeSubKreisCenter(toDelete: SubKreisCenter) {
+    this.deleteBelow(toDelete);
+    const kreis: Kreis = toDelete.parent as Kreis;
+    let index = kreis.centerChilds.indexOf(toDelete);
+
+    kreis.centerChilds.splice(index, 1);
+    index = this.ShapeList.indexOf(toDelete);
+    this.ShapeList.splice(index, 1);
+    this.reziseDividerAfterDeleteCenter(toDelete);
+    this.setSelected(this.getChildFrom(kreis)[0]);
+    this.rearrangeAll(this.ShapeList[0]);
+  }
+
+  deleteTree() {
+    if (!(this.LastSelected instanceof Rechteck )) {
+      return;
+    }
+    const toDelete: Shape = this.LastSelected.parent;
+    this.deleteBelow(toDelete);
+  }
 }

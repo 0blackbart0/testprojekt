@@ -19,11 +19,10 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   deleteBelow() {
-
-
+    this.director.deleteBelow(this.director.LastSelected);
   }
 
   deleteTree() {
-
+    this.director.deleteTree();
   }
 }
