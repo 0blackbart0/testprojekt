@@ -32,6 +32,13 @@ body {
 
     --button-size: 5vh;
 
+    --menu-connector-top: -4vh;
+
+    --img-link-width: 20vh;
+    --img-link-height: 10vh;
+    --img-link-left: 6vh;
+    --img-link-top: -1vh;
+
     /*/////////////// MenuElements /////////*/
 
     --left-1: 6.5vh;

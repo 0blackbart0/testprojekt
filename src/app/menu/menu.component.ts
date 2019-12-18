@@ -23,17 +23,17 @@ export class MenuComponent implements OnInit {
   menuType(): string {
 
     let type: string = null;
-
+    const childs: Shape[] = this.director.getChildFrom(this.shape);
     if ( this.shape.parent instanceof SubKreis) {
       type = 'kreisLeaf';
-      if (this.director.getChildFrom(this.shape).length !== 0) {
+      if (childs.length !== 0) {
         type = 'kreisWithChild';
       }
     } else if ( this.shape.parent instanceof Rechteck || this.shape.parent instanceof StartShape) {
       type = 'rechteckLeaf';
-      if (this.director.getChildFrom(this.shape).length !== 0) {
+      if (childs.length !== 0) {
         type = 'rechteckWithChild';
-        if ( this.director.getChildFrom(this.shape)[0] instanceof Kreis ) {
+        if ( childs[0] instanceof Kreis ) {
           type += 'Kreis';
         }
       }

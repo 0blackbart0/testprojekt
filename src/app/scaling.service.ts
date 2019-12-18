@@ -35,6 +35,13 @@ export class ScalingService {
 
   buttonSize = 5;
 
+  menuConnectorTop = -4;
+
+  imgLinkWidth = 20;
+  imgLinkHeight = 10;
+  imgLinkLeft = 6;
+  imgLinkTop = -1;
+
   left1 = 6.5;
   left2 = 12.5;
   left3 = 18.5;
@@ -103,6 +110,7 @@ export class ScalingService {
     this.connectorHeightFem *= Math.pow(this.scale, exponent);
     this.borderRadiusMedium *= Math.pow(this.scale, exponent);
     this.buttonSize *= Math.pow(this.scale, exponent);
+    this.menuConnectorTop *= Math.pow(this.scale, exponent);
 
     this.left1 *= Math.pow(this.scale, exponent);
     this.left2 *= Math.pow(this.scale, exponent);
@@ -121,6 +129,11 @@ export class ScalingService {
     this.topU1_5 *= Math.pow(this.scale, exponent);
     this.topU2_4 *= Math.pow(this.scale, exponent);
     this.topU3 *= Math.pow(this.scale, exponent);
+
+    this.imgLinkWidth *= Math.pow(this.scale, exponent);
+    this.imgLinkHeight *= Math.pow(this.scale, exponent);
+    this.imgLinkLeft *= Math.pow(this.scale, exponent);
+    this.imgLinkTop *= Math.pow(this.scale, exponent);
 
 
 
@@ -157,7 +170,12 @@ export class ScalingService {
     body.style.setProperty('--font-size-text', this.fontSizeText + 'vh');
     body.style.setProperty('--label-size', this.labelSize + 'vh');
     body.style.setProperty('--button-size', this.buttonSize + 'vh');
+    body.style.setProperty('--menu-connector-top', this.menuConnectorTop + 'vh');
 
+    body.style.setProperty('--img-link-width', this.imgLinkWidth + 'vh');
+    body.style.setProperty('--img-link-height', this.imgLinkHeight + 'vh');
+    body.style.setProperty('--img-link-left', this.imgLinkLeft + 'vh');
+    body.style.setProperty('--img-link-top', this.imgLinkTop + 'vh');
 
     body.style.setProperty('--left-1', this.left1 + 'vh');
     body.style.setProperty('--left-2', this.left2 + 'vh');

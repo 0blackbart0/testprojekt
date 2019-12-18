@@ -22,6 +22,7 @@ img{
     border-radius: var(--border-radius-medium);
     width: var(--button-size);
     height: var(--button-size); 
+    z-index: 2;
 }
 
 img:hover{
@@ -35,9 +36,23 @@ img:hover{
     display: block;
     box-sizing: border-box;
     height: 90%;
-    width: 100%;
- 
-    
+    width: 100%;    
+}
+
+.connector {
+    display: block;
+    border-top: none;
+    box-sizing: border-box;
+    border: solid var(--border-radius-small) white;
+    border-top: none;
+    position: relative;
+    left: 36.1%;
+    top: var(--menu-connector-top);
+    width: var(--connector-size);
+    height: var(--connector-radius);
+    background-color: white;
+    border-radius: 0 0 var(--connector-radius) var(--connector-radius);
+    z-index: 1;
 }
 
 

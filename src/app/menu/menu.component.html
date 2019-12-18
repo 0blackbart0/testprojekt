@@ -2,10 +2,11 @@
 [style.top.vh]="shape.top"
 [style.left.vh]="shape.left"
 [style.width.vh]="shape.width"
-[style.height.vh]="shape.height">
+[style.height.vh]="shape.height"
+(click)="director.deleteMenu();">
         
     <div *ngIf="menuType() === 'rechteckLeaf'" 
-    class="wrapper" (click)="director.deleteMenu();">
+    class="wrapper" >
 
         <img src='../../assets/button_icons/icon_verzweigung.png' id="u-1" (click)="addKreis()">
         <img src='../../assets/button_icons/icon_dialog.png' id="u-2" (click)="addDialog()">
@@ -16,7 +17,7 @@
     </div>
 
     <div *ngIf="menuType() === 'kreisLeaf'" 
-    class="wrapper" (click)="director.deleteMenu();" >
+    class="wrapper"  >
         <img src='../../assets/button_icons/icon_dialog.png' id="e-1" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="e-2" (click)="addMonolog()">
         <img src='../../assets/button_icons/icon_verlinkung.png' id="e-3" (click)="addLink()">
@@ -24,14 +25,14 @@
     </div>
 
     <div *ngIf="menuType() === 'kreisWithChild'" 
-    class="wrapper" (click)="director.deleteMenu();" >
+    class="wrapper"  >
         <img src='../../assets/button_icons/icon_dialog.png' id="u-2" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="u-3" (click)="addMonolog()">
         <img src='../../assets/button_icons/icon_delete.png' id="u-4" (click)="deleteTree()">
     </div>
 
     <div *ngIf="menuType() === 'rechteckWithChild'" 
-    class="wrapper" (click)="director.deleteMenu();">
+    class="wrapper" >
         <img src='../../assets/button_icons/icon_dialog.png' id="e-1" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="e-2" (click)="addMonolog()">
         <img src='../../assets/button_icons/icon_verzweigung.png' id="e-3" (click)="addKreis()">
@@ -41,12 +42,13 @@
 
     
     <div *ngIf="menuType() === 'rechteckWithChildKreis'"
-    class="wrapper" (click)="director.deleteMenu();">
+    class="wrapper">
         <img src='../../assets/button_icons/icon_dialog.png' id="u-2" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="u-3" (click)="addMonolog()">
         <img src='../../assets/button_icons/icon_delete.png' id="u-4" (click)="deleteTree()">
     
     </div>
 
+    <div class="connector"></div>
 
 </div>

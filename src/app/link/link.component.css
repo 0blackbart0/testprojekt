@@ -57,10 +57,10 @@
 
 img {
     position: relative;
-    width: 20vh;
-    height: 10vh;
-    left: 6vh;
-    top: -1vh;
+    width: var(--img-link-width);
+    height: var(--img-link-height);
+    left: var(--img-link-left);
+    top: var(--img-link-top);
 
     
 }

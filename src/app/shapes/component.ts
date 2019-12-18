@@ -3,7 +3,7 @@ import { ComponentDirectorService } from '../component-director.service';
 
 export class Menu extends Rechteck {
 
-    height = 14;
+    height = 13;
     typeOfMenu(): string {
         return this.parent.instanceOf();
     }
