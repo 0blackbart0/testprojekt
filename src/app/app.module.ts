@@ -19,7 +19,8 @@ import { MenuComponent } from './menu/menu.component';
 import { LinkComponent } from './link/link.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component'
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { SidebarComponent } from './sidebar/sidebar.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component'
     ScalingMenuComponent,
     MenuComponent,
     LinkComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

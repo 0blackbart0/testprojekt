@@ -16,3 +16,40 @@
 #toolMenuClass{
     position: absolute;
 }
+
+app-sidebar {
+    position: fixed;
+    right: -30vh;
+
+}
+
+.slideIn {
+    animation-name: slideIn;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideIn {
+    from {
+        right: -30vh;
+    }
+    to {
+        right: 0vh;
+    }
+}
+
+.slideOut{
+    animation-name: slideOut;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+@keyframes slideOut {
+    from {
+        right: 0vh;
+    }
+    to {
+        right: -30vh;
+    }
+}
