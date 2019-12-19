@@ -95,13 +95,7 @@ export class MenuComponent implements OnInit {
 
 
 
-  deleteSubKreisCenter() {
-    const toDelete: Shape = this.director.LastSelected;
-    if (!(toDelete instanceof SubKreisCenter )) {
-      return;
-    }
-    this.director.removeSubKreisCenter(toDelete);
-  }
+  
 
 
   deleteSubTree() {
@@ -179,33 +173,7 @@ export class MenuComponent implements OnInit {
     this.director.resizeInjectedDivider(tmp);
   }
 
-  addSubKreisCenter() {
-    if (!(this.director.LastSelected instanceof SubKreis)) {
-      return;
-    }
-    const parent: Shape = this.director.LastSelected.getParent();
-    const childs: Shape[] = this.director.getChildFrom(parent);
-    let subKreisRight: SubKreisRight;
-    for (const child of childs) {
-      if ( child instanceof SubKreisRight) {
-        subKreisRight = child;
-      }
-    }
-    const subKreisRightChild: Shape[] = this.director.getChildFrom(subKreisRight);
-    const subKreisCenter: SubKreisCenter = new SubKreisCenter(parent, this.director);
-    this.director.addShape(subKreisCenter);
-    (parent as Kreis).addCenter(subKreisCenter);
-    subKreisCenter.setValuesTo(subKreisRight);
-    subKreisRight.left += subKreisRight.phantomLeft.width + subKreisRight.width;
-    subKreisRight.phantomLeft.width = 0;
-    if (subKreisRightChild.length === 1 ) {
-      subKreisRightChild[0].parent = subKreisCenter;
-    }
-    this.director.reziseDividerAfterAddCenter(subKreisCenter);
-    this.director.rearrangeAll(this.director.ShapeList[0]);
-    this.director.sizePhantomOfSubKreisRightAfterCenterAdd(subKreisCenter);
-    this.director.setPadding();
-  }
+
 
   addRechteck() {
     let tmp: Shape = null;

@@ -1,5 +1,26 @@
 <div class="sidebar">
-    <button class="toggle">=</button>
-    <p> hallo</p>
+    <button class="toggle" (click)="toggleSidebar()">=</button>
+   
+    
+    <label class="title">Titel</label>
+    <input class="titleInput" type="text" 
+    [(ngModel)]="shape.title">
 
+    <div *ngIf="shape.instanceOf() === 'kreis'">
+        <div *ngFor="let child of kreisChilds; index as i" >
+            <label class="subKreisTitle">Verzweigung {{i+1}}</label>
+            <input class="subKreisSelectionText" type="text" 
+            [(ngModel)]="child.selectionText">
+            <div *ngIf="child.instanceOf() === 'subKreisCenter'">
+                <button (click)="director.removeSubKreisCenter(child)">delete Subkreis</button>
+            </div>
+
+        </div>
+
+        <button (click)="addSubKreisCenter(); ">addSubCenter</button>
+    </div>
+
+   
+
+   
 </div>

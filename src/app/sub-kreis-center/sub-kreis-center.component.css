@@ -21,12 +21,13 @@
   
   
   .phantom {
-      border: 2px solid black;
+      border: var(--border-weight-medium) solid var(--dark-grey);
       border-right: none;
       border-left: none;
       box-sizing: border-box;
       position: absolute;
       background-color: var(--light-grey);
+      margin-top: var(--connector-height-fem);
   }
 
   .buttonInput {

@@ -1,13 +1,22 @@
 .drawing-field {
     overflow: scroll;
     background-color: white;
-    height: 100vh;
+    height: 100%;
     position: relative;
-    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-background);
-    scrollbar-width: thin;
+    scrollbar-width: none;
+
 }
 
-#drawingFieldPadding {
+.scrollbar-vertical {
+    height: 100vh;
+    overflow-x: scroll ;
+    overflow-y: hidden;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-background); 
+    scrollbar-width: thin;
+    box-sizing: border-box;
+}
+
+.drawingFieldPadding {
     position: absolute;
     height: 1px;
     width: 1px;
@@ -20,6 +29,7 @@
 app-sidebar {
     position: fixed;
     right: -30vh;
+    z-index: 5;
 
 }
 
@@ -32,10 +42,10 @@ app-sidebar {
 
 @keyframes slideIn {
     from {
-        right: -30vh;
+        transform: translateX(0);
     }
     to {
-        right: 0vh;
+        transform: translateX(-30vh);
     }
 }
 
@@ -47,9 +57,17 @@ app-sidebar {
 }
 @keyframes slideOut {
     from {
-        right: 0vh;
+        transform: translateX(-30vh);
     }
     to {
-        right: -30vh;
+        transform: translateX(0vh);
     }
+}
+
+#scalingMenu {
+    position: fixed;
+    bottom: 5vh;
+    right: 5vh; 
+    z-index: 3;
+    
 }

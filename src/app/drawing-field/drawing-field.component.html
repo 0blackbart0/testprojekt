@@ -1,35 +1,41 @@
-<div class="drawing-field">
-    <app-start-shape id="startShape" ></app-start-shape>
-
-    <div *ngFor="let Shape of ShapeList">
-        <div *ngIf="Shape.instanceOf() === 'dialog'">
-            <app-dialog [shape]=Shape></app-dialog>
-        </div>
-        <div *ngIf="Shape.instanceOf() === 'monolog'">
-            <app-monolog [shape]=Shape></app-monolog>
-        </div>
-        <div *ngIf="Shape.instanceOf() === 'subKreisLeft'" >
-            <app-sub-kreis-left [shape]=Shape></app-sub-kreis-left>
-        </div>
-        <div *ngIf="Shape.instanceOf() === 'subKreisCenter'">
-            <app-sub-kreis-center [shape]=Shape></app-sub-kreis-center>
-        </div>
-        <div *ngIf="Shape.instanceOf() === 'subKreisRight'" >
-            <app-sub-kreis-right [shape]=Shape></app-sub-kreis-right>
-        </div>
-        <div *ngIf="Shape.instanceOf() === 'link'">
-            <app-link [shape]=Shape></app-link>
-        </div>
-        <div *ngIf="Shape.instanceOf() === 'menu'">
-            <app-menu [shape]=Shape></app-menu>
-        </div>
+<div class="scrollbar-vertical">
 
 
+    <div class="drawing-field">
+        <app-start-shape id="startShape" ></app-start-shape>
+
+        <div *ngFor="let Shape of ShapeList">
+            <div *ngIf="Shape.instanceOf() === 'dialog'">
+                <app-dialog [shape]=Shape></app-dialog>
+            </div>
+            <div *ngIf="Shape.instanceOf() === 'monolog'">
+                <app-monolog [shape]=Shape></app-monolog>
+            </div>
+            <div *ngIf="Shape.instanceOf() === 'subKreisLeft'" >
+                <app-sub-kreis-left [shape]=Shape></app-sub-kreis-left>
+            </div>
+            <div *ngIf="Shape.instanceOf() === 'subKreisCenter'">
+                <app-sub-kreis-center [shape]=Shape></app-sub-kreis-center>
+            </div>
+            <div *ngIf="Shape.instanceOf() === 'subKreisRight'" >
+                <app-sub-kreis-right [shape]=Shape></app-sub-kreis-right>
+            </div>
+            <div *ngIf="Shape.instanceOf() === 'link'">
+                <app-link [shape]=Shape></app-link>
+            </div>
+            <div *ngIf="Shape.instanceOf() === 'menu'">
+                <app-menu [shape]=Shape></app-menu>
+            </div>
+
+
+        </div>
+
+        <div [style.top.vh]="drawingFieldPaddingTop" class="drawingFieldPadding">   
+        </div>
+        <div [style.left.vh]="drawingFieldPaddingRight" class="drawingFieldPadding">
+        </div>
+
+        <app-scaling-menu id="scalingMenu"></app-scaling-menu>
+        <app-sidebar id="sidebar"></app-sidebar>
     </div>
-
-    <div [style.top.vh]="drawingFieldPaddingTop" id="drawingFieldPadding">   
-    </div>
-
-    <app-scaling-menu></app-scaling-menu>
-    <app-sidebar (click)="toggleSidebar()" id="sidebar"></app-sidebar>
 </div>

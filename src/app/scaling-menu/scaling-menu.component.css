@@ -1,10 +1,4 @@
-.scaling-menu {
-    position: fixed;
-    bottom: 5vh;
-    right: 5vh; 
-    z-index: 3;
-    
-}
+
 
 button {
     height: 5vh;

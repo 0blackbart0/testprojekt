@@ -4,6 +4,7 @@ import { SubKreis, SubKreisLeft, SubKreisRight, SubKreisCenter } from './shapes/
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 import { ScalingService } from './scaling.service';
 import { Menu } from './shapes/component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class ComponentDirectorService {
   LastSelected: Shape;
   replaceActive = false;
   drawingField: DrawingFieldComponent = null;
+  sidebar: SidebarComponent = null;
 
   constructor(private scaling: ScalingService) { }
 
@@ -404,9 +406,23 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
 
   }
 
+  setPaddingRight() {
+    let maxDistanceLeft: number = 0;
+    const paddingRight: number = 60;
+
+    for (const shape of this.getShapeList()) {
+      if (shape.left + shape.width > maxDistanceLeft) {
+        maxDistanceLeft = shape.left + shape.width;
+
+      }
+    }
+    this.drawingField.drawingFieldPaddingRight = maxDistanceLeft + paddingRight;
+  }
+
   setPadding() {
     this.setPaddingLeft();
     this.setPaddingBottom();
+    this.setPaddingRight();
   }
 
 
@@ -472,6 +488,12 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
       }
       this.LastSelected = shape;
       shape.selected = true;
+      if ( shape instanceof SubKreis ) {
+        this.sidebar.shape = shape.parent;
+        this.sidebar.kreisChilds = this.getChildFrom(shape.parent) as SubKreis[];
+      } else {
+        this.sidebar.shape = shape;
+      }
   }
 
   deleteMenu() {
@@ -650,4 +672,33 @@ resizeDividerAfterDeleteCenterRecursive(element: SubKreis) {
     const toDelete: Shape = this.LastSelected.parent;
     this.deleteBelow(toDelete);
   }
+
+  addSubKreisCenter() {
+    if (!(this.LastSelected instanceof SubKreis)) {
+      return;
+    }
+    const parent: Shape = this.LastSelected.getParent();
+    const childs: Shape[] = this.getChildFrom(parent);
+    let subKreisRight: SubKreisRight;
+    for (const child of childs) {
+      if ( child instanceof SubKreisRight) {
+        subKreisRight = child;
+      }
+    }
+    const subKreisRightChild: Shape[] = this.getChildFrom(subKreisRight);
+    const subKreisCenter: SubKreisCenter = new SubKreisCenter(parent, this);
+    this.addShape(subKreisCenter);
+    (parent as Kreis).addCenter(subKreisCenter);
+    subKreisCenter.setValuesTo(subKreisRight);
+    subKreisRight.left += subKreisRight.phantomLeft.width + subKreisRight.width;
+    subKreisRight.phantomLeft.width = 0;
+    if (subKreisRightChild.length === 1 ) {
+      subKreisRightChild[0].parent = subKreisCenter;
+    }
+    this.reziseDividerAfterAddCenter(subKreisCenter);
+    this.rearrangeAll(this.ShapeList[0]);
+    this.sizePhantomOfSubKreisRightAfterCenterAdd(subKreisCenter);
+    this.setPadding();
+  }
+
 }

@@ -1,22 +1,57 @@
 .sidebar {
+    
     height: 100vh;
     width: 30vh;
     box-sizing: border-box;
     display: block;
     background-color: var(--light-grey);
     border-left: solid var(--dark-grey) 0.4vh;
-    padding: 1vh;
+    padding: 2vh;
+    
+}
+
+
+
+.title {
+    
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 3vh;
+    font-weight: bolder;
+    margin-bottom: 1.5vh;
+    color: var(--dark-grey);
+    
+}
+
+.titleInput {
+    background-color: transparent;
+    width: 100%;
+
+    box-sizing: border-box;
+    font-size: 2vh;
+    border: 0;
+    border-bottom: 0.3vh solid black;
+   
+    color: var(--dark-grey);
+
+    padding: 0;
+    margin-bottom: 1.5vh;
+
+    display: block;
+
 }
 
 .toggle {
     box-sizing: border-box;
-    position: relative;
+    position: absolute;
     width: 2.5vh;
     height: 20vh;
-    right: 3.5vh;
+    right: 30vh;
     top: 40vh;
     border: solid var(--dark-grey) 0.3vh;
     border-radius: 0.8vh 0 0 0.8vh;
+    border-right: none;
     
 }
 

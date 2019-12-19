@@ -6,7 +6,7 @@
     [style.height.vh]="shape.phantomLeft.height * 0.63"> 
     </div>
     
-    <div class="subKreisCenter" (click)="director.setSelected(this.shape); director.deleteMenu()"
+    <div class="subKreisCenter" (click)="director.setSelected(this.shape);"
     [style.top.vh]="shape.top"
     [style.left.vh]="shape.left"
     [style.width.vh]="shape.width"
@@ -14,7 +14,7 @@
         <div class="wrapper">
             <input class="buttonInput" type="text" [(ngModel)]="shape.selectionText"
             [class.buttonInput-selected]="shape.selected"
-            (click)="deselectConnectoractive()">
+            (click)="deselectConnectoractive();  director.deleteMenu()">
         </div>
           <div class="connector"
           (click)="director.setSelected(this.shape); director.deleteMenu(); director.addMenu(); toggleConnectorActive()"
