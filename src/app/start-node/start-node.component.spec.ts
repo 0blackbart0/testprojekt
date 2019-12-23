@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RechteckComponent } from './rechteck.component';
+import { StartNodeComponent } from './start-node.component';
 
-describe('RechteckComponent', () => {
-  let component: RechteckComponent;
-  let fixture: ComponentFixture<RechteckComponent>;
+describe('StartNodeComponent', () => {
+  let component: StartNodeComponent;
+  let fixture: ComponentFixture<StartNodeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RechteckComponent ]
+      declarations: [ StartNodeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RechteckComponent);
+    fixture = TestBed.createComponent(StartNodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

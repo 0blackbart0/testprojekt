@@ -1,6 +1,7 @@
 import { Injectable, RootRenderer } from '@angular/core';
-import { Shape } from './shapes/shape';
-import { SubKreis, SubKreisLeft, SubKreisRight } from './shapes/subkreis';
+import { Node } from './nodes/node';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -197,56 +198,28 @@ export class ScalingService {
     body.style.setProperty('--top-u-3', this.topU3 + 'vh');
   }
 
-  rezise(element: Shape, scale: string) {
+  rezise(node: Node, scale: string) {
 
     if ( scale === '+') {
-      element.height /= this.scale;
-      element.width /= this.scale;
-      if ( element instanceof SubKreis) {
-        (element as SubKreis).phantomRight.width /= this.scale;
-        (element as SubKreis).phantomRight.height /= this.scale;
-        (element as SubKreis).phantomLeft.width /= this.scale;
-        (element as SubKreis).phantomLeft.height /= this.scale;
-      }
+      node.height /= this.scale;
+      node.width /= this.scale;
     } else if ( scale === '-') {
-      element.height *= this.scale;
-      element.width *= this.scale;
-      if ( element instanceof SubKreis) {
-        (element as SubKreis).phantomRight.width *= this.scale;
-        (element as SubKreis).phantomRight.height *= this.scale;
-        (element as SubKreis).phantomLeft.width *= this.scale;
-        (element as SubKreis).phantomLeft.height *= this.scale;
-      }
+      node.height *= this.scale;
+      node.width *= this.scale;
     }
   }
 
-  scaleNewShape(shape: Shape) {
+  scaleNewNode(node: Node) {
     if ( this.balance < 0) {
       for (let i = 0; i < Math.abs(this.balance); i++) {
-        shape.height *= this.scale;
-        shape.width *= this.scale;
-        if (shape instanceof SubKreisLeft) {
-          (shape as SubKreisLeft).phantomRight.height *= this.scale;
-          (shape as SubKreisLeft).phantomRight.width *= this.scale;
-        }
-        if (shape instanceof SubKreisRight) {
-          (shape as SubKreisRight).phantomLeft.height *= this.scale;
-          (shape as SubKreisRight).phantomLeft.width *= this.scale;
-        }
+        node.height *= this.scale;
+        node.width *= this.scale;
       }
 
     } else if ( this.balance > 0 ) {
       for (let i = 0; i < this.balance + 1; i++) {
-        shape.height /= this.scale;
-        shape.width /= this.scale;
-        if (shape instanceof SubKreisLeft) {
-          (shape as SubKreisLeft).phantomRight.height /= this.scale;
-          (shape as SubKreisLeft).phantomRight.width /= this.scale;
-        }
-        if (shape instanceof SubKreisRight) {
-          (shape as SubKreisRight).phantomLeft.height /= this.scale;
-          (shape as SubKreisRight).phantomLeft.width /= this.scale;
-        }
+        node.height /= this.scale;
+        node.width /= this.scale;
       }
     }
   }

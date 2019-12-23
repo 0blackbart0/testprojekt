@@ -1,16 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Shape  } from '../shapes/shape';
+import { Node  } from '../nodes/node';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
 
 @Component({
-  selector: 'app-rechteck',
-  templateUrl: './rechteck.component.html',
-  styleUrls: ['./rechteck.component.css']
+  selector: 'app-basic-node',
+  templateUrl: './basicNode.component.html',
+  styleUrls: ['./basicNode.component.css']
 })
-export class RechteckComponent implements OnInit {
+export class BasicNodeComponent implements OnInit {
 
-  @Input() shape: Shape;
+  @Input() node: Node;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
   }
@@ -18,7 +18,7 @@ export class RechteckComponent implements OnInit {
   ngOnInit() {
   }
 
-  setParent(shape: Shape) {
-    this.shape.parent = shape;
+  setParent(node: Node) {
+    this.node.parent = node;
   }
 }

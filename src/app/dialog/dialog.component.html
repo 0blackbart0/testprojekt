@@ -1,16 +1,16 @@
 
 <div class="rechteck"  
-[style.top.vh]="shape.top"
-[style.left.vh]="shape.left"
-[style.width.vh]="shape.width"
-[style.height.vh]="shape.height">
+[style.top.vh]="node.top"
+[style.left.vh]="node.left"
+[style.width.vh]="node.width"
+[style.height.vh]="node.height">
     <div class="connector-fem">
     </div>
-    <div class="wrapper"  (click)="director.setSelected(this.shape); director.deleteMenu()"
-    [class.wrapper-active]="shape.selected">
+    <div class="wrapper"
+    [class.wrapper-active]="node.selected">
  
         <input class="titleInput" type="text" 
-        [(ngModel)]="shape.title" 
+        [(ngModel)]="node.title" 
         (click)="deselectConnectoractive()">
         
         
@@ -18,7 +18,7 @@
             <label class="Label floatRight" >Benutzer</label>
         </div>
         <textarea class="chatBubble user" type="textarea" 
-        [(ngModel)]="shape.question"
+        [(ngModel)]="node.question"
         (click)="deselectConnectoractive()"></textarea>
         
         <div class="triangleUser"></div>
@@ -26,7 +26,7 @@
 
         <label class="Label" >ChatBot</label>
         <textarea class="chatBubble" type="textarea" 
-        [(ngModel)]="shape.answer"
+        [(ngModel)]="node.answer"
         (click)="deselectConnectoractive()"></textarea>
 
         <div class="triangleBot"></div>
@@ -34,6 +34,6 @@
         
     </div>
     <div class="connector"
-    (click)="director.setSelected(this.shape); director.deleteMenu(); director.addMenu(); toggleConnectorActive()"
-    [class.connector-active]="shape.connectorActive"></div>
+    (click)="toggleConnectorActive()"
+    [class.connector-active]="node.connectorActive"></div>
 </div>

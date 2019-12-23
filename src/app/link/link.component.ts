@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Link } from '../shapes/component';
+import { Link } from '../nodes/component';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
 
@@ -10,7 +10,7 @@ import { ScalingService } from '../scaling.service';
 })
 export class LinkComponent implements OnInit {
 
-  @Input() shape: Link;
+  @Input() node: Link;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
 

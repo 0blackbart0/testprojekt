@@ -1,19 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Monolog } from '../nodes/component';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
+import { DividerBranch } from '../nodes/dividerBranch';
 
 @Component({
-  selector: 'app-monolog',
-  templateUrl: './monolog.component.html',
-  styleUrls: ['./monolog.component.css']
+  selector: 'app-divider-branch-right',
+  templateUrl: './divider-branch-right.component.html',
+  styleUrls: ['./divider-branch-right.component.css']
 })
-export class MonologComponent implements OnInit {
+export class DividerBranchRightComponent implements OnInit {
 
-  @Input() node: Monolog;
-
-  constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
-   }
+  @Input() node: DividerBranch;
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
 
   ngOnInit() {
   }

@@ -1,11 +1,10 @@
-<div class="rechteck" 
+<div class="rechteck"  
 [style.top.vh]="node.top"
 [style.left.vh]="node.left"
 [style.width.vh]="node.width"
 [style.height.vh]="node.height">
-    <div class="connector-fem">
-    </div>
-    <div class="wrapper" 
+
+    <div class="wrapper"
     [class.wrapper-active]="node.selected">
 
         <input class="titleInput" type="text" 
@@ -13,14 +12,14 @@
         (click)="deselectConnectoractive()">
         
         <label class="Label" >ChatBot</label>
-        <textarea class="chatBubble" type="textarea"
-        [(ngModel)]="node.forwardText"
+        <textarea class="chatBubble" type="textarea" 
+        [(ngModel)]="node.greeting"
         (click)="deselectConnectoractive()"></textarea>
         <div class="triangleBot"></div>
         
 
     </div>
     <div class="connector"
-    (click)="toggleConnectorActive();"
+    (click)="toggleConnectorActive()"
     [class.connector-active]="node.connectorActive"></div>
 </div>

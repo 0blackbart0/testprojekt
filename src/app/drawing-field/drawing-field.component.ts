@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Shape } from '../shapes/shape';
+import { Node } from '../nodes/node';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
 
@@ -10,8 +10,8 @@ import { ScalingService } from '../scaling.service';
 })
 export class DrawingFieldComponent implements OnInit {
 
-  selected: Shape;
-  ShapeList: Shape[] = [];
+  selected: Node;
+  nodeList: Node[] = [];
   drawingFieldPadding: number = 60;
   drawingFieldPaddingTop: number = 50;
   drawingFieldPaddingRight: number = 100;
@@ -26,7 +26,7 @@ export class DrawingFieldComponent implements OnInit {
     console.log("test erfolgreich");
   }
   ngOnInit() {
-    this.ShapeList = this.director.getShapeList();
+    this.nodeList = this.director.nodeList;
     this.director.setDrawingField(this);
   }
 

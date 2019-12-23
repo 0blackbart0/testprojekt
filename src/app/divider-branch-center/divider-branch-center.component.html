@@ -1,0 +1,18 @@
+<div>
+    <div class="subKreisCenter"
+    [style.top.vh]="node.top"
+    [style.left.vh]="node.left"
+    [style.width.vh]="node.width"
+    [style.height.vh]="node.height">
+
+        <div class="wrapper">
+            <input class="buttonInput" type="text" [(ngModel)]="node.selectionText"
+            [class.buttonInput-selected]="node.selected"
+            (click)="deselectConnectoractive()">
+        </div>
+        <div class="connector" (click)="toggleConnectorActive()" [class.connector-active]="node.connectorActive">
+
+        </div>
+    </div>
+    
+</div>

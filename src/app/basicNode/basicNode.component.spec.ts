@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StartShapeComponent } from './start-shape.component';
+import { BasicNodeComponent } from './basicNode.component';
 
-describe('StartShapeComponent', () => {
-  let component: StartShapeComponent;
-  let fixture: ComponentFixture<StartShapeComponent>;
+describe('BasicNodeComponent', () => {
+  let component: BasicNodeComponent;
+  let fixture: ComponentFixture<BasicNodeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StartShapeComponent ]
+      declarations: [ BasicNodeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StartShapeComponent);
+    fixture = TestBed.createComponent(BasicNodeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

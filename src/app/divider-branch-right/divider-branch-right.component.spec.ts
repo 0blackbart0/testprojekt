@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubKreisLeftComponent } from './sub-kreis-left.component';
+import { DividerBranchRightComponent } from './divider-branch-right.component';
 
-describe('SubKreisLeftComponent', () => {
-  let component: SubKreisLeftComponent;
-  let fixture: ComponentFixture<SubKreisLeftComponent>;
+describe('DividerBranchRightComponent', () => {
+  let component: DividerBranchRightComponent;
+  let fixture: ComponentFixture<DividerBranchRightComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SubKreisLeftComponent ]
+      declarations: [ DividerBranchRightComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SubKreisLeftComponent);
+    fixture = TestBed.createComponent(DividerBranchRightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

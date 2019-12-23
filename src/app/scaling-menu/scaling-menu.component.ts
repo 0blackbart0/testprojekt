@@ -13,6 +13,7 @@ export class ScalingMenuComponent implements OnInit {
 
     window.addEventListener("wheel", event => {
       if (event.ctrlKey) {
+        console.log("test");
         if (event.deltaY > 0 ) {
           this.scale('-');
         } else {
@@ -37,11 +38,9 @@ export class ScalingMenuComponent implements OnInit {
     }
     if ( scalingAllowed ) {
 
-      for (const element of this.director.getShapeList()) {
+      for (const element of this.director.nodeList) {
         this.scaling.rezise(element, scale);
       }
-      this.director.rearrangeAll(this.director.ShapeList[0]);
-      this.director.setPadding();
     }
   }
 

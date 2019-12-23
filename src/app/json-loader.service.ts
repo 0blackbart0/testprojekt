@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Shape } from '../app/shapes/shape';
+import { Node } from './nodes/node';
 import { ComponentDirectorService } from '../app/component-director.service';
 import { stringify } from 'querystring';
 
@@ -10,18 +10,10 @@ import { stringify } from 'querystring';
 })
 export class JsonLoaderService {
 
-  ShapeList: Shape[] = [];
+  NodeList: Node[] = [];
 
   constructor(private director: ComponentDirectorService) {
-    this.ShapeList = this.director.getShapeList();
+    this.NodeList = this.director.nodeList;
    }
-
-  generateString(): string {
-
-    const generatedString: string = this.ShapeList[0].getInfoString();
-    const jsonString: string = JSON.parse(generatedString);
-
-    return jsonString;
-  }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentDirectorService } from '../component-director.service';
-import { Shape } from '../shapes/shape';
+import { Node } from '../nodes/node';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -15,14 +15,14 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   deleteSingle() {
-    this.director.deleteSingle(this.director.LastSelected);
+   console.log('lösch eionzelnd');
   }
 
   deleteBelow() {
-    this.director.deleteBelow(this.director.LastSelected);
+    console.log('lösch unter dir');
   }
 
   deleteTree() {
-    this.director.deleteTree();
+    console.log('lösch Baum');
   }
 }

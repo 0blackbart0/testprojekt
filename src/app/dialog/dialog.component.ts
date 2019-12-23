@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Shape  } from '../shapes/shape';
+import { Node  } from '../nodes/node';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
-import { Dialog } from '../shapes/component';
+import { Dialog } from '../nodes/component';
 
 @Component({
   selector: 'app-dialog',
@@ -11,7 +11,7 @@ import { Dialog } from '../shapes/component';
 })
 export class DialogComponent implements OnInit {
 
-  @Input() shape: Dialog;
+  @Input() node: Dialog;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
   }
@@ -19,19 +19,18 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  setParent(shape: Shape) {
-    this.shape.parent = shape;
+  setParent(node: Node) {
+    this.node.parent = node;
   }
 
   toggleConnectorActive() {
-    this.shape.connectorActive = !this.shape.connectorActive;
-    if (!this.shape.connectorActive) {
-      this.director.deleteMenu();
+    this.node.connectorActive = !this.node.connectorActive;
+    if (!this.node.connectorActive) {
     }
 
   }
 
   deselectConnectoractive() {
-    this.shape.connectorActive = false;
+    this.node.connectorActive = false;
   }
 }

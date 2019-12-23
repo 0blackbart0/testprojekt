@@ -1,21 +1,21 @@
 <div class="rechteck" 
-[style.top.vh]="shape.top"
-[style.left.vh]="shape.left"
-[style.width.vh]="shape.width"
-[style.height.vh]="shape.height"
-(click)="director.deleteMenu(); shape.parent.connectorActive = false;">
+[style.top.vh]="node.top"
+[style.left.vh]="node.left"
+[style.width.vh]="node.width"
+[style.height.vh]="node.height"
+(click)="node.parent.connectorActive = false;">
         
-    <div *ngIf="menuType() === 'rechteckLeaf'" 
+    <div *ngIf="getMenuType() === 'basicDividerLeaf'" 
     class="wrapper" >
         <img src='../../assets/button_icons/icon_dialog.png' id="u-1" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="u-2" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_verzweigung.png' id="u-3" (click)="addKreis()">
+        <img src='../../assets/button_icons/icon_verzweigung.png' id="u-3" (click)="addDividerNode()">
         <img src='../../assets/button_icons/icon_verlinkung.png' id="u-4" (click)="addLink()">
         <img src='../../assets/button_icons/icon_delete.png' id="u-5" (click)="openDialog()">
 
     </div>
 
-    <div *ngIf="menuType() === 'kreisLeaf'" 
+    <div *ngIf="getMenuType() === 'DividerNodeLeaf'" 
     class="wrapper"  >
         <img src='../../assets/button_icons/icon_dialog.png' id="e-1" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="e-2" (click)="addMonolog()">
@@ -23,24 +23,24 @@
         <img src='../../assets/button_icons/icon_delete.png' id="e-4" (click)="openDialog()">
     </div>
 
-    <div *ngIf="menuType() === 'kreisWithChild'" 
+    <div *ngIf="getMenuType() === 'DividerNodeWithChild'" 
     class="wrapper"  >
         <img src='../../assets/button_icons/icon_dialog.png' id="u-2" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="u-3" (click)="addMonolog()">
         <img src='../../assets/button_icons/icon_delete.png' id="u-4" (click)="openDialog()">
     </div>
 
-    <div *ngIf="menuType() === 'rechteckWithChild'" 
+    <div *ngIf="getMenuType() === 'rechteckWithChild'" 
     class="wrapper" >
         <img src='../../assets/button_icons/icon_dialog.png' id="e-1" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="e-2" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_verzweigung.png' id="e-3" (click)="addKreis()">
+        <img src='../../assets/button_icons/icon_verzweigung.png' id="e-3" (click)="addDividerNode()">
         <img src='../../assets/button_icons/icon_delete.png' id="e-4" (click)="openDialog()">
     
     </div>
 
     
-    <div *ngIf="menuType() === 'rechteckWithChildKreis'"
+    <div *ngIf="getMenuType() === 'rechteckWithChildDividerNode'"
     class="wrapper">
         <img src='../../assets/button_icons/icon_dialog.png' id="u-2" (click)="addDialog()">
         <img src='../../assets/button_icons/icon_monolog.png' id="u-3" (click)="addMonolog()">

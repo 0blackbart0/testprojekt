@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Shape } from '../shapes/shape';
+import { Node } from '../nodes/node';
 import { ComponentDirectorService } from '../component-director.service';
-import { SubKreis } from '../shapes/subkreis';
+import { DividerBranch } from '../nodes/dividerBranch';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,25 +10,17 @@ import { SubKreis } from '../shapes/subkreis';
 })
 export class SidebarComponent implements OnInit {
 
-  shape: Shape;
-
-  kreisChilds: SubKreis[];
+  node: Node;
 
   sidebarOpen = false;
   constructor(public director: ComponentDirectorService) {
     this.director.sidebar = this;
-    this.shape = director.LastSelected;
+    this.node = director.selected;
   }
 
   ngOnInit() {
 
   }
-
-  addSubKreisCenter() {
-    this.director.addSubKreisCenter();
-    this.kreisChilds = this.director.getChildFrom(this.shape) as SubKreis[];
-  }
-
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;

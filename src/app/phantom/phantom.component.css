@@ -1,8 +1,0 @@
-.phantom {
-    border: 2px solid black;
-    border-right: none;
-    border-left: none;
-    box-sizing: border-box;
-    position: absolute;
-    background-color: lightgray;
-}
