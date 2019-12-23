@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComponentDirectorService } from '../component-director.service';
-import { Menu } from '../nodes/component';
+import { Menu, Monolog } from '../nodes/component';
+import { Node } from '../nodes/node';
 import { JsonLoaderService } from '../json-loader.service';
 import { ScalingService } from '../scaling.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -41,6 +42,8 @@ export class MenuComponent implements OnInit {
     });
   }
 
+
+
   scale(scale: string) {
     let scalingAllowed = false;
     if (scale === '+') {
@@ -72,6 +75,7 @@ export class MenuComponent implements OnInit {
   }
 
   addMonolog() {
+    this.director.addNode(new Monolog(this.director.selected, this.director));
     console.log("addMonolog");
   }
   addLink() {

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { StartNode} from '../nodes/node';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
+import { NodeType} from '../../assets/strings';
 
 @Component({
   selector: 'app-start-node',
@@ -19,6 +20,7 @@ export class StartNodeComponent implements OnInit {
     this.node.selected = true;
     this.director.selected = this.node;
     this.director.addNode(this.node);
+    this.director.addMenu(this.node);
   }
 
   ngOnInit() {
@@ -27,7 +29,10 @@ export class StartNodeComponent implements OnInit {
 
   toggleConnectorActive() {
     this.node.connectorActive = !this.node.connectorActive;
-    if (!this.node.connectorActive) {
+    if (this.node.connectorActive) {
+      this.director.addMenu(this.node);
+    } else {
+      this.director.deleteMenu();
     }
   }
 

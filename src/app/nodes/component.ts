@@ -1,5 +1,6 @@
 import { Node, BasicNode } from './node';
 import { ComponentDirectorService } from '../component-director.service';
+import { NodeType} from '../../assets/strings';
 
 export class Menu extends BasicNode {
 
@@ -7,7 +8,7 @@ export class Menu extends BasicNode {
     constructor(parent: Node, director: ComponentDirectorService) {
         super(parent, director);
 
-        this.type = 'menu';
+        this.type = NodeType.MENU;
     }
 
 }
