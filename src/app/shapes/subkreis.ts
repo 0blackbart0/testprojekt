@@ -19,16 +19,20 @@ export abstract class SubKreis extends Kreis {
         this.childs = this.director.getChildFrom(this);
 
         if (this.childs.length < 1) {
-            return '{"name":"branch","childs":null}';
+            return '{"name":"branch", "selectionText":"' + this.selectionText + '", "childs":null}';
         }
 
         for (this.shape of this.childs) {
 
             const childStringOfShape = this.shape.getInfoString();
+            if (childStringOfShape === null) {
+                return '{"name":"branch", "selectionText":"' + this.selectionText + '", "childs":null}';
+            }
             resultString = resultString.concat(childStringOfShape);
+
         }
 
-        return '{"name":"branch","childs":[' + resultString + ']}';
+        return '{"name":"branch", "selectionText":"' + this.selectionText + '", "childs":[' + resultString + ']}';
     }
 
 

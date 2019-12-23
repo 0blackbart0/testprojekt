@@ -61,8 +61,9 @@ export class MenuComponent implements OnInit {
     return type;
   }
 
-  generateJSONString() {
-    console.log(this.loader.generateString());
+  callJsonLoader() {
+    console.log('generateJson aufgerufen');
+    console.log(this.loader.generateJson());
   }
 
 
@@ -181,13 +182,13 @@ export class MenuComponent implements OnInit {
     childs = this.director.getChildFrom(this.director.LastSelected);
     if (childs.length === 0) {
       /////////   Einfügen als Leaf
-      tmp = new Rechteck(this.director.LastSelected, this.director);
+      //tmp = new Rechteck(this.director.LastSelected, this.director);
       this.director.addShape(tmp);
       this.director.setSelected(tmp);
       tmp.setPosition();
     } else if (childs.length === 1) {
       /////////// Einfügen in der Mitte
-      tmp = new Rechteck(this.director.LastSelected, this.director);
+      //tmp = new Rechteck(this.director.LastSelected, this.director);
       childs[0].parent = tmp;
       this.director.addShape(tmp);
       this.director.setSelected(tmp);

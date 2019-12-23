@@ -12,6 +12,11 @@ export class Menu extends Rechteck {
         return 'menu';
     }
 
+    getInfoString(): string {
+
+        return null;
+    }
+
 }
 
 export class Dialog extends Rechteck {
@@ -33,6 +38,34 @@ export class Dialog extends Rechteck {
         return 'dialog';
     }
 
+    getInfoString(): string {
+
+        this.childs = this.director.getChildFrom(this);
+
+        let resultString: string = '';
+
+        if (this.childs.length < 1) {
+            // tslint:disable-next-line: max-line-length
+            return '{"name":"dialog", "title":"' + this.title + '", "question":"' + this.question + '", "answer":"' + this.answer + '", "childs":null}';
+        }
+
+        for (this.shape of this.childs) {
+
+            const childStringOfShape = this.shape.getInfoString();
+            if (childStringOfShape === null) {
+                // tslint:disable-next-line: max-line-length
+                return '{"name":"dialog", "title":"' + this.title + '", "question":"' + this.question + '", "answer":"' + this.answer + '", "childs":null}';
+
+            }
+            resultString = resultString.concat(childStringOfShape);
+        }
+
+
+        // tslint:disable-next-line: max-line-length
+        return '{"name":"dialog", "title":"' + this.title + '", "question":"' + this.question + '", "answer":"' + this.answer + '", "childs":[' + resultString + ']}';
+
+    }
+
 }
 
 export class Monolog extends Rechteck {
@@ -51,6 +84,28 @@ export class Monolog extends Rechteck {
         return 'monolog';
     }
 
+    getInfoString(): string {
+
+        this.childs = this.director.getChildFrom(this);
+
+        let resultString: string = '';
+
+        if (this.childs.length < 1) {
+            return '{"name":"monolog", "title":"' + this.title + '", "text":"' + this.forwardText + '", "childs":null}';
+        }
+
+        for (this.shape of this.childs) {
+
+            const childStringOfShape = this.shape.getInfoString();
+            if (childStringOfShape === null) {
+                return '{"name":"monolog", "title":"' + this.title + '", "text":"' + this.forwardText + '", "childs":null}';
+            }
+            resultString = resultString.concat(childStringOfShape);
+        }
+
+        return '{"name":"monolog", "title":"' + this.title + '", "text":"' + this.forwardText + '", "childs":[' + resultString + ']}';
+    }
+
 }
 
 export class Link extends Rechteck {
@@ -62,5 +117,11 @@ export class Link extends Rechteck {
 
     instanceOf(): string {
         return 'link';
+    }
+
+
+    //TODO
+    getInfoString(): string {
+        return '{"name":"link","title":"' + this.title + '"}';
     }
 }

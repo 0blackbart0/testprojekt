@@ -16,7 +16,7 @@ export class JsonLoaderService {
     this.ShapeList = this.director.getShapeList();
    }
 
-  generateString(): string {
+   generateJson(): string {
 
     const generatedString: string = this.ShapeList[0].getInfoString();
     const jsonString: string = JSON.parse(generatedString);

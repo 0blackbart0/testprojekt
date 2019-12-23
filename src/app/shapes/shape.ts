@@ -42,7 +42,7 @@ export abstract class Shape {
     }
 }
 
-export class Rechteck extends Shape {
+export abstract class Rechteck extends Shape {
 
     shape: Shape = null;
     childs: Shape[];
@@ -58,25 +58,6 @@ export class Rechteck extends Shape {
 
     instanceOf(): string {
         return 'rechteck';
-    }
-
-    getInfoString(): string {
-
-        this.childs = this.director.getChildFrom(this);
-
-        let resultString: string = '';
-
-        if (this.childs.length < 1) {
-            return '{"name":"rechteck", "childs":null}';
-        }
-
-        for (this.shape of this.childs) {
-
-            const childStringOfShape = this.shape.getInfoString();
-            resultString = resultString.concat(childStringOfShape);
-        }
-
-        return '{"name":"rechteck", "childs":[' + resultString + ']}';
     }
 
 }
@@ -150,15 +131,19 @@ export class StartShape extends Shape {
         let resultString: string = '';
 
         if (this.childs.length < 1) {
-            return '{"name": "startshape","childs":null}';
+            return '{"name": "startshape", "title":"' + this.title + '", "childs":null}';
         }
 
         for (this.shape of this.childs) {
 
             const childStringOfShape = this.shape.getInfoString();
+            if (childStringOfShape === null) {
+                // tslint:disable-next-line: max-line-length
+                return '{"name": "startshape", "title":"' + this.title + '", "childs":null}';
+            }
             resultString = resultString.concat(childStringOfShape);
         }
-        return '{"name": "startshape","childs":[' + resultString + ']}';
+        return '{"name": "startshape", "title":"' + this.title + '", "childs":[' + resultString + ']}';
     }
 
 

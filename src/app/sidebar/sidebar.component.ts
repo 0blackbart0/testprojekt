@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
 
   }
 
+
   addSubKreisCenter() {
     this.director.addSubKreisCenter();
     this.kreisChilds = this.director.getChildFrom(this.shape) as SubKreis[];
