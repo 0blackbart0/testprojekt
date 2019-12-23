@@ -9,7 +9,20 @@ import { ComponentDirectorService } from '../component-director.service';
 })
 export class ScalingMenuComponent implements OnInit {
 
-  constructor(public scaling: ScalingService, public director: ComponentDirectorService) { }
+  constructor(public scaling: ScalingService, public director: ComponentDirectorService) {
+
+    window.addEventListener("wheel", event => {
+      if (event.ctrlKey) {
+        if (event.deltaY > 0 ) {
+          this.scale('-');
+        } else {
+          this.scale('+');
+        }
+      }
+
+
+    });
+   }
 
   ngOnInit() {
   }
