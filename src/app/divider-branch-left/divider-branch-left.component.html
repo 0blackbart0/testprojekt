@@ -1,24 +1,19 @@
 <div>
-    <div class="subKreisLeft"
+    <div class="dividerBranch"
     [style.top.vh]="node.top"
     [style.left.vh]="node.left"
     [style.width.vh]="node.width"
     [style.height.vh]="node.height">
 
-    
         <div class="wrapper" >
                 <input class="buttonInput" type="text" [(ngModel)]="node.selectionText"
                 [class.buttonInput-selected]="node.selected"
                 (click)="deselectConnectoractive()">
         </div>
         <div class="connector"
-        (click)="toggleConnectorActive()"
+        (click)="director.toggleMenu(this.node)"
+        (click)="toggleConnectorActive();"
+        (click)="director.setSelected(this.node);"
         [class.connector-active]="node.connectorActive"></div>
-    </div>
-
-  
-    <div class="connector-fem"
-    >
-    </div>
-    
+    </div>    
 </div>

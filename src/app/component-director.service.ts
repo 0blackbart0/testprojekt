@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Node, StartNode } from './nodes/node';
+import { Node, StartNode, DividerNode } from './nodes/node';
 import { Menu } from './nodes/component';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 import { ScalingService } from './scaling.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NodeType } from '../assets/strings';
+import { DividerBranch } from './nodes/dividerBranch';
 
 
 @Injectable({
@@ -18,54 +19,79 @@ export class ComponentDirectorService {
 
   constructor(private scaling: ScalingService) { }
 
+  setDrawingField(field: DrawingFieldComponent) {
+    this.drawingField = field;
+  }
+
+  setSelected(node: Node) {
+    this.selected.selected = false;
+    this.selected.connectorActive = false;
+    this.selected = node;
+    node.selected = true;
+  }
 
   addNode(node: Node) {
+    this.deleteMenu();
     this.nodeList.push(node);
-    if (node.parent !== null) {
+
+    if (node.type === "dividerNode") {
+      node.parent.child = node;
+
+    } else if (node.parent !== null ) {
       node.child = node.parent.child;
       node.parent.child = node;
+
       if ( node.child !== null ) {
         node.child.parent = node;
       }
     }
+    this.scaling.scaleNewNode(node);
+    this.arrange(this.nodeList[0]);
   }
 
-
+  toggleMenu(parent: Node){
+    for ( const menu of this.nodeList ) {
+      if ( menu instanceof Menu) {
+        this.deleteMenu();
+        return;
+      }
+    }
+    this.addMenu(parent);
+  }
 
   addMenu(parent: Node) {
     this.addNode(new Menu(parent, this));
   }
 
-
-
   deleteMenu() {
    for ( const menu of this.nodeList ) {
     if ( menu instanceof Menu ) {
-
+      menu.parent.child = menu.child;
+      if (menu.child !== null) {
+        menu.child.parent = menu.parent;
+      }
 
       this.nodeList.splice(this.nodeList.indexOf(menu), 1);
+      this.arrange(this.nodeList[0]);
     }
    }
   }
 
-  arange(nodePtr: Node) {
+  arrange(node: Node) {
 
-    if ( nodePtr.child === null) {
-      return;
+      if (node.parent !== null) {
+        node.left = node.parent.left - ((node.width - node.parent.width) / 2);
+        node.top = node.parent.top + node.parent.height;
+      }
+      if (node instanceof DividerBranch) {
+        const tmp: DividerNode = node.parent as DividerNode;
+        const childList: Node[] = tmp.childs;
+        const index = childList.indexOf(node);
+        node.left = node.parent.left + index * node.width;
+        node.top = node.parent.top;
+      }
+      if ( node.child !== null ) {
+        this.arrange(node.child);
+      }
     }
-
-
-  }
-
-  setDrawingField(field: DrawingFieldComponent) {
-    this.drawingField = field;
-  }
-
-  checkNotNull(node: Node): boolean {
-    if (node !== null ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }

@@ -1,36 +1,16 @@
-.subKreisRight {
+.dividerBranch {
     box-sizing: border-box;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    position: absolute;
-    padding-right:var(--outer-padding);
     display: block;
+    position: absolute;
 }
 .wrapper {
-    border: solid var(--border-weight-medium) var(--dark-grey);
-    border-left: none;
     box-sizing: border-box;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
     height: 63%;
     width: 100%;
     margin-top: var(--connector-height-fem);
-    background-color: var(--light-grey);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    display: block;
+    text-align: center;
 }
-
-
-.phantom {
-    margin-top: var(--connector-height-fem);
-    border: solid var(--border-weight-medium) var(--dark-grey);
-    border-right: none;
-    border-left: none;
-    box-sizing: border-box;
-    position: absolute;
-    background-color: var(--light-grey);
-}
-
 
 .buttonInput {
     

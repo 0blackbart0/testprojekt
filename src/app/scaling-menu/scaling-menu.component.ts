@@ -42,6 +42,7 @@ export class ScalingMenuComponent implements OnInit {
         this.scaling.rezise(element, scale);
       }
     }
+    this.director.arrange(this.director.nodeList[0]);
   }
 
 }

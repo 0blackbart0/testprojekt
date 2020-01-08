@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComponentDirectorService } from '../component-director.service';
-import { Menu, Monolog } from '../nodes/component';
-import { Node } from '../nodes/node';
+import { Menu, Monolog, Dialog } from '../nodes/component';
+import { Node, DividerNode } from '../nodes/node';
 import { JsonLoaderService } from '../json-loader.service';
 import { ScalingService } from '../scaling.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { DividerBranchLeft, DividerBranchRight } from '../nodes/dividerBranch';
 
 @Component({
   selector: 'app-menu',
@@ -33,8 +34,6 @@ export class MenuComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = false;
 
-
-
     const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -61,16 +60,24 @@ export class MenuComponent implements OnInit {
   }
 
   addDividerNode() {
-    console.log("addDividerNode");
+    const tmp: DividerNode = new DividerNode(this.director.selected, this.director);
+    const left: Node = new DividerBranchLeft(tmp, this.director);
+    const right: Node = new DividerBranchRight(tmp, this.director);
+    console.log(left.parent.type);
+    
+    tmp.childs.push(left);
+    tmp.childs.push(right);
+    this.director.addNode(tmp);
+    this.director.addNode(left);
+    this.director.addNode(right);
   }
-
-
 
   addBasicNode() {
     console.log("addBasicNode");
   }
 
   addDialog() {
+    this.director.addNode(new Dialog(this.director.selected, this.director));
     console.log("addDialog");
   }
 

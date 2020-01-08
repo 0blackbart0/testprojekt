@@ -29,11 +29,6 @@ export class StartNodeComponent implements OnInit {
 
   toggleConnectorActive() {
     this.node.connectorActive = !this.node.connectorActive;
-    if (this.node.connectorActive) {
-      this.director.addMenu(this.node);
-    } else {
-      this.director.deleteMenu();
-    }
   }
 
   deselectConnectoractive() {

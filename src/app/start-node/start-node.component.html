@@ -1,10 +1,12 @@
-<div class="rechteck"  
+<div class="rechteck"
 [style.top.vh]="node.top"
 [style.left.vh]="node.left"
 [style.width.vh]="node.width"
 [style.height.vh]="node.height">
 
-    <div class="wrapper"
+    <div class="wrapper" 
+    (click)="director.setSelected(this.node);" 
+    (click)="director.deleteMenu();"
     [class.wrapper-active]="node.selected">
 
         <input class="titleInput" type="text" 
@@ -20,6 +22,8 @@
 
     </div>
     <div class="connector"
+    (click)="director.toggleMenu(this.node)"
     (click)="toggleConnectorActive()"
+    (click)="director.setSelected(this.node);"
     [class.connector-active]="node.connectorActive"></div>
 </div>

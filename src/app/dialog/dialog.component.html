@@ -7,6 +7,8 @@
     <div class="connector-fem">
     </div>
     <div class="wrapper"
+    (click)="director.setSelected(this.node);" 
+    (click)="director.deleteMenu();"
     [class.wrapper-active]="node.selected">
  
         <input class="titleInput" type="text" 
@@ -34,6 +36,8 @@
         
     </div>
     <div class="connector"
-    (click)="toggleConnectorActive()"
+    (click)="director.toggleMenu(this.node)"
+    (click)="toggleConnectorActive();"
+    (click)="director.setSelected(this.node);"
     [class.connector-active]="node.connectorActive"></div>
 </div>

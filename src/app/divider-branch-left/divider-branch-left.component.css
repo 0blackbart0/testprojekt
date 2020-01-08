@@ -1,44 +1,17 @@
-.subKreisLeft {
+.dividerBranch {
     box-sizing: border-box;
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    display: inline-block;
     position: absolute;
-    padding-left: var(--outer-padding);
-    display: block;
 }
 
 
 .wrapper {
-    border: solid var(--border-weight-medium) var(--dark-grey); 
-    border-right: none;
     box-sizing: border-box;
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
     height: 63%;
     width: 100%;
     margin-top: var(--connector-height-fem);
-    background-color: var(--light-grey);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-
-.phantom {
-    margin-top: var(--connector-height-fem);
-    border: solid var(--border-weight-medium) var(--dark-grey); 
-    border-right: none;
-    border-left: none;
-    box-sizing: border-box;
-    position: absolute;
-    background-color: var(--light-grey);;
-}
-
-.connector-fem {
-    position: absolute;
-    background-color: var(--assono-blau);
-    height: var(--connector-height-fem);
-    width: var(--connector-size);
-    left: 72.2%;
+    display: inline-block;
+    text-align: center;
 }
 
 .buttonInput {
@@ -56,10 +29,6 @@
 .buttonInput-selected {
     border-color:  var(--assono-rot);
 }
-
-
-
-
 
 .connector {
     display: block;

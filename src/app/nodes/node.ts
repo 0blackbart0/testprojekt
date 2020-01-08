@@ -1,6 +1,8 @@
 import { ComponentDirectorService } from '../component-director.service';
-import { DividerBranchCenter } from './dividerBranch';
+import { DividerBranchCenter, DividerBranchLeft } from './dividerBranch';
 import { NodeType } from 'src/assets/strings';
+import { ScalingService } from '../scaling.service';
+import { DividerBranchLeftComponent } from '../divider-branch-left/divider-branch-left.component';
 
 
 export abstract class Node {
@@ -20,6 +22,7 @@ export abstract class Node {
     child: Node = null
 
     connectorActive: boolean = false;
+
 
     constructor(parent: Node) {
         this.title = 'Titel';
@@ -63,9 +66,9 @@ export class DividerNode extends Node {
     constructor(parent: Node, director: ComponentDirectorService) {
         super(parent);
         this.type = 'dividerNode';
+        this.director = director;
         this.width = 36 * 2;
         this.height = 15;
-        this.director = director;
     }
 
     addCenter(center: DividerBranchCenter) {

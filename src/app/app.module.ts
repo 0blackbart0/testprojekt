@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { DividerComponent } from './divider/divider.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     MenuComponent,
     LinkComponent,
     DeleteDialogComponent,
-    SidebarComponent
+    SidebarComponent,
+    DividerComponent
   ],
   imports: [
     BrowserModule,
