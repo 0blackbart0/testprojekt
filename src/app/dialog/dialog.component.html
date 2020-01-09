@@ -36,7 +36,8 @@
         
     </div>
     <div class="connector"
-    (click)="director.toggleMenu(this.node)"
+    (click)="director.deleteMenu()"
+    (click)="director.addMenu(this.node)"
     (click)="toggleConnectorActive();"
     (click)="director.setSelected(this.node);"
     [class.connector-active]="node.connectorActive"></div>

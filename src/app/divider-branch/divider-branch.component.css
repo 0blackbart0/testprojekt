@@ -1,44 +1,33 @@
-.subKreisCenter {
-      box-sizing: border-box;
-      position: absolute;
-  }
-  .wrapper {
-      border: solid var(--border-weight-medium) var(--dark-grey);
-      border-right: none;
-      border-left: none;
-      box-sizing: border-box;
-      height: 63%;
-      width: 100%;
-      margin-top: var(--connector-height-fem);
-      background-color: var(--light-grey);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-  }
+.dividerBranch {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    padding: none;
+}
 
-  
-  
-  
-  .phantom {
-      border: var(--border-weight-medium) solid var(--dark-grey);
-      border-right: none;
-      border-left: none;
-      box-sizing: border-box;
-      position: absolute;
-      background-color: var(--light-grey);
-      margin-top: var(--connector-height-fem);
-  }
 
-  .buttonInput {
+.wrapper {
+    box-sizing: border-box;
+    height: 63%;
+    width: 100%;
+    margin-top: var(--connector-height-fem);
+    display: block;
+    position: absolute;
+}
+
+.buttonInput {
     
+    position: relative;
     background-color: white;
     color: var(--dark-grey);
     border: solid var(--border-weight-medium) var(--dark-grey);
     font-size: var(--font-size-text);
     font-weight: bold;
     text-align: center;
-    width: 68.75%;
+    display: block;
+    margin: auto;
+    margin-top: var(--branch-margin-top);
+    width: 70%;
     height: 50%;
 }
 
@@ -46,16 +35,15 @@
     border-color:  var(--assono-rot);
 }
 
-
-
 .connector {
     display: block;
     border-top: none;
     box-sizing: border-box;
     border: solid var(--border-radius-small) white;
     border-top: none;
-    position: relative;
+    position: absolute;
     left: 36.1%;
+    top: 96.5%;
     width: var(--connector-size);
     height: var(--connector-radius);
     background-color: var(--assono-blau);

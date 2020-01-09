@@ -13,11 +13,8 @@
             <div *ngIf="node.type === 'dividerNode'">
                 <app-divider [node]=node></app-divider>
             </div>
-            <div *ngIf="node.type === 'dividerBranchLeft'">
-                <app-divider-branch-left [node]=node></app-divider-branch-left>
-            </div>
-            <div *ngIf="node.type === 'dividerBranchRight'">
-                <app-divider-branch-right [node]=node></app-divider-branch-right>
+            <div *ngIf="node.type === 'dividerBranch'">
+                <app-divider-branch [node]=node></app-divider-branch>
             </div>
             <div *ngIf="node.type === 'link'">
                 <app-link [node]=node></app-link>

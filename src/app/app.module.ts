@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { BasicNodeComponent } from './basicNode/basicNode.component';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 import { StartNodeComponent } from './start-node/start-node.component';
-import { DividerBranchLeftComponent } from './divider-branch-left/divider-branch-left.component';
-import { DividerBranchRightComponent } from './divider-branch-right/divider-branch-right.component';
-import { DividerBranchCenterComponent } from './divider-branch-center/divider-branch-center.component';
+import { DividerBranchComponent } from './divider-branch/divider-branch.component';
 
 import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
@@ -28,9 +26,7 @@ import { DividerComponent } from './divider/divider.component';
     BasicNodeComponent,
     DrawingFieldComponent,
     StartNodeComponent,
-    DividerBranchLeftComponent,
-    DividerBranchRightComponent,
-    DividerBranchCenterComponent,
+    DividerBranchComponent,
     MonologComponent,
     DialogComponent,
     ScalingMenuComponent,

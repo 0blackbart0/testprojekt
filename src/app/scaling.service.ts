@@ -15,6 +15,7 @@ export class ScalingService {
   componentPadding = 2;
   titleMarginBottom = 1.5;
   menuMarginTop = 5;
+  branchMarginTop = 2;
   wrapperInnerPadding = 2;
   wrapperInnerPaddingHover = 3;
   borderRadius = 2;
@@ -90,6 +91,7 @@ export class ScalingService {
 
     this.outerPadding *= Math.pow(this.scale, exponent);
     this.menuMarginTop *= Math.pow(this.scale, exponent);
+    this.branchMarginTop *= Math.pow(this.scale, exponent);
     this.componentPadding *= Math.pow(this.scale, exponent);
     this.titleMarginBottom *= Math.pow(this.scale, exponent);
     this.wrapperInnerPadding *= Math.pow(this.scale, exponent);
@@ -148,6 +150,7 @@ export class ScalingService {
     body.style.setProperty('--component-padding', this.componentPadding + 'vh');
     body.style.setProperty('--title-margin-bottom', this.titleMarginBottom + 'vh');
     body.style.setProperty('--menu-margin-top', this.menuMarginTop + 'vh');
+    body.style.setProperty('--branch-margin-top', this.branchMarginTop + 'vh');
     body.style.setProperty('--wrapper-inner-padding', this.wrapperInnerPadding + 'vh');
     body.style.setProperty('--wrapper-inner-padding-hover', this.wrapperInnerPaddingHover + 'vh');
     body.style.setProperty('--chatbubble-padding-left', this.chatBubblePaddingLeft + 'vh');
@@ -196,6 +199,7 @@ export class ScalingService {
     body.style.setProperty('--top-u-1-5', this.topU1_5 + 'vh');
     body.style.setProperty('--top-u-2-4', this.topU2_4 + 'vh');
     body.style.setProperty('--top-u-3', this.topU3 + 'vh');
+
   }
 
   rezise(node: Node, scale: string) {

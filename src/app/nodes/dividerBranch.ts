@@ -1,7 +1,7 @@
 import { ComponentDirectorService } from '../component-director.service';
 import { DividerNode, Node } from './node';
 
-export abstract class DividerBranch extends DividerNode {
+export class DividerBranch extends DividerNode {
 
     injected = false;
     selectionText = 'Auswahltext';
@@ -14,26 +14,3 @@ export abstract class DividerBranch extends DividerNode {
 
 
 }
-
-export class DividerBranchLeft extends DividerBranch {
-
-    constructor(parent: Node, director: ComponentDirectorService) {
-        super(parent, director);
-        this.type = 'dividerBranchLeft';
-    }
-}
-
-export class DividerBranchCenter extends DividerBranch {
-    constructor(parent: Node, director: ComponentDirectorService) {
-        super(parent, director);
-        this.type = 'dividerBranchCenter';
-    }
-}
-
-export class DividerBranchRight extends DividerBranch {
-    constructor(parent: Node, director: ComponentDirectorService) {
-        super(parent, director);
-        this.type = 'dividerBranchRight';
-    }
-}
-

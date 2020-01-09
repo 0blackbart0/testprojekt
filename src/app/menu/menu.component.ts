@@ -6,7 +6,7 @@ import { JsonLoaderService } from '../json-loader.service';
 import { ScalingService } from '../scaling.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { DividerBranchLeft, DividerBranchRight } from '../nodes/dividerBranch';
+import { DividerBranch } from '../nodes/dividerBranch';
 
 @Component({
   selector: 'app-menu',
@@ -61,10 +61,10 @@ export class MenuComponent implements OnInit {
 
   addDividerNode() {
     const tmp: DividerNode = new DividerNode(this.director.selected, this.director);
-    const left: Node = new DividerBranchLeft(tmp, this.director);
-    const right: Node = new DividerBranchRight(tmp, this.director);
+    const left: Node = new DividerBranch(tmp, this.director);
+    const right: Node = new DividerBranch(tmp, this.director);
     console.log(left.parent.type);
-    
+
     tmp.childs.push(left);
     tmp.childs.push(right);
     this.director.addNode(tmp);

@@ -24,20 +24,28 @@ export class ComponentDirectorService {
   }
 
   setSelected(node: Node) {
+    if ( this.selected.parent !== null && this.selected.parent.type === NodeType.DIVIDERNODE) {
+      this.selected.parent.selected = false;
+    }
     this.selected.selected = false;
-    this.selected.connectorActive = false;
+
+    if ( node !== this.selected ) {
+      this.selected.connectorActive = false;
+    }
     this.selected = node;
     node.selected = true;
   }
 
   addNode(node: Node) {
+    this.selected.connectorActive = false;
     this.deleteMenu();
     this.nodeList.push(node);
 
-    if (node.type === "dividerNode") {
+
+    if (node.type === 'dividerNode') {
       node.parent.child = node;
 
-    } else if (node.parent !== null ) {
+    } else if (node.parent !== null && node.type !== 'dividerBranch' ) {
       node.child = node.parent.child;
       node.parent.child = node;
 
@@ -49,7 +57,7 @@ export class ComponentDirectorService {
     this.arrange(this.nodeList[0]);
   }
 
-  toggleMenu(parent: Node){
+  toggleMenu(parent: Node) {
     for ( const menu of this.nodeList ) {
       if ( menu instanceof Menu) {
         this.deleteMenu();
@@ -82,6 +90,11 @@ export class ComponentDirectorService {
       if (node.parent !== null) {
         node.left = node.parent.left - ((node.width - node.parent.width) / 2);
         node.top = node.parent.top + node.parent.height;
+      }
+      if ( node instanceof DividerNode) {
+        for ( const child of node.childs) {
+          this.arrange(child);
+        }
       }
       if (node instanceof DividerBranch) {
         const tmp: DividerNode = node.parent as DividerNode;
