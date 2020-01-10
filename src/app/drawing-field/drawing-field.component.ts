@@ -22,9 +22,7 @@ export class DrawingFieldComponent implements OnInit {
 
 
 
-  test() {
-    console.log("test erfolgreich");
-  }
+
   ngOnInit() {
     this.nodeList = this.director.nodeList;
     this.director.setDrawingField(this);

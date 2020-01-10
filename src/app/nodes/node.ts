@@ -12,10 +12,17 @@ export abstract class Node {
     // Developer Values
 
     selected: boolean;
-    left: number;
     top: number;
     height: number;
+
+    left: number;
     width: number;
+
+    baseLeft: number;
+    baseWidth: number;
+
+    marginLeft = 0;
+    marginRight = 0;
 
     parent: Node = null;
     child: Node = null;
@@ -38,8 +45,6 @@ export abstract class Node {
 
 export class BasicNode extends Node {
 
-    Node: Node = null;
-    childs: Node[];
     director: ComponentDirectorService;
 
     constructor(parent: Node, director: ComponentDirectorService) {
@@ -47,6 +52,7 @@ export class BasicNode extends Node {
         super(parent);
         this.type = NodeType.BASICNODE;
         this.width = 36;
+        this.baseWidth = 36;
         this.director = director;
         this.height = 50;
     }
@@ -67,11 +73,27 @@ export class DividerNode extends Node {
         this.type = NodeType.DIVIDERNODE;
         this.director = director;
         this.width = 36 * 2;
+        this.baseWidth = 36 * 2;
         this.height = 15;
     }
 
-    addCenter(center: DividerBranch) {
-        this.childs.splice(1 , 0, center);
+    move(value: number, direction: number) {
+        switch (direction) {
+            case 0:
+                this.left -= value;
+                for (const child of this.childs ) {
+                    child.left -= value;
+                }
+                break;
+            case 1:
+                this.left += value;
+                for (const child of this.childs ) {
+                    child.left += value;
+                }
+                break;
+            default:
+                console.log('wrong direction, 0=left 1=right');
+        }
     }
 
 }
@@ -94,5 +116,8 @@ export class StartNode extends Node {
         this.width = 36;
         this.height = 30;
         this.left = 60;
+
+        this.baseWidth = 36;
+        this.baseLeft = 60;
     }
 }

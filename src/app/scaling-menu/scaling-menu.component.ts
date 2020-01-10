@@ -13,7 +13,6 @@ export class ScalingMenuComponent implements OnInit {
 
     window.addEventListener("wheel", event => {
       if (event.ctrlKey) {
-        console.log("test");
         if (event.deltaY > 0 ) {
           this.scale('-');
         } else {

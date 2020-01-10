@@ -7,6 +7,7 @@ import { ScalingService } from '../scaling.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { DividerBranch } from '../nodes/dividerBranch';
+import { NodeType } from 'src/assets/strings';
 
 @Component({
   selector: 'app-menu',
@@ -55,7 +56,6 @@ export class MenuComponent implements OnInit {
       for (const element of this.director.nodeList) {
         this.scaling.rezise(element, scale);
       }
-      // this.director.rearrangeAll(this.director.nodeList[0]);
     }
   }
 
@@ -63,7 +63,7 @@ export class MenuComponent implements OnInit {
     const tmp: DividerNode = new DividerNode(this.director.selected, this.director);
     const left: Node = new DividerBranch(tmp, this.director);
     const right: Node = new DividerBranch(tmp, this.director);
-    console.log(left.parent.type);
+
 
     tmp.childs.push(left);
     tmp.childs.push(right);
@@ -74,6 +74,22 @@ export class MenuComponent implements OnInit {
 
   addBasicNode() {
     console.log("addBasicNode");
+  }
+
+  addBranch() {
+    if (this.director.selected.type !== NodeType.DIVIDERBRANCH) {
+      return;
+    }
+
+    const tmp: DividerNode = this.director.selected.parent as DividerNode;
+    const center = new DividerBranch(tmp, this.director);
+    tmp.childs.push(center);
+    this.director.addNode(center);
+
+    tmp.width += center.width;
+    tmp.baseWidth += 36;
+
+   // this.director.arrange(this.director.nodeList[0]);
   }
 
   addDialog() {

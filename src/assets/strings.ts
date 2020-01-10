@@ -3,5 +3,6 @@ export enum NodeType {
     DIALOG = 'dialog',
     STARTNODE = 'startNode',
     DIVIDERNODE = 'dividerNode',
-    BASICNODE = 'basicNode'
+    BASICNODE = 'basicNode',
+    DIVIDERBRANCH = 'dividerBranch'
 }

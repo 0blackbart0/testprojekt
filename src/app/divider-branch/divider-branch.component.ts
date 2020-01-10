@@ -19,8 +19,6 @@ export class DividerBranchComponent implements OnInit {
 
   toggleConnectorActive() {
     this.node.connectorActive = !this.node.connectorActive;
-    if (!this.node.connectorActive) {
-    }
   }
 
   deselectConnectoractive() {
