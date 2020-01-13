@@ -1,12 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComponentDirectorService } from '../component-director.service';
-import { Menu, Monolog, Dialog } from '../nodes/component';
-import { Node, DividerNode } from '../nodes/node';
+import { Menu, Monolog, Dialog, DividerNode, DividerBranch } from '../nodes/component';
+import { Node } from '../nodes/node';
 import { JsonLoaderService } from '../json-loader.service';
 import { ScalingService } from '../scaling.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-import { DividerBranch } from '../nodes/dividerBranch';
 import { NodeType } from 'src/assets/strings';
 
 @Component({
@@ -81,15 +80,15 @@ export class MenuComponent implements OnInit {
       return;
     }
 
-    const tmp: DividerNode = this.director.selected.parent as DividerNode;
-    const center = new DividerBranch(tmp, this.director);
-    tmp.childs.push(center);
+    const parentDividerNode: DividerNode = this.director.selected.parent as DividerNode;
+    const center = new DividerBranch(parentDividerNode, this.director);
+    parentDividerNode.childs.push(center);
     this.director.addNode(center);
 
-    tmp.width += center.width;
-    tmp.baseWidth += 36;
+    parentDividerNode.width += center.width;
+    parentDividerNode.baseWidth += parentDividerNode.parent.baseWidth;
 
-   // this.director.arrange(this.director.nodeList[0]);
+    this.director.drawTree();
   }
 
   addDialog() {

@@ -1,5 +1,4 @@
 import { ComponentDirectorService } from '../component-director.service';
-import { DividerBranch } from './dividerBranch';
 import { NodeType } from 'src/assets/strings';
 
 
@@ -60,43 +59,7 @@ export class BasicNode extends Node {
 
 }
 
-export class DividerNode extends Node {
 
-    childs: Node[] = [];
-    Node: Node = null;
-    director: ComponentDirectorService;
-
-
-
-    constructor(parent: Node, director: ComponentDirectorService) {
-        super(parent);
-        this.type = NodeType.DIVIDERNODE;
-        this.director = director;
-        this.width = 36 * 2;
-        this.baseWidth = 36 * 2;
-        this.height = 15;
-    }
-
-    move(value: number, direction: number) {
-        switch (direction) {
-            case 0:
-                this.left -= value;
-                for (const child of this.childs ) {
-                    child.left -= value;
-                }
-                break;
-            case 1:
-                this.left += value;
-                for (const child of this.childs ) {
-                    child.left += value;
-                }
-                break;
-            default:
-                console.log('wrong direction, 0=left 1=right');
-        }
-    }
-
-}
 
 export class StartNode extends Node {
 

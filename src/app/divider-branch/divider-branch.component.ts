@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
-import { DividerBranch } from '../nodes/dividerBranch';
+import { DividerBranch } from '../nodes/component';
 
 @Component({
   selector: 'app-divider-branch',

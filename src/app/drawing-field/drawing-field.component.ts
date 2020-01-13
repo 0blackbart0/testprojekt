@@ -12,20 +12,14 @@ export class DrawingFieldComponent implements OnInit {
 
   selected: Node;
   nodeList: Node[] = [];
-  drawingFieldPadding: number = 60;
-  drawingFieldPaddingTop: number = 50;
-  drawingFieldPaddingRight: number = 100;
+  drawingFieldPaddingTop: number;
+  drawingFieldPaddingRight: number;
 
   constructor(public director: ComponentDirectorService) {}
 
-
-
-
-
-
   ngOnInit() {
-    this.nodeList = this.director.nodeList;
     this.director.setDrawingField(this);
+    this.nodeList = this.director.nodeList;
   }
 
 }

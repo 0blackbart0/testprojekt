@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Node } from '../nodes/node';
 import { ComponentDirectorService } from '../component-director.service';
-import { DividerBranch } from '../nodes/dividerBranch';
+
 
 @Component({
   selector: 'app-sidebar',

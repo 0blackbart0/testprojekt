@@ -207,23 +207,30 @@ export class ScalingService {
     if ( scale === '+') {
       node.height /= this.scale;
       node.width /= this.scale;
+      node.baseWidth /= this.scale;
     } else if ( scale === '-') {
       node.height *= this.scale;
       node.width *= this.scale;
+      node.baseWidth *= this.scale;
     }
   }
 
   scaleNewNode(node: Node) {
+    if ( node === null ) {
+      return;
+    }
     if ( this.balance < 0) {
       for (let i = 0; i < Math.abs(this.balance); i++) {
         node.height *= this.scale;
         node.width *= this.scale;
+        node.baseWidth *= this.scale;
       }
 
     } else if ( this.balance > 0 ) {
       for (let i = 0; i < this.balance + 1; i++) {
         node.height /= this.scale;
         node.width /= this.scale;
+        node.baseWidth /= this.scale;
       }
     }
   }

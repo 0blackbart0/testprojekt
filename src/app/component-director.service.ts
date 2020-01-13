@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Node, StartNode, DividerNode } from './nodes/node';
-import { Menu } from './nodes/component';
+import { Node } from './nodes/node';
+import { Menu, DividerBranch, DividerNode } from './nodes/component';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
 import { ScalingService } from './scaling.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NodeType } from '../assets/strings';
-import { DividerBranch } from './nodes/dividerBranch';
-import { BasePortalHost } from '@angular/cdk/portal';
+
 
 
 
@@ -66,7 +65,7 @@ export class ComponentDirectorService {
       }
     }
     this.scaling.scaleNewNode(node);
-   // this.arrange(this.nodeList[0]);
+    this.drawTree();
   }
 
   toggleMenu(parent: Node) {
@@ -92,12 +91,12 @@ export class ComponentDirectorService {
       }
 
       this.nodeList.splice(this.nodeList.indexOf(menu), 1);
-     // this.arrange(this.nodeList[0]);
+      this.drawTree();
     }
    }
   }
 
-  arrange(node: Node) {
+  basicArrange(node: Node) {
 
     node.width = node.baseWidth;
     if (node.parent !== null) {
@@ -106,7 +105,7 @@ export class ComponentDirectorService {
     }
     if ( node instanceof DividerNode) {
       for ( const child of node.childs) {
-        this.arrange(child);
+        this.basicArrange(child);
       }
     }
     if (node instanceof DividerBranch) {
@@ -117,11 +116,50 @@ export class ComponentDirectorService {
       node.top = node.parent.top;
     }
     if ( node.child !== null ) {
-      this.arrange(node.child);
+      this.basicArrange(node.child);
     }
   }
 
-  arrange2(node: Node) {
+  resizeDividerNodes(node: Node | null): number[] {
+
+    if ( node === null ) {
+      return;
+    }
+    let values = [0, 0];
+
+    if ( node.type !== NodeType.DIVIDERNODE) {
+      return this.resizeDividerNodes(node.child);
+    } else {
+      for ( const branch of (node as DividerNode).childs) {
+
+        const child = branch as DividerBranch;
+
+        if ( this.hasChildDivider(child)) {
+          const childDivider = this.getChildDividerNode(child);
+          values = this.resizeDividerNodes(child);
+          values[0] = child.left - childDivider.left;
+          values[1] = childDivider.left + childDivider.width - child.left - child.width;
+
+          child.marginLeft = values[0];
+          child.marginRight = values[1];
+          child.left += child.marginLeft;
+
+          child.parent.width = child.parent.width + values[0] + values[1];
+          child.parent.left -= values[0];
+
+
+
+        } else {
+          (child as DividerBranch).marginLeft = 0;
+          (child as DividerBranch).marginRight = 0;
+
+        }
+      }
+      return values;
+    }
+  }
+
+  repositionDividerNodes(node: Node) {
 
     if (node.parent !== null && !(node instanceof DividerBranch)) {
       node.left = node.parent.left - ((node.width - node.parent.width) / 2);
@@ -129,70 +167,98 @@ export class ComponentDirectorService {
     }
 
     if ( node.type === NodeType.DIVIDERNODE) {
+
+
       const dividerNode = node as DividerNode;
-      const rightBranch = dividerNode.childs[dividerNode.childs.length - 1];
-      const distance = dividerNode.left + dividerNode.width -  (rightBranch.left + rightBranch.width + rightBranch.marginRight);
 
       for ( const child of dividerNode.childs) {
-        
         const leftBranch = (child as DividerBranch).getLeftBranch();
         if ( leftBranch !== null) {
 
-          child.left = leftBranch.left + leftBranch.marginLeft + leftBranch.marginRight; //TODO
-          console.log(child.left);
+          child.left = leftBranch.left + leftBranch.width + leftBranch.marginRight + child.marginLeft;
         } else {
           child.left = child.parent.left + child.marginLeft;
-          console.log(child.left);
         }
 
-        this.arrange2(child);
+        this.repositionDividerNodes(child);
       }
     }
     if ( node.child !== null ) {
-      this.arrange2(node.child);
+      this.repositionDividerNodes(node.child);
     }
   }
 
-
-    bla(node: Node | null): number[] {
-
-      let values = [0, 0];
-
-      if ( node.type !== NodeType.DIVIDERNODE) {
-        return this.bla(node.child);
-      } else {
-        for ( const branch of (node as DividerNode).childs) {
-
-          const child = branch as DividerBranch;
-
-          if ( this.hasChildDivider(child)) {
-
-            values = this.bla(child);
-            values[0] = child.left - this.getChildDividerNode(child).left;
-            values[1] = this.getChildDividerNode(child).left + this.getChildDividerNode(child).width - child.left - child.width;
-
-            child.marginLeft = values[0];
-            child.marginRight = values[1];
-            child.left += child.marginLeft;
-            const rightBranch = child.getRightBranch();
-            if ( rightBranch !== null) {
-              rightBranch.left += values[0] + values[1];
-            }
-            child.parent.width = child.parent.width + values[0] + values[1];
-
-
-
-          } else {
-            (child as DividerBranch).marginLeft = 0;
-            (child as DividerBranch).marginRight = 0;
-
-          }
+    prettier() {
+      for ( const node of this.nodeList) {
+        if (node instanceof DividerNode && node.type === NodeType.DIVIDERNODE) {
+          node.width = node.width - node.childs[0].marginLeft - node.childs[node.childs.length - 1].marginRight;
+          node.left += node.childs[0].marginLeft;
+          node.connectorFem = node.parent.left + (node.parent.width / 2) - (this.scaling.connectorSize / 2);
         }
-        return values;
       }
     }
 
-    
+    drawTree() {
+      const startNode = this.nodeList[0];
+      this.basicArrange(startNode);
+      this.resizeDividerNodes(startNode);
+      this.repositionDividerNodes(startNode);
+      this.prettier();
+      
+      this.setPadding();
+
+      this.basicArrange(startNode);
+      this.resizeDividerNodes(startNode);
+      this.repositionDividerNodes(startNode);
+      this.prettier();
+    }
+
+
+    setPadding() {
+
+      const startShape = this.nodeList[0];
+      const paddingLeft = 40;
+      let difference: number;
+
+      const paddingRight = 40;
+      let maxLeft = 0;
+
+      const paddingBottom = 40;
+      let maxTop = 0;
+
+      let minLeft = startShape.left;
+      for ( const node of this.nodeList) {
+        // padding left
+        if ( node.left < minLeft) {
+          minLeft = node.left;
+        }
+        // padding right
+        if ( node.left + node.width > maxLeft) {
+          maxLeft = node.left + node.width;
+        }
+
+        // padding bottom
+        if (node.top + node.height > maxTop) {
+          maxTop = node.top + node.height;
+        }
+
+      }
+
+      //padding left
+      if ( minLeft <= paddingLeft ) {
+        difference = paddingLeft - minLeft;
+        startShape.left += difference;
+      } else {
+        difference = minLeft - paddingLeft;
+        startShape.left -= difference;
+      }
+
+      // padding right and bottom
+      if ( this.drawingField !== null ) {
+        this.drawingField.drawingFieldPaddingRight = maxLeft + paddingRight;
+        this.drawingField.drawingFieldPaddingTop = maxTop + paddingBottom;
+      }
+    }
 
 
     getChildDividerNode(node: Node): DividerNode {

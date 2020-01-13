@@ -1,11 +1,14 @@
 <div>
+    <div class="connector-fem"
+    [style.top.vh]="node.top"
+    [style.left.vh]="node.connectorFem"></div>
     <div class="subKreisLeft"
     [style.top.vh]="node.top"
     [style.left.vh]="node.left"
     [style.width.vh]="node.width"
     [style.height.vh]="node.height">
 
-    <div class="connector-fem"></div>
+
     <div class="wrapper"
     (click)="director.setSelected(this.node);" 
     (click)="director.deleteMenu();"

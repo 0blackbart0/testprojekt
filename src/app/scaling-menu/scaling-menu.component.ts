@@ -13,6 +13,7 @@ export class ScalingMenuComponent implements OnInit {
 
     window.addEventListener("wheel", event => {
       if (event.ctrlKey) {
+        event.preventDefault();
         if (event.deltaY > 0 ) {
           this.scale('-');
         } else {
@@ -41,7 +42,7 @@ export class ScalingMenuComponent implements OnInit {
         this.scaling.rezise(element, scale);
       }
     }
-    this.director.arrange(this.director.nodeList[0]);
+    this.director.drawTree();
   }
 
 }
