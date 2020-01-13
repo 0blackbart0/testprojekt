@@ -13,7 +13,8 @@
  
         <input class="titleInput" type="text" 
         [(ngModel)]="node.title" 
-        (click)="deselectConnectoractive()">
+        (click)="deselectConnectoractive()"
+        placeholder="{{titlePlaceholder}}">
         
         
         <div class="contentFloat user">
@@ -21,7 +22,8 @@
         </div>
         <textarea class="chatBubble user" type="textarea" 
         [(ngModel)]="node.question"
-        (click)="deselectConnectoractive()"></textarea>
+        (click)="deselectConnectoractive()"
+        placeholder="{{questionPlaceholder}}"></textarea>
         
         <div class="triangleUser"></div>
 
@@ -29,7 +31,8 @@
         <label class="Label" >ChatBot</label>
         <textarea class="chatBubble" type="textarea" 
         [(ngModel)]="node.answer"
-        (click)="deselectConnectoractive()"></textarea>
+        (click)="deselectConnectoractive()"
+        placeholder="{{answerPlaceholder}}"></textarea>
 
         <div class="triangleBot"></div>
         

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Monolog } from '../nodes/component';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
+import { PlaceHolder } from 'src/assets/strings';
 
 @Component({
   selector: 'app-monolog',
@@ -11,8 +12,12 @@ import { ScalingService } from '../scaling.service';
 export class MonologComponent implements OnInit {
 
   @Input() node: Monolog;
+  titlePlaceholder;
+  forwardTextPlaceholder;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
+    this.titlePlaceholder = PlaceHolder.TITLE;
+    this.forwardTextPlaceholder = PlaceHolder.FORWARDTEXT;
    }
 
   ngOnInit() {

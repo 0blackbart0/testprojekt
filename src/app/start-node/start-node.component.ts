@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StartNode} from '../nodes/node';
+import { StartNode} from '../nodes/component';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
-import { NodeType} from '../../assets/strings';
+import { PlaceHolder } from 'src/assets/strings';
 
 @Component({
   selector: 'app-start-node',
@@ -11,6 +11,10 @@ import { NodeType} from '../../assets/strings';
 })
 export class StartNodeComponent implements OnInit {
   @Input() node: StartNode;
+
+  titlePlaceholder;
+  greetingPlaceHolder;
+
 
   constructor(
     public director: ComponentDirectorService,
@@ -21,6 +25,8 @@ export class StartNodeComponent implements OnInit {
     this.director.selected = this.node;
     this.director.addNode(this.node);
     this.director.addMenu(this.node);
+    this.titlePlaceholder = PlaceHolder.TITLE;
+    this.greetingPlaceHolder = PlaceHolder.GREETING;
   }
 
   ngOnInit() {

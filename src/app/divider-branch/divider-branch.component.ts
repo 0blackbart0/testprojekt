@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ComponentDirectorService } from '../component-director.service';
 import { ScalingService } from '../scaling.service';
 import { DividerBranch } from '../nodes/component';
+import { PlaceHolder } from 'src/assets/strings';
 
 @Component({
   selector: 'app-divider-branch',
@@ -11,8 +12,10 @@ import { DividerBranch } from '../nodes/component';
 export class DividerBranchComponent implements OnInit {
 
   @Input() node: DividerBranch;
-
-  constructor(public director: ComponentDirectorService, public scaling: ScalingService) { }
+  selectionTextPlaceholder;
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
+    this.selectionTextPlaceholder = PlaceHolder.SELECTIONTEXT;
+   }
 
   ngOnInit() {
   }

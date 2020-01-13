@@ -12,12 +12,14 @@
 
         <input class="titleInput" type="text" 
         [(ngModel)]="node.title" 
-        (click)="deselectConnectoractive()">
+        (click)="deselectConnectoractive()"
+        placeholder="{{titlePlaceholder}}">
         
         <label class="Label" >ChatBot</label>
         <textarea class="chatBubble" type="textarea"
         [(ngModel)]="node.forwardText"
-        (click)="deselectConnectoractive()"></textarea>
+        (click)="deselectConnectoractive()"
+        placeholder="{{forwardTextPlaceholder}}"></textarea>
         <div class="triangleBot"></div>
         
 

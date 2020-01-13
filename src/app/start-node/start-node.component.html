@@ -11,11 +11,13 @@
     [class.wrapper-active]="node.selected">
 
         <input class="titleInput" type="text" 
-        [(ngModel)]="node.title">
+        [(ngModel)]="node.title" 
+        placeholder="{{titlePlaceholder}}">
         
         <label class="Label" >ChatBot</label>
         <textarea class="chatBubble" type="textarea" 
         [(ngModel)]="node.greeting"
+        placeholder="{{greetingPlaceHolder}}"
         ></textarea>
         <div class="triangleBot"></div>
         

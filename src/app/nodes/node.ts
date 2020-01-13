@@ -1,5 +1,5 @@
 import { ComponentDirectorService } from '../component-director.service';
-import { NodeType } from 'src/assets/strings';
+import { NodeType, PlaceHolder } from 'src/assets/strings';
 
 
 
@@ -30,7 +30,6 @@ export abstract class Node {
 
 
     constructor(parent: Node) {
-        this.title = 'Titel';
         this.parent = parent;
         this.left = 0;
         this.top = 2;
@@ -57,30 +56,4 @@ export class BasicNode extends Node {
     }
 
 
-}
-
-
-
-export class StartNode extends Node {
-
-    // JSON Values
-    greeting: string = 'Hallo ich bin Bot MultOS, wie kann ich dir zu Diensten sein?';
-
-    // Developer Values
-    childs: Node[] = [];
-    Node: Node = null;
-    director: ComponentDirectorService;
-
-
-    constructor(director: ComponentDirectorService) {
-        super(null);
-        this.type = NodeType.STARTNODE;
-        this.director = director;
-        this.width = 36;
-        this.height = 30;
-        this.left = 60;
-
-        this.baseWidth = 36;
-        this.baseLeft = 60;
-    }
 }

@@ -10,7 +10,8 @@
                 <input class="buttonInput" type="text" [(ngModel)]="node.selectionText"
                 [class.buttonInput-selected]="node.selected && !node.connectorActive"
                 (click)="deselectConnectoractive()" 
-                (click)="director.setSelected(this.node)">
+                (click)="director.setSelected(this.node)"
+                placeholder="{{selectionTextPlaceholder}}">
         </div>
         <div class="connector"
 
