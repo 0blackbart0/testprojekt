@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Node  } from '../nodes/node';
-import { ComponentDirectorService } from '../component-director.service';
-import { ScalingService } from '../scaling.service';
-import { DividerNode } from '../nodes/component';
+import { Node  } from '../../nodeModels/node';
+import { ComponentDirectorService } from '../../services/component-director.service';
+import { ScalingService } from '../../services/scaling.service';
+import { DividerNode } from '../../nodeModels/component';
 
 @Component({
   selector: 'app-divider',

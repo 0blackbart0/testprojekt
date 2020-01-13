@@ -1,5 +1,5 @@
 import { Injectable, RootRenderer } from '@angular/core';
-import { Node } from './nodes/node';
+import { Node } from '../nodeModels/node';
 
 
 

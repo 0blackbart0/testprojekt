@@ -3,22 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BasicNodeComponent } from './basicNode/basicNode.component';
+import { BasicNodeComponent } from './nodeComponents/basicNode/basicNode.component';
 import { DrawingFieldComponent } from './drawing-field/drawing-field.component';
-import { StartNodeComponent } from './start-node/start-node.component';
-import { DividerBranchComponent } from './divider-branch/divider-branch.component';
+import { StartNodeComponent } from './nodeComponents/start-node/start-node.component';
+import { DividerBranchComponent } from './nodeComponents/divider-branch/divider-branch.component';
 
-import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponent } from './nodeComponents/dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
-import { MonologComponent } from './monolog/monolog.component';
-import { ScalingMenuComponent } from './scaling-menu/scaling-menu.component';
-import { MenuComponent } from './menu/menu.component';
-import { LinkComponent } from './link/link.component';
+import { MonologComponent } from './nodeComponents/monolog/monolog.component';
+import { ScalingMenuComponent } from './uiComponents/scaling-menu/scaling-menu.component';
+import { MenuComponent } from './nodeComponents/menu/menu.component';
+import { LinkComponent } from './nodeComponents/link/link.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatButtonModule } from '@angular/material';
-import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { DividerComponent } from './divider/divider.component';
+import { DeleteDialogComponent } from './uiComponents/delete-dialog/delete-dialog.component';
+import { SidebarComponent } from './uiComponents/sidebar/sidebar.component';
+import { DividerComponent } from './nodeComponents/divider/divider.component';
 
 @NgModule({
   declarations: [

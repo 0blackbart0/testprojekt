@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Node } from "./nodes/node";
-import { Menu, DividerBranch, DividerNode } from "./nodes/component";
-import { DrawingFieldComponent } from "./drawing-field/drawing-field.component";
+import { Node } from "../nodeModels/node";
+import { Menu, DividerBranch, DividerNode } from "../nodeModels/component";
+import { DrawingFieldComponent } from "../drawing-field/drawing-field.component";
 import { ScalingService } from "./scaling.service";
-import { SidebarComponent } from "./sidebar/sidebar.component";
-import { NodeType } from "../assets/strings";
+import { SidebarComponent } from "../uiComponents/sidebar/sidebar.component";
+import { NodeType } from "../../assets/strings";
 
 @Injectable({
   providedIn: "root"
@@ -22,10 +22,6 @@ export class ComponentDirectorService {
   }
 
   setSelected(node: Node) {
-    console.log("left= " + node.left);
-    console.log("width= " + node.width);
-    console.log("marginLeft= " + node.marginLeft);
-    console.log("marginRight= " + node.marginRight);
     if (
       this.selected.parent !== null &&
       this.selected.parent.type === NodeType.DIVIDERNODE
@@ -236,7 +232,7 @@ export class ComponentDirectorService {
       }
     }
 
-    //padding left
+    // padding left
     if (minLeft <= paddingLeft) {
       difference = paddingLeft - minLeft;
       startShape.left += difference;

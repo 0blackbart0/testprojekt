@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentDirectorService } from '../component-director.service';
-import { Node } from '../nodes/node';
+import { ComponentDirectorService } from '../../services/component-director.service';
+import { Node } from '../../nodeModels/node';
 
 @Component({
   selector: 'app-delete-dialog',

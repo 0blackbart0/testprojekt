@@ -1,5 +1,5 @@
 import { Node, BasicNode } from "./node";
-import { ComponentDirectorService } from "../component-director.service";
+import { ComponentDirectorService } from "../services/component-director.service";
 import { NodeType } from "../../assets/strings";
 
 export class StartNode extends Node {

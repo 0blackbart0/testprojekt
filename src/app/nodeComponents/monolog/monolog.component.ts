@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Monolog } from '../nodes/component';
-import { ComponentDirectorService } from '../component-director.service';
-import { ScalingService } from '../scaling.service';
+import { Monolog } from '../../nodeModels/component';
+import { ComponentDirectorService } from '../../services/component-director.service';
+import { ScalingService } from '../../services/scaling.service';
 import { PlaceHolder } from 'src/assets/strings';
 
 @Component({

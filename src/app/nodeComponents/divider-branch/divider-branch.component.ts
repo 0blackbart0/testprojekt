@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ComponentDirectorService } from '../component-director.service';
-import { ScalingService } from '../scaling.service';
-import { DividerBranch } from '../nodes/component';
+import { ComponentDirectorService } from '../../services/component-director.service';
+import { ScalingService } from '../../services/scaling.service';
+import { DividerBranch } from '../../nodeModels/component';
 import { PlaceHolder } from 'src/assets/strings';
 
 @Component({

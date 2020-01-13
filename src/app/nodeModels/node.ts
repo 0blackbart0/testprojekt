@@ -1,4 +1,4 @@
-import { ComponentDirectorService } from '../component-director.service';
+import { ComponentDirectorService } from '../services/component-director.service';
 import { NodeType, PlaceHolder } from 'src/assets/strings';
 
 
