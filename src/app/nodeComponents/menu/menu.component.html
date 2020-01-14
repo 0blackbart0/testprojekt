@@ -53,6 +53,22 @@
 
     </div>
 
+    <div *ngIf="getMenuType() === 'startNodeWithChild'" 
+    class="wrapper" >
+        <img src='{{dialogImg}}' id="u-2" (click)="addDialog()">
+        <img src='{{monologImg}}' id="u-3" (click)="addMonolog()">
+        <img src='{{dividerImg}}' id="u-4" (click)="addDividerNode()">
+
+
+    </div>
+
+    <div *ngIf="getMenuType() === 'startNodeWithChildDivider'" 
+    class="wrapper" >
+        <img src='{{dialogImg}}' id="e-2" (click)="addDialog()">
+        <img src='{{monologImg}}' id="e-3" (click)="addMonolog()">
+
+    </div>
+
 
     <div class="connector"></div>
 

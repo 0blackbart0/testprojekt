@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentDirectorService } from '../../services/component-director.service';
-import { Node } from '../../nodeModels/node';
+import { Node, BasicNode } from '../../nodeModels/node';
+import { DividerBranch, DividerNode } from 'src/app/nodeModels/component';
+import { NodeType } from 'src/assets/values';
+
 
 @Component({
   selector: 'app-delete-dialog',
@@ -9,20 +12,76 @@ import { Node } from '../../nodeModels/node';
 })
 export class DeleteDialogComponent implements OnInit {
 
+
   constructor(public director: ComponentDirectorService) { }
 
   ngOnInit() {
   }
 
-  deleteSingle() {
-   console.log('lösch eionzelnd');
+  
+
+
+  getDialogType(): string {
+    const toDelete = this.director.selected;
+    let type: string;
+
+    if ( toDelete instanceof DividerNode) {
+      type = 'dividerNode';
+      if ((toDelete.parent as DividerNode).childs.length > 2 ) {
+        type = 'dividerNodeMultiple';
+      }
+    } else if ( toDelete instanceof BasicNode) {
+      type = 'basicNode';
+    }
+    console.log(type);
+    
+    return type;
   }
 
-  deleteBelow() {
+  deleteSingle(toDelete: Node) {
+    if ( toDelete instanceof DividerBranch) {
+      return;
+    }
+    this.director.deleteMenu();
+
+
+    toDelete.parent.child = toDelete.child;
+    if ( toDelete.child !== null ) {
+      toDelete.child.parent = toDelete.parent;
+    }
+    this.director.deleteNode(toDelete);
+    this.director.drawTree();
+  }
+
+  deleteBranch() {
     console.log('lösch unter dir');
   }
 
   deleteTree() {
-    console.log('lösch Baum');
+    const toDelete = this.director.selected;
+    if (toDelete instanceof DividerBranch ) {
+      toDelete.parent.parent.child = null;
+      this.deleteSelfAndChilds(toDelete.parent);
+      return;
+    }
+    toDelete.parent.child = null;
+
+    this.deleteSelfAndChilds(toDelete);
+  }
+
+  deleteSelfAndChilds(toDelete: Node) {
+    if ( toDelete === null ) {
+      return;
+    }
+
+    if ( toDelete instanceof DividerNode && toDelete.type === NodeType.DIVIDERNODE ) {
+      for (const child of toDelete.childs) {
+        this.deleteSelfAndChilds(child);
+      }
+    } else {
+      this.deleteSelfAndChilds(toDelete.child);
+    }
+    this.director.deleteNode(toDelete);
+
   }
 }

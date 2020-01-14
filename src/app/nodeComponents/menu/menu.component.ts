@@ -43,21 +43,24 @@ export class MenuComponent implements OnInit {
       if (this.node.child !== null) {
         type = 'branchWithChild';
       }
-    } else {
-      type = 'basicNodeLeaf';
-      if (this.node.child !== null) {
+    } else if (this.node.parent instanceof StartNode) {
+
+        type = 'startNodeLeaf';
+        if ( this.node.child !== null) {
+            type = 'startNodeWithChild';
+            if ( this.node.child instanceof DividerNode) {
+              type += 'Divider';
+            }
+          }
+      } else if (this.node.child !== null) {
         type = 'basicNodeWithChild';
         if ( this.node.child instanceof DividerNode) {
           type += 'Divider';
         }
-      } else if (this.node.parent instanceof StartNode) {
-        if (this.node.child === null) {
-          type = 'startNodeLeaf';
-        } else {
-          type = 'basicNodeWithChild';
-        }
+      } else {
+        type = 'basicNodeLeaf';
       }
-    }
+    
     return type;
   }
 
@@ -85,23 +88,6 @@ export class MenuComponent implements OnInit {
     this.director.addNode(tmp);
     this.director.addNode(left);
     this.director.addNode(right);
-  }
-
-  addBranch() {
-    if (this.director.selected.type !== NodeType.DIVIDERBRANCH) {
-      return;
-    }
-
-    const parentDividerNode: DividerNode = this.director.selected
-      .parent as DividerNode;
-    const center = new DividerBranch(parentDividerNode, this.director);
-    parentDividerNode.childs.push(center);
-    this.director.addNode(center);
-
-    parentDividerNode.width += center.width;
-    parentDividerNode.baseWidth += parentDividerNode.parent.baseWidth;
-
-    this.director.drawTree();
   }
 
   addDialog() {

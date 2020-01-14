@@ -22,17 +22,20 @@ export class ComponentDirectorService {
   }
 
   setSelected(node: Node) {
-    if (
-      this.selected.parent !== null &&
-      this.selected.parent.type === NodeType.DIVIDERNODE
-    ) {
+
+    if ( this.selected instanceof DividerBranch ) {
       this.selected.parent.selected = false;
     }
+    if (node instanceof DividerBranch) {
+      node.parent.selected = true;
+    }
+
     this.selected.selected = false;
 
     if (node !== this.selected) {
       this.selected.connectorActive = false;
     }
+    
     this.selected = node;
     node.selected = true;
   }
@@ -59,6 +62,11 @@ export class ComponentDirectorService {
     }
     this.scaling.scaleNewNode(node);
     this.drawTree();
+  }
+
+  deleteNode(toDelete: Node) {
+    const index = this.nodeList.indexOf(toDelete);
+    this.nodeList.splice(index, 1);
   }
 
   toggleMenu(parent: Node) {

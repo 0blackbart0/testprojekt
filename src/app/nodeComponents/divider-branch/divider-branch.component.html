@@ -4,7 +4,7 @@
     [style.left.vh]="node.left"
     [style.width.vh]="node.width"
     [style.height.vh]="node.height"
-    (click)="node.parent.selected = true;">
+    (click)="director.setSelected(this.node);">
 
         <div class="wrapper">
                 <input class="buttonInput" type="text" [(ngModel)]="node.selectionText"
