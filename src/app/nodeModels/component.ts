@@ -1,8 +1,8 @@
 import { Node, BasicNode } from "./node";
 import { ComponentDirectorService } from "../services/component-director.service";
-import { NodeType } from "../../assets/strings";
+import { NodeType, NodeSizes } from "../../assets/values";
 
-export class StartNode extends Node {
+export class StartNode extends BasicNode {
 
     // JSON Values
     greeting: string;
@@ -14,15 +14,11 @@ export class StartNode extends Node {
 
 
     constructor(director: ComponentDirectorService) {
-        super(null);
+        super(null, director);
         this.type = NodeType.STARTNODE;
-        this.director = director;
-        this.width = 36;
-        this.height = 30;
-        this.left = 60;
-
-        this.baseWidth = 36;
-        this.baseLeft = 60;
+        this.height = NodeSizes.STARTNODEHEIGHT;
+        this.baseWidth = NodeSizes.BASICNODEWIDTH;
+        this.left = NodeSizes.STARTNODELEFT;
     }
 }
 
@@ -37,9 +33,9 @@ export class DividerNode extends Node {
     super(parent);
     this.type = NodeType.DIVIDERNODE;
     this.director = director;
-    this.width = 36 * 2;
-    this.baseWidth = 36 * 2;
-    this.height = 15;
+    this.width = NodeSizes.BASICNODEWIDTH * 2;
+    this.baseWidth = NodeSizes.BASICNODEWIDTH * 2;
+    this.height = NodeSizes.DIVIDERNODEHEIGHT;
   }
 }
 
@@ -52,9 +48,9 @@ export class DividerBranch extends DividerNode {
   constructor(parent: Node, director: ComponentDirectorService) {
     super(parent, director);
     this.type = NodeType.DIVIDERBRANCH;
-    this.width = 36;
-    this.height = 15;
-    this.baseWidth = 36;
+    this.width = NodeSizes.BASICNODEWIDTH;
+    this.baseWidth = NodeSizes.BASICNODEWIDTH;
+    this.height = NodeSizes.DIVIDERNODEHEIGHT;
   }
 
   getLeftBranch(): DividerBranch {
@@ -69,7 +65,7 @@ export class DividerBranch extends DividerNode {
 }
 
 export class Menu extends BasicNode {
-  height = 13;
+  height = NodeSizes.MENUHEIGHT;
   constructor(parent: Node, director: ComponentDirectorService) {
     super(parent, director);
     this.type = NodeType.MENU;
@@ -86,7 +82,7 @@ export class Dialog extends BasicNode {
   constructor(parent: Node, director: ComponentDirectorService) {
     super(parent, director);
     this.type = NodeType.DIALOG;
-    this.height = 55;
+    this.height = NodeSizes.DIALOGHEIGHT;
   }
 }
 
@@ -99,7 +95,7 @@ export class Monolog extends BasicNode {
   constructor(parent: Node, director: ComponentDirectorService) {
     super(parent, director);
     this.type = NodeType.MONOLOG;
-    this.height = 35;
+    this.height = NodeSizes.MONOLOGHEIGHT;
   }
 }
 
@@ -107,6 +103,6 @@ export class Link extends BasicNode {
   constructor(parent: Node, director: ComponentDirectorService) {
     super(parent, director);
     this.type = NodeType.LINK;
-    this.height = 20;
+    this.height = NodeSizes.LINKHEIGHT;
   }
 }

@@ -18,6 +18,27 @@ export enum PlaceHolder {
     QUESTION = 'Frage',
     ANSWER = 'Antwort',
     FORWARDTEXT = 'Ich leite sie gerne weiter'
+}
 
+export enum NodeSizes {
+    STARTNODETOP = 2,
+    BASEMARGIN = 0,
+    BASELEFT = 0,
+
+    BASICNODEWIDTH = 36,
+
+    STARTNODEHEIGHT = 30,
+    STARTNODELEFT = 60,
+    
+    DIVIDERNODEHEIGHT = 15,
+
+    MENUHEIGHT = 13,
+
+    DIALOGHEIGHT = 55,
+
+    MONOLOGHEIGHT = 35,
+
+    LINKHEIGHT = 20
+    
 
 }

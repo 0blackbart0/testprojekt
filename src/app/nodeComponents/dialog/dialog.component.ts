@@ -3,7 +3,7 @@ import { Node  } from '../../nodeModels/node';
 import { ComponentDirectorService } from '../../services/component-director.service';
 import { ScalingService } from '../../services/scaling.service';
 import { Dialog } from '../../nodeModels/component';
-import { PlaceHolder } from 'src/assets/strings';
+import { PlaceHolder } from 'src/assets/values';
 
 @Component({
   selector: 'app-dialog',

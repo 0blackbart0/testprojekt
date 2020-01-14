@@ -12,7 +12,7 @@ import { Node } from "../../nodeModels/node";
 import { ScalingService } from "../../services/scaling.service";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { DeleteDialogComponent } from "../../uiComponents/delete-dialog/delete-dialog.component";
-import { NodeType } from "src/assets/strings";
+import { NodeType } from "src/assets/values";
 
 @Component({
   selector: "app-menu",
@@ -21,7 +21,12 @@ import { NodeType } from "src/assets/strings";
 })
 export class MenuComponent implements OnInit {
   @Input() node: Menu;
-  menuType;
+  dialogImg = '../../assets/button_icons/icon_dialog.png';
+  monologImg = '../../assets/button_icons/icon_monolog.png';
+  dividerImg = '../../assets/button_icons/icon_verzweigung.png';
+  linkImg = '../../assets/button_icons/icon_verlinkung.png';
+  deleteImg = '../../assets/button_icons/icon_delete.png';
+
 
   constructor(
     public director: ComponentDirectorService,

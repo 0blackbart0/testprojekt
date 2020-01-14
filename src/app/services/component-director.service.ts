@@ -4,7 +4,7 @@ import { Menu, DividerBranch, DividerNode } from "../nodeModels/component";
 import { DrawingFieldComponent } from "../drawing-field/drawing-field.component";
 import { ScalingService } from "./scaling.service";
 import { SidebarComponent } from "../uiComponents/sidebar/sidebar.component";
-import { NodeType } from "../../assets/strings";
+import { NodeType } from "../../assets/values";
 
 @Injectable({
   providedIn: "root"

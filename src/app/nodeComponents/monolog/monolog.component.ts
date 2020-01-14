@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Monolog } from '../../nodeModels/component';
 import { ComponentDirectorService } from '../../services/component-director.service';
 import { ScalingService } from '../../services/scaling.service';
-import { PlaceHolder } from 'src/assets/strings';
+import { PlaceHolder } from 'src/assets/values';
 
 @Component({
   selector: 'app-monolog',

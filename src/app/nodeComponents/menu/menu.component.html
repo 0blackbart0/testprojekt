@@ -7,49 +7,49 @@
         
     <div *ngIf="getMenuType() === 'basicNodeLeaf'" 
     class="wrapper" >
-        <img src='../../assets/button_icons/icon_dialog.png' id="u-1" (click)="addDialog()">
-        <img src='../../assets/button_icons/icon_monolog.png' id="u-2" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_verzweigung.png' id="u-3" (click)="addDividerNode()">
-        <img src='../../assets/button_icons/icon_verlinkung.png' id="u-4" (click)="addLink()">
-        <img src='../../assets/button_icons/icon_delete.png' id="u-5" (click)="openDialog()">
+        <img src='{{dialogImg}}' id="u-1" (click)="addDialog()">
+        <img src='{{monologImg}}' id="u-2" (click)="addMonolog()">
+        <img src='{{dividerImg}}' id="u-3" (click)="addDividerNode()">
+        <img src='{{linkImg}}' id="u-4" (click)="addLink()">
+        <img src='{{deleteImg}}' id="u-5" (click)="openDialog()">
     </div>
 
     <div *ngIf="getMenuType() === 'basicNodeWithChild'" 
     class="wrapper" >
-        <img src='../../assets/button_icons/icon_dialog.png' id="e-1" (click)="addDialog()">
-        <img src='../../assets/button_icons/icon_monolog.png' id="e-2" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_verzweigung.png' id="e-3" (click)="addDividerNode()">
-        <img src='../../assets/button_icons/icon_delete.png' id="e-4" (click)="openDialog()">
+        <img src='{{dialogImg}}' id="e-1" (click)="addDialog()">
+        <img src='{{monologImg}}' id="e-2" (click)="addMonolog()">
+        <img src='{{dividerImg}}' id="e-3" (click)="addDividerNode()">
+        <img src='{{deleteImg}}' id="e-4" (click)="openDialog()">
     </div>
 
     <div *ngIf="getMenuType() === 'branchLeaf'" 
     class="wrapper"  >
-        <img src='../../assets/button_icons/icon_dialog.png' id="e-1" (click)="addDialog()">
-        <img src='../../assets/button_icons/icon_monolog.png' id="e-2" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_verlinkung.png' id="e-3" (click)="addLink()">
-        <img src='../../assets/button_icons/icon_delete.png' id="e-4" (click)="openDialog()">
+        <img src='{{dialogImg}}' id="e-1" (click)="addDialog()">
+        <img src='{{monologImg}}' id="e-2" (click)="addMonolog()">
+        <img src='{{linkImg}}' id="e-3" (click)="addLink()">
+        <img src='{{deleteImg}}' id="e-4" (click)="openDialog()">
     </div>
 
     <div *ngIf="getMenuType() === 'branchWithChild'" 
     class="wrapper"  >
-        <img src='../../assets/button_icons/icon_dialog.png' id="u-2" (click)="addDialog()">
-        <img src='../../assets/button_icons/icon_monolog.png' id="u-3" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_delete.png' id="u-4" (click)="openDialog()">
+        <img src='{{dialogImg}}' id="u-2" (click)="addDialog()">
+        <img src='{{monologImg}}' id="u-3" (click)="addMonolog()">
+        <img src='{{deleteImg}}' id="u-4" (click)="openDialog()">
     </div>
 
     <div *ngIf="getMenuType() === 'basicNodeWithChildDivider'"
     class="wrapper">
-        <img src='../../assets/button_icons/icon_dialog.png' id="u-2" (click)="addDialog()">
-        <img src='../../assets/button_icons/icon_monolog.png' id="u-3" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_delete.png' id="u-4" (click)="openDialog()">
+        <img src='{{dialogImg}}' id="u-2" (click)="addDialog()">
+        <img src='{{monologImg}}' id="u-3" (click)="addMonolog()">
+        <img src='{{deleteImg}}' id="u-4" (click)="openDialog()">
     </div>
 
     <div *ngIf="getMenuType() === 'startNodeLeaf'" 
     class="wrapper" >
-        <img src='../../assets/button_icons/icon_dialog.png' id="e-1" (click)="addDialog()">
-        <img src='../../assets/button_icons/icon_monolog.png' id="e-2" (click)="addMonolog()">
-        <img src='../../assets/button_icons/icon_verzweigung.png' id="e-3" (click)="addDividerNode()">
-        <img src='../../assets/button_icons/icon_verlinkung.png' id="e-4" (click)="addLink()">
+        <img src='{{dialogImg}}' id="e-1" (click)="addDialog()">
+        <img src='{{monologImg}}' id="e-2" (click)="addMonolog()">
+        <img src='{{dividerImg}}' id="e-3" (click)="addDividerNode()">
+        <img src='{{linkImg}}' id="e-4" (click)="addLink()">
 
     </div>
 

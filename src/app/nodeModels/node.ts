@@ -1,5 +1,5 @@
 import { ComponentDirectorService } from '../services/component-director.service';
-import { NodeType, PlaceHolder } from 'src/assets/strings';
+import { NodeType, NodeSizes } from 'src/assets/values';
 
 
 
@@ -17,11 +17,10 @@ export abstract class Node {
     left: number;
     width: number;
 
-    baseLeft: number;
     baseWidth: number;
 
-    marginLeft = 0;
-    marginRight = 0;
+    marginLeft = NodeSizes.BASEMARGIN;
+    marginRight = NodeSizes.BASEMARGIN;
 
     parent: Node = null;
     child: Node = null;
@@ -31,8 +30,8 @@ export abstract class Node {
 
     constructor(parent: Node) {
         this.parent = parent;
-        this.left = 0;
-        this.top = 2;
+        this.left = NodeSizes.BASELEFT;
+        this.top = NodeSizes.STARTNODETOP;
     }
 
 
@@ -49,10 +48,9 @@ export class BasicNode extends Node {
 
         super(parent);
         this.type = NodeType.BASICNODE;
-        this.width = 36;
-        this.baseWidth = 36;
+        this.width = NodeSizes.BASICNODEWIDTH;
+        this.baseWidth = NodeSizes.BASICNODEWIDTH;
         this.director = director;
-        this.height = 50;
     }
 
 
