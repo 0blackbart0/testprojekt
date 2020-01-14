@@ -14,6 +14,7 @@ body {
     --border-radius-medium: 1vh;
     --border-radius-small: 0.5vh;
     --border-bottom-seperator: 0.3vh;
+    --border-weight-small: 0.3vh;
     --border-weight-medium: 0.5vh;
     --border-weight-thick: 0.7vh;
 
@@ -34,6 +35,7 @@ body {
     --button-size: 5vh;
 
     --menu-connector-top: -4vh;
+    --add-branch-button-top : -6vh;
 
     --img-link-width: 10vh;
     --img-link-height: 5vh;

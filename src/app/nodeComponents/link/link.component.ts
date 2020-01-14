@@ -21,4 +21,10 @@ export class LinkComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteLink() {
+    this.node.parent.child = null;
+    this.director.deleteNode(this.node);
+    this.director.drawTree();
+  }
+
 }

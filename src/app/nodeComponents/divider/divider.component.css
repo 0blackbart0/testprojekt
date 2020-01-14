@@ -16,11 +16,26 @@
 
 .addBranchButton {
     display: block;
+    box-sizing: border-box;
     position: relative;
-    height: 4vh;
-    width: 4vh;
-    top: -5vh;
+    height: var(--button-size);
+    width: var(--button-size);
+    top: var(--add-branch-button-top);
     z-index: 2;
+    font-size: var(--font-size-text);
+    font-weight: bold;
+    background-color: white;
+
+    border: var(--border-bottom-seperator) solid var(--dark-grey);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6);
+    border-radius: var(--border-radius-medium);
+    width: var(--button-size);
+    height: var(--button-size);
+}
+
+.addBranchButton:hover {
+    background-color: var(--assono-rot);
+    color: white;
 }
 
 .connector-fem {

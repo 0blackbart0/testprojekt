@@ -37,6 +37,8 @@ export class ScalingService {
 
   buttonSize = 5;
 
+  addBranchButtonTop = -6;
+
   menuConnectorTop = -4;
 
   imgLinkWidth = 20;
@@ -114,6 +116,7 @@ export class ScalingService {
     this.borderRadiusMedium *= Math.pow(this.scale, exponent);
     this.buttonSize *= Math.pow(this.scale, exponent);
     this.menuConnectorTop *= Math.pow(this.scale, exponent);
+    this.addBranchButtonTop *= Math.pow(this.scale, exponent);
 
     this.left1 *= Math.pow(this.scale, exponent);
     this.left2 *= Math.pow(this.scale, exponent);
@@ -175,6 +178,7 @@ export class ScalingService {
     body.style.setProperty('--label-size', this.labelSize + 'vh');
     body.style.setProperty('--button-size', this.buttonSize + 'vh');
     body.style.setProperty('--menu-connector-top', this.menuConnectorTop + 'vh');
+    body.style.setProperty('--add-branch-button-top', this.addBranchButtonTop + 'vh');
 
     body.style.setProperty('--img-link-width', this.imgLinkWidth + 'vh');
     body.style.setProperty('--img-link-height', this.imgLinkHeight + 'vh');

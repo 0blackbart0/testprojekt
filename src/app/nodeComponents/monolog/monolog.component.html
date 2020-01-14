@@ -8,17 +8,16 @@
     <div class="wrapper" 
     (click)="director.setSelected(this.node);" 
     (click)="director.deleteMenu();"
+    (click)="deselectConnectoractive()"
     [class.wrapper-active]="node.selected">
 
         <input class="titleInput" type="text" 
         [(ngModel)]="node.title" 
-        (click)="deselectConnectoractive()"
         placeholder="{{titlePlaceholder}}">
         
         <label class="Label" >ChatBot</label>
         <textarea class="chatBubble" type="textarea"
         [(ngModel)]="node.forwardText"
-        (click)="deselectConnectoractive()"
         placeholder="{{forwardTextPlaceholder}}"></textarea>
         <div class="triangleBot"></div>
         
@@ -27,7 +26,7 @@
     <div class="connector"
     (click)="director.deleteMenu()"
     (click)="director.addMenu(this.node)"
-    (click)="toggleConnectorActive();"
     (click)="director.setSelected(this.node);"
+    (click)="toggleConnectorActive();"
     [class.connector-active]="node.connectorActive"></div>
 </div>

@@ -3,14 +3,13 @@
     background-color: white;
     height: 100%;
     position: relative;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-background); 
     scrollbar-width: none;
+
 }
 
 .scrollbar-vertical {
     height: 100vh;
-    overflow: scroll;
-    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-background); 
-    scrollbar-width: thin;
     box-sizing: border-box;
 }
 

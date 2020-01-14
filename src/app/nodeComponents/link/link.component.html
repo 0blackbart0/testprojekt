@@ -2,12 +2,21 @@
 [style.top.vh]="node.top"
 [style.left.vh]="node.left"
 [style.width.vh]="node.width"
-[style.height.vh]="node.height">
+[style.height.vh]="node.height"
+(click)="director.setSelected(node)">
+
     <div class="connector-fem">
     </div>
+
+    <img *ngIf="node.selected" 
+    src="../../assets/button_icons/icon_delete.png" class="deleteLink"
+    [style.left.vh]="node.width - scaling.buttonSize"
+    (click)="deleteLink()">
+
+
     <div class="wrapper" 
     [class.wrapper-active]="node.selected">
-
+       
         <input class="titleInput" type="text" [(ngModel)]="node.title"
         placeholder="{{titlePlaceholder}}">
         

@@ -16,7 +16,7 @@
         [class.wrapper-active]="node.selected">
             <button *ngIf="node.selected" class="addBranchButton"
             (click)="addBranch()"
-            [style.left.vh]="node.width - 4">+</button>
+            [style.left.vh]="node.width - scaling.buttonSize">+</button>
         </div>
           
     </div>

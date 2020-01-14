@@ -6,10 +6,11 @@
     [style.height.vh]="node.height"
     (click)="director.setSelected(this.node);">
 
-        <div class="wrapper">
+        <div class="wrapper"
+        (click)="director.deleteMenu();"
+        (click)="deselectConnectoractive()" >
                 <input class="buttonInput" type="text" [(ngModel)]="node.selectionText"
                 [class.buttonInput-selected]="node.selected && !node.connectorActive"
-                (click)="deselectConnectoractive()" 
                 (click)="director.setSelected(this.node)"
                 placeholder="{{selectionTextPlaceholder}}">
         </div>
@@ -17,8 +18,8 @@
 
         (click)="director.deleteMenu()"
         (click)="director.addMenu(this.node)"
-        (click)="toggleConnectorActive();"
         (click)="director.setSelected(this.node);"
+        (click)="toggleConnectorActive();"
         [class.connector-active]="node.connectorActive"></div>
     </div>    
 </div>

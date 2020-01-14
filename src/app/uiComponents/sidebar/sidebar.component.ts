@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Node } from '../../nodeModels/node';
 import { ComponentDirectorService } from '../../services/component-director.service';
+import { StartNode } from 'src/app/nodeModels/component';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { ComponentDirectorService } from '../../services/component-director.serv
 })
 export class SidebarComponent implements OnInit {
 
-  node: Node;
+  node: StartNode | Node;
 
   sidebarOpen = false;
   constructor(public director: ComponentDirectorService) {

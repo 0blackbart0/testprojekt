@@ -18,6 +18,28 @@
     width: 100%;
 }
 
+.deleteLink {
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    height: var(--button-size);
+    width: var(--button-size);
+
+    z-index: 2;
+    font-size: var(--font-size-text);
+    font-weight: bold;
+    background-color: white;
+
+    border: var(--border-bottom-seperator) solid var(--dark-grey);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6);
+    border-radius: var(--border-radius-medium);
+
+}
+
+.deleteLink:hover {
+    background-color: var(--assono-rot);
+}
+
 .wrapper-active {
     border: dotted var(--border-weight-medium) var(--assono-rot);
 }

@@ -6,7 +6,8 @@ import {
   Dialog,
   DividerNode,
   DividerBranch,
-  StartNode
+  StartNode,
+  Link
 } from "../../nodeModels/component";
 import { Node } from "../../nodeModels/node";
 import { ScalingService } from "../../services/scaling.service";
@@ -98,5 +99,6 @@ export class MenuComponent implements OnInit {
     this.director.addNode(new Monolog(this.director.selected, this.director));
   }
   addLink() {
+    this.director.addNode(new Link(this.director.selected, this.director));
   }
 }

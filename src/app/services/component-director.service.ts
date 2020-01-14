@@ -10,6 +10,7 @@ import { NodeType } from "../../assets/values";
   providedIn: "root"
 })
 export class ComponentDirectorService {
+
   nodeList: Node[] = [];
   selected: Node;
   drawingField: DrawingFieldComponent = null;
@@ -35,8 +36,9 @@ export class ComponentDirectorService {
     if (node !== this.selected) {
       this.selected.connectorActive = false;
     }
-    
+
     this.selected = node;
+    this.sidebar.node = node;
     node.selected = true;
   }
 
