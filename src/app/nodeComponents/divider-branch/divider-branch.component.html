@@ -8,7 +8,7 @@
 
         <div class="wrapper"
         (click)="director.deleteMenu();"
-        (click)="deselectConnectoractive()" >
+        (click)="node.deselectConnectorActive()" >
                 <input class="buttonInput" type="text" [(ngModel)]="node.selectionText"
                 [class.buttonInput-selected]="node.selected && !node.connectorActive"
                 (click)="director.setSelected(this.node)"
@@ -19,7 +19,7 @@
         (click)="director.deleteMenu()"
         (click)="director.addMenu(this.node)"
         (click)="director.setSelected(this.node);"
-        (click)="toggleConnectorActive();"
+        (click)="node.selectConnectorActive()"
         [class.connector-active]="node.connectorActive"></div>
     </div>    
 </div>

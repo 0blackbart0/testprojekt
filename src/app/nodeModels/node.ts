@@ -35,6 +35,12 @@ export abstract class Node {
     }
 
 
+    deselectConnectorActive() {
+        this.connectorActive = false;
+      }
+    selectConnectorActive() {
+        this.connectorActive = true;
+    }
 
     getParent(): Node { return this.parent; }
 

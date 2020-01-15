@@ -7,7 +7,7 @@
     <div class="wrapper" 
     (click)="director.setSelected(this.node);" 
     (click)="director.deleteMenu();"
-    (click)="deselectConnectoractive();"
+    (click)="node.deselectConnectorActive();"
     [class.wrapper-active]="node.selected">
 
         <input class="titleInput" type="text" 
@@ -27,6 +27,6 @@
     (click)="director.deleteMenu()"
     (click)="director.addMenu(this.node)"
     (click)="director.setSelected(this.node);"
-    (click)="toggleConnectorActive();"
+    (click)="node.selectConnectorActive()"
     [class.connector-active]="node.connectorActive"></div>
 </div>

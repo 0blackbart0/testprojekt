@@ -30,14 +30,4 @@ export class DialogComponent implements OnInit {
     this.node.parent = node;
   }
 
-  toggleConnectorActive() {
-    this.node.connectorActive = !this.node.connectorActive;
-    if (!this.node.connectorActive) {
-    }
-
-  }
-
-  deselectConnectoractive() {
-    this.node.connectorActive = false;
-  }
 }

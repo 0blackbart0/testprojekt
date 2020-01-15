@@ -25,11 +25,4 @@ export class StartNodeComponent implements OnInit {
     this.node.connectorActive = true;
   }
 
-  toggleConnectorActive() {
-    this.node.connectorActive = !this.node.connectorActive;
-  }
-
-  deselectConnectoractive() {
-    this.node.connectorActive = false;
-  }
 }
