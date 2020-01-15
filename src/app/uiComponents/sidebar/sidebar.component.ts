@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Node } from '../../nodeModels/node';
 import { ComponentDirectorService } from '../../services/component-director.service';
-import { StartNode } from 'src/app/nodeModels/component';
+import { NodeType, PlaceHolder } from 'src/assets/values';
 
 
 @Component({
@@ -9,9 +8,14 @@ import { StartNode } from 'src/app/nodeModels/component';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
+
+
 export class SidebarComponent implements OnInit {
 
-  node: StartNode | Node;
+  node;
+
+  nodeType = NodeType;
+  placeholder = PlaceHolder;
 
   sidebarOpen = false;
   constructor(public director: ComponentDirectorService) {
@@ -22,6 +26,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
   }
+
+
 
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;

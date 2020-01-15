@@ -39,3 +39,16 @@ export enum NodeSizes {
 
   LINKHEIGHT = 20
 }
+
+export enum MenuType {
+  BRANCHLEAF = 'branchLeaf',
+  BRANCHWITHCHILD = 'branchWithChild',
+  STARTNODELEAF = 'startNodeLeaf',
+  STARTNODEWITHCHILD = 'startNodeWithChild',
+  STARTNODEWITHCHILDDIVIDER = 'startNodeWithChildDivider',
+  BASICNODEWITHCHILD = 'basicNodeWithChild',
+  BASICNODEWITHCHILDDIVIDER = 'basicNodeWithChildDivider',
+  BASICNODELEAF = 'basicNodeLeaf'
+
+
+}

@@ -5,7 +5,7 @@
 [style.height.vh]="node.height"
 (click)="node.parent.connectorActive = false;">
         
-    <div *ngIf="getMenuType() === 'basicNodeLeaf'" 
+    <div *ngIf="getMenuType() === menuType.BASICNODELEAF" 
     class="wrapper" >
         <img src='{{dialogImg}}' id="u-1" (click)="addDialog()">
         <img src='{{monologImg}}' id="u-2" (click)="addMonolog()">
@@ -14,7 +14,7 @@
         <img src='{{deleteImg}}' id="u-5" (click)="openDialog()">
     </div>
 
-    <div *ngIf="getMenuType() === 'basicNodeWithChild'" 
+    <div *ngIf="getMenuType() === menuType.BASICNODEWITHCHILD" 
     class="wrapper" >
         <img src='{{dialogImg}}' id="e-1" (click)="addDialog()">
         <img src='{{monologImg}}' id="e-2" (click)="addMonolog()">
@@ -22,7 +22,7 @@
         <img src='{{deleteImg}}' id="e-4" (click)="openDialog()">
     </div>
 
-    <div *ngIf="getMenuType() === 'branchLeaf'" 
+    <div *ngIf="getMenuType() === menuType.BRANCHLEAF" 
     class="wrapper"  >
         <img src='{{dialogImg}}' id="e-1" (click)="addDialog()">
         <img src='{{monologImg}}' id="e-2" (click)="addMonolog()">
@@ -30,21 +30,21 @@
         <img src='{{deleteImg}}' id="e-4" (click)="openDialog()">
     </div>
 
-    <div *ngIf="getMenuType() === 'branchWithChild'" 
+    <div *ngIf="getMenuType() === menuType.BRANCHWITHCHILD" 
     class="wrapper"  >
         <img src='{{dialogImg}}' id="u-2" (click)="addDialog()">
         <img src='{{monologImg}}' id="u-3" (click)="addMonolog()">
         <img src='{{deleteImg}}' id="u-4" (click)="openDialog()">
     </div>
 
-    <div *ngIf="getMenuType() === 'basicNodeWithChildDivider'"
+    <div *ngIf="getMenuType() === menuType.BASICNODEWITHCHILDDIVIDER"
     class="wrapper">
         <img src='{{dialogImg}}' id="u-2" (click)="addDialog()">
         <img src='{{monologImg}}' id="u-3" (click)="addMonolog()">
         <img src='{{deleteImg}}' id="u-4" (click)="openDialog()">
     </div>
 
-    <div *ngIf="getMenuType() === 'startNodeLeaf'" 
+    <div *ngIf="getMenuType() === menuType.STARTNODELEAF" 
     class="wrapper" >
         <img src='{{dialogImg}}' id="e-1" (click)="addDialog()">
         <img src='{{monologImg}}' id="e-2" (click)="addMonolog()">
@@ -53,7 +53,7 @@
 
     </div>
 
-    <div *ngIf="getMenuType() === 'startNodeWithChild'" 
+    <div *ngIf="getMenuType() === menuType.STARTNODEWITHCHILD" 
     class="wrapper" >
         <img src='{{dialogImg}}' id="u-2" (click)="addDialog()">
         <img src='{{monologImg}}' id="u-3" (click)="addMonolog()">
@@ -62,7 +62,7 @@
 
     </div>
 
-    <div *ngIf="getMenuType() === 'startNodeWithChildDivider'" 
+    <div *ngIf="getMenuType() === menuType.STARTNODEWITHCHILDDIVIDER" 
     class="wrapper" >
         <img src='{{dialogImg}}' id="e-2" (click)="addDialog()">
         <img src='{{monologImg}}' id="e-3" (click)="addMonolog()">

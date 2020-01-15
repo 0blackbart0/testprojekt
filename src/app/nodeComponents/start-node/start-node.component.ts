@@ -12,8 +12,7 @@ import { PlaceHolder } from 'src/assets/values';
 export class StartNodeComponent implements OnInit {
   @Input() node: StartNode;
 
-  titlePlaceholder;
-  greetingPlaceHolder;
+  placeholder = PlaceHolder;
 
 
   constructor(
@@ -25,8 +24,6 @@ export class StartNodeComponent implements OnInit {
     this.director.selected = this.node;
     this.director.addNode(this.node);
     this.director.addMenu(this.node);
-    this.titlePlaceholder = PlaceHolder.TITLE;
-    this.greetingPlaceHolder = PlaceHolder.GREETING;
   }
 
   ngOnInit() {

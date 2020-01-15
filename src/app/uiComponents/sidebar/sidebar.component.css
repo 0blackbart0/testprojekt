@@ -17,7 +17,7 @@
     display: block;
     width: 100%;
     box-sizing: border-box;
-    font-size: 3vh;
+    font-size: 2.5vh;
     font-weight: bolder;
     margin-bottom: 1.5vh;
     color: var(--dark-grey);
@@ -25,21 +25,52 @@
 }
 
 .titleInput {
-    background-color: transparent;
+    background-color: white;
     width: 100%;
 
     box-sizing: border-box;
     font-size: 2vh;
-    border: 0;
-    border-bottom: 0.3vh solid black;
+    border: 0.3vh solid black;
+    border-radius: 0.2vh;
    
     color: var(--dark-grey);
 
-    padding: 0;
+    padding-left: 1vh;
     margin-bottom: 1.5vh;
 
     display: block;
 
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: block;
+    
+}
+
+.chatBubble {
+    background-color: white;
+    width: 100%;
+    height: 30%;
+    
+    
+
+    box-sizing: border-box;
+    font-size: 2vh;
+   
+    color: var(--dark-grey);
+
+    padding: 0.5vh;
+    margin-top: 1.5vh;
+    resize: none;
+    display: block;
+
+    border: 0.3vh solid black;
+    border-radius: 0.2vh;
+
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-background);
+    scrollbar-width: thin;
 }
 
 .toggle {

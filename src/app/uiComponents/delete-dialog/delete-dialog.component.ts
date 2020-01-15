@@ -62,6 +62,7 @@ export class DeleteDialogComponent implements OnInit {
     if (toDelete instanceof DividerBranch) {
       toDelete.parent.parent.child = null;
       this.deleteSelfAndChilds(toDelete.parent);
+      this.director.drawTree();
       return;
     }
     toDelete.parent.child = null;

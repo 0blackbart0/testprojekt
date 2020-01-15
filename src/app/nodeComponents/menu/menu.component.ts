@@ -13,7 +13,7 @@ import { Node } from "../../nodeModels/node";
 import { ScalingService } from "../../services/scaling.service";
 import { MatDialog, MatDialogConfig } from "@angular/material";
 import { DeleteDialogComponent } from "../../uiComponents/delete-dialog/delete-dialog.component";
-import { NodeType } from "src/assets/values";
+import { MenuType } from "src/assets/values";
 
 @Component({
   selector: "app-menu",
@@ -28,6 +28,7 @@ export class MenuComponent implements OnInit {
   linkImg = '../../assets/button_icons/icon_verlinkung.png';
   deleteImg = '../../assets/button_icons/icon_delete.png';
 
+  menuType = MenuType;
 
   constructor(
     public director: ComponentDirectorService,
@@ -40,26 +41,26 @@ export class MenuComponent implements OnInit {
   getMenuType(): string {
     let type: string = null;
     if ( this.node.parent instanceof DividerBranch) {
-      type = 'branchLeaf';
+      type = MenuType.BRANCHLEAF;
       if (this.node.child !== null) {
-        type = 'branchWithChild';
+        type = MenuType.BRANCHWITHCHILD;
       }
     } else if (this.node.parent instanceof StartNode) {
 
-        type = 'startNodeLeaf';
+        type = MenuType.STARTNODELEAF;
         if ( this.node.child !== null) {
-            type = 'startNodeWithChild';
+            type = MenuType.STARTNODEWITHCHILD;
             if ( this.node.child instanceof DividerNode) {
-              type += 'Divider';
+              type = MenuType.STARTNODEWITHCHILDDIVIDER;
             }
           }
       } else if (this.node.child !== null) {
-        type = 'basicNodeWithChild';
+        type = MenuType.BASICNODEWITHCHILD;
         if ( this.node.child instanceof DividerNode) {
-          type += 'Divider';
+          type = MenuType.BASICNODEWITHCHILDDIVIDER;
         }
       } else {
-        type = 'basicNodeLeaf';
+        type = MenuType.BASICNODELEAF;
       }
     
     return type;

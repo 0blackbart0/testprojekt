@@ -38,7 +38,11 @@ export class ComponentDirectorService {
     }
 
     this.selected = node;
-    this.sidebar.node = node;
+    if ( node instanceof DividerBranch ) {
+      this.sidebar.node = node.parent;
+    } else {
+      this.sidebar.node = node;
+    }
     node.selected = true;
   }
 

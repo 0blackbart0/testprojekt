@@ -2,9 +2,68 @@
     <button class="toggle" (click)="toggleSidebar()">=</button>
    
     
-    <label class="title">Titel</label>
+    <label class="title">Titel:</label>
     <input class="titleInput" type="text" 
+    placeholder="{{placeholder.TITLE}}"
     [(ngModel)]="node.title">
 
+    <div *ngIf="node.type === nodeType.STARTNODE" class="wrapper">
+
+        <label class="title">
+            Begrüßungstext:
+        </label>
+
+        <textarea class="chatBubble" type="textarea"
+        [(ngModel)]="node.greeting"
+        placeholder="{{placeholder.GREETING}}">
+        </textarea>
+
+    </div>
+
+    <div *ngIf="node.type === nodeType.MONOLOG" class="wrapper">
+        <label class="title">
+            Weiterleitungstext:
+        </label>
+
+        <textarea class="chatBubble" type="textarea"
+        [(ngModel)]="node.forwardText"
+        placeholder="{{placeholder.FORWARDTEXT}}">
+        </textarea>
+    </div>
+
+    <div *ngIf="node.type === nodeType.DIALOG" class="wrapper">
+        <label class="title">
+            Einleitende Frage:
+        </label>
+
+        <textarea class="chatBubble" type="textarea"
+        [(ngModel)]="node.question"
+        placeholder="{{placeholder.QUESTION}}">
+        </textarea>
+
+        <label class="title">
+            Bot Antwort:
+        </label>
+
+        <textarea class="chatBubble" type="textarea"
+        [(ngModel)]="node.answer"
+        placeholder="{{placeholder.ANSWER}}">
+        </textarea>
+    </div>
+
+    <div *ngIf="node.type === nodeType.DIVIDERNODE" class="wrapper">
+        <div *ngFor="let child of node.childs; index as i;">
+            <label class="title">Verzweigung {{i + 1}}:</label>
+            <input class="titleInput"
+            [(ngModel)]="child.selectionText"
+            placeholder="{{placeholder.SELECTIONTEXT}}">
+        </div>
+
+    </div>
+
+    <div *ngIf="node.type === nodeType.LINK" class="wrapper">
+       < Dropdown Menu mit interner Verlinkng oder Externer Verlinkung >
+
+    </div>
    
 </div>

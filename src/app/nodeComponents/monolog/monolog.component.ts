@@ -12,13 +12,9 @@ import { PlaceHolder } from 'src/assets/values';
 export class MonologComponent implements OnInit {
 
   @Input() node: Monolog;
-  titlePlaceholder;
-  forwardTextPlaceholder;
+  placeholder = PlaceHolder;
 
-  constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
-    this.titlePlaceholder = PlaceHolder.TITLE;
-    this.forwardTextPlaceholder = PlaceHolder.FORWARDTEXT;
-   }
+  constructor(public director: ComponentDirectorService, public scaling: ScalingService) {}
 
   ngOnInit() {
   }
