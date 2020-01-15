@@ -19,11 +19,6 @@ export class StartNodeComponent implements OnInit {
     public director: ComponentDirectorService,
     public scaling: ScalingService
   ) {
-    this.node = new StartNode(director);
-    this.node.selected = true;
-    this.director.selected = this.node;
-    this.director.addNode(this.node);
-    this.director.addMenu(this.node);
   }
 
   ngOnInit() {

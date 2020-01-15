@@ -1,25 +1,26 @@
 <div class="scrollbar-vertical">
 
     <div class="drawing-field">
-        <app-start-node ></app-start-node>
-
         <div *ngFor="let node of nodeList">
-            <div *ngIf="node.type === 'dialog'">
+            <div *ngIf="node.type === nodeType.STARTNODE">
+                <app-start-node [node]=node></app-start-node>
+            </div>
+            <div *ngIf="node.type === nodeType.DIALOG">
                 <app-dialog [node]=node></app-dialog>
             </div>
-            <div *ngIf="node.type === 'monolog'">
+            <div *ngIf="node.type === nodeType.MONOLOG">
                 <app-monolog [node]=node></app-monolog>
             </div>
-            <div *ngIf="node.type === 'dividerNode'">
+            <div *ngIf="node.type === nodeType.DIVIDERNODE">
                 <app-divider [node]=node></app-divider>
             </div>
-            <div *ngIf="node.type === 'dividerBranch'">
+            <div *ngIf="node.type === nodeType.DIVIDERBRANCH">
                 <app-divider-branch [node]=node></app-divider-branch>
             </div>
-            <div *ngIf="node.type === 'link'">
+            <div *ngIf="node.type === nodeType.LINK">
                 <app-link [node]=node></app-link>
             </div>
-            <div *ngIf="node.type === 'menu'">
+            <div *ngIf="node.type === nodeType.MENU">
                 <app-menu [node]=node></app-menu>
             </div>
 
