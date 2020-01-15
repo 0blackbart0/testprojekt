@@ -3,6 +3,7 @@ import { ComponentDirectorService } from "../../services/component-director.serv
 import { Node, BasicNode } from "../../nodeModels/node";
 import { DividerBranch, DividerNode } from "src/app/nodeModels/component";
 import { NodeType } from "src/assets/values";
+import { DrawService } from "src/app/services/draw.service";
 
 @Component({
   selector: "app-delete-dialog",
@@ -10,7 +11,10 @@ import { NodeType } from "src/assets/values";
   styleUrls: ["./delete-dialog.component.css"]
 })
 export class DeleteDialogComponent implements OnInit {
-  constructor(public director: ComponentDirectorService) {}
+  constructor(
+    public director: ComponentDirectorService,
+    private draw: DrawService
+  ) {}
 
   ngOnInit() {}
 
@@ -41,7 +45,7 @@ export class DeleteDialogComponent implements OnInit {
       toDelete.child.parent = toDelete.parent;
     }
     this.director.deleteNode(toDelete);
-    this.director.drawTree();
+    this.draw.drawTree();
   }
 
   deleteBranch() {
@@ -54,7 +58,7 @@ export class DeleteDialogComponent implements OnInit {
 
     parentDivider.width -= toDelete.width;
     parentDivider.baseWidth -= toDelete.baseWidth;
-    this.director.drawTree();
+    this.draw.drawTree();
   }
 
   deleteTree() {
@@ -62,7 +66,7 @@ export class DeleteDialogComponent implements OnInit {
     if (toDelete instanceof DividerBranch) {
       toDelete.parent.parent.child = null;
       this.deleteSelfAndChilds(toDelete.parent);
-      this.director.drawTree();
+      this.draw.drawTree();
       return;
     }
     toDelete.parent.child = null;

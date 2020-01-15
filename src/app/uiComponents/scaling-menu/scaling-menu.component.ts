@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ScalingService } from "../../services/scaling.service";
 import { ComponentDirectorService } from "../../services/component-director.service";
-import { UndoService } from 'src/app/services/undo.service';
+import { DrawService } from 'src/app/services/draw.service';
 
 @Component({
   selector: "app-scaling-menu",
@@ -12,7 +12,7 @@ export class ScalingMenuComponent implements OnInit {
   constructor(
     public scaling: ScalingService,
     public director: ComponentDirectorService,
-    private undoService: UndoService
+    private draw: DrawService
   ) {
     window.addEventListener("wheel", event => {
       if (event.ctrlKey) {
@@ -28,10 +28,6 @@ export class ScalingMenuComponent implements OnInit {
 
   ngOnInit() {}
 
-  undo() {
-    this.undoService.undo();
-  }
-
   scale(scale: string) {
     let scalingAllowed = false;
     if (scale === "+") {
@@ -44,6 +40,6 @@ export class ScalingMenuComponent implements OnInit {
         this.scaling.rezise(element, scale);
       }
     }
-    this.director.drawTree();
+    this.draw.drawTree();
   }
 }

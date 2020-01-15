@@ -4,6 +4,7 @@ import { ComponentDirectorService } from "../../services/component-director.serv
 import { ScalingService } from "../../services/scaling.service";
 import { DividerNode, DividerBranch } from "../../nodeModels/component";
 import { NodeType } from "src/assets/values";
+import { DrawService } from "src/app/services/draw.service";
 
 @Component({
   selector: "app-divider",
@@ -15,7 +16,8 @@ export class DividerComponent implements OnInit {
 
   constructor(
     public director: ComponentDirectorService,
-    public scaling: ScalingService
+    public scaling: ScalingService,
+    private draw: DrawService
   ) {}
 
   ngOnInit() {}
@@ -28,7 +30,7 @@ export class DividerComponent implements OnInit {
     this.node.width += center.width;
     this.node.baseWidth += this.node.parent.baseWidth;
 
-    this.director.drawTree();
+    this.draw.drawTree();
   }
 
   setParent(node: Node) {

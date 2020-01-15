@@ -31,11 +31,5 @@ export class UndoService {
       this.nodeList2 = JSON.parse(JSON.stringify(this.director.nodeList));
     }
 
-
-
-
-    this.director.drawTree();
   }
-
-
 }
