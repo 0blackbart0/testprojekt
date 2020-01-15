@@ -5,26 +5,26 @@ import { DrawingFieldComponent } from "../drawing-field/drawing-field.component"
 import { ScalingService } from "./scaling.service";
 import { SidebarComponent } from "../uiComponents/sidebar/sidebar.component";
 import { NodeType } from "../../assets/values";
+import { UndoService } from "./undo.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class ComponentDirectorService {
-
   nodeList: Node[] = [];
   selected: Node;
   drawingField: DrawingFieldComponent = null;
   sidebar: SidebarComponent = null;
 
-  constructor(private scaling: ScalingService) {}
+  constructor(private scaling: ScalingService, private undo: UndoService) {}
 
   setDrawingField(field: DrawingFieldComponent) {
     this.drawingField = field;
+    this.undo.director = this;
   }
 
   setSelected(node: Node) {
-
-    if ( this.selected instanceof DividerBranch ) {
+    if (this.selected instanceof DividerBranch) {
       this.selected.parent.selected = false;
     }
     if (node instanceof DividerBranch) {
@@ -38,7 +38,7 @@ export class ComponentDirectorService {
     }
 
     this.selected = node;
-    if ( node instanceof DividerBranch ) {
+    if (node instanceof DividerBranch) {
       this.sidebar.node = node.parent;
     } else {
       this.sidebar.node = node;
@@ -66,6 +66,7 @@ export class ComponentDirectorService {
         node.child.parent = node;
       }
     }
+
     this.scaling.scaleNewNode(node);
     this.drawTree();
   }
