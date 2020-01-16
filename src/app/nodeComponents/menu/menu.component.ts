@@ -82,11 +82,15 @@ export class MenuComponent implements OnInit {
       this.director.selected,
       this.director
     );
-    const left: Node = new DividerBranch(tmp, this.director);
-    const right: Node = new DividerBranch(tmp, this.director);
+    const left = new DividerBranch(tmp, this.director);
+    const right = new DividerBranch(tmp, this.director);
 
-    tmp.childs.push(left);
-    tmp.childs.push(right);
+   // tmp.childs.push(left);
+   // tmp.childs.push(right);
+
+    tmp.addChild(left);
+    tmp.addChild(right);
+    
     this.director.addNode(tmp);
     this.director.addNode(left);
     this.director.addNode(right);

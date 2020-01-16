@@ -5,6 +5,7 @@ import { Node } from '../nodeModels/node';
 import { ComponentDirectorService } from './component-director.service';
 import { DrawService } from './draw.service';
 import { ScalingService } from './scaling.service';
+import { example1 } from '../../assets/dialog_lists/example_1';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,14 @@ export class JsonNodeListService {
 
   constructor(private director: ComponentDirectorService, private draw: DrawService, private scale: ScalingService) { }
 
+  loadTree() {
+    this.director.clearNodeList();
+    this.scale.resetScaling();
+    this.jsonNodeList.splice(0, this.jsonNodeList.length);
+    this.jsonNodeList = example1.nodeList;
+    this.nodeCrawler();
+  }
+  
   stringify() {
     this.scale.resetScaling();
     this.jsonNodeList.splice(0, this.jsonNodeList.length);
@@ -45,6 +54,8 @@ export class JsonNodeListService {
         this.jsonNodeList.push(jsobj);
       }
     }
+
+    console.log(JSON.stringify(this.jsonNodeList));
   }
 
   nodeCrawler() {
@@ -59,10 +70,12 @@ export class JsonNodeListService {
   }
 
   nodeCrawlerRecursive(parent: Node, childId: number) {
+    console.log( "id = " + childId);
     const jsonNode = this.getJsonNodeById(childId);
     let node: Node;
 
     if (jsonNode === null) {
+      console.log("abbruch bei childid = " + childId);
       return;
     }
     switch ( jsonNode.type ) {
@@ -98,26 +111,34 @@ export class JsonNodeListService {
         dividerNode.parent.childId = dividerNode.id;
         this.director.nodeList.push(dividerNode);
 
-        console.log(childIds);
-        for ( const cId of childIds ) {
+        for ( const cId of childIds) {
 
           const dividerBranch = new DividerBranch(dividerNode, this.director);
           const jsonDividerBranch = this.getJsonNodeById(cId);
+          console.log("dividerBranch: = " + jsonDividerBranch.id);
           dividerBranch.selectionText = jsonDividerBranch.selectionText;
-          dividerNode.childs.push(dividerBranch);
+          // dividerNode.childs.push(dividerBranch);
+          dividerNode.addChild(dividerBranch);
           this.director.nodeList.push(dividerBranch);
 
           this.nodeCrawlerRecursive(dividerBranch, jsonDividerBranch.childId);
         }
+        
         return;
     }
     this.nodeCrawlerRecursive(node, jsonNode.childId);
   }
 
+  kjshfd() {
+    let test = new Array;
+    test.push(example1);
+    console.log(test);
+  }
 
   save() {
-    const fs = require('fs');
+ //   const fs = require('fs');
 
+/*
 // specify the path to the file, and create a buffer with characters we want to write
     let path = '../assets/dialog_lists/test.json';
     let buffer = new Buffer('Those who wish to follow me\nI welcome with my hands\nAnd the red sun sinks at last');
@@ -136,7 +157,10 @@ export class JsonNodeListService {
         });
     });
 });
+
+*/
   }
+
 
 
   

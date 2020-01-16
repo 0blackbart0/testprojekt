@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Node } from "../nodeModels/node";
-import { Menu, DividerBranch, DividerNode } from "../nodeModels/component";
+import { Menu, DividerBranch, DividerNode, StartNode } from "../nodeModels/component";
 import { DrawingFieldComponent } from "../drawing-field/drawing-field.component";
 import { ScalingService } from "./scaling.service";
 import { SidebarComponent } from "../uiComponents/sidebar/sidebar.component";
 import { NodeType } from "../../assets/values";
 import { DrawService } from "./draw.service";
-import { JsonNodeListService } from './json-node-list.service';
+
 
 @Injectable({
   providedIn: "root"
@@ -20,6 +20,11 @@ export class ComponentDirectorService {
   constructor(private scaling: ScalingService, private draw: DrawService) {
     draw.nodeList = this.nodeList;
     draw.director = this;
+
+    const startNode = new StartNode(this);
+    startNode.selected = true;
+    this.selected = startNode;
+    this.addNode(startNode);
   }
 
   setDrawingField(field: DrawingFieldComponent) {
@@ -56,11 +61,17 @@ export class ComponentDirectorService {
 
     if (node.type === NodeType.DIVIDERNODE) {
       (node as DividerNode).childs[0].child = node.parent.child;
+      if ( node.parent.child !== null ) {
+        (node as DividerNode).childs[0].childId = node.parent.child.id;
+      }
+
+
       node.parent.child = node;
       node.parent.childId = node.id;
 
       if ((node as DividerNode).childs[0].child !== null) {
         (node as DividerNode).childs[0].child.parent = (node as DividerNode).childs[0];
+        (node as DividerNode).childs[0].child.parentId = (node as DividerNode).childs[0].id;
       }
     } else if (node.parent !== null && node.type !== NodeType.DIVIDERBRANCH) {
       node.child = node.parent.child;

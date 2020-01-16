@@ -19,11 +19,6 @@ export class DrawingFieldComponent implements OnInit {
   drawingFieldPaddingRight: number;
 
   constructor(public director: ComponentDirectorService) {
-    const startNode = new StartNode(director);
-    startNode.selected = true;
-    director.selected = startNode;
-    director.addNode(startNode);
-    director.addMenu(startNode);
   }
 
   ngOnInit() {

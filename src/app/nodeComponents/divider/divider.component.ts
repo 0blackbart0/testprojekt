@@ -23,12 +23,13 @@ export class DividerComponent implements OnInit {
 
   addBranch() {
     const center = new DividerBranch(this.node, this.director);
-    this.node.childs.push(center);
-    this.director.addNode(center);
+  //  this.node.childs.push(center);
+    this.node.addChild(center);  
+  this.director.addNode(center);
 
-    this.node.width += center.width;
+   /* this.node.width += center.width;
     this.node.baseWidth += this.node.parent.baseWidth;
-
+*/
     this.draw.drawTree();
   }
 

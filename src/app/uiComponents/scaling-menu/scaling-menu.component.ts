@@ -28,6 +28,10 @@ export class ScalingMenuComponent implements OnInit {
     });
   }
 
+  loadExample() {
+    this.jsonNode.loadTree();
+  }
+
   ngOnInit() {}
 
   scale(scale: string) {

@@ -22,7 +22,6 @@ export class StartNodeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.node.connectorActive = true;
   }
 
 }
