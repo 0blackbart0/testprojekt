@@ -1,7 +1,7 @@
 
 
     <h2>Welche Löschaktion soll durchgeführt werden?</h2>
-    <div *ngIf="getDialogType() === 'basicNode'">
+    <div *ngIf="getDialogType() === nodeType.BASICNODE">
         <mat-dialog-actions align="center">
             
             <button mat-raised-button mat-dialog-close tabindex="1" (click)="deleteSingle(director.selected)">delete single</button>
@@ -11,7 +11,16 @@
         </mat-dialog-actions>
     </div>
 
-    <div *ngIf="getDialogType() === 'dividerNode'">
+    <div *ngIf="getDialogType() === nodeType.BASICNODE + 'Leaf'">
+        <mat-dialog-actions align="center">
+            
+            <button mat-raised-button mat-dialog-close tabindex="1" (click)="deleteSingle(director.selected)">delete single</button>
+            <button mat-raised-button mat-dialog-close tabindex="3" >abbrechen</button>
+            
+        </mat-dialog-actions>
+    </div>
+
+    <div *ngIf="getDialogType() === nodeType.DIVIDERNODE">
         <mat-dialog-actions align="center">
 
             <button mat-raised-button mat-dialog-close tabindex="1" (click)="deleteTree(director.selected)">ganze Verzweigung löschen</button>
@@ -20,7 +29,7 @@
         </mat-dialog-actions>
     </div>
 
-    <div *ngIf="getDialogType() === 'dividerNodeMultiple'">
+    <div *ngIf="getDialogType() === nodeType.DIVIDERNODE + 'Multiple'">
         <mat-dialog-actions align="center">
 
             <button mat-raised-button mat-dialog-close tabindex="1" (click)="deleteBranch()">diesen Strang löschen</button>

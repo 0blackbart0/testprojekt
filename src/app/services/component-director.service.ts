@@ -6,6 +6,7 @@ import { ScalingService } from "./scaling.service";
 import { SidebarComponent } from "../uiComponents/sidebar/sidebar.component";
 import { NodeType } from "../../assets/values";
 import { DrawService } from "./draw.service";
+import { JsonNodeListService } from './json-node-list.service';
 
 @Injectable({
   providedIn: "root"
@@ -56,16 +57,21 @@ export class ComponentDirectorService {
     if (node.type === NodeType.DIVIDERNODE) {
       (node as DividerNode).childs[0].child = node.parent.child;
       node.parent.child = node;
+      node.parent.childId = node.id;
 
       if ((node as DividerNode).childs[0].child !== null) {
         (node as DividerNode).childs[0].child.parent = (node as DividerNode).childs[0];
       }
     } else if (node.parent !== null && node.type !== NodeType.DIVIDERBRANCH) {
       node.child = node.parent.child;
+      node.childId = node.parent.childId;
+
       node.parent.child = node;
+      node.parent.childId = node.id;
 
       if (node.child !== null) {
         node.child.parent = node;
+        node.child.parentId = node.id;
       }
     }
 
@@ -78,6 +84,10 @@ export class ComponentDirectorService {
     this.nodeList.splice(index, 1);
   }
 
+  clearNodeList() {
+    this.nodeList.splice(0, this.nodeList.length);
+  }
+
   addMenu(parent: Node) {
     this.addNode(new Menu(parent, this));
   }
@@ -86,8 +96,10 @@ export class ComponentDirectorService {
     for (const menu of this.nodeList) {
       if (menu instanceof Menu) {
         menu.parent.child = menu.child;
+        menu.parent.childId = menu.childId;
         if (menu.child !== null) {
           menu.child.parent = menu.parent;
+          menu.child.parentId = menu.parentId;
         }
 
         this.nodeList.splice(this.nodeList.indexOf(menu), 1);

@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ScalingService } from "../../services/scaling.service";
 import { ComponentDirectorService } from "../../services/component-director.service";
 import { DrawService } from 'src/app/services/draw.service';
+import { JsonNodeListService } from 'src/app/services/json-node-list.service';
 
 @Component({
   selector: "app-scaling-menu",
@@ -12,7 +13,8 @@ export class ScalingMenuComponent implements OnInit {
   constructor(
     public scaling: ScalingService,
     public director: ComponentDirectorService,
-    private draw: DrawService
+    private draw: DrawService,
+    public jsonNode: JsonNodeListService
   ) {
     window.addEventListener("wheel", event => {
       if (event.ctrlKey) {

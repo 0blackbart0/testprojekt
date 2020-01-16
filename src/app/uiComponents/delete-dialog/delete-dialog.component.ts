@@ -11,9 +11,13 @@ import { DrawService } from "src/app/services/draw.service";
   styleUrls: ["./delete-dialog.component.css"]
 })
 export class DeleteDialogComponent implements OnInit {
+
+  nodeType = NodeType;
+
   constructor(
     public director: ComponentDirectorService,
     private draw: DrawService
+    
   ) {}
 
   ngOnInit() {}
@@ -23,12 +27,15 @@ export class DeleteDialogComponent implements OnInit {
     let type: string;
 
     if (toDelete instanceof DividerNode) {
-      type = "dividerNode";
+      type = this.nodeType.DIVIDERNODE;
       if ((toDelete.parent as DividerNode).childs.length > 2) {
-        type = "dividerNodeMultiple";
+        type += "Multiple";
       }
     } else if (toDelete instanceof BasicNode) {
-      type = "basicNode";
+      type = this.nodeType.BASICNODE;
+      if ( toDelete.child.child === null) {
+          type += "Leaf";
+        }
     }
 
     return type;
@@ -41,8 +48,10 @@ export class DeleteDialogComponent implements OnInit {
     this.director.deleteMenu();
 
     toDelete.parent.child = toDelete.child;
+    toDelete.parent.childId = toDelete.childId;
     if (toDelete.child !== null) {
       toDelete.child.parent = toDelete.parent;
+      toDelete.child.parentId = toDelete.parentId;
     }
     this.director.deleteNode(toDelete);
     this.draw.drawTree();

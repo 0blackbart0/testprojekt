@@ -3,7 +3,6 @@ import { Node } from "../../nodeModels/node";
 import { ComponentDirectorService } from "../../services/component-director.service";
 import { ScalingService } from "../../services/scaling.service";
 import { DividerNode, DividerBranch } from "../../nodeModels/component";
-import { NodeType } from "src/assets/values";
 import { DrawService } from "src/app/services/draw.service";
 
 @Component({

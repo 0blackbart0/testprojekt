@@ -5,10 +5,17 @@ import { NodeType, NodeSizes } from 'src/assets/values';
 
 export abstract class Node {
 
+    static counterId: number = 0;
+
     // JSON Values
     title: string;
     type: string;
     // Developer Values
+
+    id: number;
+    childId: number;
+    parentId: number;
+
 
     selected: boolean;
     top: number;
@@ -32,6 +39,13 @@ export abstract class Node {
         this.parent = parent;
         this.left = NodeSizes.BASELEFT;
         this.top = NodeSizes.STARTNODETOP;
+
+        if ( this.parent !== null ) {
+            this.parentId = parent.id;
+        } else {
+            this.parentId = null;
+        }
+        this.id = Node.counterId++;
     }
 
 
