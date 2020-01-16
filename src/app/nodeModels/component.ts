@@ -20,6 +20,18 @@ export class StartNode extends BasicNode {
         this.baseWidth = NodeSizes.BASICNODEWIDTH;
         this.left = NodeSizes.STARTNODELEFT;
     }
+
+    getJsonString() {
+      if (this.child === null) {
+        // tslint:disable-next-line: max-line-length
+        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"' + this.greeting + '", "child":null}';
+      } else {
+        // tslint:disable-next-line: max-line-length
+        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"' + this.greeting + '", "child":' + this.child.getJsonString() + '}';
+      }
+  
+    }
+
 }
 
 export class DividerNode extends Node {
@@ -37,6 +49,26 @@ export class DividerNode extends Node {
     this.baseWidth = NodeSizes.BASICNODEWIDTH * 2;
     this.height = NodeSizes.DIVIDERNODEHEIGHT;
   }
+
+  getJsonString() {
+
+    let mergedString: string = '';
+
+    for (let i = 0; i < this.childs.length; i++) {
+
+      const childString: string = this.childs[i].getJsonString();
+
+      if (i === this.childs.length - 1) {
+        mergedString = mergedString.concat(childString);
+      } else {
+        mergedString = mergedString.concat(childString, ', ');
+      }
+    }
+
+    return '{"nodeType": "Divider", "childs":[' + mergedString + ']}';
+
+  }
+
 }
 
 export class DividerBranch extends DividerNode {
@@ -62,6 +94,15 @@ export class DividerBranch extends DividerNode {
       return parent.childs[index - 1] as DividerBranch;
     }
   }
+
+  getJsonString() {
+
+    if (this.child === null) {
+      return '{"nodeType": "DividerBranch", "selectionText":"' + this.selectionText + '", "child":null}';
+    } else {
+      return '{"nodeType": "DividerBranch", "selectionText":"' + this.selectionText + '", "child":' + this.child.getJsonString() + '}';
+    }
+  }
 }
 
 export class Menu extends BasicNode {
@@ -70,6 +111,11 @@ export class Menu extends BasicNode {
     super(parent, director);
     this.type = NodeType.MENU;
   }
+
+  getJsonString() {
+    return null;
+  }
+
 }
 
 export class Dialog extends BasicNode {
@@ -84,6 +130,17 @@ export class Dialog extends BasicNode {
     this.type = NodeType.DIALOG;
     this.height = NodeSizes.DIALOGHEIGHT;
   }
+
+  getJsonString() {
+    if (this.child === null) {
+      // tslint:disable-next-line: max-line-length
+      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"' + this.question + '", "answer":"' + this.answer + '","child":null}';
+    } else {
+      // tslint:disable-next-line: max-line-length
+      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"' + this.question + '", "answer":"' + this.answer + '","child":' + this.child.getJsonString() + '}';
+    }
+
+  }
 }
 
 export class Monolog extends BasicNode {
@@ -97,6 +154,17 @@ export class Monolog extends BasicNode {
     this.type = NodeType.MONOLOG;
     this.height = NodeSizes.MONOLOGHEIGHT;
   }
+
+  getJsonString() {
+    if (this.child === null) {
+      // tslint:disable-next-line: max-line-length
+      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"' + this.forwardText + '", "child":null}';
+    } else {
+      // tslint:disable-next-line: max-line-length
+      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"' + this.forwardText + '", "child":' + this.child.getJsonString() + '}';
+    }
+  }
+
 }
 
 export class Link extends BasicNode {
@@ -104,5 +172,9 @@ export class Link extends BasicNode {
     super(parent, director);
     this.type = NodeType.LINK;
     this.height = NodeSizes.LINKHEIGHT;
+  }
+
+  getJsonString() {
+    return '{"nodeType": "Link", "title":"' + this.title + '", "child":null}'; // hier als child evtl titel des neuen Baums
   }
 }
