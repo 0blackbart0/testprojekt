@@ -8,7 +8,7 @@ export abstract class Node {
     static counterId: number = 0;
 
     // JSON Values
-    title: string;
+    title: string = '';
     type: string;
     // Developer Values
 

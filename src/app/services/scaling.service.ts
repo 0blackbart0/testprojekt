@@ -89,6 +89,16 @@ export class ScalingService {
     return false;
   }
 
+  resetScaling() {
+    while ( this.balance !== 0 ) {
+      if ( this.balance < 0 ) {
+        this.increase();
+      } else {
+        this.decrease();
+      }
+    }
+  }
+
   scaleCSS(exponent: number) {
 
     this.outerPadding *= Math.pow(this.scale, exponent);

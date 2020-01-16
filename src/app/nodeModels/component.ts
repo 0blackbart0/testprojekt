@@ -5,7 +5,7 @@ import { NodeType, NodeSizes } from "../../assets/values";
 export class StartNode extends BasicNode {
 
     // JSON Values
-    greeting: string;
+    greeting: string = '';
 
     // Developer Values
     childs: Node[] = [];
@@ -41,7 +41,7 @@ export class DividerNode extends Node {
 
 export class DividerBranch extends DividerNode {
   // JSON Values
-  selectionText;
+  selectionText: string = '';
 
   // Developer Values
 
@@ -74,8 +74,8 @@ export class Menu extends BasicNode {
 
 export class Dialog extends BasicNode {
   // JSON Values
-  question: string;
-  answer: string;
+  question: string = '';
+  answer: string = '';
 
   // Developer Values
 
@@ -88,7 +88,7 @@ export class Dialog extends BasicNode {
 
 export class Monolog extends BasicNode {
   // JSON Values
-  forwardText: string;
+  forwardText: string = '';
 
   // Developer Values
 
