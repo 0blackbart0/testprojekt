@@ -6,6 +6,8 @@ import { ScalingService } from "./scaling.service";
 import { SidebarComponent } from "../uiComponents/sidebar/sidebar.component";
 import { NodeType } from "../../assets/values";
 import { DrawService } from "./draw.service";
+import { UndoService } from './undo.service';
+import { JsonNodeListService } from './json-node-list.service';
 
 
 @Injectable({
@@ -17,9 +19,14 @@ export class ComponentDirectorService {
   drawingField: DrawingFieldComponent = null;
   sidebar: SidebarComponent = null;
 
-  constructor(private scaling: ScalingService, private draw: DrawService) {
+  constructor(private scaling: ScalingService, private draw: DrawService, private undo: UndoService, jsonNode: JsonNodeListService) {
     draw.nodeList = this.nodeList;
     draw.director = this;
+    undo.director = this;
+    undo.jsonNode = jsonNode;
+    jsonNode.director = this;
+    jsonNode.draw = draw;
+    jsonNode.scaling = scaling;
 
     const startNode = new StartNode(this);
     startNode.selected = true;
@@ -85,9 +92,11 @@ export class ComponentDirectorService {
         node.child.parentId = node.id;
       }
     }
-
+    
     this.scaling.scaleNewNode(node);
     this.draw.drawTree();
+
+
   }
 
   deleteNode(toDelete: Node) {

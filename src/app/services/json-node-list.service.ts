@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NodeType } from 'src/assets/values';
+import { NodeType, NodeSizes } from 'src/assets/values';
 import { StartNode, Monolog, Dialog, DividerBranch, Link, DividerNode } from '../nodeModels/component';
 import { Node } from '../nodeModels/node';
 import { ComponentDirectorService } from './component-director.service';
@@ -14,22 +14,26 @@ export class JsonNodeListService {
 
   jsonNodeList: any[] = [];
 
-  constructor(private director: ComponentDirectorService, private draw: DrawService, private scale: ScalingService) { }
+  director: ComponentDirectorService;
+  draw: DrawService;
+  scaling: ScalingService;
+
+  oldBalance: number;
+  constructor() { }
 
   loadTree() {
     this.director.clearNodeList();
-    this.scale.resetScaling();
+    this.scaling.resetScaling(NodeSizes.BASICSCALEBALANCE);
     this.jsonNodeList.splice(0, this.jsonNodeList.length);
     this.jsonNodeList = example1.nodeList;
-    this.nodeCrawler();
+    this.parse();
   }
-  
-  stringify() {
-    this.scale.resetScaling();
+
+  stringify(nodeList: Node[]): string {
     this.jsonNodeList.splice(0, this.jsonNodeList.length);
 
     let json;
-    for (const node of this.director.nodeList) {
+    for (const node of nodeList) {
       if (node.type === NodeType.STARTNODE) {
         json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title +
       '", "childId":"' + node.childId + '", "parentId":"' + node.parentId + '", "greeting":"' + (node as StartNode).greeting + '"}';
@@ -56,20 +60,29 @@ export class JsonNodeListService {
     }
 
     console.log(JSON.stringify(this.jsonNodeList));
+    return JSON.stringify(this.jsonNodeList);
   }
 
-  nodeCrawler() {
+  loadNodeListFromString(nodeListAsString: string ) {
+    this.jsonNodeList.splice(0, this.jsonNodeList.length);
+    this.jsonNodeList = JSON.parse(nodeListAsString);
+  }
+
+  parse() {
+    this.oldBalance = this.scaling.resetScaling(NodeSizes.BASICSCALEBALANCE);
     const node = new StartNode(this.director);
     node.title = this.jsonNodeList[0].title;
     node.greeting = this.jsonNodeList[0].greeting;
+    this.scaling.resetScaling(this.oldBalance);
     this.director.addNode(node);
 
-    this.nodeCrawlerRecursive(node, this.jsonNodeList[0].childId);
+    this.parseRecursive(node, this.jsonNodeList[0].childId);
     this.draw.drawTree();
+    
 
   }
 
-  nodeCrawlerRecursive(parent: Node, childId: number) {
+  parseRecursive(parent: Node, childId: number) {
     console.log( "id = " + childId);
     const jsonNode = this.getJsonNodeById(childId);
     let node: Node;
@@ -110,6 +123,7 @@ export class JsonNodeListService {
         dividerNode.parent.child = dividerNode;
         dividerNode.parent.childId = dividerNode.id;
         this.director.nodeList.push(dividerNode);
+        this.scaling.scaleNewNode(dividerNode);
 
         for ( const cId of childIds) {
 
@@ -118,47 +132,16 @@ export class JsonNodeListService {
           console.log("dividerBranch: = " + jsonDividerBranch.id);
           dividerBranch.selectionText = jsonDividerBranch.selectionText;
           // dividerNode.childs.push(dividerBranch);
+          this.scaling.scaleNewNode(dividerBranch);
           dividerNode.addChild(dividerBranch);
           this.director.nodeList.push(dividerBranch);
 
-          this.nodeCrawlerRecursive(dividerBranch, jsonDividerBranch.childId);
+          this.parseRecursive(dividerBranch, jsonDividerBranch.childId);
         }
         
         return;
     }
-    this.nodeCrawlerRecursive(node, jsonNode.childId);
-  }
-
-  kjshfd() {
-    let test = new Array;
-    test.push(example1);
-    console.log(test);
-  }
-
-  save() {
- //   const fs = require('fs');
-
-/*
-// specify the path to the file, and create a buffer with characters we want to write
-    let path = '../assets/dialog_lists/test.json';
-    let buffer = new Buffer('Those who wish to follow me\nI welcome with my hands\nAnd the red sun sinks at last');
-
-// open the file in writing mode, adding a callback function where we do the actual writing
-    fs.open(path, 'w', function(err, fd) {
-    if (err) {
-        throw 'could not open file: ' + err;
-    }
-
-    // write the contents of the buffer, from position 0 to the end, to the file descriptor returned in opening our file
-    fs.write(fd, buffer, 0, buffer.length, null, function(err) {
-        if (err) throw 'error writing file: ' + err;
-        fs.close(fd, function() {
-            console.log('wrote the file successfully');
-        });
-    });
-});
-
-*/
+    this.parseRecursive(node, jsonNode.childId);
   }
 
 

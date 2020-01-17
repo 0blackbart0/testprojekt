@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentDirectorService } from './component-director.service';
 import { Node } from '../nodeModels/node';
+import { JsonNodeListService } from './json-node-list.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +9,14 @@ import { Node } from '../nodeModels/node';
 export class UndoService {
 
   director: ComponentDirectorService;
+  jsonNode: JsonNodeListService;
 
-  nodeList1: Node[] = [];
-  nodeList2: Node[] = [];
+  nodeList1: string = '';
+  nodeList2: string = '';
 
+  //nodeList: string[] = [];
 
   usedIndex: number;
-
-  flag = true;
 
   constructor() { }
 
@@ -24,12 +25,14 @@ export class UndoService {
   }
 
   undo() {
-    if (this.flag) {
-      this.nodeList1 = JSON.parse(JSON.stringify(this.director.nodeList));
-      this.flag = false;
-    } else {
-      this.nodeList2 = JSON.parse(JSON.stringify(this.director.nodeList));
-    }
+    this.director.clearNodeList();
+    this.jsonNode.parse();
+  }
 
+  save() {
+
+    
+    this.nodeList1 = this.nodeList2;
+    this.nodeList2 = this.jsonNode.stringify(this.director.nodeList);
   }
 }

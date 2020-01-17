@@ -20,6 +20,9 @@ export enum PlaceHolder {
 }
 
 export enum NodeSizes {
+
+  BASICSCALEBALANCE = 0,
+
   STARTNODETOP = 2,
   BASEMARGIN = 0,
   BASELEFT = 0,

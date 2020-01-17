@@ -1,5 +1,6 @@
 import { Injectable, RootRenderer } from '@angular/core';
 import { Node } from '../nodeModels/node';
+import { NodeType } from 'src/assets/values';
 
 
 
@@ -69,6 +70,7 @@ export class ScalingService {
   constructor() { }
 
   increase(): boolean {
+    console.log("test");
     if ( this.balance < 10 ) {
       this.balance++;
       this.scaleCSS(-1);
@@ -79,6 +81,7 @@ export class ScalingService {
   }
 
   decrease() {
+    console.log("test");
     if (this.balance > -15 ) {
 
       this.balance--;
@@ -89,14 +92,16 @@ export class ScalingService {
     return false;
   }
 
-  resetScaling() {
-    while ( this.balance !== 0 ) {
-      if ( this.balance < 0 ) {
+  resetScaling(value: number): number {
+    const balance = this.balance;
+    while ( this.balance !== value ) {
+      if ( this.balance < value ) {
         this.increase();
       } else {
         this.decrease();
       }
     }
+    return balance;
   }
 
   scaleCSS(exponent: number) {
@@ -230,7 +235,7 @@ export class ScalingService {
   }
 
   scaleNewNode(node: Node) {
-    if ( node === null ) {
+    if ( node === null) {
       return;
     }
     if ( this.balance < 0) {

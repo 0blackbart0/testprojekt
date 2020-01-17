@@ -3,6 +3,7 @@ import { ScalingService } from "../../services/scaling.service";
 import { ComponentDirectorService } from "../../services/component-director.service";
 import { DrawService } from 'src/app/services/draw.service';
 import { JsonNodeListService } from 'src/app/services/json-node-list.service';
+import { UndoService } from 'src/app/services/undo.service';
 
 @Component({
   selector: "app-scaling-menu",
@@ -14,7 +15,8 @@ export class ScalingMenuComponent implements OnInit {
     public scaling: ScalingService,
     public director: ComponentDirectorService,
     private draw: DrawService,
-    public jsonNode: JsonNodeListService
+    public jsonNode: JsonNodeListService,
+    public undo: UndoService
   ) {
     window.addEventListener("wheel", event => {
       if (event.ctrlKey) {
