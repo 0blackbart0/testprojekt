@@ -14,7 +14,7 @@ export class UndoService {
   nodeList1: string = '';
   nodeList2: string = '';
 
-  //nodeList: string[] = [];
+  nodeList: string[] = [];
 
   usedIndex: number;
 

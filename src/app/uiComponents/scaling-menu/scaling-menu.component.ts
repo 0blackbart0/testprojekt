@@ -5,12 +5,17 @@ import { DrawService } from 'src/app/services/draw.service';
 import { JsonNodeListService } from 'src/app/services/json-node-list.service';
 import { UndoService } from 'src/app/services/undo.service';
 
+import { Node } from 'src/app/nodeModels/node';
 @Component({
   selector: "app-scaling-menu",
   templateUrl: "./scaling-menu.component.html",
   styleUrls: ["./scaling-menu.component.css"]
 })
 export class ScalingMenuComponent implements OnInit {
+
+  NodeList: Node[] = [];
+  jsonObject;
+
   constructor(
     public scaling: ScalingService,
     public director: ComponentDirectorService,
@@ -50,4 +55,16 @@ export class ScalingMenuComponent implements OnInit {
     }
     this.draw.drawTree();
   }
+
+  createJSON() {
+
+    this.NodeList = this.director.nodeList;
+
+    const nodeString: string = this.NodeList[0].getJsonString();
+
+    this.jsonObject = JSON.parse(nodeString);
+
+    console.log(this.jsonObject);
+  }
+
 }

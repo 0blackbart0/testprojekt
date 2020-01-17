@@ -57,10 +57,11 @@ export abstract class Node {
     }
 
     getParent(): Node { return this.parent; }
+    abstract getJsonString();
 
 }
 
-export class BasicNode extends Node {
+export abstract class BasicNode extends Node {
 
     director: ComponentDirectorService;
 
@@ -73,5 +74,6 @@ export class BasicNode extends Node {
         this.director = director;
     }
 
+    abstract getJsonString();
 
 }
