@@ -59,7 +59,7 @@ export class JsonNodeListService {
       }
     }
 
-    console.log(JSON.stringify(this.jsonNodeList));
+    //console.log(JSON.stringify(this.jsonNodeList));
     return JSON.stringify(this.jsonNodeList);
   }
 
@@ -79,16 +79,13 @@ export class JsonNodeListService {
     this.parseRecursive(node, this.jsonNodeList[0].childId);
     this.draw.drawTree();
     
-
   }
 
   parseRecursive(parent: Node, childId: number) {
-    console.log( "id = " + childId);
     const jsonNode = this.getJsonNodeById(childId);
     let node: Node;
 
     if (jsonNode === null) {
-      console.log("abbruch bei childid = " + childId);
       return;
     }
     switch ( jsonNode.type ) {
@@ -129,7 +126,6 @@ export class JsonNodeListService {
 
           const dividerBranch = new DividerBranch(dividerNode, this.director);
           const jsonDividerBranch = this.getJsonNodeById(cId);
-          console.log("dividerBranch: = " + jsonDividerBranch.id);
           dividerBranch.selectionText = jsonDividerBranch.selectionText;
           // dividerNode.childs.push(dividerBranch);
           this.scaling.scaleNewNode(dividerBranch);

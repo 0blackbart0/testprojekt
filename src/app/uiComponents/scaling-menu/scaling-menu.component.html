@@ -4,6 +4,8 @@
     <button (click)="jsonNode.stringify(director.nodeList); director.clearNodeList();jsonNode.parse()">JS</button>
     <button (click)="loadExample()">bsp</button>
     <button (click)="undo.undo()"><-</button>
+    <button (click)="undo.redo()">-></button>
+
 
   <!--  <button (click)="director.basicArrange(director.nodeList[0])">basic</button>
     <button (click)="director.resizeDividerNodes(director.nodeList[0]);">resize</button>

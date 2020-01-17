@@ -29,7 +29,6 @@ export class StartNode extends BasicNode {
         // tslint:disable-next-line: max-line-length
         return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"' + this.greeting + '", "child":' + this.child.getJsonString() + '}';
       }
-  
     }
 
 }

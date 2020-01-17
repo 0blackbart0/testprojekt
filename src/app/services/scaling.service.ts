@@ -70,7 +70,6 @@ export class ScalingService {
   constructor() { }
 
   increase(): boolean {
-    console.log("test");
     if ( this.balance < 10 ) {
       this.balance++;
       this.scaleCSS(-1);
@@ -81,7 +80,6 @@ export class ScalingService {
   }
 
   decrease() {
-    console.log("test");
     if (this.balance > -15 ) {
 
       this.balance--;

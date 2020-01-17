@@ -32,6 +32,7 @@ export class ComponentDirectorService {
     startNode.selected = true;
     this.selected = startNode;
     this.addNode(startNode);
+    this.undo.save();
   }
 
   setDrawingField(field: DrawingFieldComponent) {
@@ -92,9 +93,9 @@ export class ComponentDirectorService {
         node.child.parentId = node.id;
       }
     }
-    
     this.scaling.scaleNewNode(node);
     this.draw.drawTree();
+
 
 
   }
