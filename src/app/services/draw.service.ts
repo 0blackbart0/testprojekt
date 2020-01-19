@@ -34,10 +34,11 @@ export class DrawService {
         node.parent.left - (node.baseWidth - node.parent.baseWidth) / 2;
       node.top = node.parent.top + node.parent.height;
     }
-    if (node instanceof DividerNode) {
-      for (const child of node.childs) {
+    if (node.type === NodeType.DIVIDERNODE) {
+      node.baseWidth = (node.parent.baseWidth * (node as DividerNode).childs.length);
+      for (const child of (node as DividerNode).childs) {
         this.basicArrange(child);
-      }
+    }
     }
     if (node instanceof DividerBranch) {
       const tmp: DividerNode = node.parent as DividerNode;
