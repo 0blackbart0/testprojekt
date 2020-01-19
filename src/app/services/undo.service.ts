@@ -68,8 +68,6 @@ export class UndoService {
     }
     const newNodeList = this.jsonNode.stringify(this.director.nodeList);
     this.nodeLists.splice(0, 0, newNodeList);
-
-    console.log(this.nodeLists[0]);
   }
 
 

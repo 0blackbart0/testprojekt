@@ -34,26 +34,34 @@ export class JsonNodeListService {
 
     let json;
     for (const node of nodeList) {
+
+      node.title = this.replaceBadCharacter(node.title);
+
       if (node.type === NodeType.STARTNODE) {
         json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title +
-      '", "childId":"' + node.childId + '", "parentId":"' + node.parentId + '", "greeting":"' + (node as StartNode).greeting + '"}';
+      '", "childId":"' + node.childId + '", "parentId":"' + node.parentId + '", "greeting":"'
+      + this.replaceBadCharacter((node as StartNode).greeting) + '"}';
       } else if (node.type === NodeType.MONOLOG) {
         json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title +
-      '", "childId":"' + node.childId + '", "parentId":"' + node.parentId + '", "forwardText":"' + (node as Monolog).forwardText + '"}';
+      '", "childId":"' + node.childId + '", "parentId":"' + node.parentId + '", "forwardText":"'
+      + this.replaceBadCharacter((node as Monolog).forwardText) + '"}';
       } else if (node.type === NodeType.DIALOG) {
         json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title +
       '", "childId":"' + node.childId + '", "parentId":"' + node.parentId + '", "question":"' +
-      (node as Dialog).question + '", "answer":"' + (node as Dialog).answer + '"}';
+      this.replaceBadCharacter((node as Dialog).question) + '", "answer":"' +
+      this.replaceBadCharacter((node as Dialog).answer) + '"}';
       } else if (node.type === NodeType.DIVIDERNODE) {
         json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title + '", "parentId":"' + node.parentId + '"}';
       } else if (node.type === NodeType.DIVIDERBRANCH) {
-        json = '{"id":"' + node.id + '", "type":"' + node.type + '", "selectionText":"' + (node as DividerBranch).selectionText +
+        json = '{"id":"' + node.id + '", "type":"' + node.type + '", "selectionText":"' +
+        this.replaceBadCharacter((node as DividerBranch).selectionText) +
         '", "parentId":"' + node.parentId + '", "childId":"' + node.childId + '"}';
       } else if (node.type === NodeType.LINK) {
-        json = '{"id":"' + node.id + '", "type":"' + node.type + '", "parentId":"' + node.parentId + '"}';
+        json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title + '", "parentId":"' + node.parentId + '"}';
       }
 
       if ( node.type !== NodeType.MENU) {
+        json = json.replace('\n', ' ');
         const jsobj = JSON.parse(json);
         this.jsonNodeList.push(jsobj);
       }
@@ -126,7 +134,6 @@ export class JsonNodeListService {
           const dividerBranch = new DividerBranch(dividerNode, this.director);
           const jsonDividerBranch = this.getJsonNodeById(cId);
           dividerBranch.selectionText = jsonDividerBranch.selectionText;
-          console.log(dividerBranch.selectionText);
           this.scaling.scaleNewNode(dividerBranch);
           dividerNode.addChild(dividerBranch);
           this.director.nodeList.push(dividerBranch);
@@ -136,6 +143,14 @@ export class JsonNodeListService {
         return;
     }
     this.parseRecursive(node, jsonNode.childId);
+  }
+
+  replaceBadCharacter(value: string): string {
+    value = value.split("\\").join("");
+    value = value.split('"').join('\\"');
+    value = value.split("'").join('\\"');
+    value = value.split("\n").join(" \\n");
+    return value;
   }
 
 
