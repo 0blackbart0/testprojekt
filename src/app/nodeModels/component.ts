@@ -23,11 +23,11 @@ export class StartNode extends BasicNode {
 
     getJsonString() {
       if (this.child === null) {
-        // tslint:disable-next-line: max-line-length
-        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"' + this.greeting + '", "child":null}';
+        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"'
+        + this.greeting + '", "child":null}';
       } else {
-        // tslint:disable-next-line: max-line-length
-        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"' + this.greeting + '", "child":' + this.child.getJsonString() + '}';
+        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"'
+        + this.greeting + '", "child":' + this.child.getJsonString() + '}';
       }
     }
 
@@ -137,11 +137,11 @@ export class Dialog extends BasicNode {
 
   getJsonString() {
     if (this.child === null) {
-      // tslint:disable-next-line: max-line-length
-      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"' + this.question + '", "answer":"' + this.answer + '","child":null}';
+      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"'
+      + this.question + '", "answer":"' + this.answer + '","child":null}';
     } else {
-      // tslint:disable-next-line: max-line-length
-      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"' + this.question + '", "answer":"' + this.answer + '","child":' + this.child.getJsonString() + '}';
+      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"'
+      + this.question + '", "answer":"' + this.answer + '","child":' + this.child.getJsonString() + '}';
     }
 
   }
@@ -161,11 +161,11 @@ export class Monolog extends BasicNode {
 
   getJsonString() {
     if (this.child === null) {
-      // tslint:disable-next-line: max-line-length
-      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"' + this.forwardText + '", "child":null}';
+      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"'
+      + this.forwardText + '", "child":null}';
     } else {
-      // tslint:disable-next-line: max-line-length
-      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"' + this.forwardText + '", "child":' + this.child.getJsonString() + '}';
+      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"'
+      + this.forwardText + '", "child":' + this.child.getJsonString() + '}';
     }
   }
 

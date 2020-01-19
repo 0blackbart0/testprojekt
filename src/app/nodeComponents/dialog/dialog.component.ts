@@ -13,14 +13,10 @@ import { PlaceHolder } from 'src/assets/values';
 export class DialogComponent implements OnInit {
 
   @Input() node: Dialog;
-  titlePlaceholder;
-  questionPlaceholder;
-  answerPlaceholder;
+
+  placeholder = PlaceHolder;
 
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
-    this.titlePlaceholder = PlaceHolder.TITLE;
-    this.questionPlaceholder = PlaceHolder.QUESTION;
-    this.answerPlaceholder = PlaceHolder.ANSWER;
   }
 
   ngOnInit() {

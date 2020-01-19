@@ -78,7 +78,6 @@ export class MenuComponent implements OnInit {
   }
 
   addDividerNode() {
-    //this.undo.save();
     const tmp: DividerNode = new DividerNode(
       this.director.selected,
       this.director
@@ -96,21 +95,17 @@ export class MenuComponent implements OnInit {
   }
 
   addDialog() {
-    //this.undo.save();
     this.director.addNode(new Dialog(this.director.selected, this.director));
     this.undo.save();
   }
 
   addMonolog() {
-    //this.undo.save();
     this.director.addNode(new Monolog(this.director.selected, this.director));
     this.undo.save();
   }
   addLink() {
-    //this.undo.save();
     this.director.addNode(new Link(this.director.selected, this.director));
     this.undo.save();
-
   }
 
 }

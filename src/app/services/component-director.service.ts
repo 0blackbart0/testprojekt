@@ -155,7 +155,7 @@ export class ComponentDirectorService {
   }
 
   getParentDividerBranch(node: Node): DividerBranch {
-    let ptr = node.parent; // parent of Node
+    let ptr = node.parent;
 
     while (ptr !== null && !(ptr instanceof DividerBranch)) {
       ptr = ptr.parent;

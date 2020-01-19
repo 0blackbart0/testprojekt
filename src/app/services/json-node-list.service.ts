@@ -47,7 +47,7 @@ export class JsonNodeListService {
       } else if (node.type === NodeType.DIVIDERNODE) {
         json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title + '", "parentId":"' + node.parentId + '"}';
       } else if (node.type === NodeType.DIVIDERBRANCH) {
-        json = '{"id":"' + node.id + '", "type":"' + node.type + '", "selectiontext":"' + (node as DividerBranch).selectionText +
+        json = '{"id":"' + node.id + '", "type":"' + node.type + '", "selectionText":"' + (node as DividerBranch).selectionText +
         '", "parentId":"' + node.parentId + '", "childId":"' + node.childId + '"}';
       } else if (node.type === NodeType.LINK) {
         json = '{"id":"' + node.id + '", "type":"' + node.type + '", "parentId":"' + node.parentId + '"}';
@@ -59,7 +59,7 @@ export class JsonNodeListService {
       }
     }
 
-    //console.log(JSON.stringify(this.jsonNodeList));
+    console.log(JSON.stringify(this.jsonNodeList));
     return JSON.stringify(this.jsonNodeList);
   }
 
@@ -78,7 +78,6 @@ export class JsonNodeListService {
 
     this.parseRecursive(node, this.jsonNodeList[0].childId);
     this.draw.drawTree();
-    
   }
 
   parseRecursive(parent: Node, childId: number) {
@@ -127,22 +126,19 @@ export class JsonNodeListService {
           const dividerBranch = new DividerBranch(dividerNode, this.director);
           const jsonDividerBranch = this.getJsonNodeById(cId);
           dividerBranch.selectionText = jsonDividerBranch.selectionText;
-          // dividerNode.childs.push(dividerBranch);
+          console.log(dividerBranch.selectionText);
           this.scaling.scaleNewNode(dividerBranch);
           dividerNode.addChild(dividerBranch);
           this.director.nodeList.push(dividerBranch);
 
           this.parseRecursive(dividerBranch, jsonDividerBranch.childId);
         }
-        
         return;
     }
     this.parseRecursive(node, jsonNode.childId);
   }
 
 
-
-  
   getJsonNodeById(id: number): any {
 
     let jsonNode = null;

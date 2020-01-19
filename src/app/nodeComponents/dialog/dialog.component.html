@@ -14,7 +14,7 @@
  
         <input class="titleInput" type="text" 
         [(ngModel)]="node.title" 
-        placeholder="{{titlePlaceholder}}">
+        placeholder="{{placeholder.TITLE}}">
         
         
         <div class="contentFloat user">
@@ -23,7 +23,7 @@
         <textarea class="chatBubble user" type="textarea" 
         [(ngModel)]="node.question"
 
-        placeholder="{{questionPlaceholder}}"></textarea>
+        placeholder="{{placeholder.QUESTION}}"></textarea>
         
         <div class="triangleUser"></div>
 
@@ -31,7 +31,7 @@
         <label class="Label" >ChatBot</label>
         <textarea class="chatBubble" type="textarea" 
         [(ngModel)]="node.answer"
-        placeholder="{{answerPlaceholder}}"></textarea>
+        placeholder="{{placeholder.ANSWER}}"></textarea>
 
         <div class="triangleBot"></div>
         

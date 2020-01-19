@@ -1,5 +1,10 @@
 <div class="sidebar">
-    <button class="toggle" (click)="toggleSidebar()">=</button>
+    <button *ngIf="!sidebarOpen" class="toggle" (click)="toggleSidebar()">
+        =
+    </button>
+    <button *ngIf="sidebarOpen" class="toggle" (click)="toggleSidebar()">
+        x
+    </button>
    
     
     <label class="title">Titel:</label>

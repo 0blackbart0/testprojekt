@@ -12,15 +12,13 @@ import { DrawService } from "src/app/services/draw.service";
 })
 export class LinkComponent implements OnInit {
   @Input() node: Link;
-  titlePlaceholder;
+  placeholder = PlaceHolder;
 
   constructor(
     public director: ComponentDirectorService,
     public scaling: ScalingService,
     private draw: DrawService
-  ) {
-    this.titlePlaceholder = PlaceHolder.LINKTITLE;
-  }
+  ) {}
 
   ngOnInit() {}
 

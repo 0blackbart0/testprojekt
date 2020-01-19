@@ -12,9 +12,8 @@ import { PlaceHolder } from 'src/assets/values';
 export class DividerBranchComponent implements OnInit {
 
   @Input() node: DividerBranch;
-  selectionTextPlaceholder;
+  placeholder = PlaceHolder;
   constructor(public director: ComponentDirectorService, public scaling: ScalingService) {
-    this.selectionTextPlaceholder = PlaceHolder.SELECTIONTEXT;
    }
 
   ngOnInit() {
