@@ -46,8 +46,6 @@ export class DividerNode extends Node {
     this.director = director;
     this.width = 0;
     this.baseWidth = 0;
-   // this.width = NodeSizes.BASICNODEWIDTH * 2;
-   // this.baseWidth = NodeSizes.BASICNODEWIDTH * 2;
     this.height = NodeSizes.DIVIDERNODEHEIGHT;
   }
 
