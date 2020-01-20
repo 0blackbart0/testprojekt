@@ -228,7 +228,8 @@ export let example2 = {
       childId: "39",
       parentId: "37",
       forwardText:
-        "Sie können nur unsere Produkte wählen, sofern das TV Signal von uns ist. Dürfen wir dies vorab prüfen oder wünschen sie trotzdem eine Produktberatung?"
+        "Sie können nur unsere Produkte wählen, sofern das TV Signal von uns ist. " +
+        "Dürfen wir dies vorab prüfen oder wünschen sie trotzdem eine Produktberatung?"
     },
     {
       id: "55",

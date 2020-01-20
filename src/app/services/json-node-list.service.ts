@@ -67,7 +67,7 @@ export class JsonNodeListService {
       }
     }
 
-    console.log(JSON.stringify(this.jsonNodeList));
+    //console.log(JSON.stringify(this.jsonNodeList));
     return JSON.stringify(this.jsonNodeList);
   }
 

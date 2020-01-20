@@ -3,8 +3,7 @@
 [style.left.vh]="node.left"
 [style.width.vh]="node.width"
 [style.height.vh]="node.height"
-(click)="node.parent.connectorActive = false;"
-(click)="undo.save()">
+(click)="node.parent.connectorActive = false;">
         
     <div *ngIf="getMenuType() === menuType.BASICNODELEAF" 
     class="wrapper" >

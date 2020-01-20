@@ -15,54 +15,36 @@ export class UndoService {
 
   index = 0;
 
-  //
-  inUndoDirection = true;
-
   usedIndex: number;
 
   constructor() { }
 
 
   undo() {
-    if ( this.index === 0 ) {
-      this.save();
-      this.index++;
+    if ( this.index === this.nodeLists.length - 1) {
+      return;
     }
-
-    if ( this.index < this.nodeLists.length) {
-      if ( !this.inUndoDirection) {
-        this.index++;
-      }
-      this.director.clearNodeList();
-      this.jsonNode.loadNodeListFromString (this.nodeLists[this.index]);
-      this.jsonNode.parse();
-      this.index++;
-      this.inUndoDirection = true;
-    }
+    this.index++;
+    this.director.clearNodeList();
+    this.jsonNode.loadNodeListFromString (this.nodeLists[this.index]);
+    this.jsonNode.parse();
   }
 
   redo() {
-    if ( this.index > 0 ) {
-      if (this.inUndoDirection) {
-        this.index--;
-      }
-      this.director.clearNodeList();
-      this.jsonNode.loadNodeListFromString(this.nodeLists[this.index - 1]);
-      this.jsonNode.parse();
-      this.index--;
-      this.inUndoDirection = false;
+    if ( this.index === 0) {
+      return;
     }
+    this.index--;
+    this.director.clearNodeList();
+    this.jsonNode.loadNodeListFromString(this.nodeLists[this.index]);
+    this.jsonNode.parse();
   }
 
   save() {
     if ( this.index !== 0) {
       const tmp = this.nodeLists[this.index];
-
+      this.nodeLists.splice(0, this.index);
       this.index = 0;
-
-      this.nodeLists.splice(0, this.nodeLists.length);
-      this.inUndoDirection = true;
-      this.nodeLists.push(tmp);
     }
     const newNodeList = this.jsonNode.stringify(this.director.nodeList);
     this.nodeLists.splice(0, 0, newNodeList);
