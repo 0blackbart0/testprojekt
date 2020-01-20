@@ -4,32 +4,32 @@ import { NodeType, NodeSizes } from "../../assets/values";
 
 export class StartNode extends BasicNode {
 
-    // JSON Values
-    greeting: string = '';
+  // JSON Values
+  greeting: string = '';
 
-    // Developer Values
-    childs: Node[] = [];
-    Node: Node = null;
-    director: ComponentDirectorService;
+  // Developer Values
+  childs: Node[] = [];
+  Node: Node = null;
+  director: ComponentDirectorService;
 
 
-    constructor(director: ComponentDirectorService) {
-        super(null, director);
-        this.type = NodeType.STARTNODE;
-        this.height = NodeSizes.STARTNODEHEIGHT;
-        this.baseWidth = NodeSizes.BASICNODEWIDTH;
-        this.left = NodeSizes.STARTNODELEFT;
-    }
+  constructor(director: ComponentDirectorService) {
+    super(null, director);
+    this.type = NodeType.STARTNODE;
+    this.height = NodeSizes.STARTNODEHEIGHT;
+    this.baseWidth = NodeSizes.BASICNODEWIDTH;
+    this.left = NodeSizes.STARTNODELEFT;
+  }
 
-    getJsonString() {
-      if (this.child === null) {
-        return '{"nodeType": "StartNode", "title":"' + this.replaceBadCharacter(this.title) + '", "greeting":"'
+  getJsonString() {
+    if (this.child === null) {
+      return '{"nodeType": "StartNode", "title":"' + this.replaceBadCharacter(this.title) + '", "greeting":"'
         + this.replaceBadCharacter(this.greeting) + '", "child":null}';
-      } else {
-        return '{"nodeType": "StartNode", "title":"' + this.replaceBadCharacter(this.title) + '", "greeting":"'
+    } else {
+      return '{"nodeType": "StartNode", "title":"' + this.replaceBadCharacter(this.title) + '", "greeting":"'
         + this.replaceBadCharacter(this.greeting) + '", "child":' + this.child.getJsonString() + '}';
-      }
     }
+  }
 
 }
 
@@ -103,7 +103,7 @@ export class DividerBranch extends DividerNode {
       return '{"nodeType": "DividerBranch", "selectionText":"' + this.replaceBadCharacter(this.selectionText) + '", "child":null}';
     } else {
       return '{"nodeType": "DividerBranch", "selectionText":"' + this.replaceBadCharacter(this.selectionText) + '", "child":' +
-       this.child.getJsonString() + '}';
+        this.child.getJsonString() + '}';
     }
   }
 }
@@ -116,10 +116,14 @@ export class Menu extends BasicNode {
   }
 
   getJsonString() {
-    return null;
+    if (this.child === null) {
+      return '{"nodeType": "Menu", "child":null}';
+    } else {
+      return '{"nodeType": "Menu", "child":' + this.child.getJsonString() + '}';
+    }
   }
-
 }
+
 
 export class Dialog extends BasicNode {
   // JSON Values
@@ -137,11 +141,11 @@ export class Dialog extends BasicNode {
   getJsonString() {
     if (this.child === null) {
       return '{"nodeType": "DialogNode", "title":"' + this.replaceBadCharacter(this.title) + '", "question":"'
-      + this.replaceBadCharacter(this.question) + '", "answer":"' + this.replaceBadCharacter(this.answer) + '","child":null}';
+        + this.replaceBadCharacter(this.question) + '", "answer":"' + this.replaceBadCharacter(this.answer) + '","child":null}';
     } else {
       return '{"nodeType": "DialogNode", "title":"' + this.replaceBadCharacter(this.title) + '", "question":"'
-      + this.replaceBadCharacter(this.question) + '", "answer":"' + this.replaceBadCharacter(this.answer) + '","child":' +
-       this.child.getJsonString() + '}';
+        + this.replaceBadCharacter(this.question) + '", "answer":"' + this.replaceBadCharacter(this.answer) + '","child":' +
+        this.child.getJsonString() + '}';
     }
 
   }
@@ -161,14 +165,11 @@ export class Monolog extends BasicNode {
 
   getJsonString() {
     if (this.child === null) {
-      return '{"nodeType": "Monolog", "title":"' +
-        this.replaceBadCharacter(this.title) + '", "forwardText":"' +
-        this.replaceBadCharacter(this.forwardText) + '", "child":null}';
+      return '{"nodeType": "Monolog", "title":"' + this.replaceBadCharacter(this.title) + '", "forwardText":"'
+        + this.replaceBadCharacter(this.forwardText) + '", "child":null}';
     } else {
-      return '{"nodeType": "Monolog", "title":"' +
-        this.replaceBadCharacter(this.title) + '", "forwardText":"' +
-        this.replaceBadCharacter(this.forwardText) + '", "child":' +
-        this.child.getJsonString() + '}';
+      return '{"nodeType": "Monolog", "title":"' + this.replaceBadCharacter(this.title) + '", "forwardText":"'
+        + this.replaceBadCharacter(this.forwardText) + '", "child":' + this.child.getJsonString() + '}';
     }
   }
 

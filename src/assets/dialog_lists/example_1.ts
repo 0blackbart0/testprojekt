@@ -660,3 +660,29 @@ export let example2 = {
     }
   ]
 };
+
+let kjashd =  {
+                nodeType: "StartNode",
+                title: "Start",
+                greeting: "Hallo, wie darf ich Ihnen helfen?",
+                child: {
+                  nodeType: "Divider",
+                  childs: [
+                    {
+                      nodeType: "DividerBranch",
+                      selectionText: "Produktberatung",
+                      child: {
+                        nodeType: "Monolog",
+                        title: "Vorhandene Verträge",
+                        forwardText: "Haben sie bereits Verträge bei uns?",
+                        child: null
+                      }
+                    },
+                    {
+                      nodeType: "DividerBranch",
+                      selectionText: "Störung",
+                      child: { nodeType: "Link", title: "BAUM: Störungsbaum", child: null }
+                    }
+                  ]
+                }
+              };
