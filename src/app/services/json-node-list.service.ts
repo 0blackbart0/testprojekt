@@ -5,7 +5,6 @@ import { Node } from '../nodeModels/node';
 import { ComponentDirectorService } from './component-director.service';
 import { DrawService } from './draw.service';
 import { ScalingService } from './scaling.service';
-import { example1 } from '../../assets/dialog_lists/example_1';
 import { UndoService } from './undo.service';
 
 @Injectable({
@@ -59,7 +58,10 @@ export class JsonNodeListService {
         this.replaceBadCharacter((node as DividerBranch).selectionText) +
         '", "parentId":"' + node.parentId + '", "childId":"' + node.childId + '"}';
       } else if (node.type === NodeType.LINK) {
-        json = '{"id":"' + node.id + '", "type":"' + node.type + '", "title":"' + node.title + '", "parentId":"' + node.parentId + '"}';
+        json = '{"id":"' + node.id +
+        '", "type":"' + node.type +
+        '", "title":"' + node.title +
+        '", "parentId":"' + node.parentId + '"}';
       }
 
       if ( node.type !== NodeType.MENU) {

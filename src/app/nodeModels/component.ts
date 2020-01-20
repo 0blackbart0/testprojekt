@@ -181,8 +181,8 @@ export class Link extends BasicNode {
     this.type = NodeType.LINK;
     this.height = NodeSizes.LINKHEIGHT;
   }
-
   getJsonString() {
-    return '{"nodeType": "Link", "title":"' + this.replaceBadCharacter(this.title) + '", "child":null}';
+    return '{"nodeType": "Link", "title":"' + this.replaceBadCharacter(this.title) +
+    '", "child":null}';
   }
 }

@@ -1,8 +1,5 @@
 import { Injectable, RootRenderer } from '@angular/core';
 import { Node } from '../nodeModels/node';
-import { NodeType } from 'src/assets/values';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -153,9 +150,6 @@ export class ScalingService {
     this.imgLinkHeight *= Math.pow(this.scale, exponent);
     this.imgLinkLeft *= Math.pow(this.scale, exponent);
     this.imgLinkTop *= Math.pow(this.scale, exponent);
-
-
-
   }
 
   setCSSValues() {
