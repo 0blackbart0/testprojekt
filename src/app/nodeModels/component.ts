@@ -161,11 +161,14 @@ export class Monolog extends BasicNode {
 
   getJsonString() {
     if (this.child === null) {
-      return '{"nodeType": "Monolog", "title":"' + this.replaceBadCharacter(this.title) + '", "forwardText":"'
-      + this.replaceBadCharacter(this.forwardText) + '", "child":null}';
+      return '{"nodeType": "Monolog", "title":"' +
+        this.replaceBadCharacter(this.title) + '", "forwardText":"' +
+        this.replaceBadCharacter(this.forwardText) + '", "child":null}';
     } else {
-      return '{"nodeType": "Monolog", "title":"' + this.replaceBadCharacter(this.title) + '", "forwardText":"'
-      + this.replaceBadCharacter(this.forwardText) + '", "child":' + this.child.getJsonString() + '}';
+      return '{"nodeType": "Monolog", "title":"' +
+        this.replaceBadCharacter(this.title) + '", "forwardText":"' +
+        this.replaceBadCharacter(this.forwardText) + '", "child":' +
+        this.child.getJsonString() + '}';
     }
   }
 

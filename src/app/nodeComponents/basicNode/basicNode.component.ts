@@ -20,8 +20,4 @@ export class BasicNodeComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  setParent(node: Node) {
-    this.node.parent = node;
-  }
 }

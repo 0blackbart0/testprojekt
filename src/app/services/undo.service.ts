@@ -42,7 +42,6 @@ export class UndoService {
 
   save() {
     if ( this.index !== 0) {
-      const tmp = this.nodeLists[this.index];
       this.nodeLists.splice(0, this.index);
       this.index = 0;
     }
