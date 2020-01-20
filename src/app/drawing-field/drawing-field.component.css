@@ -19,10 +19,6 @@
     width: 1px;
 }
 
-#toolMenuClass{
-    position: absolute;
-}
-
 app-sidebar {
     position: fixed;
     right: -30vh;
@@ -60,9 +56,16 @@ app-sidebar {
     }
 }
 
-#scalingMenu {
+app-scaling-menu {
     position: fixed;
     bottom: 5vh;
     right: 5vh; 
     z-index: 3;  
+}
+
+app-undo-menu {
+    position: fixed;
+    top: 5vh;
+    left:  5vh;
+    z-index: 3;
 }

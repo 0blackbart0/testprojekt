@@ -2,11 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ScalingService } from "../../services/scaling.service";
 import { ComponentDirectorService } from "../../services/component-director.service";
 import { DrawService } from 'src/app/services/draw.service';
-import { JsonNodeListService } from 'src/app/services/json-node-list.service';
-import { UndoService } from 'src/app/services/undo.service';
 
-import { Node } from 'src/app/nodeModels/node';
-import { example1, example2 } from 'src/assets/dialog_lists/example_1';
 @Component({
   selector: "app-scaling-menu",
   templateUrl: "./scaling-menu.component.html",
@@ -17,9 +13,7 @@ export class ScalingMenuComponent implements OnInit {
   constructor(
     public scaling: ScalingService,
     public director: ComponentDirectorService,
-    public draw: DrawService,
-    public jsonNode: JsonNodeListService,
-    public undo: UndoService
+    public draw: DrawService
   ) {
     window.addEventListener("wheel", event => {
       if (event.ctrlKey) {
@@ -31,17 +25,6 @@ export class ScalingMenuComponent implements OnInit {
         }
       }
     });
-  }
-
-  loadExample(value: number) {
-    switch (value) {
-      case 1:
-        this.jsonNode.loadTreeFromJson(example1.nodeList);
-        break;
-      case 2:
-        this.jsonNode.loadTreeFromJson(example2.nodeList);
-        break;
-    }
   }
 
   ngOnInit() {}
@@ -61,12 +44,6 @@ export class ScalingMenuComponent implements OnInit {
     this.draw.drawTree();
   }
 
-  createJSON() {
-    console.log("test");
-    const nodeString: string = this.director.nodeList[0].getJsonString();
-    const jsonObject = JSON.parse(nodeString);
-    console.log(nodeString);
-    console.log(jsonObject);
-  }
+
 
 }

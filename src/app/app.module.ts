@@ -19,6 +19,8 @@ import { MatDialogModule, MatButtonModule } from '@angular/material';
 import { DeleteDialogComponent } from './uiComponents/delete-dialog/delete-dialog.component';
 import { SidebarComponent } from './uiComponents/sidebar/sidebar.component';
 import { DividerComponent } from './nodeComponents/divider/divider.component';
+import { PresentationComponent } from './uiComponents/presentation/presentation.component';
+import { UndoMenuComponent } from './uiComponents/undo-menu/undo-menu.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { DividerComponent } from './nodeComponents/divider/divider.component';
     LinkComponent,
     DeleteDialogComponent,
     SidebarComponent,
-    DividerComponent
+    DividerComponent,
+    PresentationComponent,
+    UndoMenuComponent
   ],
   imports: [
     BrowserModule,
