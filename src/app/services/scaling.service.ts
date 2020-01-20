@@ -244,7 +244,7 @@ export class ScalingService {
       }
 
     } else if ( this.balance > 0 ) {
-      for (let i = 0; i < this.balance + 1; i++) {
+      for (let i = 0; i < this.balance; i++) {
         node.height /= this.scale;
         node.width /= this.scale;
         node.baseWidth /= this.scale;

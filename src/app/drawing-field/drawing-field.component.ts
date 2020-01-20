@@ -25,5 +25,4 @@ export class DrawingFieldComponent implements OnInit {
     this.director.setDrawingField(this);
     this.nodeList = this.director.nodeList;
   }
-
 }

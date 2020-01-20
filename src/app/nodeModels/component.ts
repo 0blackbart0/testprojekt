@@ -50,8 +50,6 @@ export class DividerNode extends Node {
   }
 
   addChild(child: DividerBranch) {
-    this.width += this.parent.width;
-    this.baseWidth += this.parent .baseWidth;
     this.childs.push(child);
   }
   getJsonString() {

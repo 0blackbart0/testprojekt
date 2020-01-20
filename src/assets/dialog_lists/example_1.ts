@@ -9,7 +9,7 @@ export let example1 = {
       parentId: "null",
       greeting: "Hallo, wie darf ich Ihnen helfen?"
     },
-    { id: "2", type: "dividerNode", title: "", parentId: "1" },
+    { id: "2", type: "dividerNode", title: "Beispiel Baum", parentId: "1" },
     {
       id: "3",
       type: "dividerBranch",
@@ -174,6 +174,82 @@ export let example1 = {
       childId: "28"
     },
     { id: "28", type: "link", title: "BAUM: Störungsbaum", parentId: "27" },
-    { id: "30", type: "link", title: "Verabschiedung", parentId: "24" },
+    { id: "30", type: "link", title: "Verabschiedung", parentId: "24" }
+  ]
+};
+
+export let example2 = {
+  title: "Beispiel 2",
+  nodeList: [
+    {
+      id: "30",
+      type: "startNode",
+      title: "Start",
+      childId: "31",
+      parentId: "null",
+      greeting: "Hallo, wie darf ich Ihnen helfen?"
+    },
+    { id: "31", type: "dividerNode", title: "", parentId: "30" },
+    {
+      id: "32",
+      type: "dividerBranch",
+      selectionText: "Produktberatung",
+      parentId: "31",
+      childId: "33"
+    },
+    {
+      id: "33",
+      type: "monolog",
+      title: "Vorhandene Verträge",
+      childId: "34",
+      parentId: "32",
+      forwardText: "Haben sie bereits Verträge bei uns?"
+    },
+    { id: "34", type: "dividerNode", title: "", parentId: "33" },
+    {
+      id: "35",
+      type: "dividerBranch",
+      selectionText: "Ja",
+      parentId: "34",
+      childId: "36"
+    },
+    { id: "36", type: "link", title: "BAUM: Produktberatung", parentId: "35" },
+    {
+      id: "37",
+      type: "dividerBranch",
+      selectionText: "Nein",
+      parentId: "34",
+      childId: "38"
+    },
+    {
+      id: "38",
+      type: "monolog",
+      title: "Erlaubnis nach Verfügbarkeit",
+      childId: "39",
+      parentId: "37",
+      forwardText:
+        "Sie können nur unsere Produkte wählen, sofern das TV Signal von uns ist. Dürfen wir dies vorab prüfen oder wünschen sie trotzdem eine Produktberatung?"
+    },
+    {
+      id: "55",
+      type: "dividerBranch",
+      selectionText: "unsicher",
+      parentId: "34",
+      childId: "56"
+    },
+    {
+      id: "56",
+      type: "link",
+      title: "Erlaubnis nach Verfügbarkeit",
+      parentId: "55"
+    },
+    {
+      id: "57",
+      type: "dividerBranch",
+      selectionText: "Störung",
+      parentId: "31",
+      childId: "58"
+    },
+    { id: "58", type: "link", title: "BAUM: Störungsbaum", parentId: "57" }
   ]
 };

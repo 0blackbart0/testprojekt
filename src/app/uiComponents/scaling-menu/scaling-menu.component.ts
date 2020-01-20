@@ -6,6 +6,7 @@ import { JsonNodeListService } from 'src/app/services/json-node-list.service';
 import { UndoService } from 'src/app/services/undo.service';
 
 import { Node } from 'src/app/nodeModels/node';
+import { example1, example2 } from 'src/assets/dialog_lists/example_1';
 @Component({
   selector: "app-scaling-menu",
   templateUrl: "./scaling-menu.component.html",
@@ -19,7 +20,7 @@ export class ScalingMenuComponent implements OnInit {
   constructor(
     public scaling: ScalingService,
     public director: ComponentDirectorService,
-    private draw: DrawService,
+    public draw: DrawService,
     public jsonNode: JsonNodeListService,
     public undo: UndoService
   ) {
@@ -35,8 +36,15 @@ export class ScalingMenuComponent implements OnInit {
     });
   }
 
-  loadExample() {
-    this.jsonNode.loadTree();
+  loadExample(value: number) {
+    switch (value) {
+      case 1:
+        this.jsonNode.loadTreeFromJson(example1.nodeList);
+        break;
+      case 2:
+        this.jsonNode.loadTreeFromJson(example2.nodeList);
+        break;
+    }
   }
 
   ngOnInit() {}

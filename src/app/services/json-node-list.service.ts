@@ -21,16 +21,16 @@ export class JsonNodeListService {
   oldBalance: number;
   constructor() { }
 
-  loadTree() {
+  loadTreeFromJson(tree: any[]) {
     this.director.clearNodeList();
     this.scaling.resetScaling(NodeSizes.BASICSCALEBALANCE);
-    this.jsonNodeList.splice(0, this.jsonNodeList.length);
-    this.jsonNodeList = example1.nodeList;
+    this.jsonNodeList = tree;
     this.parse();
   }
 
   stringify(nodeList: Node[]): string {
     this.jsonNodeList.splice(0, this.jsonNodeList.length);
+
 
     let json;
     for (const node of nodeList) {

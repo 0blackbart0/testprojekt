@@ -1,23 +1,87 @@
 .rechteck{
-    /*background-color: lightgray;
-    border: solid 2px black;
-    */border-radius: 5px;
+    border-radius: var(--border-radius);
     display: block;
     position: absolute;
     box-sizing: border-box;
-    padding: 0.2vh;
-}
+    padding: var(--outer-padding);
 
+}
 .wrapper{
-    background-color: lightgray;
-    border: solid 2px black;
-    border-radius: 5px;
+    position: relative;
+    padding: var(--wrapper-inner-padding);
+    background-color: var(--light-grey);
+    border: solid var(--border-weight-medium) var(--dark-grey);
+    border-radius: var(--border-radius); 
     display: block;
     box-sizing: border-box;
-    height: 100%;
+    height: 90%;
     width: 100%;
 }
 
-.rechteck:hover {
-    opacity: 0.7;
+.wrapper-active {
+    border: dotted var(--border-weight-medium) var(--assono-rot);
+}
+
+
+
+
+.titleInput {
+    background-color: transparent;
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 0;
+    border-bottom: var(--border-bottom-seperator) solid black;
+
+    text-align: center;
+    font-size: var(--font-size-header);
+    font-weight: bolder;
+    color: var(--dark-grey);
+
+    padding: 0;
+    margin-bottom: var(--title-margin-bottom);
+
+    display: block;
+
+}
+
+.titleInput:focus {
+    border-color: var(--assono-rot);
+}
+
+.connector-fem {
+    position: relative;
+    background-color: var(--assono-blau);
+    height: var(--connector-height-fem);
+    width: var(--connector-size);
+    left: 36.1%;
+}
+.connector {
+    display: block;
+    border-top: none;
+    box-sizing: border-box;
+    border: solid var(--border-radius-small) white;
+    border-top: none;
+    position: relative;
+    left: 36.1%;
+    width: var(--connector-size);
+    height: var(--connector-radius);
+    background-color: var(--assono-blau);
+    border-radius: 0 0 var(--connector-radius) var(--connector-radius);
+    z-index: 1;
+}
+
+.connector:hover {
+    border: solid var(--connector-border) var(--assono-rot);
+    transition: 0.3s;
+}
+
+.connector:hover {
+    background-color: var(--assono-rot);
+}
+
+.connector-active {
+    background-color: var(--assono-rot);
+    border-color: var(--assono-rot);
 }

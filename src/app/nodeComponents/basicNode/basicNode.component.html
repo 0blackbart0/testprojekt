@@ -1,9 +1,29 @@
-<div class="rechteck" 
+
+<div class="rechteck"  
 [style.top.vh]="node.top"
 [style.left.vh]="node.left"
 [style.width.vh]="node.width"
 [style.height.vh]="node.height">
-    <div class="wrapper" 
-    [style.background-color]="node.selected ? '#DD0B2F': '#707070'">
+    <div class="connector-fem">
     </div>
+    <div class="wrapper"
+    (click)="director.setSelected(this.node);" 
+    (click)="director.deleteMenu();"
+    (click)="node.deselectConnectorActive()"
+    [class.wrapper-active]="node.selected">
+ 
+        <input class="titleInput" type="text" 
+        [(ngModel)]="node.title" 
+        placeholder="{{placeholder.TITLE}}">
+        
+        <!-- Insert own HTML -->
+        
+        
+    </div>
+    <div class="connector"
+    (click)="director.deleteMenu()"
+    (click)="director.addMenu(this.node)"
+    (click)="director.setSelected(this.node);"
+    (click)="node.selectConnectorActive()"
+    [class.connector-active]="node.connectorActive"></div>
 </div>
