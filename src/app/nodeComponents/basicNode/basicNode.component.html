@@ -11,14 +11,11 @@
     (click)="director.deleteMenu();"
     (click)="node.deselectConnectorActive()"
     [class.wrapper-active]="node.selected">
- 
+        <!-- Insert own HTML -->
         <input class="titleInput" type="text" 
         [(ngModel)]="node.title" 
         placeholder="{{placeholder.TITLE}}">
-        
         <!-- Insert own HTML -->
-        
-        
     </div>
     <div class="connector"
     (click)="director.deleteMenu()"

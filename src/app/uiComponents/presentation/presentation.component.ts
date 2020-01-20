@@ -19,7 +19,6 @@ export class PresentationComponent implements OnInit {
   ngOnInit() {}
 
   createJSON() {
-    console.log("test");
     const nodeString: string = this.director.nodeList[0].getJsonString();
     const jsonObject = JSON.parse(nodeString);
     console.log(nodeString);
