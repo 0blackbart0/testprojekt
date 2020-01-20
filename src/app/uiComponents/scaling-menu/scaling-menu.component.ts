@@ -14,9 +14,6 @@ import { example1, example2 } from 'src/assets/dialog_lists/example_1';
 })
 export class ScalingMenuComponent implements OnInit {
 
-  NodeList: Node[] = [];
-  jsonObject;
-
   constructor(
     public scaling: ScalingService,
     public director: ComponentDirectorService,
@@ -65,14 +62,11 @@ export class ScalingMenuComponent implements OnInit {
   }
 
   createJSON() {
-
-    this.NodeList = this.director.nodeList;
-
-    const nodeString: string = this.NodeList[0].getJsonString();
-
-    this.jsonObject = JSON.parse(nodeString);
-
-    console.log(this.jsonObject);
+    console.log("test");
+    const nodeString: string = this.director.nodeList[0].getJsonString();
+    const jsonObject = JSON.parse(nodeString);
+    console.log(nodeString);
+    console.log(jsonObject);
   }
 
 }

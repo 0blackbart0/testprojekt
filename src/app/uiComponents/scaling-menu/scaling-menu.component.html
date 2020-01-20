@@ -1,11 +1,14 @@
 <div class="scaling-menu">
     <button id="plus" (click)="scale('+')">+</button>
     <button id="minus" (click)="scale('-')">-</button>
-    <button (click)="jsonNode.stringify(director.nodeList); director.clearNodeList();jsonNode.parse()">JS</button>
+    <button (click)="jsonNode.stringify(director.nodeList)">saveJSON</button>
     <button (click)="loadExample(1)">bsp1</button>
     <button (click)="loadExample(2)">bsp2</button>
+
     <button (click)="undo.undo()"><-</button>
     <button (click)="undo.redo()">-></button>
+
+    <button (click)="createJSON()">ViewJSON</button>
 
 <!--
     <button (click)="draw.basicArrange(director.nodeList[0])">basic</button>

@@ -27,6 +27,7 @@ export class ComponentDirectorService {
     jsonNode.director = this;
     jsonNode.draw = draw;
     jsonNode.scaling = scaling;
+    jsonNode.undo = undo;
 
     const startNode = new StartNode(this);
     startNode.selected = true;

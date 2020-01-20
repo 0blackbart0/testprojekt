@@ -6,6 +6,7 @@ import { ComponentDirectorService } from './component-director.service';
 import { DrawService } from './draw.service';
 import { ScalingService } from './scaling.service';
 import { example1 } from '../../assets/dialog_lists/example_1';
+import { UndoService } from './undo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class JsonNodeListService {
   director: ComponentDirectorService;
   draw: DrawService;
   scaling: ScalingService;
+  undo: UndoService;
 
   oldBalance: number;
   constructor() { }
@@ -26,11 +28,11 @@ export class JsonNodeListService {
     this.scaling.resetScaling(NodeSizes.BASICSCALEBALANCE);
     this.jsonNodeList = tree;
     this.parse();
+    this.undo.save();
   }
 
   stringify(nodeList: Node[]): string {
     this.jsonNodeList.splice(0, this.jsonNodeList.length);
-
 
     let json;
     for (const node of nodeList) {
@@ -67,7 +69,7 @@ export class JsonNodeListService {
       }
     }
 
-    //console.log(JSON.stringify(this.jsonNodeList));
+    console.log(JSON.stringify(this.jsonNodeList));
     return JSON.stringify(this.jsonNodeList);
   }
 

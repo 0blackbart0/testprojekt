@@ -48,7 +48,6 @@ export class DeleteDialogComponent implements OnInit {
       return;
     }
 
-    this.undo.save();
     this.director.deleteMenu();
 
     toDelete.parent.child = toDelete.child;
@@ -59,11 +58,11 @@ export class DeleteDialogComponent implements OnInit {
     }
     this.director.deleteNode(toDelete);
     this.draw.drawTree();
+    this.undo.save();
   }
 
   deleteBranch() {
     this.director.deleteMenu();
-    this.undo.save();
     const toDelete = this.director.selected;
     const parentDivider = toDelete.parent as DividerNode;
 
@@ -74,21 +73,24 @@ export class DeleteDialogComponent implements OnInit {
     parentDivider.width -= toDelete.width;
     parentDivider.baseWidth -= toDelete.baseWidth;
     this.draw.drawTree();
+    this.undo.save();
   }
 
   deleteTree() {
     this.director.deleteMenu();
-    this.undo.save();
     const toDelete = this.director.selected;
     if (toDelete instanceof DividerBranch) {
       toDelete.parent.parent.child = null;
       this.deleteSelfAndChilds(toDelete.parent);
       this.draw.drawTree();
+      this.undo.save();
       return;
     }
     toDelete.parent.child = null;
 
     this.deleteSelfAndChilds(toDelete);
+    this.draw.drawTree();
+    this.undo.save();
   }
 
   deleteSelfAndChilds(toDelete: Node) {

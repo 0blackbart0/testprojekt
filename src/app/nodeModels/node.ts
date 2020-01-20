@@ -59,6 +59,14 @@ export abstract class Node {
     getParent(): Node { return this.parent; }
     abstract getJsonString();
 
+    replaceBadCharacter(value: string): string {
+        value = value.split("\\").join("");
+        value = value.split('"').join('\\"');
+        value = value.split("'").join('\\"');
+        value = value.split("\n").join(" \\n");
+        return value;
+      }
+
 }
 
 export abstract class BasicNode extends Node {

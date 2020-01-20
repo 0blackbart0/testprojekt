@@ -23,11 +23,11 @@ export class StartNode extends BasicNode {
 
     getJsonString() {
       if (this.child === null) {
-        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"'
-        + this.greeting + '", "child":null}';
+        return '{"nodeType": "StartNode", "title":"' + this.replaceBadCharacter(this.title) + '", "greeting":"'
+        + this.replaceBadCharacter(this.greeting) + '", "child":null}';
       } else {
-        return '{"nodeType": "StartNode", "title":"' + this.title + '", "greeting":"'
-        + this.greeting + '", "child":' + this.child.getJsonString() + '}';
+        return '{"nodeType": "StartNode", "title":"' + this.replaceBadCharacter(this.title) + '", "greeting":"'
+        + this.replaceBadCharacter(this.greeting) + '", "child":' + this.child.getJsonString() + '}';
       }
     }
 
@@ -100,9 +100,10 @@ export class DividerBranch extends DividerNode {
   getJsonString() {
 
     if (this.child === null) {
-      return '{"nodeType": "DividerBranch", "selectionText":"' + this.selectionText + '", "child":null}';
+      return '{"nodeType": "DividerBranch", "selectionText":"' + this.replaceBadCharacter(this.selectionText) + '", "child":null}';
     } else {
-      return '{"nodeType": "DividerBranch", "selectionText":"' + this.selectionText + '", "child":' + this.child.getJsonString() + '}';
+      return '{"nodeType": "DividerBranch", "selectionText":"' + this.replaceBadCharacter(this.selectionText) + '", "child":' +
+       this.child.getJsonString() + '}';
     }
   }
 }
@@ -135,11 +136,12 @@ export class Dialog extends BasicNode {
 
   getJsonString() {
     if (this.child === null) {
-      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"'
-      + this.question + '", "answer":"' + this.answer + '","child":null}';
+      return '{"nodeType": "DialogNode", "title":"' + this.replaceBadCharacter(this.title) + '", "question":"'
+      + this.replaceBadCharacter(this.question) + '", "answer":"' + this.replaceBadCharacter(this.answer) + '","child":null}';
     } else {
-      return '{"nodeType": "DialogNode", "title":"' + this.title + '", "question":"'
-      + this.question + '", "answer":"' + this.answer + '","child":' + this.child.getJsonString() + '}';
+      return '{"nodeType": "DialogNode", "title":"' + this.replaceBadCharacter(this.title) + '", "question":"'
+      + this.replaceBadCharacter(this.question) + '", "answer":"' + this.replaceBadCharacter(this.answer) + '","child":' +
+       this.child.getJsonString() + '}';
     }
 
   }
@@ -159,11 +161,11 @@ export class Monolog extends BasicNode {
 
   getJsonString() {
     if (this.child === null) {
-      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"'
-      + this.forwardText + '", "child":null}';
+      return '{"nodeType": "Monolog", "title":"' + this.replaceBadCharacter(this.title) + '", "forwardText":"'
+      + this.replaceBadCharacter(this.forwardText) + '", "child":null}';
     } else {
-      return '{"nodeType": "Monolog", "title":"' + this.title + '", "forwardText":"'
-      + this.forwardText + '", "child":' + this.child.getJsonString() + '}';
+      return '{"nodeType": "Monolog", "title":"' + this.replaceBadCharacter(this.title) + '", "forwardText":"'
+      + this.replaceBadCharacter(this.forwardText) + '", "child":' + this.child.getJsonString() + '}';
     }
   }
 
@@ -177,6 +179,6 @@ export class Link extends BasicNode {
   }
 
   getJsonString() {
-    return '{"nodeType": "Link", "title":"' + this.title + '", "child":null}'; // hier als child evtl titel des neuen Baums
+    return '{"nodeType": "Link", "title":"' + this.replaceBadCharacter(this.title) + '", "child":null}';
   }
 }
