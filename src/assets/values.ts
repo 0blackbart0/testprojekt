@@ -52,6 +52,4 @@ export enum MenuType {
   BASICNODEWITHCHILD = 'basicNodeWithChild',
   BASICNODEWITHCHILDDIVIDER = 'basicNodeWithChildDivider',
   BASICNODELEAF = 'basicNodeLeaf'
-
-
 }

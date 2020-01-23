@@ -1,6 +1,6 @@
 <div class="scrollbar-vertical">
 
-    <div class="drawing-field">
+    <div class="drawing-field" >
         <div *ngFor="let node of nodeList">
             <div *ngIf="node.type === nodeType.STARTNODE">
                 <app-start-node [node]=node></app-start-node>
