@@ -1,12 +1,13 @@
 import { Injectable, RootRenderer } from '@angular/core';
 import { Node } from '../nodeModels/node';
+import { NodeSizes } from 'src/assets/values';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScalingService {
 
-  balance = 0;
+  balance = NodeSizes.BASICSCALEBALANCE;
   scale = 0.9;
 
   outerPadding = 0.2;
@@ -67,7 +68,7 @@ export class ScalingService {
   constructor() { }
 
   increase(): boolean {
-    if ( this.balance < 10 ) {
+    if ( this.balance < 0 ) {
       this.balance++;
       this.scaleCSS(-1);
       this.setCSSValues();

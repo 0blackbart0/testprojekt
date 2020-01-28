@@ -1,39 +1,38 @@
-<div class="scrollbar-vertical">
-
-    <div class="drawing-field">
-        <div *ngFor="let node of nodeList">
-            <div *ngIf="node.type === nodeType.STARTNODE">
-                <app-start-node [node]=node></app-start-node>
-            </div>
-            <div *ngIf="node.type === nodeType.DIALOG">
-                <app-dialog [node]=node></app-dialog>
-            </div>
-            <div *ngIf="node.type === nodeType.MONOLOG">
-                <app-monolog [node]=node></app-monolog>
-            </div>
-            <div *ngIf="node.type === nodeType.DIVIDERNODE">
-                <app-divider [node]=node></app-divider>
-            </div>
-            <div *ngIf="node.type === nodeType.DIVIDERBRANCH">
-                <app-divider-branch [node]=node></app-divider-branch>
-            </div>
-            <div *ngIf="node.type === nodeType.LINK">
-                <app-link [node]=node></app-link>
-            </div>
-            <div *ngIf="node.type === nodeType.MENU">
-                <app-menu [node]=node></app-menu>
-            </div>
 
 
+<div class="drawing-field">
+    <div *ngFor="let node of nodeList">
+        <div *ngIf="node.type === nodeType.STARTNODE">
+            <app-start-node [node]=node></app-start-node>
+        </div>
+        <div *ngIf="node.type === nodeType.DIALOG">
+            <app-dialog [node]=node></app-dialog>
+        </div>
+        <div *ngIf="node.type === nodeType.MONOLOG">
+            <app-monolog [node]=node></app-monolog>
+        </div>
+        <div *ngIf="node.type === nodeType.DIVIDERNODE">
+            <app-divider [node]=node></app-divider>
+        </div>
+        <div *ngIf="node.type === nodeType.DIVIDERBRANCH">
+            <app-divider-branch [node]=node></app-divider-branch>
+        </div>
+        <div *ngIf="node.type === nodeType.LINK">
+            <app-link [node]=node></app-link>
+        </div>
+        <div *ngIf="node.type === nodeType.MENU">
+            <app-menu [node]=node></app-menu>
         </div>
 
-        <div [style.top.vh]="drawingFieldPaddingTop" class="drawingFieldPadding">   
-        </div>
-        <div [style.left.vh]="drawingFieldPaddingRight" class="drawingFieldPadding">
-        </div>
 
-        <app-undo-menu></app-undo-menu>
-        <app-scaling-menu id="scalingMenu"></app-scaling-menu>
-        <app-sidebar id="sidebar"></app-sidebar>
     </div>
+
+    <div [style.top.vh]="drawingFieldPaddingTop" class="drawingFieldPadding">   
+    </div>
+    <div [style.left.vh]="drawingFieldPaddingRight" class="drawingFieldPadding">
+    </div>
+
+    <app-undo-menu></app-undo-menu>
+    <app-scaling-menu id="scalingMenu"></app-scaling-menu>
+    <app-sidebar id="sidebar"></app-sidebar>
 </div>
