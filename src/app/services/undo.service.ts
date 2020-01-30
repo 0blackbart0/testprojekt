@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentDirectorService } from './component-director.service';
-import { Node } from '../nodeModels/node';
 import { JsonNodeListService } from './json-node-list.service';
+import { SidebarComponent } from '../uiComponents/sidebar/sidebar.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ export class UndoService {
 
   director: ComponentDirectorService;
   jsonNode: JsonNodeListService;
+  sideBar: SidebarComponent;
 
   nodeLists: string[] = [];
 
@@ -20,6 +21,10 @@ export class UndoService {
   constructor() { }
 
 
+  setSideBar(sideBar: SidebarComponent) {
+    this.sideBar = sideBar;
+  }
+
   undo() {
     if ( this.index === this.nodeLists.length - 1) {
       return;
@@ -28,6 +33,7 @@ export class UndoService {
     this.director.clearNodeList();
     this.jsonNode.loadNodeListFromString (this.nodeLists[this.index]);
     this.jsonNode.parse();
+    this.sideBar.node = this.director.nodeList[0];
   }
 
   redo() {
@@ -38,6 +44,7 @@ export class UndoService {
     this.director.clearNodeList();
     this.jsonNode.loadNodeListFromString(this.nodeLists[this.index]);
     this.jsonNode.parse();
+    this.sideBar.node = this.director.nodeList[0];
   }
 
   save() {

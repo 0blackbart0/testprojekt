@@ -40,6 +40,10 @@ export class ComponentDirectorService {
     this.drawingField = field;
   }
 
+  setSideBar(sideBar: SidebarComponent) {
+    this.sidebar = sideBar;
+  }
+
   setSelected(node: Node) {
     if (this.selected instanceof DividerBranch) {
       this.selected.parent.selected = false;
@@ -104,6 +108,7 @@ export class ComponentDirectorService {
   deleteNode(toDelete: Node) {
     const index = this.nodeList.indexOf(toDelete);
     this.nodeList.splice(index, 1);
+    this.sidebar.node = this.nodeList[0];
   }
 
   clearNodeList() {

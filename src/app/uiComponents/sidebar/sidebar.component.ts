@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentDirectorService } from '../../services/component-director.service';
 import { NodeType, PlaceHolder } from 'src/assets/values';
+import { UndoService } from 'src/app/services/undo.service';
 
 
 @Component({
@@ -18,9 +19,11 @@ export class SidebarComponent implements OnInit {
   placeholder = PlaceHolder;
 
   sidebarOpen = false;
-  constructor(public director: ComponentDirectorService) {
-    this.director.sidebar = this;
+  constructor(public director: ComponentDirectorService, private undo: UndoService) {
+
     this.node = director.selected;
+    director.setSideBar(this);
+    undo.setSideBar(this);
   }
 
   ngOnInit() {
